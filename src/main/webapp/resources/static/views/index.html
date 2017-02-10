@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="helloApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Hello AngularJS - Hello World</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
+    <script src="../js/controller/user_controller.js"></script>
+
+</head>
+<body ng-controller="UserCtrl">
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Password again</th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.password_again}}</td>
+        </tr>
+    </table>
+
+    <form class="form-horizontal" role="form" ng-submit="addRow()">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Email</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="email"
+                       ng-model="email" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Password</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="password"
+                       ng-model="password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Password again</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="password_again"
+                       ng-model="password_again" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="padding-left:110px">
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
