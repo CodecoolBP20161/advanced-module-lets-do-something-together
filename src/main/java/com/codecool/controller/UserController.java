@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 
+
 @Controller
 public class UserController {
 
@@ -23,20 +24,27 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "testindex";
     }
 
+    @RequestMapping(value = "registration", method = RequestMethod.GET)
+    public String registration() {
+        return "registration";
+    }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     @ResponseBody
     public String registration(@RequestBody String data) {
 
-
 //        JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
         try {
             User user = mapper.readValue(data, User.class);
-            userRepository.save(user);
+            if (userRepository.findByEmail(user.getEmail()) == null) {
+                userRepository.save(user);
+            } else {
+                return "i don't know yet what to do";
+            }
         } catch (JsonGenerationException | JsonMappingException e) {
             e.printStackTrace();
         } catch (IOException e) {
