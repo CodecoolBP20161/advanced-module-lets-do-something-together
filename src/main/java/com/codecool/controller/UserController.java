@@ -24,7 +24,7 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
-        return "testindex";
+        return "index";
     }
 
     @RequestMapping(value = "registration", method = RequestMethod.GET)
