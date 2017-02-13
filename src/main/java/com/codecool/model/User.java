@@ -5,16 +5,16 @@ import com.codecool.security.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-
     private Integer id;
     private String email;
     private String password;
-    private Role role;
+    private Collection<Role> roles;
 
     public User() {
     }
@@ -24,14 +24,15 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "roles", nullable = false)
     @Enumerated(EnumType.STRING)
-    public Role getRole() {
-        return role;
+    @ManyToMany(mappedBy = "userCollection", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    public Collection<Role> getRole() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Id
