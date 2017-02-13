@@ -15,12 +15,8 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
 
     @Override
     public Optional<User> getUserById(int id) {
@@ -38,11 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user, Role role) {
+
+    public void create(User user, Role role) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole(new HashSet<Role>() {{
             add(role);
         }});
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 }

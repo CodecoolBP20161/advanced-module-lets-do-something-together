@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
-@Table(name = "users")
+@Table(name = "`user`")
 public class User {
 
     private Integer id;

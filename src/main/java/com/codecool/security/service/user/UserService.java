@@ -14,6 +14,6 @@ public interface UserService {
 
     Collection<User> getAllUsers();
 
-    User create(User user, Role role);
+    void create(User user, Role role);
 
 }

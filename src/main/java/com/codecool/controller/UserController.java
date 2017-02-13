@@ -22,16 +22,11 @@ import java.io.IOException;
 public class UserController {
 
     @Autowired
-    private final UserService userService;
+    private UserService userService;
 
     @Autowired
-    private final RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
-    @Autowired
-    public UserController(UserService userService, RoleRepository roleRepository) {
-        this.userService = userService;
-        this.roleRepository = roleRepository;
-    }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
@@ -64,7 +59,7 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     @ResponseBody
     public String registration(@RequestBody String data, Model model) {
-
+        System.out.println(data);
 //        JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -74,7 +69,7 @@ public class UserController {
                 userService.create(user, Role.USER);
             } else {
                 model.addAttribute("error", "used email address");
-                return "registration";
+                return "index";
             }
         } catch (JsonGenerationException | JsonMappingException e) {
             e.printStackTrace();
