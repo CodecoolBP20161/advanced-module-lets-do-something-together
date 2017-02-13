@@ -1,6 +1,8 @@
 package com.codecool.model;
 
 
+import com.codecool.security.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +14,7 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+    private Role role;
 
     public User() {
     }
@@ -19,6 +22,16 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Id
