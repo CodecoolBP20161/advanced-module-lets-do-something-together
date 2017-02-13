@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +35,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     @ResponseBody
-    public String registration(@RequestBody String data) {
+    public String registration(@RequestBody String data, Model model) {
 
 //        JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
@@ -43,13 +44,14 @@ public class UserController {
             if (userRepository.findByEmail(user.getEmail()) == null) {
                 userRepository.save(user);
             } else {
-                return "i don't know yet what to do";
+                model.addAttribute("error", "used email address");
+                return "registration";
             }
         } catch (JsonGenerationException | JsonMappingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "gut";
+        return "redirect:/";
     }
 }
