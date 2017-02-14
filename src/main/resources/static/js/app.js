@@ -1,1 +1,3 @@
-var App = angular.module('myApp',[]);
+'use strict';
+
+var App = angular.module('actimate',[]);
