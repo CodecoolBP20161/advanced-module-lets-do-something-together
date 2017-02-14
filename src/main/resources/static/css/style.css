@@ -17,3 +17,55 @@
 .email.ng-dirty.ng-invalid-email {
     background-color: yellow;
 }
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin-bottom: 20px;
+}
+
+nav {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 99;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+}
+
+.sect {
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.subSect {
+    height: 50%;
+    background-color: beige;
+}
+
+.sectOne {
+    background-image: url("../images/bg_image_1.jpg");
+}
+
+.sectTwo {
+    background-image: url("../images/bg_image_2.jpg");
+}
+
+.sectThree {
+    background-image: url("../images/bg_image_3.jpg");
+}

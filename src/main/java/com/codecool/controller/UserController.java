@@ -1,6 +1,8 @@
 package com.codecool.controller;
 
 import com.codecool.model.User;
+import com.codecool.repository.RoleRepository;
+import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -18,15 +20,20 @@ import java.io.IOException;
 
 @Controller
 public class UserController {
-    private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
+//        create possible roles *before* creating users -> so they can be referenced by the new user
+//        TODO come up with a proper way to do so
+        roleRepository.save(Role.ADMIN);
+        roleRepository.save(Role.USER);
         return "index";
     }
 
@@ -52,16 +59,17 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     @ResponseBody
     public String registration(@RequestBody String data, Model model) {
-
+        System.out.println(data);
 //        JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
         try {
             User user = mapper.readValue(data, User.class);
             if (userService.getUserByEmail(user.getEmail()) == null) {
-                userService.create(user);
+//                default user is USER, an admin can later create new ADMIN users as well
+                userService.create(user, Role.USER);
             } else {
                 model.addAttribute("error", "used email address");
-                return "registration";
+                return "index";
             }
         } catch (JsonGenerationException | JsonMappingException e) {
             e.printStackTrace();

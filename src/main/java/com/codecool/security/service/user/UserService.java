@@ -1,6 +1,7 @@
 package com.codecool.security.service.user;
 
 import com.codecool.model.User;
+import com.codecool.security.Role;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,6 +14,6 @@ public interface UserService {
 
     Collection<User> getAllUsers();
 
-    User create(User user);
+    void create(User user, Role role);
 
 }
