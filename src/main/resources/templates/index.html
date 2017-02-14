@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html ng-app="helloApp">
+<html ng-app="actimate">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
     <title>Hello AngularJS - Hello World</title>
@@ -14,7 +14,7 @@
 <body ng-controller="UserCtrl">
 
 <div>
-    <table class="table">
+<!--    <table class="table">
         <tr>
             <th>Email</th>
             <th>Password</th>
@@ -25,28 +25,28 @@
             <td>{{user.password}}</td>
             <td>{{user.password_again}}</td>
         </tr>
-    </table>
+    </table>-->
 
     <form class="form-horizontal" role="form" ng-submit="addRow()">
         <div class="form-group">
             <label class="col-md-2 control-label">Email</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="email"
-                       ng-model="email" />
+                       ng-model="user.email" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">Password</label>
             <div class="col-md-4">
                 <input type="password" class="form-control" name="password"
-                       ng-model="password" />
+                       ng-model="user.password" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">Password again</label>
             <div class="col-md-4">
                 <input type="password" class="form-control" name="password_again"
-                       ng-model="password_again" />
+                       ng-model="user.password_again" />
             </div>
         </div>
         <div class="form-group">
