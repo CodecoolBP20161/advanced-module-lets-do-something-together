@@ -8,18 +8,19 @@ actimate.controller("UserCtrl", function($scope, $http) {
     $scope.user = {}
     ;
     console.log($scope.user);
+    console.log(angular.toJson($scope.user));
     $scope.addRow = function(){
         /*$scope.users.push({ 'email':$scope.email, 'password': $scope.password, 'password_again':$scope.password_again });
         $scope.email='';
         $scope.password='';
         $scope.password_again='';
 */
-        $http.post('/registration', $scope.user)
+        $http.post('/registration', angular.toJson($scope.user))
             .success(function(data, status, headers, config) {
                 $scope.message = data;
             })
             .error(function(data, status, headers, config) {
-                alert( "failure message: " + $scope.user);
+                alert( "failure message: " + angular.toJson($scope.user));
             });
         // Making the fields empty
         //
