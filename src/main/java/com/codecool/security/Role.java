@@ -11,8 +11,7 @@ public enum Role {
     private int id;
     private String role;
 
-    Role() {
-    }
+    Role() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
