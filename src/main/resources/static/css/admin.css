@@ -1,0 +1,23 @@
+.admin-btn {
+    margin: 0px 15px;
+}
+
+form {
+    text-align: center
+}
+
+tr td:nth-child(2) {
+    text-align: left;
+}
+
+#listIcon {
+    width: 50px;
+}
+
+#roleColumn {
+    width: 150px;
+}
+
+.col-md-8, .col-md-6 {
+    text-align: center
+}
