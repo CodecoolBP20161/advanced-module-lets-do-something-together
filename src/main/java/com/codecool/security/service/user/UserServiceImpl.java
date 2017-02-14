@@ -1,6 +1,7 @@
 package com.codecool.security.service.user;
 
 import com.codecool.model.User;
+import com.codecool.repository.RoleRepository;
 import com.codecool.repository.UserRepository;
 import com.codecool.security.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 
 @Service
@@ -17,6 +17,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    public UserServiceImpl() {
+    }
 
     @Override
     public Optional<User> getUserById(int id) {
@@ -37,9 +43,7 @@ public class UserServiceImpl implements UserService {
 
     public void create(User user, Role role) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setRole(new HashSet<Role>() {{
-            add(role);
-        }});
+        user.setRole(role);
         userRepository.save(user);
     }
 }

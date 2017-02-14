@@ -1,10 +1,7 @@
 package com.codecool.security;
 
-import com.codecool.model.User;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 
 @Entity
 @Table(name = "roles")
@@ -13,22 +10,8 @@ public enum Role {
 
     private int id;
     private String role;
-    private Collection<User> userCollection;
 
     Role() {
-        this.role = this.toString();
-    }
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "role_users",
-            joinColumns = @JoinColumn(name = "roles", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "userCollection", referencedColumnName = "id"))
-    public Collection<User> getUserCollection() {
-        return userCollection;
-    }
-
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
     }
 
     @Id

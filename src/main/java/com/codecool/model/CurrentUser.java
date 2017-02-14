@@ -3,8 +3,6 @@ package com.codecool.model;
 import com.codecool.security.Role;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import java.util.Collection;
-
 public class CurrentUser extends org.springframework.security.core.userdetails.User {
 
     private User user;
@@ -22,7 +20,8 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         return user.getId();
     }
 
-    public Collection<Role> getRole() {
+    //    public Collection<Role> getRole() {
+    public Role getRole() {
         return user.getRole();
     }
 }

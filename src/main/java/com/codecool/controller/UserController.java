@@ -27,13 +27,20 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    public UserController(UserService userService, RoleRepository roleRepository) {
+    }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
 //        create possible roles *before* creating users -> so they can be referenced by the new user
 //        TODO come up with a proper way to do so
-        roleRepository.save(Role.ADMIN);
-        roleRepository.save(Role.USER);
+        Role admin = Role.ADMIN;
+        admin.setRole(admin.toString());
+        Role user = Role.USER;
+        user.setRole(user.toString());
+        roleRepository.save(admin);
+        roleRepository.save(user);
         return "index";
     }
 
