@@ -24,11 +24,6 @@ public class UserController {
     public UserController(UserService userService) {
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration() {
-        return "registration";
-    }
-
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public @ResponseBody String registration(@RequestBody String data) {
 //        JSON from String to Object
@@ -38,7 +33,7 @@ public class UserController {
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
             } else {
-                return "index";
+                return "registration";
             }
         } catch (IOException e) {
             e.printStackTrace();
