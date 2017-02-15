@@ -6,26 +6,21 @@ actimate.config(['$httpProvider', function ($httpProvider) {
 }]);
 actimate.controller("UserCtrl", function($scope, $http) {
     $scope.user = {};
-    $scope.addUser = function(valid){
+    $scope.addUser = function(){
 
-        if(valid) {
-            $http({
-                method: 'POST',
-                url: '/registration',
-                //withCredentials:true,
-                headers: {'Content-Type': 'application/json; charset=UTF-8'},
-                data: angular.toJson($scope.user)
+        $http({
+            method: 'POST',
+            url: '/registration',
+            //withCredentials:true,
+            headers: {'Content-Type': 'application/json; charset=UTF-8'},
+            data: angular.toJson($scope.user)
+        })
+            .success(function (response) {
             })
-                .success(function (response) {
-                })
-                .error(function (response) {
-                    alert("failure message: " + angular.toJson($scope.user));
-                });
-            $scope.validForm.$setPristine();
-            $scope.showLogin = true;
-            $scope.showRegistration = false;
+            .error(function (response) {
+                alert("failure message: " + angular.toJson($scope.user));
+            });
 
-        }
         // Making the fields empty
         $scope.user = null;
     };
