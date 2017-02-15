@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>ActiMate Admin</title>
+
+    <div th:replace="admin/fragments/styles :: copy"></div>
+
+</head>
+
+<body>
+<div class="jumbotron text-center">
+    <h1>ActiMate Admin</h1>
+</div>
+
+<div th:replace="admin/fragments/navbar :: copy"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <h2>List of ActiMate activities</h2>
+
+            <br></br>
+            <br></br>
+            <br></br>
+
+            <div th:text="${activities}"></div>
+
+            <br></br>
+            <br></br>
+            <br></br>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<div th:replace="admin/fragments/footer :: copy"></div>
+
+</body>
+</html>

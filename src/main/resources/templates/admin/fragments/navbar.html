@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<div th:fragment="copy">
+
+    <div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#actiMateNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand active" href="/admin"><span
+                            class="glyphicon glyphicon-home"></span> Admin Home</a>
+                </div>
+                <div class="collapse navbar-collapse" id="actiMateNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/admin/users">Users</a></li>
+                        <li><a href="/admin/activities">Activities</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</div>
+</html>
