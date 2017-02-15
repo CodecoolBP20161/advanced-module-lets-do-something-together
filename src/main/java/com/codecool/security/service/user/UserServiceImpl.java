@@ -1,7 +1,6 @@
 package com.codecool.security.service.user;
 
 import com.codecool.model.User;
-import com.codecool.repository.RoleRepository;
 import com.codecool.repository.UserRepository;
 import com.codecool.security.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
 
     public UserServiceImpl() {
     }

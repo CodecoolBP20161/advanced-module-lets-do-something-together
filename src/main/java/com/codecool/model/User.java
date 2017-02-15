@@ -24,6 +24,7 @@ public class User {
     }
 
     @Column(name = "role", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     public Role getRole() {
         return role;
     }

@@ -13,7 +13,7 @@ public class AdminController {
     private UserService userService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String mainUI(Model model) {
+    public String mainUI() {
         return "admin/admin_main";
     }
 
