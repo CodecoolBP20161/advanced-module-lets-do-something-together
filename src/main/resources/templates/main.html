@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ActiMate Home</title>
-    <link rel="stylesheet" href="../static/css/style.css"/>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>AngularJS Routing</title>
 
 </head>
 <body>
-
 <nav>
     <a id="home" href="#homeSection">HOME</a>
-    <a id="mission" href="#missionSection">MISSION</a>
+    <a id="mission" href="#mission">MISSION</a>
     <a id="howTo" href="#howToSection">HOW IT WORKS</a>
     <a id="contact" href="#contactSection">CONTACT</a>
-    <a id="register" href="#registerSection">REGISTER</a>
+    <a id="login" href="#login">LOGIN</a>
 </nav>
-<div id="homeSection" class="sect sectOne"></div>
-<div id="missionSection" class="subSect"></div>
-<div id="howToSection" class="sect sectTwo"></div>
-<div id="contactSection" class="subSect"></div>
-<div id="registerSection" class="sect sectThree"></div>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="../static/js/navigation.js"></script>
+<div ng-app="mainApp">
+    <ng-view></ng-view>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<link rel="stylesheet" href="../css/style.css"/>
 </body>
 </html>

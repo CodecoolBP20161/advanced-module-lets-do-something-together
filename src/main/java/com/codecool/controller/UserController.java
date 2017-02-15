@@ -32,8 +32,8 @@ public class UserController {
     public String index() {
 //        create possible roles *before* creating users -> so they can be referenced by the new user
 //        TODO come up with a proper way to do so
-        roleRepository.save(Role.ADMIN);
-        roleRepository.save(Role.USER);
+        //roleRepository.save(Role.ADMIN);
+        //roleRepository.save(Role.USER);
         return "index";
     }
 
