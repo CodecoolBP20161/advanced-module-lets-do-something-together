@@ -7,10 +7,10 @@ mainApp.config(function($routeProvider) {
         .when('/home', {
             templateUrl: 'home.html'
         })
-        .when('/login', {
-            templateUrl: 'login.html',
-            controller: 'loginController'
-        })
+        // .when('/login', {
+        //     templateUrl: 'login.html',
+        //     controller: 'loginController'
+        //})
         .when('/mission', {
             templateUrl: 'mission.html',
             controller: 'missionController'
