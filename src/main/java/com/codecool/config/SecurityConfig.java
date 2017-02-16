@@ -1,10 +1,10 @@
 package com.codecool.config;
 
+import com.codecool.security.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,21 +24,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/", "/registration").permitAll().anyRequest().authenticated()
+                .antMatchers("/admin/**").hasAuthority(Role.ADMIN.toString())
+                .antMatchers("/", "/registration").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login?error")
-                .usernameParameter("email")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .deleteCookies("remember-me")
-                .logoutSuccessUrl("/")
-                .permitAll()
-                .and()
-                .rememberMe();
+                .permitAll();
     }
 
     @Override
