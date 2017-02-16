@@ -20,9 +20,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    @Autowired
-    public UserController(UserService userService) {
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration() {
+        return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -34,11 +34,11 @@ public class UserController {
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
             } else {
-                return "registration";
+                return "fail";
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/";
+        return "success";
     }
 }
