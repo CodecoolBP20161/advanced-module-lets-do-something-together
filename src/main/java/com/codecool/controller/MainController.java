@@ -9,6 +9,6 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "registration";
+        return "main";
     }
 }
