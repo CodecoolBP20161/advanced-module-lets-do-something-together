@@ -6,22 +6,43 @@ actimate.config(['$httpProvider', function ($httpProvider) {
 }]);
 actimate.controller("UserCtrl", function($scope, $http) {
     $scope.user = {};
-    $scope.addUser = function(){
+    $scope.errorConfirm = false;
 
-        $http({
-            method: 'POST',
-            url: '/registration',
-            //withCredentials:true,
-            headers: {'Content-Type': 'application/json; charset=UTF-8'},
-            data: angular.toJson($scope.user)
-        })
-            .success(function (response) {
+    $scope.addUser = function(valid){
+        if(valid) {
+            $http({
+                method: 'POST',
+                url: '/registration',
+                //withCredentials:true,
+                headers: {'Content-Type': 'application/json; charset=UTF-8'},
+                data: angular.toJson($scope.user)
             })
-            .error(function (response) {
-                alert("failure message: " + angular.toJson($scope.user));
-            });
-
+                .success(function (response) {
+                })
+                .error(function (response) {
+                    alert("failure message: " + angular.toJson($scope.user));
+                });
+        }
         // Making the fields empty
         $scope.user = null;
     };
+
+    $scope.compareTo = function(){
+        return {
+            require: "ngModel",
+            scope: {
+                otherModelValue: "=compareTo"
+            },
+            link: function(scope, element, attributes, ngModel) {
+
+                ngModel.$validators.compareTo = function(modelValue) {
+                    return modelValue == scope.otherModelValue;
+                };
+
+                scope.$watch("otherModelValue", function() {
+                    ngModel.$validate();
+                });
+            }
+        };
+    }
 });
