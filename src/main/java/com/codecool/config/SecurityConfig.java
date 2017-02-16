@@ -25,11 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.POST,"/", "/registration").permitAll().anyRequest().authenticated()
+                .antMatchers("/", "/registration").permitAll().anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login?error")
+                .failureUrl("/")
                 .usernameParameter("email")
                 .permitAll()
                 .and()
