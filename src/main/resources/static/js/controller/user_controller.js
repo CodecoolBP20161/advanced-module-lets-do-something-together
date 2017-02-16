@@ -18,9 +18,11 @@ actimate.controller("UserCtrl", function($scope, $http) {
                 data: angular.toJson($scope.user)
             })
                 .success(function (response) {
+                    $scope.message = "Submitted ";
                 })
                 .error(function (response) {
                     alert("failure message: " + angular.toJson($scope.user));
+                    $scope.message = "There are still invalid fields below";
                 });
         }
         // Making the fields empty
@@ -44,5 +46,6 @@ actimate.controller("UserCtrl", function($scope, $http) {
                 });
             }
         };
-    }
+    };
+    actimate.directive("compareTo", compareTo);
 });
