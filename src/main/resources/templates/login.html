@@ -2,13 +2,12 @@
     <div class="container" ng-controller="loginController">
         <div class="login-container">
             <div class="vertical-align">
-                <form action="/" id="myLogin">
-                    Username: <input type="text" placeholder="Enter username" ng-model="username"/><br>
-                    Password: <input type="password" placeholder="Enter password" ng-model="password"/><br>
-                    <button type="button" id="login" ng-click="submit()">LOGIN</button>
+                <h1>Welcome!</h1>
+                <form method="post" id="myLogin">
+                    <input type="text" placeholder="Enter username" required="required" ng-model="username"/><br>
+                    <input type="password" placeholder="Enter password" required="required" ng-model="password"/><br>
+                    <button type="submit" class="btn-login" ng-click="submit()">LOGIN</button>
                     <br>
-                    <a href="#/home">Back</a>
-                    <p>{{message}}</p>
                 </form>
             </div>
         </div>
