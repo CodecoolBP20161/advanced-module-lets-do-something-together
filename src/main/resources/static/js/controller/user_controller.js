@@ -24,4 +24,4 @@ actimate.controller("UserCtrl", function($scope, $http) {
         // Making the fields empty
         $scope.user = null;
     };
-    });
+});
