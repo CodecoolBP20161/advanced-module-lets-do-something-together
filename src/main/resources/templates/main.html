@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head lang="en">
     <meta charset="utf-8"/>
-    <title>AngularJS Routing</title>
+    <title>ActiMate</title>
 
 </head>
 
@@ -10,8 +10,10 @@
 <nav>
     <a id="home" href="/">HOME</a>
     <a id="mission" href="#mission">MISSION</a>
-    <a id="register" href="/registration">REGISTER</a>
-    <a id="login" href="/login">LOGIN</a>
+    <a th:if="${#httpServletRequest.remoteUser}" id="profile" href="#">PROFILE</a>
+    <a th:if="${#httpServletRequest.remoteUser}" id="logout" th:href="@{/logout}">LOGOUT</a>
+    <a th:unless="${#httpServletRequest.remoteUser}" id="register" href="/registration">REGISTER</a>
+    <a th:unless="${#httpServletRequest.remoteUser}" id="login" href="/login">LOGIN</a>
     <a id="contact" href="#contactSection">CONTACT</a>
 </nav>
 <header></header>
