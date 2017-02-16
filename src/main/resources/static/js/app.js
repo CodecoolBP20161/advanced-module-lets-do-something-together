@@ -4,13 +4,13 @@ var mainApp = angular.module("mainApp", ['ngRoute']);
 
 mainApp.config(function($routeProvider) {
     $routeProvider
-        .when('/home', {
-            templateUrl: 'home.html'
+        .when('/', {
+            templateUrl: 'main.html'
         })
-        // .when('/login', {
-        //     templateUrl: 'login.html',
-        //     controller: 'loginController'
-        //})
+        .when('/registration', {
+             templateUrl: 'registration.html',
+             controller: 'registerController'
+        })
         .when('/mission', {
             templateUrl: 'mission.html',
             controller: 'missionController'
@@ -27,7 +27,7 @@ mainApp.config(function($routeProvider) {
 
         })
         .otherwise({
-            redirectTo: '/home'
+            redirectTo: '/'
         });
 });
 
@@ -51,4 +51,8 @@ mainApp.controller('missionController', function($scope) {
 
 mainApp.controller('profileController', function($scope) {
     $scope.message = "This is PROFILE PAGE."
+});
+
+mainApp.controller('registerController', function ($scope) {
+
 });

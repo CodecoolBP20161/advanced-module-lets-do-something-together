@@ -1,0 +1,80 @@
+.text-center{
+    text-align: center;
+}
+
+body {
+    min-height:100%;
+    background-color: #bee9d4;
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+h1 {
+    color: white;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 25px;
+    text-align: center;
+}
+.container {
+    max-width: 400px;
+    max-height: 200px;
+    margin-top: 10px;
+}
+
+.signup-screen {
+    align: center;
+    padding: 20px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    background-color: #84D9BE;
+    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+    color: white;
+}
+
+.space-bot{
+    margin-bottom: 35px;
+}
+.registrationpage{
+    text-align: center;
+}
+
+.space-top{
+    margin-top: 35px;
+}
+
+.button-pad{
+    padding-left:110px;
+}
+
+.input-group {
+    width:100%;
+}
+
+.input-group .ng-invalid {
+    border: 2px solid #e74c3c;
+    border-radius: 3px;
+}
+
+.alert-danger{
+    text-align: center;
+}
+
+.alert{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    border-color: #e85a71;
+    background-color:  #e85a71;
+    color: white;
+
+}
+
+.bt-pad{
+    padding-left:110px
+}
+

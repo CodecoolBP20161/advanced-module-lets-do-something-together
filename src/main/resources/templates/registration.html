@@ -4,58 +4,47 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
     <title>Hello AngularJS - Hello World</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
+    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
     <script src="/js/controller/user_controller.js"></script>
+    <script src="/js/controller/stageController.js"></script>
 
 </head>
-<body class="registrationpage" ng-controller="UserCtrl">
-
-<div>
-<!--    <table class="table">
-        <tr>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Password again</th>
-        </tr>
-        <tr ng-repeat="user in users">
-            <td>{{user.email}}</td>
-            <td>{{user.password}}</td>
-            <td>{{user.password_again}}</td>
-        </tr>
-    </table>-->
-
-    <form class="form-horizontal" role="form" ng-submit="addUser()">
-        <div class="form-group">
-            <label class="col-md-2 control-label">Email</label>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="email"
-                       ng-model="user.email" />
+<body ng-controller="UserCtrl">
+<div class="container" ng-controller="registerController">
+    <div id="signup">
+        <div class="signup-screen">
+            <div class="space-bot text-center">
+                <h1>Sign up</h1>
+                <div class="divider"></div>
             </div>
+            <form class="form-register" role="form" name="register" ng-submit="addUser()">
+                <div class="form-group">
+                    <label class="col-md-6 control-label" for="email">Email</label>
+                    <div class="input-field col s6">
+                        <input type="text" class="form-control" name="email" id="email" ng-model="user.email" />
+                    </div>
+                    <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is invalid.</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-6 control-label" for="password">Password</label>
+                    <div class="input-field col s6"><input type="password" ng-minlength='6' id="password" class="form-control" name="password" ng-model="user.password" /></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-6 control-label" for="password2">Password again</label>
+                    <div class="input-field col s6"><input type="password" class="form-control" id="password2" name="password_again" ng-model="user.password_again" /></div>
+                </div>
+                <div class="form-group">
+                    <div class="bt-pad"><input type="submit" value="Submit" class="waves-effect waves-light btn done"/></div>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">Password</label>
-            <div class="col-md-4">
-                <input type="password" class="form-control" name="password"
-                       ng-model="user.password" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">Password again</label>
-            <div class="col-md-4">
-                <input type="password" class="form-control" name="password_again"
-                       ng-model="user.password_again" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div style="padding-left:110px">
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-            </div>
-        </div>
-    </form>
-
+    </div>
 </div>
 </body>
 </html>
