@@ -11,4 +11,14 @@ public class MainController {
     public String index() {
         return "main";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGet() {
+        return "login_form";
+    }
+
+    @RequestMapping(value = "/mission", method = RequestMethod.GET)
+    public String mission() {
+        return "mission";
+    }
 }
