@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableGlobalMethodSecurity
@@ -22,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority(Role.ADMIN.toString())
                 .antMatchers("/", "/registration").permitAll()
@@ -32,7 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
     @Override
