@@ -6,21 +6,25 @@ actimate.config(['$httpProvider', function ($httpProvider) {
 }]);
 actimate.controller("UserCtrl", function($scope, $http) {
     $scope.user = {};
-    $scope.addUser = function(){
+    $scope.errorConfirm = false;
 
-        $http({
-            method: 'POST',
-            url: '/registration',
-            //withCredentials:true,
-            headers: {'Content-Type': 'application/json; charset=UTF-8'},
-            data: angular.toJson($scope.user)
-        })
-            .success(function (response) {
+    $scope.addUser = function(valid){
+        if(valid) {
+            $http({
+                method: 'POST',
+                url: '/registration',
+                //withCredentials:true,
+                headers: {'Content-Type': 'application/json; charset=UTF-8'},
+                data: angular.toJson($scope.user)
             })
-            .error(function (response) {
-                alert("failure message: " + angular.toJson($scope.user));
-            });
-
+                .success(function (response) {
+                    $scope.message = "Submitted ";
+                })
+                .error(function (response) {
+                    alert("failure message: " + angular.toJson($scope.user));
+                    $scope.message = "There are still invalid fields below";
+                });
+        }
         // Making the fields empty
         $scope.user = null;
     };
