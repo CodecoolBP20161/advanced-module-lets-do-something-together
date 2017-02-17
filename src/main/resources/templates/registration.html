@@ -2,7 +2,7 @@
 <html ng-app="actimate">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-    <title>Hello AngularJS - Hello World</title>
+    <title>ActiMate</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
@@ -15,32 +15,33 @@
     <script src="/js/controller/stageController.js"></script>
 
 </head>
-<body ng-controller="UserCtrl">
-<div class="container" ng-controller="registerController">
+<body>
+<div class="container" ng-controller="UserCtrl">
     <div id="signup">
         <div class="signup-screen">
             <div class="space-bot text-center">
                 <h1>Sign up</h1>
-                <div class="divider"></div>
             </div>
-            <form class="form-register" role="form" name="register" ng-submit="addUser()">
-                <div class="form-group">
-                    <label class="col-md-6 control-label" for="email">Email</label>
-                    <div class="input-field col s6">
-                        <input type="text" class="form-control" name="email" id="email" ng-model="user.email" />
-                    </div>
-                    <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is invalid.</p>
+            <form class="form-register ng-valid-email ng-invalid ng-invalid-required ng-dirty ng-valid-parse ng-invalid-minlength" name="validForm" ng-submit="addUser(validForm.$valid)" novalidate="novalidate">
+                <div class="form-group text-center">
+                    <label class="col-md-12 control-label" for="email">Email</label>
+                    <div class="input-field col s6"><input placeholder="example@example.com" type="email" name="email" id="email" class="form-control" ng-model="user.email" required="required"/></div>
+                    <div class="alert" ng-show="validForm.email.$error.email"><p>Invalid email address</p></div>
+                </div>
+                <div class="form-group text-center">
+                    <label class="col-md-12 control-label" for="password">Password</label>
+                    <div class="input-field col s6"><input type="password" ng-minlength='6' id="password" class="form-control" name="password" ng-model="user.password" required="required"/></div>
+                    <p class="alert alert-danger" ng-show="form-register.password.$error.minlength || form.password.$invalid ">Your password must be at least 6 characters.</p>
+                </div>
+                <div class="form-group text-center">
+                    <label class="col-md-12 control-label" for="confirmPassword">Confirm Password</label>
+                    <div class="input-field col s6"><input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="user.confirmPassword" required="required" compare-to="user.password"/></div>
+                    <div class="alert" ng-show="form-register.$error"> <span class="alert" ng-show="form-register.password_again.$error.compareTo">Passwords don't match.</span></div>
+                    <div class="alert" ng-show="form-register.confirmPassword.$error"><p>Password Doesnt match</p></div>
+
                 </div>
                 <div class="form-group">
-                    <label class="col-md-6 control-label" for="password">Password</label>
-                    <div class="input-field col s6"><input type="password" ng-minlength='6' id="password" class="form-control" name="password" ng-model="user.password" /></div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-6 control-label" for="password2">Password again</label>
-                    <div class="input-field col s6"><input type="password" class="form-control" id="password2" name="password_again" ng-model="user.password_again" /></div>
-                </div>
-                <div class="form-group">
-                    <div class="bt-pad"><input type="submit" value="Submit" class="waves-effect waves-light btn done"/></div>
+                    <div class="bt-pad col-md-14"><input type="submit" value="Submit" class="waves-effect waves-light btn done"/></div>
                 </div>
             </form>
         </div>

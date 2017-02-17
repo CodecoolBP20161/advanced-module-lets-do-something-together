@@ -5,6 +5,7 @@
 body {
     min-height:100%;
     background-color: #bee9d4;
+    align: center;
 }
 
 input:invalid {
@@ -27,6 +28,7 @@ h1 {
 
 .signup-screen {
     align: center;
+    align-content: center;
     padding: 20px;
     padding-bottom: 40px;
     border-radius: 5px;
@@ -71,10 +73,47 @@ h1 {
     border-color: #e85a71;
     background-color:  #e85a71;
     color: white;
+}
 
+.alert2{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    border-color: #e85a71;
+    background-color:  #e85a71;
+    color: white;
 }
 
 .bt-pad{
-    padding-left:110px
+    align: center;
+    align-content: center;
+}
+
+.ng-invalid {
+    border-color: red;
+    outline-color: red;
+}
+
+.ng-valid {
+    border-color: green;
+    outline-color: green;
+}
+
+.input-field {
+    position: relative;
+    margin-top: 1rem;
+}
+
+p.errormessage{
+    color: #FF9800;
+    font-size: 16px;
+}
+.errormessage p {
+    text-transform: uppercase;
+    color: #FF9800;
+    float: right;
+    margin-right: 25px;
+    padding: 11px;
 }
 
