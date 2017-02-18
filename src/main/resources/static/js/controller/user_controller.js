@@ -18,11 +18,15 @@ actimate.controller("UserCtrl", function($scope, $http) {
                 data: angular.toJson($scope.user)
             })
                 .success(function (response) {
-                    $scope.message = "Submitted ";
+                    if (response == "fail") {
+                        $('.email-error-message').text("Email address is already in use").fadeIn();
+                    } else {
+                        $('.success-message').text("You have successfully registered").fadeIn();
+                    }
+                    console.log(response);
                 })
                 .error(function (response) {
                     alert("failure message: " + angular.toJson($scope.user));
-                    $scope.message = "There are still invalid fields below";
                 });
         }
         // Making the fields empty
