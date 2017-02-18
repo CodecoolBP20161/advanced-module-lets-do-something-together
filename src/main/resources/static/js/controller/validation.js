@@ -49,11 +49,6 @@ function validateEmailFormat() {
     }
 }
 
-$("#email").blur();
-
-
-$("#password_again").blur();
-
 
 function onSuccess() {
     $('.success-message').text("You have successfully registered").addClass("alert alert-success alert-dismissable").fadeIn();
@@ -79,15 +74,26 @@ function removeError($element) {
     $element.removeClass("has-feedback");
 }
 
+
 function validatePasswordFormat() {
     var $password = $(".password");
     var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}/g;
     if (!re.test($password.val())) {
-        $(".password-validate-message").text("Minimum length is 6 characters. Password must contain at least one" +
-            "uppercase, lowercase and number").fadeIn();
+        $(".password-validate-message").text("Minimum length is 6 characters.\nPassword must contain at least one " +
+            "uppercase, lowercase and number").addClass("alert alert-danger alert-dismissable").css("white-space", "pre-line").fadeIn();
         buttonActive(false);
+        $("#password").focus();
+        addError($("#pwdDiv"));
     } else {
         $(".password-validate-message").fadeOut();
         buttonActive(true);
+        removeError($("#pwdDiv"));
     }
 }
+
+
+$("#email").blur();
+
+$("#password_again").blur();
+
+$("#password").blur();
