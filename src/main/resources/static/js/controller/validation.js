@@ -78,7 +78,7 @@ function removeError($element) {
 function validatePasswordFormat() {
     var $password = $(".password");
     var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}/g;
-    if (!re.test($password.val())) {
+    if ($password.val().length > 0 && !re.test($password.val())) {
         $(".password-validate-message").text("Minimum length is 6 characters.\nPassword must contain at least one " +
             "uppercase, lowercase and number").addClass("alert alert-danger alert-dismissable").css("white-space", "pre-line").fadeIn();
         buttonActive(false);
