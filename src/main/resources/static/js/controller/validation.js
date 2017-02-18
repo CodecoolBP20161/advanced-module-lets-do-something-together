@@ -40,3 +40,16 @@ function validateEmailFormat() {
         $(".email-format-message").fadeOut();
     }
 }
+
+function validatePasswordFormat() {
+    var $password = $(".password");
+    var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}/g;
+    if (!re.test($password.val())) {
+        $(".password-validate-message").text("Minimum length is 6 characters. Password must contain at least one" +
+            "uppercase, lowercase and number").fadeIn();
+        buttonActive(false);
+    } else {
+        $(".password-validate-message").fadeOut();
+        buttonActive(true);
+    }
+}
