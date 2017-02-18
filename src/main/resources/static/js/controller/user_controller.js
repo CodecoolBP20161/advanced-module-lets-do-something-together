@@ -4,12 +4,12 @@ var actimate = angular.module("actimate", ['ngResource']);
 actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 }]);
-actimate.controller("UserCtrl", function($scope, $http) {
+actimate.controller("UserCtrl", function ($scope, $http) {
     $scope.user = {};
     $scope.errorConfirm = false;
 
-    $scope.addUser = function(valid){
-        if(valid) {
+    $scope.addUser = function (valid) {
+        if (valid) {
             $http({
                 method: 'POST',
                 url: '/registration',
@@ -19,9 +19,10 @@ actimate.controller("UserCtrl", function($scope, $http) {
             })
                 .success(function (response) {
                     if (response == "fail") {
-                        $('.email-error-message').text("Email address is already in use").fadeIn();
+                        $(".email-error-message").text("Email address is already in use").addClass("alert alert-danger alert-dismissable").fadeIn();
+                        addError($("#emailDiv"));
                     } else {
-                        $('.success-message').text("You have successfully registered").fadeIn();
+                        onSuccess();
                     }
                     console.log(response);
                 })
