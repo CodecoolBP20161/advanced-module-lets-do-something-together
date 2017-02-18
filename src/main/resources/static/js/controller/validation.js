@@ -2,6 +2,7 @@ $(document).ready(function () {
     buttonActive(false);
     $('.email-error-message').hide();
     $('.success-message').hide();
+    $("#email").focus();
 });
 
 
@@ -40,3 +41,5 @@ function validateEmailFormat() {
         $(".email-format-message").fadeOut();
     }
 }
+
+$("#email").blur();
