@@ -43,7 +43,6 @@ public class MainController {
         }
         return "login_form";
     }
-}
 
     @RequestMapping(value = "/mission", method = RequestMethod.GET)
     public String mission() {
