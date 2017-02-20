@@ -13,9 +13,18 @@
     <script src="/js/controller/userController.js"></script>
 </head>
 <body>
+<nav ng-controller="navController">
+    <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+    <a href="/">HOME</a>
+    <a href="/mission">MISSION</a>
+    <a sec:authorize="isAuthenticated()" href="#" id="profile">PROFILE</a>
+    <a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a>
+    <a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a>
+    <a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a>
+    <a id="contact" href="#contactSection">CONTACT</a>
+</nav>
 
-    <div id="mission">
-    <div class="container" ng-controller="missionController">
+    <div class="container" id="mission" ng-controller="missionController">
         <div class="mission-container">
             <div class="vertical-align" id="missionText">
                 <i>Mission</i> answers the question “Why do we exist?”
@@ -33,6 +42,6 @@
             </div>
         </div>
     </div>
-    </div>
+
 </body>
 </html>
