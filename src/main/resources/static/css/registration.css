@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+}
+
 .text-center {
     text-align: center;
 }
@@ -13,9 +17,12 @@ body {
     align-items: center;
 }
 
+html, body {
+    height: 100%;
+}
+
 h1 {
     color: white;
-    font-family: 'Roboto';
     text-transform: uppercase;
     font-weight: 900;
     font-size: 25px;
@@ -89,8 +96,8 @@ h1 {
 }
 
 .ng-valid {
-    border-color: green;
-    outline-color: green;
+    border-color: lightgreen;
+    outline-color: lightgreen;
 }
 
 .input-field {
@@ -134,4 +141,25 @@ p.errormessage {
 
 #sign-up-title {
     color: #f9f9f9;
+}
+
+nav {
+    top: 0px;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 99;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+}
+
+#signup {
+    width: 400px;
 }

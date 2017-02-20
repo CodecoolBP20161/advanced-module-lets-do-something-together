@@ -134,18 +134,3 @@ input:focus {
     background-color: #ffffff;
     color: #000;
 }
-
-/* Prefent AngularJS template to show as raw before everything  is loaded properly */
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
-
-nav > .active > a{
-    color: #e74c3c;
-    border-bottom-color: #e74c3c;
-}
-
-nav > .active > a:hover {
-    color: white;
-    border-bottom-color: white;
-}
