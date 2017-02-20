@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<link rel="stylesheet" type="text/css" href="/css/main.css"/>
+<div id="login-bg">
 <div class="container" ng-controller="loginController">
     <div class="login-container">
         <div class="vertical-align">
             <h1>Welcome</h1>
 <form th:action="@{/login}" method="post" id="myLogin">
-    <div><label> Email : <input type="email" name="username" placeholder="Email"/> </label></div>
-    <div><label> Password: <input type="password" name="password" placeholder="Password"/> </label></div>
+    <div><label><input type="email" name="username" placeholder="Email"/> </label></div>
+    <div><label><input type="password" name="password" placeholder="Password"/> </label></div>
     <div><input type="submit" value="Sign In" ng-click="submit()"/></div>
 </form>
         </div>
     </div>
 </div>
-
+</div>
 </html>

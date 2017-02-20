@@ -34,8 +34,19 @@ nav a {
     background-attachment: fixed;
 }
 
+#login-bg {
+    background-image: url("../images/bg_image_1.jpg");
+    height: 100vh;
+    background-size: cover;
+    margin-bottom: 20px;
 
-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header{
     background-image: url("../images/bg_image_1.jpg");
     height: 100vh;
     background-size: cover;

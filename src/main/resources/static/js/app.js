@@ -35,6 +35,8 @@ mainApp.config(function($routeProvider) {
         });
 });
 
+
+
 mainApp.controller('loginController', function($scope, $location, $rootScope) {
     $scope.submit = function () {
         if($scope.username == 'admin' && $scope.password == 'admin'){
@@ -54,7 +56,6 @@ mainApp.controller('missionController', function($scope) {
 });
 
 mainApp.controller('profileController', function($scope) {
-    $scope.message = "This is PROFILE PAGE."
 });
 
 mainApp.controller('registerController', function ($scope) {
