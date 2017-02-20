@@ -38,7 +38,7 @@
                 <div class="form-group text-center" id="pwdDiv">
                     <label class="col-md-12 control-label" for="password">Password</label>
                     <div class="input-field col s6"><input type="password" ng-minlength='6' id="password"
-                                                           onkeyup="validatePasswordFormat()"
+                                                           onkeyup="validatePasswordFormat()" onchange="passwordMatch()"
                                                            class="form-control password" name="password"
                                                            ng-model="user.password" required="required"/></div>
                     <p class="alert alert-danger"
