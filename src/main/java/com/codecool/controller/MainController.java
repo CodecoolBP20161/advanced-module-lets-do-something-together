@@ -26,20 +26,14 @@ public class MainController {
             User admin = new User("admin@admin.com", "1234");
             userService.create(admin, Role.ADMIN);
         }
-//        if (logout != null) {
-//            model.addAttribute("error", "You have been logged out successfully!");
-//        }
         return "main";
     }
 
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    public String login(Model model, String error) {
         if (error != null) {
             model.addAttribute("error", "Failed to log in. Email or password is invalid!");
-        }
-        if (logout != null) {
-            model.addAttribute("error", "You have been logged out successfully!");
         }
         return "login_form";
     }
