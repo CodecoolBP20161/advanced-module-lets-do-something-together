@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head lang="en">
     <meta charset="utf-8"/>
     <title>ActiMate</title>
@@ -8,12 +9,15 @@
 
 <body>
 <nav>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
     <a id="home" href="/">HOME</a>
     <a id="mission" href="#mission">MISSION</a>
-    <a th:if="${#httpServletRequest.remoteUser}" id="profile" href="#">PROFILE</a>
-    <a th:if="${#httpServletRequest.remoteUser}" id="logout" th:href="@{/logout}">LOGOUT</a>
-    <a th:unless="${#httpServletRequest.remoteUser}" id="register" href="/registration">REGISTER</a>
-    <a th:unless="${#httpServletRequest.remoteUser}" id="login" href="/login">LOGIN</a>
+
+    <a sec:authorize="isAuthenticated()" href="#" id="profile">PROFILE</a>
+    <a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a>
+
+    <a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a>
+    <a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a>
     <a id="contact" href="#contactSection">CONTACT</a>
 </nav>
 <header></header>

@@ -22,12 +22,12 @@
 
             <h2>List of ActiMate users</h2>
             <br></br>
-            <table class="table table-sm table-bordered">
+            <table class="table table-sm table-bordered table-hover">
                 <thead class="thead-inverse">
                 <tr>
                     <th id="listIcon"></th>
-                    <th id="emailColumn">Email</th>
-                    <th id="roleColumn">Role</th>
+                    <th id="emailColumn">EMAIL ADDRESS</th>
+                    <th id="roleColumn">ROLE</th>
                 </tr>
                 </thead>
                 <tr th:each="user, iterStat : ${users}">
@@ -43,8 +43,5 @@
         <div class="col-md-3"></div>
     </div>
 </div>
-
-<div th:replace="admin/fragments/footer :: copy"></div>
-
 </body>
 </html>
