@@ -58,7 +58,7 @@ header{
     align-items: center;
 }
 
-.login-container, .mission-container {
+.login-container {
     text-align: center;
 }
 
@@ -134,3 +134,4 @@ input:focus {
     background-color: #ffffff;
     color: #000;
 }
+
