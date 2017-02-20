@@ -3,9 +3,14 @@
 }
 
 body {
-    min-height: 100%;
-    background-color: rgba(143, 219, 196, 0.76);
-    align: center;
+    background-image: url("../images/bg_image_1.jpg");
+    height: 100vh;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -20,7 +25,7 @@ h1 {
 .container {
     max-width: 400px;
     max-height: 200px;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .signup-screen {
