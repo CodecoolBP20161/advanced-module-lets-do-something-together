@@ -54,11 +54,6 @@ h1 {
     width: 100%;
 }
 
-.input-group .ng-invalid {
-    border: 2px solid #e74c3c;
-    border-radius: 3px;
-}
-
 .alert-danger {
     text-align: center;
 }
@@ -117,8 +112,8 @@ p.errormessage {
 
 .success-message {
     text-align: center;
-    background-color: #3b3b3b;
-    border: black;
+    background-color: black;
+    border: #3b3b3b;
 }
 
 .registration-button {
@@ -128,6 +123,7 @@ p.errormessage {
 
 .control-label {
     color: #f9f9f9;
+    font-weight: 700;
 }
 
 #sign-up-title {

@@ -9,8 +9,8 @@
 
 <body>
 <nav ng-controller="navController">
-    <a href="/">HOME</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+    <a href="/">HOME</a>
     <a id="mission" href="#mission">MISSION</a>
     <a sec:authorize="isAuthenticated()" href="#" id="profile">PROFILE</a>
     <a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a>
