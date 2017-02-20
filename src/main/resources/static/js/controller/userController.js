@@ -4,12 +4,12 @@ var actimate = angular.module("actimate", ['ngResource']);
 actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 }]);
-actimate.controller("UserCtrl", function($scope, $http) {
+actimate.controller("UserCtrl", function ($scope, $http) {
     $scope.user = {};
     $scope.errorConfirm = false;
 
-    $scope.addUser = function(valid){
-        if(valid) {
+    $scope.addUser = function (valid) {
+        if (valid) {
             $http({
                 method: 'POST',
                 url: '/registration',
@@ -18,11 +18,16 @@ actimate.controller("UserCtrl", function($scope, $http) {
                 data: angular.toJson($scope.user)
             })
                 .success(function (response) {
-                    $scope.message = "Submitted ";
+                    if (response == "fail") {
+                        $(".email-error-message").text("Email address is already in use").addClass("alert alert-danger alert-dismissable").fadeIn();
+                        addError($("#emailDiv"));
+                    } else {
+                        onSuccess();
+                    }
+                    console.log(response);
                 })
                 .error(function (response) {
                     alert("failure message: " + angular.toJson($scope.user));
-                    $scope.message = "There are still invalid fields below";
                 });
         }
         // Making the fields empty

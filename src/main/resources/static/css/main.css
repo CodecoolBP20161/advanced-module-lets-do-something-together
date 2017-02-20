@@ -123,3 +123,8 @@ input:focus {
     background-color: #ffffff;
     color: #000;
 }
+
+/* Prefent AngularJS template to show as raw before everything  is loaded properly */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}

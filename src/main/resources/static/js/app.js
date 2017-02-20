@@ -11,9 +11,9 @@ mainApp.config(function($routeProvider) {
              templateUrl: 'registration.html',
              controller: 'registerController'
         })
-        .when('/mission', {
-            templateUrl: 'mission.html',
-            controller: 'missionController'
+        .when('/login', {
+            templateUrl: 'login_form.html',
+            controller: 'loginController'
         })
         .when('/profile', {
             resolve: {
@@ -25,6 +25,10 @@ mainApp.config(function($routeProvider) {
             },
             templateUrl: 'profile.html'
 
+        })
+        .when('/mission', {
+            templateUrl: 'mission.html',
+            controller: 'missionController'
         })
         .otherwise({
             redirectTo: '/'

@@ -1,15 +1,11 @@
-.text-center{
+.text-center {
     text-align: center;
 }
 
 body {
-    min-height:100%;
+    min-height: 100%;
     background-color: #bee9d4;
     align: center;
-}
-
-input:invalid {
-    border: 1px solid red;
 }
 
 h1 {
@@ -20,6 +16,7 @@ h1 {
     font-size: 25px;
     text-align: center;
 }
+
 .container {
     max-width: 400px;
     max-height: 200px;
@@ -33,27 +30,28 @@ h1 {
     padding-bottom: 40px;
     border-radius: 5px;
     background-color: #84D9BE;
-    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
     color: white;
 }
 
-.space-bot{
+.space-bot {
     margin-bottom: 35px;
 }
-.registrationpage{
+
+.registrationpage {
     text-align: center;
 }
 
-.space-top{
+.space-top {
     margin-top: 35px;
 }
 
-.button-pad{
-    padding-left:110px;
+.button-pad {
+    padding-left: 110px;
 }
 
 .input-group {
-    width:100%;
+    width: 100%;
 }
 
 .input-group .ng-invalid {
@@ -61,38 +59,33 @@ h1 {
     border-radius: 3px;
 }
 
-.alert-danger{
+.alert-danger {
     text-align: center;
 }
 
-.alert{
+.alert {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 2px;
     border-color: #e85a71;
-    background-color:  #e85a71;
+    background-color: #e85a71;
     color: white;
 }
 
-.alert2{
+.alert2 {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 2px;
     border-color: #e85a71;
-    background-color:  #e85a71;
+    background-color: #e85a71;
     color: white;
 }
 
-.bt-pad{
+.bt-pad {
     align: center;
     align-content: center;
-}
-
-.ng-invalid {
-    border-color: red;
-    outline-color: red;
 }
 
 .ng-valid {
@@ -105,10 +98,11 @@ h1 {
     margin-top: 1rem;
 }
 
-p.errormessage{
+p.errormessage {
     color: #FF9800;
     font-size: 16px;
 }
+
 .errormessage p {
     text-transform: uppercase;
     color: #FF9800;
@@ -117,3 +111,12 @@ p.errormessage{
     padding: 11px;
 }
 
+#signupBtnDiv {
+    text-align: center;
+}
+
+.success-message {
+    text-align: center;
+    background-color: #3b3b3b;
+    border: black;
+}
