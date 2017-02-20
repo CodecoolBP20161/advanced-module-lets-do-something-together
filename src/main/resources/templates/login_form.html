@@ -1,18 +1,62 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="/css/main.css"/>
-<div id="login-bg">
-<div class="container" ng-controller="loginController">
-    <div class="login-container">
-        <div class="vertical-align">
-            <h1>Welcome</h1>
-<form th:action="@{/login}" method="post" id="myLogin">
-    <div><label><input type="email" name="username" placeholder="Email"/> </label></div>
-    <div><label><input type="password" name="password" placeholder="Password"/> </label></div>
-    <div><input type="submit" value="Sign In" ng-click="submit()"/></div>
-</form>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ActiMate - LogIn</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="/css/login_form.css"/>
+    <script src="https://use.fontawesome.com/7c224a1209.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6"><p th:text="${error}" id="formError" style="text-align: center" hidden="hidden"></p></div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="loginBg">
+            <br/>
+            <br/>
+            <form th:action="@{/login}" method="post">
+                <label for="loginEmail">EMAIL</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input id="loginEmail" class="form-control" name="username" placeholder="email@example.com"
+                           required="required"/>
+                </div>
+                <br/>
+                <label>PASSWORD</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input class="form-control" type="password" name="password" required="required"/>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-md-6" id="signupBtnDiv">
+                        <a href="/registration">
+                            <button type="button" class="btn btn-lg" id="signupBtn">SIGN UP</button>
+                        </a>
+                        <div><p>Don't have an account yet?</p></div>
+                    </div>
+                    <div class="col-md-6" id="loginBtnDiv"><input type="submit" class="btn btn-lg" id="loginBtn"
+                                                                  value="LOGIN"/></div>
+                </div>
+            </form>
+            <br/>
+            <br/>
         </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 </div>
+
+<script src="/js/jquery/error.js"></script>
+</body>
 </html>

@@ -39,3 +39,12 @@ tr td:nth-child(2) {
 .admin-link, .admin-link:link {
     text-decoration: none;
 }
+
+.thead-inverse {
+    background-color: #373a3c;
+    color: #b9b9b9;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgba(143, 219, 196, 0.6);
+}

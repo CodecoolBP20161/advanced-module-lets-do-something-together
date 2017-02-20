@@ -1,0 +1,38 @@
+body {
+    background-color: rgba(143, 219, 196, 0.76);
+    vertical-align: middle;
+}
+
+#loginBg {
+    background-color: rgba(0, 0, 0, 0.65);
+    color: #f9f9f9;
+}
+
+#formError {
+    background-color: rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    box-shadow: 5px 5px 10px #333333;
+    padding: 10px;
+    width: auto;
+    text-align: center;
+    margin: 10px auto;
+    color: #f9f9f9;
+}
+
+#loginBtn, #signupBtn {
+    background-color: black;
+    color: #f9f9f9;
+    margin: 0px 15px
+}
+
+#signupBtn > a, #signupBtn > div {
+    text-align: center;
+}
+
+#loginBtnDiv {
+    text-align: right;
+}
+
+#signupBtnDiv {
+    text-align: left;
+}

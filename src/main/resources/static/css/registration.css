@@ -4,7 +4,7 @@
 
 body {
     min-height: 100%;
-    background-color: #bee9d4;
+    background-color: rgba(143, 219, 196, 0.76);
     align: center;
 }
 
@@ -29,7 +29,7 @@ h1 {
     padding: 20px;
     padding-bottom: 40px;
     border-radius: 5px;
-    background-color: #84D9BE;
+    background-color: rgba(0, 0, 0, 0.65);
     box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
     color: white;
 }
@@ -119,4 +119,17 @@ p.errormessage {
     text-align: center;
     background-color: #3b3b3b;
     border: black;
+}
+
+.registration-button {
+    background-color: #000;
+    color: #b9b9b9;
+}
+
+.control-label {
+    color: #f9f9f9;
+}
+
+#sign-up-title {
+    color: #f9f9f9;
 }
