@@ -112,8 +112,9 @@ p.errormessage {
 
 .success-message {
     text-align: center;
-    background-color: black;
-    border: #3b3b3b;
+    color: #efefef;
+    background-color: transparent;
+    border: none;
 }
 
 .registration-button {
