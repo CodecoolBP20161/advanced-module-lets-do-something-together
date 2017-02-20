@@ -149,3 +149,24 @@ nav > .active > a:hover {
     color: white;
     border-bottom-color: white;
 }
+
+#backBtn {
+    background-color: #000;
+    color: #b9b9b9;
+}
+
+.backBtn {
+    text-decoration: none;
+}
+
+#missionText {
+    color: #fff;
+    font-variant: small-caps;
+    font-size: 150%;
+    margin: 0px 10px;
+    padding: 0px 10px;
+}
+
+.mission-container {
+    margin: 10px;
+}
