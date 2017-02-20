@@ -37,10 +37,9 @@ nav a {
     width: 500px;
     padding-left: 20px;
     padding-right: 20px;
-}
-
-mission-container {
+    background-color: rgba(0,0,0,0.5);
     text-align: center;
+    padding: 20px;
 }
 
 #missionText {
@@ -49,4 +48,17 @@ mission-container {
     line-height: 1;
     text-align: center;
     font-family: Garamond;
+}
+
+#mission {
+    display: block;
+}
+
+.btn-block {
+    color: #000;
+}
+
+.btn-block:hover {
+    background-color: lightgray;
+
 }
