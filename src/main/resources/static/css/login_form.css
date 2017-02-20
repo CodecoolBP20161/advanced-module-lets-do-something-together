@@ -1,6 +1,13 @@
 body {
-    background-color: rgba(143, 219, 196, 0.76);
-    vertical-align: middle;
+    background-image: url("../images/bg_image_1.jpg");
+    height: 100vh;
+    background-size: cover;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #loginBg {

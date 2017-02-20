@@ -35,22 +35,6 @@ mainApp.config(function($routeProvider) {
         });
 });
 
-
-
-mainApp.controller('loginController', function($scope, $location, $rootScope) {
-    $scope.submit = function () {
-        if($scope.username == 'admin' && $scope.password == 'admin'){
-            $rootScope.loggedIn = true;
-            $location.path('/profile');
-        } else {
-            alert('Some alert');
-        }
-    };
-
-
-    $scope.message = "Click back to return the Homepage.";
-});
-
 mainApp.controller('missionController', function($scope) {
     $scope.message = "No Mission Yet."
 });

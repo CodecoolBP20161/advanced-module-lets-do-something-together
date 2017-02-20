@@ -139,3 +139,13 @@ input:focus {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+
+nav > .active > a{
+    color: #e74c3c;
+    border-bottom-color: #e74c3c;
+}
+
+nav > .active > a:hover {
+    color: white;
+    border-bottom-color: white;
+}
