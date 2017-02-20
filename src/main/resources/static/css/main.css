@@ -34,8 +34,19 @@ nav a {
     background-attachment: fixed;
 }
 
+#login-bg {
+    background-image: url("../images/bg_image_1.jpg");
+    height: 100vh;
+    background-size: cover;
+    margin-bottom: 20px;
 
-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header{
     background-image: url("../images/bg_image_1.jpg");
     height: 100vh;
     background-size: cover;
@@ -127,4 +138,14 @@ input:focus {
 /* Prefent AngularJS template to show as raw before everything  is loaded properly */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+}
+
+nav > .active > a{
+    color: #e74c3c;
+    border-bottom-color: #e74c3c;
+}
+
+nav > .active > a:hover {
+    color: white;
+    border-bottom-color: white;
 }
