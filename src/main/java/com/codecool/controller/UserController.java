@@ -32,9 +32,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public @ResponseBody String registration(@RequestBody String data) {
-//        JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
-//        ignore password confirmation field
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             User user = mapper.readValue(data, User.class);
