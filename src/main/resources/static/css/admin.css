@@ -1,0 +1,50 @@
+.admin-btn {
+    margin: 0px 15px;
+}
+
+form {
+    text-align: center
+}
+
+tr td:nth-child(2) {
+    text-align: left;
+}
+
+#listIcon {
+    width: 50px;
+}
+
+#roleColumn {
+    width: 150px;
+}
+
+.col-md-8, .col-md-6 {
+    text-align: center
+}
+
+.jumbotron {
+    background-color: #84D9BE;
+}
+
+.admin-btn {
+    background-image: linear-gradient(to bottom, #5c9a84 0,#84D9BE 100%);
+    border-color: #5c9a84;
+}
+
+.admin-btn:hover, .admin-btn:active, .admin-btn:focus {
+    background-color: #84D9BE;
+    border-color: #5c9a84;
+}
+
+.admin-link, .admin-link:link {
+    text-decoration: none;
+}
+
+.thead-inverse {
+    background-color: #373a3c;
+    color: #b9b9b9;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgba(143, 219, 196, 0.6);
+}

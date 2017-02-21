@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+}
+body {
+    background-image: url("../images/bg_image_1.jpg");
+    height: 100vh;
+    background-size: cover;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginBg {
+    background-color: rgba(0, 0, 0, 0.65);
+    color: #f9f9f9;
+}
+
+#formError {
+    background-color: rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    box-shadow: 5px 5px 10px #333333;
+    padding: 10px;
+    width: auto;
+    text-align: center;
+    margin: 10px auto;
+    color: #f9f9f9;
+}
+
+#loginBtn, #signupBtn {
+    background-color: black;
+    color: #f9f9f9;
+    margin: 0px 15px
+}
+
+#signupBtn > a, #signupBtn > div {
+    text-align: center;
+}
+
+#loginBtnDiv {
+    text-align: right;
+}
+
+#signupBtnDiv {
+    text-align: left;
+}
+
+nav {
+    top: 0px;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 99;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+}

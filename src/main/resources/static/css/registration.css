@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+body {
+    background-image: url("../images/bg_image_1.jpg");
+    height: 100vh;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+html, body {
+    height: 100%;
+}
+
+h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 25px;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    max-height: 200px;
+    margin-top: 0px;
+}
+
+.signup-screen {
+    align: center;
+    align-content: center;
+    padding: 20px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
+    color: white;
+}
+
+.space-bot {
+    margin-bottom: 35px;
+}
+
+.registrationpage {
+    text-align: center;
+}
+
+.space-top {
+    margin-top: 35px;
+}
+
+.button-pad {
+    padding-left: 110px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.alert-danger {
+    text-align: center;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    border-color: #e85a71;
+    background-color: #e85a71;
+    color: white;
+}
+
+.alert2 {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    border-color: #e85a71;
+    background-color: #e85a71;
+    color: white;
+}
+
+.bt-pad {
+    align: center;
+    align-content: center;
+}
+
+.ng-valid {
+    border-color: lightgreen;
+    outline-color: lightgreen;
+}
+
+.input-field {
+    position: relative;
+    margin-top: 1rem;
+}
+
+p.errormessage {
+    color: #FF9800;
+    font-size: 16px;
+}
+
+.errormessage p {
+    text-transform: uppercase;
+    color: #FF9800;
+    float: right;
+    margin-right: 25px;
+    padding: 11px;
+}
+
+#signupBtnDiv {
+    text-align: center;
+}
+
+.success-message {
+    text-align: center;
+    color: #efefef;
+    background-color: transparent;
+    border: none;
+}
+
+.registration-button {
+    background-color: #000;
+    color: #b9b9b9;
+}
+
+.control-label {
+    color: #f9f9f9;
+    font-weight: 700;
+}
+
+#sign-up-title {
+    color: #f9f9f9;
+}
+
+nav {
+    top: 0px;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 99;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+}
+
+#signup {
+    width: 400px;
+}
