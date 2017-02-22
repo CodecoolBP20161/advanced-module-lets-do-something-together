@@ -14,14 +14,20 @@ public class User {
     private String email;
     private String password;
     private Role role;
+    private String regDate;
 
     public User() {
     }
 
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+//        Date today = Calendar.getInstance().getTime();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-kk:mm:ss");
+//        this.regDate = formatter.format(today);
     }
+
 
     @Column(name = "role", nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -63,5 +69,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Column(name = "regDate")
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
     }
 }

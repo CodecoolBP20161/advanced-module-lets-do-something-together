@@ -1,6 +1,5 @@
 package com.codecool.controller;
 
-import com.codecool.email.EmailHandler;
 import com.codecool.model.User;
 import com.codecool.model.UserEmail;
 import com.codecool.repository.UserEmailRepository;
