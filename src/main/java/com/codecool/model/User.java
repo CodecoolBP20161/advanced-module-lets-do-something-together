@@ -23,9 +23,6 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-//        Date today = Calendar.getInstance().getTime();
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-kk:mm:ss");
-//        this.regDate = formatter.format(today);
     }
 
 
