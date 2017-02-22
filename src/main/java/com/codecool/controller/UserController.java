@@ -1,6 +1,8 @@
 package com.codecool.controller;
 
 import com.codecool.model.User;
+import com.codecool.model.UserEmail;
+import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,6 +25,9 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private UserEmailRepository userEmailRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -38,6 +43,9 @@ public class UserController {
             User user = mapper.readValue(data, User.class);
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
+                UserEmail userEmail = new UserEmail();
+                userEmail.setUser(user);
+                userEmailRepository.save(userEmail);
             } else {
                 return "fail";
             }
@@ -49,7 +57,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
-    public @ResponseBody
+    public
+    @ResponseBody
     String androidLogin(@RequestBody String data) {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -58,7 +67,7 @@ public class UserController {
         try {
             User user = mapper.readValue(data, User.class);
             if (!userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
-                if (bCryptPasswordEncoder.matches( user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
+                if (bCryptPasswordEncoder.matches(user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
                     return "success";
                 }
                 return "wrong password";
