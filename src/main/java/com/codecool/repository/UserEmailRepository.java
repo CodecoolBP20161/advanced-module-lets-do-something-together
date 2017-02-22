@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserEmailRepository extends JpaRepository<UserEmail, Integer> {
+    List<UserEmail> findAllByEmailSent(boolean emailSent);
 }

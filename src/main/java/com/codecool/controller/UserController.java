@@ -30,13 +30,19 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private UserEmailRepository userEmailRepository;
+
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public @ResponseBody String registration(@RequestBody String data) {
+    public
+    @ResponseBody
+    String registration(@RequestBody String data) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
@@ -60,7 +66,6 @@ public class UserController {
     public
     @ResponseBody
     String androidLogin(@RequestBody String data) {
-
         ObjectMapper mapper = new ObjectMapper();
 //        ignore password confirmation field
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
