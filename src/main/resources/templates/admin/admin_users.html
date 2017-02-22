@@ -37,7 +37,7 @@
                         <p th:case="${'ADMIN'}"><span>A</span></p>
                     </td>
                     <td th:text="${user.email}">Email</td>
-                    <td th:text="${#dates.format(user.regDate, 'yyyy-MM-dd kk:mm:ss')}">Date</td>
+                    <td th:text="${user.regDate}">Date</td>
                     <td th:text="${user.role}">Role</td>
                 </tr>
             </table>
