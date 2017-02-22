@@ -48,6 +48,7 @@ public class UserController {
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
                 UserEmail userEmail = new UserEmail();
+                userEmail.setUser(user);
                 userEmailRepository.save(userEmail);
             } else {
                 return "fail";
