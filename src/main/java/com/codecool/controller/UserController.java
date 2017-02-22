@@ -1,5 +1,6 @@
 package com.codecool.controller;
 
+import com.codecool.email.EmailHandler;
 import com.codecool.model.User;
 import com.codecool.model.UserEmail;
 import com.codecool.repository.UserEmailRepository;
@@ -24,8 +25,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserEmailRepository userEmailRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
