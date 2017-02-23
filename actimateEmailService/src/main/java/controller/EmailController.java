@@ -28,18 +28,23 @@ public class EmailController {
         this.service = service;
     }
 
-    public Response saveAdresses(Request req, Response res) {
+    private void saveAdresses(Request req) {
         String emailString = req.queryParams("emails");
-        List<String> users = new ArrayList<>(Arrays.asList(emailString.split(",")));
-        emailAddressDao.save(users);
-        return res;
+        emailAddressDao.save(new ArrayList<>(
+                Arrays.asList(emailString.split(","))));
     }
 
-    public void sendToAddresses() {
+    public Response sendToAddresses(Request req, Response res) {
+        saveAdresses(req);
         List<String> addresses = emailAddressDao.getAllNew();
         if (addresses != null) {
-            addresses.stream().filter(address -> service.send(createEmail(address))).forEach(address -> emailAddressDao.switchSentStatus(address));
+            addresses.stream()
+                    .filter(address ->
+                            service.send(createEmail(address)))
+                    .forEach(address ->
+                            emailAddressDao.switchSentStatus(address));
         }
+        return res;
     }
 
     public String sentAddresses(Request req, Response res) {
