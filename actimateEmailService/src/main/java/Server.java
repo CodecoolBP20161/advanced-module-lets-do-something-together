@@ -14,6 +14,8 @@ public class Server {
 
         emailController = new EmailController(EmailService.getInstance());
         DbHandler.setConnection();
+
         get("/", emailController::saveAdresses);
+        get("/sent", emailController::sentAddresses);
     }
 }
