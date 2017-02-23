@@ -8,7 +8,9 @@ public interface EmailAddressDao {
 
     void switchSentStatus(String email);
 
-    List<String> getAll();
+    List<String> getAllNew();
+
+    List<String> getAllSent();
 
     void removeSent();
 }

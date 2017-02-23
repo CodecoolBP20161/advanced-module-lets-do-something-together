@@ -3,7 +3,10 @@ package dao.impl;
 import dao.DbHandler;
 import dao.EmailAddressDao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +25,9 @@ public class EmailAddressDaoImpl extends DbHandler implements EmailAddressDao {
     public void save(List<String> emails) {
         for (String email : emails) {
             try (Connection connection = getConnection()) {
-                PreparedStatement query = connection.prepareStatement("INSERT INTO email_address (email, remoteid, sent) VALUES (?, ?, ?);");
+                PreparedStatement query = connection.prepareStatement("INSERT INTO email_address (email, sent) VALUES (?, ?);");
                 query.setString(1, email);
-                query.setInt(2, 0);
-                query.setBoolean(3, false);
+                query.setBoolean(2, false);
                 query.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -46,22 +48,31 @@ public class EmailAddressDaoImpl extends DbHandler implements EmailAddressDao {
     }
 
     @Override
-    public List<String> getAll() {
+    public List<String> getAllNew() {
+        return getAll(false);
+    }
+
+    @Override
+    public List<String> getAllSent() {
+        return getAll(true);
+    }
+
+    private List<String> getAll(boolean sent) {
         List<String> addresses = new ArrayList<>();
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("SELECT * FROM email_address;")
+        try (Connection connection = getConnection()
         ) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM email_address WHERE sent = ? ;");
+            preparedStatement.setBoolean(1, sent);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                if (!rs.getBoolean("sent")) {
-                    addresses.add(rs.getString("email"));
-                }
+                addresses.add(rs.getString("email"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return addresses;
     }
+
 
     @Override
     public void removeSent() {
