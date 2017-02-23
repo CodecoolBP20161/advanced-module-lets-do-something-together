@@ -42,13 +42,13 @@ public class EmailController {
         }
     }
 
-    public List<String> sentAddresses(Request req, Response res) {
+    public String sentAddresses(Request req, Response res) {
         List<String> addresses = new ArrayList<>();
         for (String address : emailAddressDao.getAllSent()) {
             addresses.add(address);
             emailAddressDao.removeSent();
         }
-        return addresses;
+        return String.join(",", addresses);
     }
 
     private Email createEmail(String recipient) {
