@@ -1,19 +1,19 @@
-import config.SenderPropertiesConfig;
+import controller.EmailController;
+import dao.DbHandler;
 import service.EmailService;
 
-import static spark.Spark.exception;
-import static spark.Spark.port;
+import static spark.Spark.*;
 
 
 public class Server {
-    private static EmailService emailService;
+    private static EmailController emailController;
 
     public static void main(String[] args) {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         port(60227);
 
-        SenderPropertiesConfig.writeConfig();
-
-        emailService = EmailService.getInstance();
+        emailController = new EmailController(EmailService.getInstance());
+        DbHandler.setConnection();
+        get("/", emailController::saveAdresses);
     }
 }
