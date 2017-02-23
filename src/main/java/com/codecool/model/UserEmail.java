@@ -17,7 +17,7 @@ public class UserEmail {
     @NotNull
     private boolean emailSent = false;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "`user`")
     @NotNull
     private User user;
