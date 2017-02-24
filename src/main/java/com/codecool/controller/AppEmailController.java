@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 public class AppEmailController {
 
     private static final String URL = "http://localhost:60227";
+    private final String emailSubject = "Welcome to ActiMate";
 
     @Autowired
     private static EmailHandler emailHandler;
@@ -29,11 +33,13 @@ public class AppEmailController {
         emailHandler = handler;
     }
 
-    public static void builderSend(String users) {
+    public static void builderSend(String users, String template, String subject) {
         URIBuilder builder;
         try {
             builder = new URIBuilder(URL);
             builder.addParameter("emails", users);
+            builder.addParameter("template", template);
+            builder.addParameter("subject", subject);
             execute(builder.build());
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
@@ -56,21 +62,33 @@ public class AppEmailController {
         return Request.Get(uri).execute().returnContent().asString();
     }
 
-    @Scheduled(fixedDelayString = "30000")
+    @Scheduled(fixedDelayString = "30001")
     private void manageNewRegistrations() {
         List<String> emails = emailHandler
                 .checkEmailStatus()
                 .stream()
                 .map(User::getEmail)
                 .collect(Collectors.toList());
-        builderSend(String.join(",", emails));
+        if (emails.size() > 0) {
+            builderSend(String.join(",", emails), getWelcomeEmailTemplate(), emailSubject);
+        }
     }
 
-    @Scheduled(fixedDelayString = "30001")
+    @Scheduled(fixedDelayString = "30000")
     private void manageSentEmails() {
         List<String> sentEmails = Arrays.asList(builderGet().split(","));
         if (sentEmails.size() > 1) {
             emailHandler.updateEmailStatus(sentEmails);
         }
+    }
+
+    private String getWelcomeEmailTemplate() {
+        StringWriter writer = new StringWriter();
+        try {
+            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email.html")), writer);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        return writer.toString();
     }
 }
