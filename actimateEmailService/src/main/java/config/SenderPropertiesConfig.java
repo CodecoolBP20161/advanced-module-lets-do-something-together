@@ -14,27 +14,6 @@ public class SenderPropertiesConfig {
     private static String SENDER_ADDRESS = "SENDER_ADDRESS";
     private static String SENDER_PWD = "SENDER_PWD";
 
-    public static void writeConfig() {
-        Properties props = new Properties();
-        OutputStream output = null;
-        try {
-            output = new FileOutputStream(FILE_PATH);
-            props.setProperty(SENDER_ADDRESS, "actimate.app@gmail.com");
-            props.setProperty(SENDER_PWD, "codecool");
-            props.store(output, null);
-        } catch (IOException io) {
-            io.getMessage();
-        } finally {
-            if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    e.getMessage();
-                }
-            }
-        }
-    }
-
     public static Map<String, String> readConfig() {
         Properties props = new Properties();
         FileInputStream in;
