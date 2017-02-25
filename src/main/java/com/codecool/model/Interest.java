@@ -1,6 +1,7 @@
 package com.codecool.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
+@ToString(exclude = "userDetails")
 public class Interest {
 
     @Id
