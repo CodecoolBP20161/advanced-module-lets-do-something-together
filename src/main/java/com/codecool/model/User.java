@@ -29,8 +29,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToOne
-    @JoinColumn(name = "userDetail")
+    @OneToOne(mappedBy = "user")
     private UserDetail userDetail;
 
     public User() {

@@ -1,6 +1,9 @@
 package com.codecool.controller;
 
 import com.codecool.model.User;
+import com.codecool.model.UserDetail;
+import com.codecool.repository.InterestRepository;
+import com.codecool.repository.UserDetailRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,6 +26,12 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    UserDetailRepository userDetailRepository;
+
+    @Autowired
+    InterestRepository interestRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -38,6 +47,15 @@ public class UserController {
             User user = mapper.readValue(data, User.class);
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
+                UserDetail userDetail = new UserDetail(user);
+//                List<Interest> interest = interestRepository.findAll();
+////                List<Interest> interests = new ArrayList<>(Arrays.asList(interest));
+//                System.out.println("aaaaaaaaaaaaaaaaa" + interest);
+//                userDetail.setInterestList(interest);
+//
+//                System.out.println(interest);
+                userDetailRepository.save(userDetail);
+
             } else {
                 return "fail";
             }
@@ -51,7 +69,6 @@ public class UserController {
     @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
     public @ResponseBody
     String androidLogin(@RequestBody String data) {
-
         ObjectMapper mapper = new ObjectMapper();
 //        ignore password confirmation field
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
