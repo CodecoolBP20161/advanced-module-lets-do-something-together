@@ -17,11 +17,14 @@
 <body ng-controller="profileController">
     <div class="container">
         <h2>Your Profile</h2>
-        <form name="profileForm" ng-submit="saveProfile(profileForm)">
+        <form name="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate" required="required" class="profileForm">
             <ul class="flex-outer">
                 <li>
-                    <label for="first-name" required="required">First Name</label>
-                    <input type="text" id="first-name" required="required" class="form-control" ng-model="user.firstname" placeholder="Enter your first name here"/>
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="firstName" required="required" class="form-control" ng-model="user.firstname" placeholder="Enter your first name here"/>
+                    <div ng-messages="profileForm.firstName.$error" ng-if="profileForm.firstName.$pristine" >
+                        <div ng-message="required" id="required-message"> * This field is required</div>
+                    </div>
                 </li>
                 <li>
                     <label for="last-name">Last Name</label>
@@ -82,7 +85,7 @@
                 </li>
                 <li>
                     <a href="/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                    <a href="/profile" type="button" id="submit" class="btn btn-info btn-lg" ng-click="saveProfile()">Submit</a>
+                    <a href="/profile" type="button" id="submit" class="btn btn-info btn-lg" ng-disabled="profileForm.$invalid" ng-click="saveProfile()">Submit</a>
                 </li>
             </ul>
         </form>

@@ -6,22 +6,26 @@ actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 }]);
 
-actimate.controller("profileController", function ($scope, $http) {
+actimate.controller("profileController", function ($scope, $http, $location) {
     $scope.user = {};
 
     $scope.saveProfile = function () {
-        $http({
-            method : 'POST',
-            url: '/profile',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'},
-            data: angular.toJson($scope.user)
-        })
-            .success(function (response) {
-                console.log($scope.user);
+            $http({
+                method: 'POST',
+                url: '/edit-profile',
+                headers: {'Content-Type': 'application/json; charset=UTF-8'},
+                data: JSON.stringify($scope.user)
             })
-            .error(function (response) {
-                alert("failure message: " + angular.toJson($scope.user));
-            });
+                .then(function (response) {
+                    console.log('Success: ', $scope.user);
+
+                }, function (error) {
+                    console.log('Error: ' , error)
+                })
+
+
+
+
     };
 
 });
