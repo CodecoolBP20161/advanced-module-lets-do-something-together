@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-    <title>ActiMate</title>
+    <title>ActiMate - Your Dashboard</title>
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Quicksand"/>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
@@ -11,75 +11,94 @@
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
-    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
 </head>
 <body>
-<article>
-    <div class="container-profile">
-        <h1>ActiMate Profile</h1>
-        <form>
-            <ul>
+<div id="topbar">
+    <a href="/">Back to Home</a>
+</div>
 
-                    <li>
-                        <label for="name" required="required"><p>First Name:</p></label>
-                        <input type="text" size="40" id="name" />
-                    </li>
+<div id="w">
+    <div id="content" class="clearfix">
+        <div id="userphoto"><img src="images/avatar.png" alt="default avatar"/>
+            <h1 id="username"> Your Name </h1>
+            <a type="submit" id="btn-edit" href="/edit-profile" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-pencil"></span>    Edit Profile</a>
+        </div>
+        <h1>Your Profile</h1>
 
-                <li>
-                    <label for="email"><p>Last Name:</p></label>
-                    <input type="email" size="40" id="email" />
-                </li>
-                <li>
-                    <label for="car"><p>Select gender:</p></label>
-                    <select id="car">
-                        <option>Female</option>
-                        <option>Male</option>
-                        <option>Other&hellip;</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="email"><p>Language:</p></label>
-                    <input type="email" size="40" id="language" />
-                </li>
-
-                <li id="interest">
-                    <div class="container-interest">
-                        <label class="title">Interests</label>
-                        <div class="column column3">
-
-                            <input type="checkbox" class="css-checkbox" id="tennis" name="interests[]" value="Tennis"/>
-                                 <label for="tennis" class="css-label">Tennis</label>
-                            <input type="checkbox" class="css-checkbox" id="gokart" name="interests[]" value="Gokart"/>
-                                <label for="gokart" class="css-label">Gokart</label>
-                            <input type="checkbox" class="css-checkbox" id="running" name="interests[]" value="Running"/>
-                                <label for="running" class="css-label">Running</label>
-                            <input type="checkbox" class="css-checkbox" id="city_walks" name="interests[]" value="City Walks"/>
-                                <label for="city_walks" class="css-label">City Walks</label>
-                            <input type="checkbox" class="css-checkbox" id="cinema" name="interests[]" value="Cinema"/>
-                                <label for="cinema" class="css-label">Cinema</label>
-                            <input type="checkbox" class="css-checkbox" id="theater" name="interests[]" value="Theater"/>
-                                <label for="theater" class="css-label">Theater</label>
-                            <input type="checkbox" class="css-checkbox" id="card_games" name="interests[]" value="Card Games"/>
-                                <label for="card_games" class="css-label">Card Games</label>
-
-
-                        </div>
-
-                    </div>
-                </li>
-                <li>
-                    <label for="message" class="title">
-                        <h3>Introduce your(best)self</h3></label>
-                    <textarea cols="50" rows="5" id="message"></textarea>
-                </li>
+        <nav id="profiletabs">
+            <ul class="clearfix">
+                <li><a href="#bio" class="sel">Bio</a></li>
+                <li><a href="#interest">Interests</a></li>
+                <li><a href="#activity">Activities</a></li>
+                <li><a href="#friends">Friends</a></li>
             </ul>
-            <p>
-                <button type="reset" class="right">Reset</button>
-                <button type="save" class="action">Save</button>
-            </p>
-        </form>
-    </div>
+        </nav>
 
-</article>
+        <section id="bio">
+            <p>Here's your introduction. Tell us about yourself.</p>
+
+            <p>Can't a guy call his mother pretty without it seeming strange? Amen. I think that's one of Mom's little fibs, you know, like I'll sacrifice anything for my children.</p>
+
+            <p>She's always got to wedge herself in the middle of us so that she can control everything. Yeah. Mom's awesome. I run a pretty tight ship around here. With a pool table.</p>
+        </section>
+
+        <section id="interest" class="hidden">
+            <p>Your interest are:</p>
+            <ul>
+                <li></li>
+            </ul>
+        </section>
+
+        <section id="activity" class="hidden">
+            <p>Your upcoming activities:</p>
+
+            <ul id="activityList" class="clearfix">
+                <li><a href="#"><img src="images/avatar.png" width="22" height="22"/> Username</a></li>
+                <li><a href="#"><img src="images/avatar.png" width="22" height="22"/> SomeGuy123</a></li>
+                <li><a href="#"><img src="images/avatar.png" width="22" height="22"/> PurpleGiraffe</a></li>
+            </ul>
+        </section>
+
+        <section id="settings" class="hidden">
+            <p>Edit your user settings:</p>
+
+            <p class="setting"><span>E-mail Address <img src="images/edit.png" alt="*Edit*"/></span> lolno@gmail.com</p>
+
+            <p class="setting"><span>Language <img src="images/edit.png" alt="*Edit*"/></span> English(US)</p>
+
+            <p class="setting"><span>Profile Status <img src="images/edit.png" alt="*Edit*"/></span> Public</p>
+
+            <p class="setting"><span>Update Frequency <img src="images/edit.png" alt="*Edit*"/></span> Weekly</p>
+
+            <p class="setting"><span>Connected Accounts <img src="images/edit.png" alt="*Edit*"/></span> None</p>
+        </section>
+
+        <section id="edit" class="hidden">
+            <p>Here's your introduction. Tell us about yourself.</p>
+
+            <p>Can't a guy call his mother pretty without it seeming strange? Amen. I think that's one of Mom's little fibs, you know, like I'll sacrifice anything for my children.</p>
+
+            <p>She's always got to wedge herself in the middle of us so that she can control everything. Yeah. Mom's awesome. I run a pretty tight ship around here. With a pool table.</p>
+        </section>
+    </div><!-- @end #content -->
+</div><!-- @end #w -->
+<script type="text/javascript">
+    $(function(){
+        $('#profiletabs ul li a').on('click', function(e){
+            e.preventDefault();
+            var newcontent = $(this).attr('href');
+
+            $('#profiletabs ul li a').removeClass('sel');
+            $(this).addClass('sel');
+
+            $('#content section').each(function(){
+                if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+            });
+
+            $(newcontent).removeClass('hidden');
+        });
+    });
+</script>
 </body>
 </html>

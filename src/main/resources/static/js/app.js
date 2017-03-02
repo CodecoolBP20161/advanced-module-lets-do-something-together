@@ -23,7 +23,7 @@ mainApp.config(function($routeProvider) {
                     }
                 }
             },
-            templateUrl: 'profile.html'
+            templateUrl: 'profile_form.html'
 
         })
         .when('/mission', {

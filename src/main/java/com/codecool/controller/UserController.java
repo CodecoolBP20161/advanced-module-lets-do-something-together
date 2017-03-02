@@ -87,8 +87,18 @@ public class UserController {
         return null;
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
     public String profile() {
+        return "profile_form";
+    }
+
+    @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
+    public @ResponseBody String profile(@RequestBody String data){
+        return "profile_form";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String dashboard() {
         return "profile";
     }
 }
