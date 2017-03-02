@@ -15,8 +15,8 @@ import java.util.List;
 public class UserDetail {
 
     @OneToOne()
-    @JoinColumn(name = "user_id")
-    private  User user;
+    @JoinColumn(name = "`user`")
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +26,13 @@ public class UserDetail {
     private String firstName;
 
     private String lastName, language, gender;
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String introduction;
-    @ManyToMany(mappedBy = "userDetails")
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_detail_interest",
+            joinColumns = @JoinColumn(name = "user_detail_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "interest_id", referencedColumnName = "id"))
     private List<Interest> interestList;
 
     public UserDetail() {
