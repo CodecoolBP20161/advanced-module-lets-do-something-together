@@ -85,7 +85,7 @@ public class AppEmailController {
     private String getWelcomeEmailTemplate() {
         StringWriter writer = new StringWriter();
         try {
-            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email.html")), writer);
+            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email_templates/email.html")), writer);
         } catch (IOException e) {
             e.getMessage();
         }
