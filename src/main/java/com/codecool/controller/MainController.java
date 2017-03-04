@@ -20,8 +20,8 @@ import java.util.Optional;
 public class MainController {
 
     private List<String> basicActivities = new ArrayList<>(
-            Arrays.asList("tennis", "gokart", "running", "card games",
-                    "cinema", "theater", "urban walks"));
+            Arrays.asList("tennis", "gokart", "running", "cardGames",
+                    "cinema", "theater", "cityWalks", "hiking"));
 
     @Autowired
     private InterestRepository interestRepository;
@@ -38,7 +38,7 @@ public class MainController {
             User admin = new User("admin@admin.com", "1234");
             userService.create(admin, Role.ADMIN);
         }
-        if(interestRepository.findAll().isEmpty()){
+        if (interestRepository.findAll().isEmpty()) {
             basicActivities.forEach(activity -> interestRepository.save(new Interest(activity)));
         }
         return "main";

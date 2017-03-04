@@ -15,80 +15,85 @@
     <script type="text/javascript" src="js/controller/profileController.js"></script>
 </head>
 <body ng-controller="profileController">
-    <div class="container">
-        <h2>Your Profile</h2>
-        <form name="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate" required="required" class="profileForm">
-            <ul class="flex-outer">
-                <li>
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" name="firstName" required="required" class="form-control" ng-model="user.firstname" placeholder="Enter your first name here"/>
-                    <div ng-messages="profileForm.firstName.$error" ng-if="profileForm.firstName.$pristine" >
-                        <div ng-message="required" id="required-message"> * This field is required</div>
-                    </div>
-                </li>
-                <li>
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name"  class="form-control" ng-model="user.lastname" placeholder="Enter your last name here"/>
-                </li>
-                <li>
-                    <label for="gender">Gender</label>
-                    <select id="gender" ng-model="user.gender">
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                        <option value="other">Other&hellip;</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="language">Language</label>
-                    <input type="text" id="language" ng-model="user.language" placeholder="What language do you prefer"/>
-                </li>
-                <li>
-                    <label for="message">Introduce yourself!</label>
-                    <textarea rows="6" id="message" ng-model="user.intro" placeholder="Write a couple of words about yourself here..."></textarea>
-                </li>
-                <li>
-                    <p>Interests</p>
-                    <ul class="flex-inner">
-                        <li>
-                            <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
-                            <label for="tennis">Tennis</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="running" ng-model="user.interest.running"/>
-                            <label for="running">Running</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
-                            <label for="gokart">Gokart</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
-                            <label for="hiking">Hiking</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
-                            <label for="cinema">Cinema</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
-                            <label for="theater">Theater</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="card-games" ng-model="user.interest.cardgames"/>
-                            <label for="card-games">Card Games</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="city-walks" ng-model="user.interest.citywalks"/>
-                            <label for="city-walks">City Walks</label>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                    <a href="/profile" type="button" id="submit" class="btn btn-info btn-lg" ng-disabled="profileForm.$invalid" ng-click="saveProfile()">Submit</a>
-                </li>
-            </ul>
-        </form>
-    </div>
+<div class="container">
+    <h2>Your Profile</h2>
+    <form name="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate" required="required"
+          class="profileForm">
+        <ul class="flex-outer">
+            <li>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="firstName" required="required" class="form-control"
+                       ng-model="user.firstName" placeholder="Enter your first name here"/>
+                <div ng-messages="profileForm.firstName.$error" ng-if="profileForm.firstName.$pristine">
+                    <div ng-message="required" id="required-message"> * This field is required</div>
+                </div>
+            </li>
+            <li>
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" class="form-control" ng-model="user.lastName"
+                       placeholder="Enter your last name here"/>
+            </li>
+            <li>
+                <label for="gender">Gender</label>
+                <select id="gender" ng-model="user.gender">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other&hellip;</option>
+                </select>
+            </li>
+            <li>
+                <label for="language">Language</label>
+                <input type="text" id="language" ng-model="user.language" placeholder="What language do you prefer"/>
+            </li>
+            <li>
+                <label for="message">Introduce yourself!</label>
+                <textarea rows="6" id="message" ng-model="user.introduction"
+                          placeholder="Write a couple of words about yourself here..."></textarea>
+            </li>
+            <li>
+                <p>Interests</p>
+                <ul class="flex-inner">
+                    <li>
+                        <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
+                        <label for="tennis">Tennis</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="running" ng-model="user.interest.running"/>
+                        <label for="running">Running</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
+                        <label for="gokart">Gokart</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
+                        <label for="hiking">Hiking</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
+                        <label for="cinema">Cinema</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
+                        <label for="theater">Theater</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="card-games" ng-model="user.interest.cardGames"/>
+                        <label for="card-games">Card Games</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="city-walks" ng-model="user.interest.cityWalks"/>
+                        <label for="city-walks">City Walks</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
+                <a href="/profile" type="button" id="submit" class="btn btn-info btn-lg"
+                   ng-disabled="profileForm.$invalid" ng-click="saveProfile()">Submit</a>
+            </li>
+        </ul>
+    </form>
+</div>
 </body>
 </html>
