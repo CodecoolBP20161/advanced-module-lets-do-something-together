@@ -1,5 +1,6 @@
 package com.codecool.controller;
 
+import com.codecool.model.Interest;
 import com.codecool.model.User;
 import com.codecool.model.UserDetail;
 import com.codecool.repository.InterestRepository;
@@ -8,6 +9,9 @@ import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,20 +21,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     UserDetailRepository userDetailRepository;
-
     @Autowired
     InterestRepository interestRepository;
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -40,7 +46,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public @ResponseBody String registration(@RequestBody String data) {
+    public
+    @ResponseBody
+    String registration(@RequestBody String data) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
@@ -67,7 +75,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
-    public @ResponseBody
+    public
+    @ResponseBody
     String androidLogin(@RequestBody String data) {
         ObjectMapper mapper = new ObjectMapper();
 //        ignore password confirmation field
@@ -75,7 +84,7 @@ public class UserController {
         try {
             User user = mapper.readValue(data, User.class);
             if (!userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
-                if (bCryptPasswordEncoder.matches( user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
+                if (bCryptPasswordEncoder.matches(user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
                     return "success";
                 }
                 return "wrong password";
@@ -93,12 +102,45 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
-    public @ResponseBody String profile(@RequestBody String data){
+    public String profile(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
+        User currentUser = userService.getUserByEmail(principal.getName()).get();
+        UserDetail currentUserDetail = userDetailRepository.findByUser(currentUser);
+
+//            profile related JSONExceptions swallowed on purpose: not mandatory profile details
+        JSONObject jsonData = new JSONObject(data);
+
+        Field[] fieldsArray = currentUserDetail.getClass().getDeclaredFields();
+//        skips id, user and interest fields
+        List<Field> fields = Arrays.asList(fieldsArray).subList(2, fieldsArray.length - 1);
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+            String fieldValue = null;
+            try {
+                fieldValue = jsonData.get(field.getName()).toString();
+            } catch (JSONException ignored) {
+            }
+            field.set(currentUserDetail, fieldValue);
+        }
+        currentUserDetail.setInterestList(getInterestsFromJson(jsonData));
+        userDetailRepository.save(currentUserDetail);
         return "profile_form";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String dashboard() {
         return "profile";
+    }
+
+    private List<Interest> getInterestsFromJson(JSONObject jsonObject) {
+        List<Interest> interestList = new ArrayList<>();
+        try {
+            JSONArray jsonArray = ((JSONObject) jsonObject.get("interest")).names();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                interestList.add(interestRepository.findByActivity(jsonArray.getString(i)));
+            }
+        } catch (JSONException ignored) {
+        }
+        return interestList;
     }
 }
