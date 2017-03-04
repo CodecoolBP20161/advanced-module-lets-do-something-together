@@ -14,8 +14,9 @@ import java.util.List;
 @ToString(exclude = "interestList")
 public class UserDetail {
 
-    @OneToOne()
-    @JoinColumn(name = "`user`")
+    @OneToOne
+    @JoinColumn(name = "`user`", unique = true)
+    @NotNull
     private User user;
 
     @Id

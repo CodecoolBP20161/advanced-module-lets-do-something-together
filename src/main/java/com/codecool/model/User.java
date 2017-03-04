@@ -29,9 +29,6 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "user")
-    private UserDetail userDetail;
-
     public User() {
     }
 
