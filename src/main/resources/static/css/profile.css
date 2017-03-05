@@ -45,7 +45,8 @@ body {
 br { display: block; line-height: 2.2em; }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-ol, ul { list-style: none; }
+ol, ul { list-style: circle;
+font-size: 1.5em;}
 
 section {
     width: 65%;
@@ -146,7 +147,7 @@ h2 {
 
 p {
     display: block;
-    font-size: 1.5em;
+    font-size: 1.9em;
     line-height: 1.55em;
     margin-bottom: 22px;
     color: #555;
@@ -204,7 +205,8 @@ a:hover { text-decoration: underline; }
 }
 
 #profiletabs ul { list-style: none; display: block; width: 70%; height: 50px; background-color: khaki; font-size: large  }
-#profiletabls ul li { float: left; }
+#profiletabls ul li { float: left;
+    font-size: 1.7em; }
 #profiletabs ul li a {
     display: block;
     float: left;

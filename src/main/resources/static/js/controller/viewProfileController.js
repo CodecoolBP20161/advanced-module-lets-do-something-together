@@ -10,9 +10,11 @@ actimate.config(['$httpProvider', function ($httpProvider) {
 actimate.controller('loadUserCtrl', function($scope, $http){
 
     $scope.user = null;
+    
+    $scope.listofInterests = null;
 
-    $http.get('')
-        .success(function (data) {
-        $scope.user = data.user;
+    $http.get("http://localhost:8080/u/profile_data")
+        .then(function (response) {
+        $scope.user = response.data;
     })
 });
