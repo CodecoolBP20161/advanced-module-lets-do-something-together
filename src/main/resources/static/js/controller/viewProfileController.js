@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('actimate', []);
+var actimate = angular.module('actimate',['ngResource']);
 
 actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
