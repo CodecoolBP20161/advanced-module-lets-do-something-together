@@ -12,7 +12,7 @@ actimate.controller("profileController", function ($scope, $http, $location) {
     $scope.saveProfile = function () {
             $http({
                 method: 'POST',
-                url: '/edit-profile',
+                url: '/u/edit-profile',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'},
                 data: JSON.stringify($scope.user)
             })
