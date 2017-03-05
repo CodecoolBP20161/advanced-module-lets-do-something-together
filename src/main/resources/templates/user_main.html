@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="actimate">
+<head>
+    <title>ActiMate</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="/css/user_main.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+</head>
+<body>
+<div id="navbar" ng-controller="viewProfileController" ng-cloak="ng-cloak">
+    <div class="md-padding">
+        <ul md-selected-nav-item="currentTab" nav-bar-aria-label="navigation links">
+            <a href="/main" ng-click="changeTab('logo')" name="page1">LOGO</a>
+            <input type="text" name="search" placeholder="Search..."/>
+            <a href="#profile" ng-click="changeTab('profile')" name="page1">Profile</a>
+            <a href="#contact" ng-click="changeTab('contact')" name="page3">Contact</a>
+            <a href="/">Logout</a>
+        </ul>
+
+        <div class="#profile" ng-view="ng-view">
+
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/app.js"></script>
+<script src="/js/route.js"></script>
+
+
+</body>
+</html>
