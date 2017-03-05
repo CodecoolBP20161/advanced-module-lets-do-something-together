@@ -103,17 +103,13 @@ public class UserController {
 
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
     public String profile(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
-        User currentUser = userService.getUserByEmail(principal.getName()).get();
-        UserDetail currentUserDetail = userDetailRepository.findByUser(currentUser);
+        UserDetail currentUserDetail = getCurrentUserDetail(principal);
+        List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentUserDetail);
 
 //            profile related JSONExceptions swallowed on purpose: not mandatory profile details
         JSONObject jsonData = new JSONObject(data);
 
-        Field[] fieldsArray = currentUserDetail.getClass().getDeclaredFields();
-//        skips id, user and interest fields
-        List<Field> fields = Arrays.asList(fieldsArray).subList(2, fieldsArray.length - 1);
-
-        for (Field field : fields) {
+        for (Field field : fields.subList(0, fields.size() - 1)) {
             field.setAccessible(true);
             String fieldValue = null;
             try {
@@ -142,5 +138,15 @@ public class UserController {
         } catch (JSONException ignored) {
         }
         return interestList;
+    }
+
+    private UserDetail getCurrentUserDetail(Principal principal) {
+        User currentUser = userService.getUserByEmail(principal.getName()).get();
+        return userDetailRepository.findByUser(currentUser);
+    }
+
+    private List<Field> getEditableFieldsOfCurrentUserDetail(UserDetail userDetail) {
+        Field[] fieldsArray = userDetail.getClass().getDeclaredFields();
+        return Arrays.asList(fieldsArray).subList(2, fieldsArray.length);
     }
 }
