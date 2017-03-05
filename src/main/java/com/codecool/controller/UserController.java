@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -126,6 +127,30 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String dashboard() {
         return "profile";
+    }
+
+    @RequestMapping(value = "/profile_data", method = RequestMethod.GET)
+    @ResponseBody
+    public String profileData(Principal principal) throws IllegalAccessException {
+        UserDetail currentUserDetail = getCurrentUserDetail(principal);
+        List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentUserDetail);
+
+        JSONObject json = new JSONObject();
+
+        for (Field field : fields.subList(0, fields.size() - 1)) {
+            field.setAccessible(true);
+            try {
+                Object fieldValue = field.get(currentUserDetail);
+                json.put(field.getName(), fieldValue);
+            } catch (JSONException ignored) {
+            }
+        }
+        try {
+            json.put(fields.get(fields.size() - 1).getName(),
+                    currentUserDetail.getInterestList().stream().map(Interest::getActivity).collect(Collectors.toList()));
+        } catch (JSONException ignored) {
+        }
+        return json.toString();
     }
 
     private List<Interest> getInterestsFromJson(JSONObject jsonObject) {
