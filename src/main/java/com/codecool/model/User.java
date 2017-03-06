@@ -4,30 +4,19 @@ package com.codecool.model;
 import com.codecool.security.Role;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "`user`")
 @Data
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
-    @NotNull
     private Integer id;
-
-    @NotNull
-    @Column(unique = true)
     private String email;
-
-    @NotNull
     private String password;
-
-    @NotNull
-    @Enumerated(value = EnumType.STRING)
     private Role role;
+    private String regDate;
 
     public User() {
     }

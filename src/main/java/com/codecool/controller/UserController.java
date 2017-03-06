@@ -4,6 +4,8 @@ import com.codecool.model.User;
 import com.codecool.model.UserDetail;
 import com.codecool.repository.InterestRepository;
 import com.codecool.repository.UserDetailRepository;
+import com.codecool.model.UserEmail;
+import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -28,8 +30,13 @@ public class UserController {
     InterestRepository interestRepository;
     @Autowired
     private UserService userService;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private UserEmailRepository userEmailRepository;
+
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
@@ -48,6 +55,9 @@ public class UserController {
                 userService.create(user, Role.USER);
                 UserDetail userDetail = new UserDetail(user);
                 userDetailRepository.save(userDetail);
+                UserEmail userEmail = new UserEmail();
+                userEmail.setUser(user);
+                userEmailRepository.save(userEmail);
             } else {
                 return "fail";
             }
