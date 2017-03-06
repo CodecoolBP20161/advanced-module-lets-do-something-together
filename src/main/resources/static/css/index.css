@@ -77,8 +77,6 @@ li
     padding:50px 80px;
 }
 
-
-
 .bgimg-1 {
     background-color: #c6eaa8;
     background-image: url("../images/bg_home.png");
@@ -89,7 +87,6 @@ li
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-
 }
 
 .bgimg-2 {

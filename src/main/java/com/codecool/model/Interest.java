@@ -21,10 +21,7 @@ public class Interest {
     @Column
     private String activity;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "interest_user_detail",
-            joinColumns = @JoinColumn(name = "interest_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_detail_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "interestList")
     private List<UserDetail> userDetails;
 
     public Interest() {

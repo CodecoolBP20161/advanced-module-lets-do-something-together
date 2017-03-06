@@ -8,7 +8,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -41,6 +44,10 @@ public class UserServiceImpl implements UserService {
     public void create(User user, Role role) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole(role);
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+        String regDate = formatter.format(today);
+        user.setRegDate(regDate);
         userRepository.save(user);
     }
 }

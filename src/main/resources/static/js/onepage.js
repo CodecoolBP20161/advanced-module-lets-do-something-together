@@ -11,6 +11,7 @@ $(document).ready(function(){
 
     }
 
+
     $('a').click(function() {
         if ($.attr(this, 'href').indexOf("#") != -1 && $.attr(this, 'href')!="#")
         {
