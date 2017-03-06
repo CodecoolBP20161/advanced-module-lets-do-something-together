@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="actimate">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
     <title>ActiMate - Your Dashboard</title>
@@ -8,45 +8,42 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/profile.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script rel="text/javascript" src="/js/jquery/profile.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
+    <script src="/js/controller/viewProfileController.js"></script>
 </head>
-<body>
+<body ng-controller="loadUserCtrl">
 <div id="topbar">
     <a href="/">Back to Home</a>
 </div>
 
 <div id="w">
     <div id="content" class="clearfix">
-        <div id="userphoto"><img src="images/avatar.png" alt="default avatar"/>
-            <h1 id="username"> Your Name </h1>
-            <a type="submit" id="btn-edit" href="/edit-profile" class="btn btn-info btn-lg">
+        <div id="userphoto"><img src="/images/avatar.png" alt="default avatar"/>
+            <h1 id="username">{{user.firstName}} {{user.lastName}}</h1>
+            <a type="submit" id="btn-edit" href="/u/edit-profile" class="btn btn-info btn-lg">
                 <span class="glyphicon glyphicon-pencil"></span>    Edit Profile</a>
         </div>
         <h1>Your Profile</h1>
 
         <nav id="profiletabs">
             <ul class="clearfix">
-                <li><a href="#bio" class="sel">Bio</a></li>
+                <li><a href="#bio" class="sel" ng-click="changeTag('bio')">Bio</a></li>
                 <li><a href="#interest">Interests</a></li>
-                <li><a href="#activity">Activities</a></li>
-                <li><a href="#friends">Friends</a></li>
+                <li><a href="#activity">Your Activities</a></li>
+                <li><a href="#events">Saved Events</a></li>
             </ul>
         </nav>
 
         <section id="bio">
-            <p>Here's your introduction. Tell us about yourself.</p>
-
-            <p>Can't a guy call his mother pretty without it seeming strange? Amen. I think that's one of Mom's little fibs, you know, like I'll sacrifice anything for my children.</p>
-
-            <p>She's always got to wedge herself in the middle of us so that she can control everything. Yeah. Mom's awesome. I run a pretty tight ship around here. With a pool table.</p>
+            <p>{{user.introduction}}</p>
         </section>
 
         <section id="interest" class="hidden">
-            <p>Your interest are:</p>
             <ul>
-                <li></li>
+                <li ng-repeat="interest in user.interestList">{{interest}}</li>
             </ul>
         </section>
 
@@ -54,51 +51,21 @@
             <p>Your upcoming activities:</p>
 
             <ul id="activityList" class="clearfix">
-                <li><a href="#"><img src="images/avatar.png" width="22" height="22"/> Username</a></li>
-                <li><a href="#"><img src="images/avatar.png" width="22" height="22"/> SomeGuy123</a></li>
-                <li><a href="#"><img src="images/avatar.png" width="22" height="22"/> PurpleGiraffe</a></li>
+
             </ul>
         </section>
 
-        <section id="settings" class="hidden">
-            <p>Edit your user settings:</p>
+        <section id="events" class="hidden">
+            <p>Your upcoming events:</p>
 
-            <p class="setting"><span>E-mail Address <img src="images/edit.png" alt="*Edit*"/></span> lolno@gmail.com</p>
+            <ul id="eventList" class="clearfix">
 
-            <p class="setting"><span>Language <img src="images/edit.png" alt="*Edit*"/></span> English(US)</p>
-
-            <p class="setting"><span>Profile Status <img src="images/edit.png" alt="*Edit*"/></span> Public</p>
-
-            <p class="setting"><span>Update Frequency <img src="images/edit.png" alt="*Edit*"/></span> Weekly</p>
-
-            <p class="setting"><span>Connected Accounts <img src="images/edit.png" alt="*Edit*"/></span> None</p>
+            </ul>
         </section>
 
-        <section id="edit" class="hidden">
-            <p>Here's your introduction. Tell us about yourself.</p>
 
-            <p>Can't a guy call his mother pretty without it seeming strange? Amen. I think that's one of Mom's little fibs, you know, like I'll sacrifice anything for my children.</p>
+    </div>
+</div>
 
-            <p>She's always got to wedge herself in the middle of us so that she can control everything. Yeah. Mom's awesome. I run a pretty tight ship around here. With a pool table.</p>
-        </section>
-    </div><!-- @end #content -->
-</div><!-- @end #w -->
-<script type="text/javascript">
-    $(function(){
-        $('#profiletabs ul li a').on('click', function(e){
-            e.preventDefault();
-            var newcontent = $(this).attr('href');
-
-            $('#profiletabs ul li a').removeClass('sel');
-            $(this).addClass('sel');
-
-            $('#content section').each(function(){
-                if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
-            });
-
-            $(newcontent).removeClass('hidden');
-        });
-    });
-</script>
 </body>
 </html>

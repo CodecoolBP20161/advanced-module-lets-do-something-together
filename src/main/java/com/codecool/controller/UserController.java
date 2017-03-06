@@ -23,14 +23,11 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     UserDetailRepository userDetailRepository;
-
     @Autowired
     InterestRepository interestRepository;
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -40,7 +37,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public @ResponseBody String registration(@RequestBody String data) {
+    public
+    @ResponseBody
+    String registration(@RequestBody String data) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
@@ -48,14 +47,7 @@ public class UserController {
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
                 UserDetail userDetail = new UserDetail(user);
-//                List<Interest> interest = interestRepository.findAll();
-////                List<Interest> interests = new ArrayList<>(Arrays.asList(interest));
-//                System.out.println("aaaaaaaaaaaaaaaaa" + interest);
-//                userDetail.setInterestList(interest);
-//
-//                System.out.println(interest);
                 userDetailRepository.save(userDetail);
-
             } else {
                 return "fail";
             }
@@ -67,7 +59,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
-    public @ResponseBody
+    public
+    @ResponseBody
     String androidLogin(@RequestBody String data) {
         ObjectMapper mapper = new ObjectMapper();
 //        ignore password confirmation field
@@ -75,7 +68,7 @@ public class UserController {
         try {
             User user = mapper.readValue(data, User.class);
             if (!userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
-                if (bCryptPasswordEncoder.matches( user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
+                if (bCryptPasswordEncoder.matches(user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
                     return "success";
                 }
                 return "wrong password";
@@ -85,20 +78,5 @@ public class UserController {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
-    public String profile() {
-        return "profile_form";
-    }
-
-    @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
-    public @ResponseBody String profile(@RequestBody String data){
-        return "profile_form";
-    }
-
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String dashboard() {
-        return "profile";
     }
 }
