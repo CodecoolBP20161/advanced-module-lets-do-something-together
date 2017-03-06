@@ -48,3 +48,15 @@ tr td:nth-child(2) {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: rgba(143, 219, 196, 0.6);
 }
+
+#reg-date {
+    text-align: center;
+}
+
+#email {
+    text-align: center;
+}
+
+#td-row {
+    text-align: center;
+}
