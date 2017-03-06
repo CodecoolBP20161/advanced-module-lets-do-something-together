@@ -11,7 +11,6 @@ $(function() {
             },
             message: "required",
         },
-
         // Specify the validation error messages
         messages: {
             name: "Please enter your name",
