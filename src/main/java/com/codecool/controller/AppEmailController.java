@@ -2,8 +2,14 @@ package com.codecool.controller;
 
 import com.codecool.email.EmailHandler;
 import com.codecool.model.User;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -23,27 +29,13 @@ import java.util.stream.Collectors;
 public class AppEmailController {
 
     private static final String URL = "http://localhost:60227";
-    private final String emailSubject = "Welcome to ActiMate";
-
     @Autowired
     private static EmailHandler emailHandler;
+    private final String emailSubject = "Welcome to ActiMate";
 
     @Autowired
     public AppEmailController(EmailHandler handler) {
         emailHandler = handler;
-    }
-
-    public static void builderSend(String users, String template, String subject) {
-        URIBuilder builder;
-        try {
-            builder = new URIBuilder(URL);
-            builder.addParameter("emails", users);
-            builder.addParameter("template", template);
-            builder.addParameter("subject", subject);
-            execute(builder.build());
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
     }
 
     public static String builderGet() {
@@ -62,7 +54,31 @@ public class AppEmailController {
         return Request.Get(uri).execute().returnContent().asString();
     }
 
-    @Scheduled(fixedDelayString = "30001")
+    private String createJson(List<String> users, String template, String subject) {
+        String jsonString = "";
+        try {
+            jsonString = new JSONObject().put("emails", String.join(",", users)).put("template", template).put("subject", subject).toString();
+        } catch (JSONException e) {
+            e.getMessage();
+        }
+        return jsonString;
+    }
+
+    private void postJson(String jsonString) {
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(URL);
+        StringEntity params;
+        try {
+            params = new StringEntity(jsonString);
+            request.addHeader("content-type", "application/x-www-form-urlencoded");
+            request.setEntity(params);
+            httpClient.execute(request);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    @Scheduled(fixedDelayString = "3000")
     private void manageNewRegistrations() {
         List<String> emails = emailHandler
                 .checkEmailStatus()
@@ -70,7 +86,7 @@ public class AppEmailController {
                 .map(User::getEmail)
                 .collect(Collectors.toList());
         if (emails.size() > 0) {
-            builderSend(String.join(",", emails), getWelcomeEmailTemplate(), emailSubject);
+            postJson(createJson(emails, getWelcomeEmailTemplate(), emailSubject));
         }
     }
 
