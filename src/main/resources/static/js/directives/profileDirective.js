@@ -17,12 +17,16 @@ actimate.directive('profileController', function() {
                     headers: {'Content-Type': 'application/json; charset=UTF-8'},
                     data: JSON.stringify($scope.user)
                 })
-                    .then(function (response) {
-                        console.log('Success: ', $scope.user);
+                    .then($scope.loadUserDetails = function ($scope, $http) {
+                            $scope.user = null;
+                            $http.get("http://localhost:8080/u/profile_data")
+                                .then(function (response) {
+                                    $scope.user = response.data;
+                        })
 
                     }, function (error) {
                         console.log('Error: ' , error)
-                    })
+                    });
 
 
             };
@@ -41,6 +45,7 @@ actimate.directive('loadUserCtrl', function() {
                 .then(function (response) {
                     $scope.user = response.data;
                 })
+
         }
     };
 });
