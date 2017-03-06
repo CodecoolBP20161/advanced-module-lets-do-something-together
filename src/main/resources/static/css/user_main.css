@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 20% */
+input[type=text]:focus {
+    width: 20%;
+}
+
+ul {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 99;
+    text-align: center;
+}
+
+li > a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+}
+
+.navBardemoBasicUsage md-content .ext-content {
+    padding: 50px;
+    margin: 20px;
+    background-color: #FFF2E0; }

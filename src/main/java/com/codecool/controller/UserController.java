@@ -1,6 +1,9 @@
 package com.codecool.controller;
 
 import com.codecool.model.User;
+import com.codecool.model.UserDetail;
+import com.codecool.repository.InterestRepository;
+import com.codecool.repository.UserDetailRepository;
 import com.codecool.model.UserEmail;
 import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
@@ -22,8 +25,11 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
+    UserDetailRepository userDetailRepository;
+    @Autowired
+    InterestRepository interestRepository;
+    @Autowired
     private UserService userService;
-
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -47,6 +53,8 @@ public class UserController {
             User user = mapper.readValue(data, User.class);
             if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 userService.create(user, Role.USER);
+                UserDetail userDetail = new UserDetail(user);
+                userDetailRepository.save(userDetail);
                 UserEmail userEmail = new UserEmail();
                 userEmail.setUser(user);
                 userEmailRepository.save(userEmail);

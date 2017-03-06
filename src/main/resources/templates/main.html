@@ -12,7 +12,7 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
     <a href="/">HOME</a>
     <a id="mission" href="/mission">MISSION</a>
-    <a sec:authorize="isAuthenticated()" href="#" id="profile">PROFILE</a>
+    <a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a>
     <a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a>
     <a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a>
     <a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a>
