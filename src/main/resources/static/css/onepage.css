@@ -1,0 +1,189 @@
+html
+{
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    top: 300px;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+nav
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+li
+{
+    display: inline;
+    padding: 0 20px;
+}
+
+.onepage
+{
+    perspective: 1px;
+    height: 100vh;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#home
+{
+    display: block;
+    background-image: url("../images/bg_home.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    top: 100px;
+    height: 800px;
+    width: 100%;
+    /*background-image: url("../images/bg_home.png");*/
+    z-index: 5;
+}
+
+#home .parallax__layer--base{
+    height: 800px;
+    background-image: url("../images/bg_home.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+
+.hometext
+{
+    text-align: center;
+    padding-left: 50%;
+    top: 400px;
+    padding-bottom: 50%;
+    position: absolute;
+}
+
+.rhombus
+{
+    width: 100%;
+    height: 300px;
+    -webkit-transform: skew(20deg);
+    -moz-transform: skew(20deg);
+    -o-transform: skew(20deg);
+    background: #3affc5;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+#mission
+{
+    background-image: url("../images/bg_image_1.jpg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    height: 600px;
+    width: 100%;
+    /*background-image: url("../images/bg_home.png");*/
+    z-index: 3;
+}
+
+#mission .parallax__layer--back{
+    background-image: url("../images/bg_image_1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    /*background-color: #84D9BE;*/
+}
+
+
+
+.mission-text {
+    position: absolute;
+    color: #ffffff;
+    font-size: x-large;
+    line-height: 1;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.mission-container {
+    justify-content: center;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #84D9BE;
+    background-size: 350px;
+    text-align: center;
+}
+
+
+#page3{
+    display: block;
+    height: 600px;
+    width: 100%;
+    /*background-image: url("../images/bg_home.png");*/
+    z-index: 4;
+}
+
+#page3 .parallax__layer--base{
+    background-color: #84D9BE;
+}
+
+#howitworks
+{
+    display: block;
+    height: 600px;
+    width: 100%;
+    padding-top: 50px;
+    /*background-color: #84D9BE;*/
+    /*background-image: url("../images/bg_home.png");*/
+    z-index: 2;
+}
+
+#howitworks .parallax__layer--deep{
+    background-image: url("../images/bg_home.png");
+    background-color: #84D9BE;
+}
+
+#page5{
+    display: block;
+    height: 600px;
+    width: 100%;
+    /*background-color: #84D9BE;*/
+    /*background-image: url("../images/bg_home.png");*/
+    z-index: 3;
+}
+
+#page5 .parallax__layer--base{
+    background-image: url("../images/bg_image_2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    /*background-color: #84D9BE;*/
+}
+
+#contactus
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+#contactus .parallax__layer--base{
+    background-image: url("../images/bg_image_3.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    /*background-color: #84D9BE;*/
+}

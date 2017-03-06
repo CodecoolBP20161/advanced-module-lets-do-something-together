@@ -5,7 +5,7 @@ var mainApp = angular.module("mainApp", ['ngRoute']);
 mainApp.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'main.html'
+            templateUrl: 'index.html'
         })
         .when('/registration', {
              templateUrl: 'registration.html',

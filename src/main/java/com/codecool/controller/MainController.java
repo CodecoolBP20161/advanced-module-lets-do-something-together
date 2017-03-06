@@ -41,7 +41,9 @@ public class MainController {
         if(interestRepository.findAll().isEmpty()){
             basicActivities.forEach(activity -> interestRepository.save(new Interest(activity)));
         }
-        return "main";
+        //return "main";
+        return "index";
+
     }
 
 
@@ -56,5 +58,15 @@ public class MainController {
     @RequestMapping(value = "/mission", method = RequestMethod.GET)
     public String mission() {
         return "mission";
+    }
+
+    @RequestMapping(value = "/howitworks", method = RequestMethod.GET)
+    public String howitworks() {
+        return "howitworks";
+    }
+
+    @RequestMapping(value = "/contactus", method = RequestMethod.GET)
+    public String contactus() {
+        return "contactus";
     }
 }
