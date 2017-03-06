@@ -1,13 +1,20 @@
 body {
     font-family:"Quicksand", "Helvetica Neue", sans-serif;
-    background: #3AAFAB;
-    color: #fff;
+    background: #c6eaa8;
+    color: #0b2027;
     padding: 50px 0;
+    font-size: initial;
 }
 
 h2 {
     text-align: -webkit-center;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
+    background-color: #70a9a1;
+    color: white;
+    padding: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 5px;
 }
 
 .container {
@@ -80,14 +87,14 @@ h2 {
     padding: 15px;
     border: none;
     border-radius: 5px;
-    color: #313131;
+    color: #0b2027;
 }
 
 .flex-outer li button {
     margin-left: auto;
     padding: 8px 16px;
     border: none;
-    background: #333;
+    background: #0b2027;
     color: #f2f2f2;
     text-transform: uppercase;
     letter-spacing: .09em;
@@ -101,7 +108,7 @@ h2 {
 
 select {
     width: 50px;
-    color: #373a3c;
+    color: #0b2027;
 }
 
 .flex-inner li label {
@@ -117,7 +124,7 @@ select {
 
 .btn-lg {
     border-radius: 5px;
-    background-color: #373a3c;
+    background-color: #0b2027;
     border-color: transparent;
 }
 
@@ -148,3 +155,4 @@ select {
 #language {
     height: 35px;
 }
+
