@@ -78,7 +78,7 @@ public class AppEmailController {
         }
     }
 
-    @Scheduled(fixedDelayString = "3000")
+    @Scheduled(fixedDelayString = "30001")
     private void manageNewRegistrations() {
         List<String> emails = emailHandler
                 .checkEmailStatus()
