@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,7 +79,7 @@ public class AppEmailController {
         }
     }
 
-    @Scheduled(fixedDelayString = "30001")
+    @Scheduled(fixedDelayString = "29000")
     private void manageNewRegistrations() {
         List<String> emails = emailHandler
                 .checkEmailStatus()
@@ -90,12 +91,14 @@ public class AppEmailController {
         }
     }
 
-    @Scheduled(fixedDelayString = "30000")
+    @Scheduled(fixedDelayString = "31000")
     private void manageSentEmails() {
-        List<String> sentEmails = Arrays.asList(builderGet().split(","));
-        if (sentEmails.size() > 1) {
-            emailHandler.updateEmailStatus(sentEmails);
+        String response = builderGet();
+        List<String> sentEmails = new ArrayList<>();
+        if (response.length() > 0) {
+            sentEmails = Arrays.asList(response.split(","));
         }
+        emailHandler.updateEmailStatus(sentEmails);
     }
 
     private String getWelcomeEmailTemplate() {
