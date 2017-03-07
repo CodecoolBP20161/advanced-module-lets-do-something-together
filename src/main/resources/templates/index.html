@@ -38,11 +38,13 @@
 <body>
 <nav>
     <ul class="fix top">
+        <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+
         <li><a href="#home">HOME</a></li>
         <li><a href="#mission">Mission</a></li>
         <li><a href="#howitworks">How it works?</a></li>
         <li><a href="#contactus">Contact Us</a></li>
-        <li><a sec:authorize="isAuthenticated()" href="#" id="profile">PROFILE</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
         <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
         <li><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
         <li><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
