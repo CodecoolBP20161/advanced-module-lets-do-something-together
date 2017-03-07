@@ -15,7 +15,7 @@ public class MainController {
 
     @RequestMapping(value = {"/", "logout"}, method = RequestMethod.GET)
     public String index(String logout) {
-        return "main";
+        return "index";
     }
 
 
