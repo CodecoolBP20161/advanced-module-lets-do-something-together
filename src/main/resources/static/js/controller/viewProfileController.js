@@ -13,7 +13,7 @@ actimate.controller('loadUserCtrl', function($scope, $http){
     
     $scope.listofInterests = null;
 
-    $http.get("http://localhost:8080/u/profile_data")
+    $http.get("/u/profile_data")
         .then(function (response) {
         $scope.user = response.data;
     })
