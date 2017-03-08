@@ -1,7 +1,6 @@
 package com.codecool.controller;
 
 import com.codecool.repository.UserEmailRepository;
-import com.codecool.security.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminController {
-
-    @Autowired
-    private UserService userService;
+public class AdminController extends AbstractController {
 
     @Autowired
     private UserEmailRepository userEmailRepository;
