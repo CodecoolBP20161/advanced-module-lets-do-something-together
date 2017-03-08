@@ -5,12 +5,12 @@ angular.module('actimate')
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'main.html'
+                templateUrl: 'index.html'
             })
             .when('/profile', {
                 templateUrl: 'profile.html'
             })
-            .when('/main', {
+            .when('/usermain', {
                 templateUrl: 'user_main.html'
             })
             .when('/registration', {
