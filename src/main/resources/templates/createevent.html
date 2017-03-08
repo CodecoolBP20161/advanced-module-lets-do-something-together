@@ -1,5 +1,5 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.w3.org/1999/xhtml" ng-app="actimate">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
@@ -16,17 +16,12 @@
     <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
     <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-
-    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-
-    <script type="text/javascript" src="/js/controller/userController.js"></script>
+    <script type="text/javascript" src="/js/controller/eventController.js"></script>
 </head>
 <body>
 
@@ -40,41 +35,46 @@
     </ul>
 </nav>
 
-<div class="page">
+<div class="page" ng-controller="saveEventCtrl">
 
     <h2> Create Event</h2>
 
-    <form class="eventform">
+    <form class="eventform" name="eventform" ng-submit="saveEvent(eventform)">
         <div>
-
-
 
             <div>
                 <h5>Choose a good name!</h5>
-                <input class="createevent" name="event_name" required="required"/>
+                <input class="createevent" name="event_name" required="required" ng-model="event.name"/>
             </div>
 
             <div>
                 <h5>What do You want to go?</h5>
-                <input class="createevent" name="event_interest" required="required"/>
+                <input class="createevent" name="event_interest" required="required" ng-model="event.interest"/>
             </div>
 
             <div>
                 <h5>Where do You want to go?</h5>
-                <input class="createevent" name="event_locations"/>
+                <input class="createevent" name="event_locations" ng-model="event.location"/>
             </div>
 
             <div>
                 <h5>When do You want to go?</h5>
-                <input class="createevent" type="date" name="event_date"/>
+                <input class="createevent" type="date" name="event_date" ng-model="event.date"/>
             </div>
             <div>
                 <h5>With how many mates?</h5>
-                <input class="createevent" name="event_participants"/>
+                <input class="createevent" name="event_participants" ng-model="event.participants"/>
             </div>
             <div>
                 <h5>Tell something about your event!</h5>
-                <input class="createevent" type="text" name="event_descriptions" required="required"/>
+                <input class="createevent" type="text" name="event_descriptions" required="required"
+                       ng-model="event.description"/>
+            </div>
+
+            <div>
+                <a href="/usermain" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
+                <a href="/usermain" type="button" id="submit" class="btn btn-info btn-lg"
+                   ng-disabled="profileForm.$invalid" ng-click="saveEvent()">Submit</a>
             </div>
 
         </div>
