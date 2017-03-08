@@ -14,12 +14,12 @@ public class MainController {
     private UserService userService;
 
     @RequestMapping(value = {"/", "logout"}, method = RequestMethod.GET)
-    public String index(String logout) {
+    public String index() {
         return "index";
     }
 
     @RequestMapping(value = "/usermain", method = RequestMethod.GET)
-    public String userMain(String logout) {
+    public String userMain() {
         return "user_main";
     }
 
