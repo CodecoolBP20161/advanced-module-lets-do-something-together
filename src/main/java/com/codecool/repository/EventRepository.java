@@ -1,7 +1,7 @@
 package com.codecool.repository;
 
-import com.codecool.model.Event;
 import com.codecool.model.Interest;
+import com.codecool.model.event.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
