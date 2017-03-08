@@ -21,7 +21,11 @@ rename it to `application.properties`, then set up your connection.
 
 ## Android 
 
-You can find the repository of the android client here: 
-```
-https://github.com/CodecoolBP20161/advanced-module-lets-do-something-together-android
-```
+You can find the repository of the android client [here](https://github.com/CodecoolBP20161/advanced-module-lets-do-something-together-android)
+
+## Email service
+
+You can find the repository of the email service [here](https://github.com/CodecoolBP20161/advanced-module-lets-do-something-together-emailservice)
+
+
+### If you see some error messages about getters/setters, then set up the [lombok](https://plugins.jetbrains.com/plugin/6317-lombok-plugin)

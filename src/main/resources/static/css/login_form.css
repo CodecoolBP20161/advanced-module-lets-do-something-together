@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
 * {
     margin: 0;
 }
 body {
-    background-image: url("../images/bg_image_1.jpg");
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #c6eaa8;
     height: 100vh;
     background-size: cover;
     margin-bottom: 20px;
@@ -45,21 +48,4 @@ body {
 
 #signupBtnDiv {
     text-align: left;
-}
-
-nav {
-    top: 0px;
-    position: fixed;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 99;
-    text-align: center;
-}
-
-nav a {
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 30px;
-    line-height: 50px;
 }

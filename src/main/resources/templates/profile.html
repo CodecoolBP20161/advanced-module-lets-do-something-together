@@ -1,10 +1,71 @@
-<header>
-    <div class="container">
-        <div class="mission-container">
-            <div class="vertical-align">
-                <p>This is your profile ATM</p>
-                <a href="#/home">Back</a>
-            </div>
+<!DOCTYPE html>
+<html lang="en" ng-app="actimate">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <title>ActiMate - Your Dashboard</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Quicksand"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/profile.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script rel="text/javascript" src="/js/jquery/profile.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
+    <script src="/js/controller/viewProfileController.js"></script>
+</head>
+<body ng-controller="loadUserCtrl">
+<div id="topbar">
+    <a href="/">Back to Home</a>
+</div>
+
+<div id="w">
+    <div id="content" class="clearfix">
+        <div id="userphoto"><img src="/images/avatar.png" alt="default avatar"/>
+            <h1 id="username">{{user.firstName}} {{user.lastName}}</h1>
+            <a type="submit" id="btn-edit" href="/u/edit-profile" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-pencil"></span>    Edit Profile</a>
         </div>
+        <h1>Your Profile</h1>
+
+        <nav id="profiletabs">
+            <ul class="clearfix">
+                <li><a href="#bio" class="sel" ng-click="changeTag('bio')">Bio</a></li>
+                <li><a href="#interest">Interests</a></li>
+                <li><a href="#activity">Your Activities</a></li>
+                <li><a href="#events">Saved Events</a></li>
+            </ul>
+        </nav>
+
+        <section id="bio">
+            <p>{{user.introduction}}</p>
+        </section>
+
+        <section id="interest" class="hidden">
+            <ul>
+                <li ng-repeat="interest in user.interestList">{{interest}}</li>
+            </ul>
+        </section>
+
+        <section id="activity" class="hidden">
+            <p>Your upcoming activities:</p>
+
+            <ul id="activityList" class="clearfix">
+
+            </ul>
+        </section>
+
+        <section id="events" class="hidden">
+            <p>Your upcoming events:</p>
+
+            <ul id="eventList" class="clearfix">
+
+            </ul>
+        </section>
+
+
     </div>
-</header>
+</div>
+
+</body>
+</html>
