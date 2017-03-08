@@ -1,3 +1,4 @@
+/*
 // When the browser is ready...
 $(function() {
     // validate
@@ -24,4 +25,4 @@ $(function() {
             $(".message").fadeOut(4500);
         }
     });
-});
+});*/
