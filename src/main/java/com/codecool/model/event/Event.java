@@ -20,6 +20,8 @@ public class Event {
     @JoinColumn(name = "category")
     private Interest category;
     private String description;
+    
+    @Enumerated(value = EnumType.STRING)
     private Status status;
 
     public Event(Coordinates location, String date, int participants, Interest category, String description) {
