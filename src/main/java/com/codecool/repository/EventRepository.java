@@ -11,8 +11,12 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
     List<Event> findByDate(String date);
+
     List<Event> findByLocation(String location);
+
     List<Event> findByParticipants(Integer number);
-    List<Event> findByCategory(Interest category);
+
+    List<Event> findByInterest(Interest category);
+
     List<Event> findByStatus(String status);
 }
