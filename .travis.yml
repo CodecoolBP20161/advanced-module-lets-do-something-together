@@ -15,3 +15,5 @@ before_script:
   - sed -i 's/{username}/postgres/g' application.properties
   - sed -i 's/{password}//g' application.properties
   - psql -c 'create database actimate;' -U postgres
+notifications:
+  email: false
