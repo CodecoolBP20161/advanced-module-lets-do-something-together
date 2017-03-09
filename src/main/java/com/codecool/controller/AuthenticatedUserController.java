@@ -1,15 +1,10 @@
 package com.codecool.controller;
 
 import com.codecool.model.Interest;
-import com.codecool.model.User;
 import com.codecool.model.UserDetail;
-import com.codecool.repository.InterestRepository;
-import com.codecool.repository.UserDetailRepository;
-import com.codecool.security.service.user.UserService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,14 +21,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping(value = "/u")
 @Controller
-public class AuthenticatedUserController {
-
-    @Autowired
-    UserDetailRepository userDetailRepository;
-    @Autowired
-    InterestRepository interestRepository;
-    @Autowired
-    private UserService userService;
+public class AuthenticatedUserController extends AbstractController {
 
     @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
     public String profile() {
@@ -101,11 +89,6 @@ public class AuthenticatedUserController {
         } catch (JSONException ignored) {
         }
         return interestList;
-    }
-
-    private UserDetail getCurrentUserDetail(Principal principal) {
-        User currentUser = userService.getUserByEmail(principal.getName()).get();
-        return userDetailRepository.findByUser(currentUser);
     }
 
     private List<Field> getEditableFieldsOfCurrentUserDetail(UserDetail userDetail) {

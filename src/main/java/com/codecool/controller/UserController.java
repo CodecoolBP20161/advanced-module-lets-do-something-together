@@ -2,12 +2,9 @@ package com.codecool.controller;
 
 import com.codecool.model.User;
 import com.codecool.model.UserDetail;
-import com.codecool.repository.InterestRepository;
-import com.codecool.repository.UserDetailRepository;
 import com.codecool.model.UserEmail;
 import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
-import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +19,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
-public class UserController {
-
-    @Autowired
-    UserDetailRepository userDetailRepository;
-    @Autowired
-    InterestRepository interestRepository;
-    @Autowired
-    private UserService userService;
+public class UserController extends AbstractController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
