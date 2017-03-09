@@ -12,11 +12,10 @@ public class Coordinates {
     private float x;
     private float y;
 
-    public Coordinates(float x, float y) {
-        this.x = x;
-        this.y = y;
+    public Coordinates(String xy) {
+        String[] coords = xy.split(",");
+        this.x = Float.parseFloat(coords[0]);
+        this.y = Float.parseFloat(coords[1]);
     }
 
-    public Coordinates() {
-    }
 }
