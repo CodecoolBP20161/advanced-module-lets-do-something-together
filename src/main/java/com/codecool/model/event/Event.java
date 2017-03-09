@@ -13,29 +13,25 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    private String name;
     private Coordinates location;
     private String date;
     private int participants;
-
-    @ManyToOne
-    @JoinColumn(name = "category")
-    private Interest category;
     private String description;
 
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private Status status = Status.ACTIVE;
+
+    @ManyToOne
+    @JoinColumn(name = "interest")
+    private Interest interest;
 
     @ManyToOne
     @JoinColumn(name = "`user`")
     private User user;
 
-    public Event(Coordinates location, String date, int participants, Interest category, String description, User user) {
-        this.location = location;
-        this.date = date;
-        this.participants = participants;
-        this.category = category;
-        this.description = description;
-        this.status = Status.ACTIVE;
-        this.user = user;
+    public Event() {
     }
+
 }
