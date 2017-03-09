@@ -7,3 +7,11 @@ addons:
       - oracle-java8-installer
 jdk:
   - oraclejdk8
+services:
+  - postgresql
+before_script:
+  - cp application.properties-Template application.properties
+  - sed -i 's/{your_db_name}/actimate/g' application.properties
+  - sed -i 's/{username}/postgres/g' application.properties
+  - sed -i 's/{password}//g' application.properties
+  - psql -c 'create database travis_ci_test;' -U postgres
