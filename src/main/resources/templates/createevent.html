@@ -11,6 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
 
     <title>Actimate</title>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
@@ -18,8 +19,6 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <!--Style-->
     <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
-
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
     <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
@@ -43,19 +42,19 @@
 
     <h2> Create Event</h2>
 
-    <form class="eventform" name="eventform" novalidate="novalidate" ng-submit="saveEvent(eventform)">
+    <form class="eventform" id="eventform" name="eventform" data-toggle="validator" ng-submit="saveEvent(eventform)">
         <div>
 
             <div>
                 <h5>Choose a good name!</h5>
-                <input type="text" id="event_name" class="createevent" ng-class="{ 'has-error' : !eventform.name.$pristine }" name="name" ng-required="required" ng-model="event.name"/>
+                <input type="text" id="event_name" class="createevent" ng-class="{ 'has-error' : !eventform.name.$pristine }" name="name" required="required" ng-model="event.name"/>
                 <p ng-show="eventform.name.$pristine" class="help-block">This field is required.</p>
             </div>
 
             <div>
                 <h5>What type of activity do you want to do?</h5>
                 <label for="interest"> </label>
-                <select id="interest" name="interest" ng-model="event.interest">
+                <select id="interest" name="interest" ng-model="event.interest" required="required">
                     <option value="tennis">Tennis</option>
                     <option value="gokart">Gokart</option>
                     <option value="running">Running</option>
@@ -69,7 +68,7 @@
             </div>
             <div>
                 <h5>Where do You want to go?</h5>
-                <input type="text" gm-places-autocomplete="" ng-model="autocomplete" style="width: 300px;"/>
+                <input type="text" gm-places-autocomplete="" ng-model="autocomplete" style="width: 300px;" required="required"/>
             </div>
             <div>
                 <h5>When do You want to go?</h5>
@@ -77,7 +76,7 @@
             </div>
             <div>
                 <h5>With how many mates?</h5>
-                <input class="createevent" type="number" name="event_participants" required="required" ng-model="event.participants"/>
+                <input class="createevent" type="text" name="number" required="required" ng-model="event.participants"/>
             </div>
             <div>
                 <h5>Tell something about your event!</h5>
@@ -96,6 +95,28 @@
     </form>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#eventform').formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                number: {
+                    validators: {
+                        integer: {
+                            message: 'The value is not an integer'
+                        }
+                    }
+                }
+            }
+        })
+    });
+</script>
 
 </body>
 
