@@ -13,7 +13,7 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
 
         $http({
             method: 'POST',
-            url: '/create-event',
+            url: '/u/create_event',
             headers: {'Content-Type': 'application/json; charset=UTF-8'},
             data: JSON.stringify($scope.event)
         })
