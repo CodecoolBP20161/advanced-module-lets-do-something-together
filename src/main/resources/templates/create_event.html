@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml" ng-app="actimate">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" ng-app="actimate">
 
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
-    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
     <meta http-equiv="cleartype" content="on"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -47,7 +47,9 @@
 
             <div>
                 <h5>Choose a good name!</h5>
-                <input type="text" id="event_name" class="createevent" ng-class="{ 'has-error' : !eventform.name.$pristine }" name="name" required="required" ng-model="event.name"/>
+                <input type="text" id="event_name" class="createevent"
+                       ng-class="{ 'has-error' : !eventform.name.$pristine }" name="name" required="required"
+                       ng-model="event.name"/>
                 <p ng-show="eventform.name.$pristine" class="help-block">This field is required.</p>
             </div>
 
@@ -61,32 +63,34 @@
                     <option value="hiking">Hiking</option>
                     <option value="cinema">Cinema</option>
                     <option value="theater">Theater</option>
-                    <option value="card-games">Card Games</option>
-                    <option value="city-walks">City Walks</option>
+                    <option value="cardGames">Card Games</option>
+                    <option value="cityWalks">City Walks</option>
                 </select>
 
             </div>
             <div>
                 <h5>Where do You want to go?</h5>
-                <input type="text" gm-places-autocomplete="" ng-model="autocomplete" style="width: 300px;" required="required"/>
+                <input type="text" gm-places-autocomplete="" ng-model="autocomplete" style="width: 300px;"
+                       required="required"/>
             </div>
             <div>
                 <h5>When do You want to go?</h5>
-                <input class="createevent" type="date" required="required" name="event_date" ng-model="event.date"/>
+                <input class="createevent" type="date" required="required" name="date" ng-model="event.date"/>
             </div>
             <div>
                 <h5>With how many mates?</h5>
-                <input class="createevent" type="text" name="number" required="required" ng-model="event.participants"/>
+                <input class="createevent" type="number" name="number" required="required" ng-model="event.participants"/>
             </div>
             <div>
                 <h5>Tell something about your event!</h5>
-                <input class="createevent" type="text" name="event_descriptions" required="required"
+                <input class="createevent" type="text" name="description" required="required"
                        ng-model="event.description"/>
             </div>
 
             <div>
                 <a href="/usermain" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                <a href="/usermain" type="button" id="submit" class="btn btn-info btn-lg" ng-click="saveEvent()">Submit</a>
+                <a href="/usermain" type="button" id="submit" class="btn btn-info btn-lg"
+                   ng-click="saveEvent()">Submit</a>
                 <!--ng-disabled="eventform.$invalid || eventform.$pending"-->
             </div>
 
@@ -97,7 +101,7 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#eventform').formValidation({
             framework: 'bootstrap',
             icon: {
