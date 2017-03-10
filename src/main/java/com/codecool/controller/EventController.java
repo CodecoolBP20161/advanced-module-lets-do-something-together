@@ -37,14 +37,14 @@ public class EventController extends AbstractController {
         Event event = new Event();
         for (Field field : getBasicEventFields()) {
             field.setAccessible(true);
-            Object fieldValue = jsonData.get(field.getName()).toString();
-
+            Object fieldValue;
             if (field.getType().equals(Coordinates.class)) {
                 fieldValue = new Coordinates(jsonData.get("lng"), jsonData.get("lng"));
             } else if (field.getType().equals(int.class)) {
-                fieldValue = Integer.parseInt(fieldValue.toString());
+                fieldValue = Integer.parseInt(jsonData.get(field.getName()).toString());
+            } else {
+                fieldValue = jsonData.get(field.getName());
             }
-
             field.set(event, fieldValue);
         }
         event.setInterest(interestRepository.findByActivity(jsonData.get("interest").toString()));
