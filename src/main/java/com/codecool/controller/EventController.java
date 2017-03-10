@@ -39,7 +39,7 @@ public class EventController extends AbstractController {
             field.setAccessible(true);
             Object fieldValue;
             if (field.getType().equals(Coordinates.class)) {
-                fieldValue = new Coordinates(jsonData.get("lng"), jsonData.get("lng"));
+                fieldValue = new Coordinates(jsonData.get("lng"), jsonData.get("lat"));
             } else if (field.getType().equals(int.class)) {
                 fieldValue = Integer.parseInt(jsonData.get(field.getName()).toString());
             } else {
