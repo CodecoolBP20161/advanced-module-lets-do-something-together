@@ -9,13 +9,14 @@ import javax.persistence.Embeddable;
 @Data
 public class Coordinates {
 
-    private float x;
-    private float y;
+    private float lng;
+    private float lat;
 
-    public Coordinates(String xy) {
-        String[] coords = xy.split(",");
-        this.x = Float.parseFloat(coords[0]);
-        this.y = Float.parseFloat(coords[1]);
+    public Coordinates(Object lng, Object lat) {
+        this.lng = Float.parseFloat(lng.toString());
+        this.lat = Float.parseFloat(lat.toString());
     }
 
+    public Coordinates() {
+    }
 }
