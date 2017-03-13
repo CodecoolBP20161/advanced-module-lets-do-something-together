@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>ActiMate Admin</title>
+
+    <div th:replace="admin/fragments/styles :: copy"></div>
+</head>
+
+<body>
+<div class="jumbotron text-center">
+    <h1>ActiMate Admin</h1>
+</div>
+
+<div th:replace="admin/fragments/navbar :: copy"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <h2>List of ActiMate Events</h2>
+
+            <form method="post">
+                <div class="radio">
+                    <label class="radio-inline radio-date">
+                        <input type="radio" th:name="filter" th:value="date"/>Search by Date
+                    </label>
+                    <label class="radio-inline radio-activities">
+                        <input type="radio" th:name="filter" th:value="activities"/>Search by Activities
+                    </label>
+                    <label class="radio-inline radio-status">
+                        <input type="radio" th:name="filter" th:value="status"/>Search by Status
+                    </label>
+                </div>
+                <div class="search-input">
+                    <input th:name="key" placeholder="Search"/>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-search" type="submit">Search</button>
+                    <a class="btn btn-primary btn-show" href="/admin/events">Show All</a>
+                </div>
+            </form>
+
+            <table class="table table-sm table-bordered table-hover">
+                <thead class="thead-inverse">
+                <tr>
+                    <th id="name">Name</th>
+                    <th id="location">Location</th>
+                    <th id="date">Date</th>
+                    <th id="participants">Participants</th>
+                    <th id="interest">Activity</th>
+                    <th id="status">Status</th>
+                    <th id="description">Description</th>
+                </tr>
+
+                </thead>
+                <tr th:each="event, iterStat : ${events}">
+
+                    <td th:text="${event.name}">Name</td>
+                    <td th:text="${event.location}">Location</td>
+                    <td th:text="${event.date}">Date</td>
+                    <td th:text="${event.participants}">Participants</td>
+                    <td th:text="${event.interest.getActivity()}">Interest</td>
+                    <td th:text="${event.status}">Status</td>
+                    <td th:text="${event.description}">Description</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+</body>
+</html>

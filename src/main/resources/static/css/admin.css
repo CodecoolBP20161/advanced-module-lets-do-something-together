@@ -60,3 +60,9 @@ tr td:nth-child(2) {
 #td-row {
     text-align: center;
 }
+
+.btn-search {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
