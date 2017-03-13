@@ -1,7 +1,13 @@
 'use strict';
 
+var actimate = angular.module('actimate', ['ngRoute', 'ngResource']);
 
-angular.module('actimate', ['ngRoute']).config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
-}]);
+
+actimate.config(['$httpProvider',
+    function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }]);
 

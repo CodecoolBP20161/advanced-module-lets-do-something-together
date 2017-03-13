@@ -1,0 +1,26 @@
+{
+  "name": "actimate",
+  "version": "1.0.0",
+  "main": "../../main/resources/static/js/app.js",
+  "scripts": {
+    "test": "js/controller/userController.spec.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-mocks": "^1.6.3",
+    "karma-chrome-launcher": "^2.0.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.5.0",
+    "karma-jasmine": "^1.1.0",
+    "node": "^0.0.0"
+  },
+  "description": ""
+}
