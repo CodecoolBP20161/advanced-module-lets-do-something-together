@@ -23,6 +23,12 @@ import java.util.stream.Collectors;
 @Controller
 public class AuthenticatedUserController extends AbstractController {
 
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public String userMain() {
+        return "user_main";
+    }
+
     @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
     public String profile() {
         return "profile_form";
