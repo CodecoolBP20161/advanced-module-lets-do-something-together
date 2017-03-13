@@ -3,10 +3,12 @@ package com.codecool.controller;
 import com.codecool.model.User;
 import com.codecool.model.event.Coordinates;
 import com.codecool.model.event.Event;
+import com.codecool.model.event.Status;
 import com.codecool.repository.EventRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @RequestMapping(value = "/u")
@@ -58,5 +62,34 @@ public class EventController extends AbstractController {
     private List<Field> getBasicEventFields() {
         Field[] fieldsArray = Event.class.getDeclaredFields();
         return Arrays.asList(fieldsArray).subList(1, 6);
+    }
+
+    //    method called daily at midnight
+//    toggles status of every event before that
+    @Scheduled(cron = "0 0 0 * * ?", zone = "CET")
+    private void managePastEvents() {
+        List<Event> events = eventRepository.findAll();
+        for (Event event : events) {
+            if (compareDates(event.getDate()) >= 0) {
+                event.setStatus(Status.PAST);
+                eventRepository.save(event);
+            }
+        }
+    }
+
+    //    compares string date to today's last minute
+    private int compareDates(String date) {
+        Calendar calendarDay = new GregorianCalendar();
+        calendarDay.set(Calendar.HOUR_OF_DAY, 23);
+        calendarDay.set(Calendar.MINUTE, 59);
+        calendarDay.set(Calendar.SECOND, 59);
+        Date today = calendarDay.getTime();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            return today.compareTo(format.parse(date));
+        } catch (ParseException e) {
+            e.getMessage();
+            return 0;
+        }
     }
 }
