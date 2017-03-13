@@ -45,32 +45,32 @@ public class AdminController extends AbstractController {
         return "admin/admin_events";
     }
 
-     @RequestMapping(value = "/events", method = RequestMethod.POST)
-     public String listEvents(HttpServletRequest request, Model model) {
-         String key = request.getParameter("key").toLowerCase();
-         String filter = request.getParameter("filter");
-
-         switch (filter) {
-             case "status":
-                 if (key.equals("active")) {
-                     Status status = Status.ACTIVE;
-                     List<Event> events = eventRepository.findByStatus(status);
-                     model.addAttribute("events", events);
-                 } else {
-                     Status status = Status.PAST;
-                     List<Event> events = eventRepository.findByStatus(status);
-                     model.addAttribute("events", events);
-                 }
-             case "date":
-                 List<Event> events = eventRepository.findByDate(key);
-                 model.addAttribute("events", events);
-             case "activities":
-                 Interest interest = interestRepository.findByActivity(key);
-                 events = eventRepository.findByInterest(interest);
-                 model.addAttribute("events", events);
-         }
-         return "admin/admin_events";
-     }
+    @RequestMapping(value = "/events", method = RequestMethod.POST)
+    public String listEvents(HttpServletRequest request, Model model) {
+        String key = request.getParameter("key").toLowerCase();
+        String filter = request.getParameter("filter");
+        
+        switch (filter) {
+            case "status":
+                if (key.equals("active")) {
+                    Status status = Status.ACTIVE;
+                    List<Event> events = eventRepository.findByStatus(status);
+                    model.addAttribute("events", events);
+                } else {
+                    Status status = Status.PAST;
+                    List<Event> events = eventRepository.findByStatus(status);
+                    model.addAttribute("events", events);
+                }
+            case "date":
+                List<Event> events = eventRepository.findByDate(key);
+                model.addAttribute("events", events);
+            case "activities":
+                Interest interest = interestRepository.findByActivity(key);
+                events = eventRepository.findByInterest(interest);
+                model.addAttribute("events", events);
+        }
+        return "admin/admin_events";
+    }
 
     @RequestMapping(value = "/email", method = RequestMethod.GET)
     public String listUserWithUnsentEmails(Model model) {
