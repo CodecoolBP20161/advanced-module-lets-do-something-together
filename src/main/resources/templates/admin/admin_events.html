@@ -5,6 +5,8 @@
     <title>ActiMate Admin</title>
 
     <div th:replace="admin/fragments/styles :: copy"></div>
+
+    <script src="/js/jquery/adminFilter.js"></script>
 </head>
 
 <body>
@@ -24,20 +26,20 @@
             <form method="post">
                 <div class="radio">
                     <label class="radio-inline radio-date">
-                        <input type="radio" th:name="filter" th:value="date"/>Search by Date
+                        <input type="radio" th:name="filter" th:value="date" onclick="active()"/>Search by Date
                     </label>
                     <label class="radio-inline radio-activities">
-                        <input type="radio" th:name="filter" th:value="activities"/>Search by Activities
+                        <input type="radio" th:name="filter" th:value="activities" onclick="active()"/>Search by Activities
                     </label>
                     <label class="radio-inline radio-status">
-                        <input type="radio" th:name="filter" th:value="status"/>Search by Status
+                        <input type="radio" th:name="filter" th:value="status" onclick="active()"/>Search by Status
                     </label>
                 </div>
                 <div class="search-input">
                     <input th:name="key" placeholder="Search"/>
                 </div>
                 <div>
-                    <button class="btn btn-primary btn-search" type="submit">Search</button>
+                    <button class="btn btn-primary btn-search" disabled="true" type="submit">Search</button>
                     <a class="btn btn-primary btn-show" href="/admin/events">Show All</a>
                 </div>
             </form>
