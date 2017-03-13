@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping(value = "/admin")
@@ -46,28 +47,31 @@ public class AdminController extends AbstractController {
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.POST)
-    public String listEvents(HttpServletRequest request, Model model) {
+    public String listEvents(HttpServletRequest request, Model model) throws IOException {
         String key = request.getParameter("key").toLowerCase();
         String filter = request.getParameter("filter");
-        
-        switch (filter) {
-            case "status":
-                if (key.equals("active")) {
-                    Status status = Status.ACTIVE;
-                    List<Event> events = eventRepository.findByStatus(status);
+        try {
+            switch (filter) {
+                case "status":
+                    if (key.equals("active")) {
+                        Status status = Status.ACTIVE;
+                        List<Event> events = eventRepository.findByStatus(status);
+                        model.addAttribute("events", events);
+                    } else {
+                        Status status = Status.PAST;
+                        List<Event> events = eventRepository.findByStatus(status);
+                        model.addAttribute("events", events);
+                    }
+                case "date":
+                    List<Event> events = eventRepository.findByDate(key);
                     model.addAttribute("events", events);
-                } else {
-                    Status status = Status.PAST;
-                    List<Event> events = eventRepository.findByStatus(status);
+                case "activities":
+                    Interest interest = interestRepository.findByActivity(key);
+                    events = eventRepository.findByInterest(interest);
                     model.addAttribute("events", events);
-                }
-            case "date":
-                List<Event> events = eventRepository.findByDate(key);
-                model.addAttribute("events", events);
-            case "activities":
-                Interest interest = interestRepository.findByActivity(key);
-                events = eventRepository.findByInterest(interest);
-                model.addAttribute("events", events);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "admin/admin_events";
     }
@@ -75,6 +79,6 @@ public class AdminController extends AbstractController {
     @RequestMapping(value = "/email", method = RequestMethod.GET)
     public String listUserWithUnsentEmails(Model model) {
         model.addAttribute("users", userEmailRepository.findAllByEmailSent(false));
-        return "admin/email";
+        return "admin/admin_email";
     }
 }
