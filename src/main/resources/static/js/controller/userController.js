@@ -1,5 +1,9 @@
 'use strict';
 
+actimate.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+}]);
+
 actimate.controller("UserCtrl",
     function ($scope, $http) {
         $scope.user = {};
