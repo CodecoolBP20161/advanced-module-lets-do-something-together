@@ -3,6 +3,7 @@ package com.codecool.controller;
 import com.codecool.test.AbstractTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -51,5 +52,12 @@ public class AdminControllerTest extends AbstractTest {
                 .andReturn().getResponse().getHeader("location");
         String actualRoute = location.substring(location.length() - expectedRoute.length(), location.length());
         assertEquals(true, expectedRoute.equals(actualRoute));
+    }
+
+    @Test
+    @WithMockUser(username = "user@user.com")
+    public void mainUIWithUserRoleForbidden() throws Exception {
+        mockMvc.perform(get(adminRoute))
+                .andExpect(status().is4xxClientError());
     }
 }
