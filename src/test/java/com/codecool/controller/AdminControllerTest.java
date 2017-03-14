@@ -11,10 +11,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -59,5 +61,17 @@ public class AdminControllerTest extends AbstractTest {
     public void mainUIWithUserRoleForbidden() throws Exception {
         mockMvc.perform(get(adminRoute))
                 .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    public void mainUIWithAdminRoleAccessGranted() throws Exception {
+        mockMvc.perform(get(adminRoute))
+                .andExpect(status().is2xxSuccessful());
+
+        mockMvc.perform(get(adminRoute))
+                .andExpect(content().string(containsString("USERS")))
+                .andExpect(content().string(containsString("ACTIVITIES")))
+                .andExpect(content().string(containsString("EMAILS")));
     }
 }
