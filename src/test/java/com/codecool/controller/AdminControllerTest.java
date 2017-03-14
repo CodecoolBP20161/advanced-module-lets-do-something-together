@@ -1,8 +1,12 @@
 package com.codecool.controller;
 
+import com.codecool.model.User;
+import com.codecool.security.Role;
+import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,6 +34,12 @@ public class AdminControllerTest extends AbstractTest {
     private String adminRoute;
     private String usersRoute;
 
+
+    @Autowired
+    private UserService userService;
+
+    private User mockUser;
+
     @Resource
     private FilterChainProxy springSecurityFilterChain;
 
@@ -43,6 +53,8 @@ public class AdminControllerTest extends AbstractTest {
 
         adminRoute = "/admin";
         usersRoute = adminRoute + "/users";
+
+        mockUser = new User("test@test.com", "password");
     }
 
     @Test
@@ -87,5 +99,13 @@ public class AdminControllerTest extends AbstractTest {
         mockMvc.perform(get(usersRoute))
                 .andExpect(content().string(containsString("ActiMate Admin")))
                 .andExpect(content().string(containsString("List of ActiMate users")));
+    }
+
+    @Test
+    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    public void listUsersData() throws Exception {
+        userService.create(mockUser, Role.USER);
+        mockMvc.perform(get(usersRoute))
+                .andExpect(content().string(containsString(mockUser.getEmail())));
     }
 }
