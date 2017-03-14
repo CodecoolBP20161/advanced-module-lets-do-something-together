@@ -35,9 +35,9 @@ public class AdminController {
         return "admin/admin_activities";
     }
 
-    @RequestMapping(value = "/email", method = RequestMethod.GET)
-    public String listUserWithUnsentEmails(Model model) {
+    @RequestMapping(value = "/emails", method = RequestMethod.GET)
+    public String listUsersWithUnsentEmail(Model model) {
         model.addAttribute("users", userEmailRepository.findAllByEmailSent(false));
-        return "admin/email";
+        return "admin/emails";
     }
 }

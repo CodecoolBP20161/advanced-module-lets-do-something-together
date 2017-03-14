@@ -60,7 +60,7 @@ public class AdminControllerTest extends AbstractTest {
         adminRoute = "/admin";
         usersRoute = adminRoute + "/users";
         activitiesRoute = adminRoute + "/activities";
-        emailRoute = adminRoute + "/email";
+        emailRoute = adminRoute + "/emails";
 
         mockUser = new User("test@test.com", "password");
     }
@@ -130,19 +130,19 @@ public class AdminControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
-    public void listUserWithUnsentEmailsView() throws Exception {
+    public void listUsersWithUnsentEmailView() throws Exception {
         mockMvc.perform(get(emailRoute))
                 .andExpect(status().is2xxSuccessful());
 
         mockMvc.perform(get(emailRoute))
                 .andExpect(content().string(containsString("ActiMate Admin")))
                 .andExpect(content().string(containsString("List of unsent emails")))
-                .andExpect(content().string(containsString("Registration date")));
+                .andExpect(content().string(containsString("REGISTRATION DATE")));
     }
 
     @Test
     @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
-    public void listUserWithUnsentEmailsData() throws Exception {
+    public void listUsersWithUnsentEmailData() throws Exception {
         userService.create(mockUser, Role.USER);
         UserEmail userEmail = new UserEmail();
         userEmail.setUser(mockUser);
