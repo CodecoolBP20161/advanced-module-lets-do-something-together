@@ -1,6 +1,8 @@
 package com.codecool.controller;
 
 import com.codecool.model.User;
+import com.codecool.model.UserEmail;
+import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
@@ -38,6 +40,9 @@ public class AdminControllerTest extends AbstractTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserEmailRepository userEmailRepository;
 
     private User mockUser;
 
@@ -133,5 +138,17 @@ public class AdminControllerTest extends AbstractTest {
                 .andExpect(content().string(containsString("ActiMate Admin")))
                 .andExpect(content().string(containsString("List of unsent emails")))
                 .andExpect(content().string(containsString("Registration date")));
+    }
+
+    @Test
+    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    public void listUserWithUnsentEmailsData() throws Exception {
+        userService.create(mockUser, Role.USER);
+        UserEmail userEmail = new UserEmail();
+        userEmail.setUser(mockUser);
+        userEmailRepository.save(userEmail);
+
+        mockMvc.perform(get(emailRoute))
+                .andExpect(content().string(containsString(mockUser.getEmail())));
     }
 }
