@@ -28,6 +28,7 @@ public class AdminControllerTest extends AbstractTest {
     private MockMvc mockMvc;
 
     private String adminRoute;
+    private String usersRoute;
 
     @Resource
     private FilterChainProxy springSecurityFilterChain;
@@ -39,7 +40,9 @@ public class AdminControllerTest extends AbstractTest {
                 .apply(springSecurity())
                 .addFilters(springSecurityFilterChain)
                 .build();
+
         adminRoute = "/admin";
+        usersRoute = adminRoute + "/users";
     }
 
     @Test
@@ -72,5 +75,17 @@ public class AdminControllerTest extends AbstractTest {
                 .andExpect(content().string(containsString("USERS")))
                 .andExpect(content().string(containsString("ACTIVITIES")))
                 .andExpect(content().string(containsString("EMAILS")));
+    }
+
+    @Test
+    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    public void listUsersView() throws Exception {
+
+        mockMvc.perform(get(usersRoute))
+                .andExpect(status().is2xxSuccessful());
+
+        mockMvc.perform(get(usersRoute))
+                .andExpect(content().string(containsString("ActiMate Admin")))
+                .andExpect(content().string(containsString("List of ActiMate users")));
     }
 }
