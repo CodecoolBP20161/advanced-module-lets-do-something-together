@@ -33,7 +33,7 @@ public class AdminControllerTest extends AbstractTest {
 
     private String adminRoute;
     private String usersRoute;
-
+    private String activitiesRoute;
 
     @Autowired
     private UserService userService;
@@ -53,6 +53,7 @@ public class AdminControllerTest extends AbstractTest {
 
         adminRoute = "/admin";
         usersRoute = adminRoute + "/users";
+        activitiesRoute = adminRoute + "/activities";
 
         mockUser = new User("test@test.com", "password");
     }
@@ -107,5 +108,16 @@ public class AdminControllerTest extends AbstractTest {
         userService.create(mockUser, Role.USER);
         mockMvc.perform(get(usersRoute))
                 .andExpect(content().string(containsString(mockUser.getEmail())));
+    }
+
+    @Test
+    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    public void listActivitiesView() throws Exception {
+        mockMvc.perform(get(activitiesRoute))
+                .andExpect(status().is2xxSuccessful());
+
+        mockMvc.perform(get(activitiesRoute))
+                .andExpect(content().string(containsString("ActiMate Admin")))
+                .andExpect(content().string(containsString("List of ActiMate activities")));
     }
 }
