@@ -49,9 +49,8 @@ public class AdminControllerTest extends AbstractTest {
                 .andExpect(status().is3xxRedirection());
 
         String expectedRoute = "/login";
-        String location = mockMvc.perform(get(adminRoute))
-                .andExpect(status().is3xxRedirection())
-                .andReturn().getResponse().getHeader("location");
+        String location = mockMvc.perform(get(adminRoute)).andReturn()
+                .getResponse().getHeader("location");
         String actualRoute = location.substring(location.length() - expectedRoute.length(), location.length());
         assertEquals(true, expectedRoute.equals(actualRoute));
     }
