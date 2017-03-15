@@ -25,18 +25,18 @@
 
             <form method="post">
                 <div class="radio">
-                    <label class="radio-inline radio-date">
-                        <input type="radio" th:name="filter" th:value="date" onclick="active()"/>Search by Date
+                    <label class="radio-inline">
+                        <input class="radio-date" type="radio" th:name="filter" th:value="date" onclick="active()"/>Search by Date
                     </label>
-                    <label class="radio-inline radio-activities">
-                        <input type="radio" th:name="filter" th:value="activities" onclick="active()"/>Search by Activities
+                    <label class="radio-inline">
+                        <input class="radio-activities" type="radio" th:name="filter" th:value="activities" onclick="active()"/>Search by Activities
                     </label>
-                    <label class="radio-inline radio-status">
-                        <input type="radio" th:name="filter" th:value="status" onclick="active()"/>Search by Status
+                    <label class="radio-inline">
+                        <input class="radio-status" type="radio" th:name="filter" th:value="status" onclick="active()"/>Search by Status
                     </label>
                 </div>
                 <div class="search-input">
-                    <input th:name="key" placeholder="Search"/>
+                    <input id="search-input" th:name="key" placeholder="Search"/>
                 </div>
                 <div>
                     <button class="btn btn-primary btn-search" disabled="true" type="submit">Search</button>
