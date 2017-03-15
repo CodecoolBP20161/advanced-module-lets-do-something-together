@@ -6,6 +6,7 @@ import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,12 @@ public class AdminControllerTest extends AbstractTest {
         emailRoute = adminRoute + "/emails";
 
         mockUser = new User("test@test.com", "password");
+    }
+
+    @After
+    public void tearDown() {
+        userEmailRepository.deleteAll();
+        userService.deleteAllUsers();
     }
 
     @Test
