@@ -86,14 +86,14 @@ public class AdminControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(username = "user@user.com")
+    @WithMockUser
     public void mainUIWithUserRoleForbidden() throws Exception {
         mockMvc.perform(get(adminRoute))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
-    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void mainUIWithAdminRoleAccessGranted() throws Exception {
         mockMvc.perform(get(adminRoute))
                 .andExpect(status().is2xxSuccessful());
@@ -105,7 +105,7 @@ public class AdminControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void listUsersView() throws Exception {
 
         mockMvc.perform(get(usersRoute))
@@ -117,7 +117,7 @@ public class AdminControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void listUsersData() throws Exception {
         userService.create(mockUser, Role.USER);
         mockMvc.perform(get(usersRoute))
@@ -125,7 +125,7 @@ public class AdminControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void listActivitiesView() throws Exception {
         mockMvc.perform(get(activitiesRoute))
                 .andExpect(status().is2xxSuccessful());
@@ -136,7 +136,7 @@ public class AdminControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void listUsersWithUnsentEmailView() throws Exception {
         mockMvc.perform(get(emailRoute))
                 .andExpect(status().is2xxSuccessful());
@@ -148,7 +148,7 @@ public class AdminControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@admin.com", authorities = {"ADMIN"})
+    @WithMockUser(authorities = {"ADMIN"})
     public void listUsersWithUnsentEmailData() throws Exception {
         userService.create(mockUser, Role.USER);
         UserEmail userEmail = new UserEmail();
