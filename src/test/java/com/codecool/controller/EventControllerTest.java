@@ -28,6 +28,8 @@ public class EventControllerTest extends AbstractTest {
     @Resource
     private FilterChainProxy springSecurityFilterChain;
 
+    private String route;
+
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders
@@ -35,19 +37,21 @@ public class EventControllerTest extends AbstractTest {
                 .apply(springSecurity())
                 .addFilters(springSecurityFilterChain)
                 .build();
+
+        route = "/u/create_event";
     }
 
     @Test
     public void createEventFormUnavailableWithoutLogin() throws Exception {
-        mockMvc.perform(get("/u/create_event")).andExpect(status().is3xxRedirection());
+        mockMvc.perform(get(route)).andExpect(status().is3xxRedirection());
     }
 
     @Test
     @WithMockUser
     public void renderCreateEventFormTest() throws Exception {
-        mockMvc.perform(get("/u/create_event")).andExpect(status().is2xxSuccessful());
+        mockMvc.perform(get(route)).andExpect(status().is2xxSuccessful());
 
-        mockMvc.perform(get("/u/create_event"))
+        mockMvc.perform(get(route))
                 .andExpect(content().string(containsString(" Create Event")))
                 .andExpect(content().string(containsString("input type=\"text\"")))
                 .andExpect(content().string(containsString("Submit")));
