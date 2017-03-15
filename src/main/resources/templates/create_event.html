@@ -11,8 +11,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
 
     <title>Actimate</title>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
     <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
@@ -20,10 +22,13 @@
     <!--Style-->
     <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
-    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
+    <script src="/js/jcs-auto-validate.min.js"></script>
+    <!-- load ngmessages -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <!--AngularJS Controllers-->
     <script src="/js/controller/eventController.js"></script>
+
 </head>
 
 <body ng-controller="saveEventCtrl">
@@ -38,89 +43,116 @@
     </ul>
 </nav>
 
-<div class="page">
+<div class="container">
 
     <h2> Create Event</h2>
 
-    <form class="eventform" id="eventform" name="eventform" data-toggle="validator" ng-submit="saveEvent(eventform)">
-        <div>
-
-            <div>
-                <h5>Choose a good name!</h5>
-                <input type="text" id="event_name" class="createevent"
-                       ng-class="{ 'has-error' : !eventform.name.$pristine }" name="name" required="required"
-                       ng-model="event.name"/>
-                <p ng-show="eventform.name.$pristine" class="help-block">This field is required.</p>
+    <form class="form-horizontal" id="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
+            <!--Event name-->
+            <div class="form-group"
+                 ng-class="
+                 {'has-error':!eventform.name.$valid &amp;(!eventform.$pristine || eventform.$submitted) ,
+                 'has-success': eventform.name.$valid &amp; !eventform.$pristine || eventform.$submitted }">
+                <label for="name" class="col-sm-2 control-label">Choose a good name!</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               id="name"
+                               class="form-control"
+                               name="name"
+                               required="required"
+                                ng-model="event.name"
+                                ng-pattern="/^[A-Za-z]/"
+                                ng-pattern-err-type="wrongInputType"
+                                ng-minlength="3"/>
+                        <p class="help-block" ng-show="eventform.name.$error.required &amp; (!eventform.$pristine || eventform.$submitted)"></p>
+                    </div>
+                </div>
+            <!--Event type-->
+            <div class="form-group">
+                <label for="interest" class="col-sm-2 control-label">What type of activity do you want to do?</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <select id="interest"
+                                class="form-control"
+                                name="interest" ng-model="event.interest" required="required">
+                            <option value="tennis">Tennis</option>
+                            <option value="gokart">Gokart</option>
+                            <option value="running">Running</option>
+                            <option value="hiking">Hiking</option>
+                            <option value="cinema">Cinema</option>
+                            <option value="theater">Theater</option>
+                            <option value="cardGames">Card Games</option>
+                            <option value="cityWalks">City Walks</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <h5>What type of activity do you want to do?</h5>
-                <label for="interest"> </label>
-                <select id="interest" name="interest" ng-model="event.interest" required="required">
-                    <option value="tennis">Tennis</option>
-                    <option value="gokart">Gokart</option>
-                    <option value="running">Running</option>
-                    <option value="hiking">Hiking</option>
-                    <option value="cinema">Cinema</option>
-                    <option value="theater">Theater</option>
-                    <option value="cardGames">Card Games</option>
-                    <option value="cityWalks">City Walks</option>
-                </select>
+            <!--Event place-->
+            <div class="form-group">
+                <label for="place" class="col-sm-2 control-label">Where do You want to go?</label>
+                <div class="col-sm-10">
+                        <input class="form-control"
+                               id="place" type="text"
+                               gm-places-autocomplete=""
+                               name="place"
+                               ng-model="autocomplete"
+                               required="required"/>
+                </div>
+            </div>
+            <!--Event date-->
+            <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">When do You want to go?</label>
+                <div class="col-sm-10">
+                        <input class="form-control"
+                               id="date" type="date"
+                               required="required"
+                               name="date"
+                               ng-model="event.date"/>
+                </div>
+            </div>
+            <!--Event participants-->
+            <div class="form-group">
+                <label for="participants" class="col-sm-2 control-label">With how many mates?</label>
+                <div class="col-sm-10">
+                        <input class="form-control"
+                               id="participants"
+                               type="number"
+                               min="1"
+                               name="participants"
+                               required="required"
+                               ng-model="event.participants"
+                               ng-min-err-type="wrongNumber"
+                               ng-pattern="/[0-9]/"/>
+                </div>
+            </div>
+            <!--Event description-->
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">Tell something about your event!</label>
+                <div class="col-sm-10">
+                        <textarea class="form-control"
+                                  id="description" rows="4"
+                                  name="description"
+                                  required="required"
+                                  ng-minlength="7"
+                                  ng-model="event.description"></textarea>
+                </div>
+            </div>
 
-            </div>
-            <div>
-                <h5>Where do You want to go?</h5>
-                <input type="text" gm-places-autocomplete="" ng-model="autocomplete" style="width: 300px;"
-                       required="required"/>
-            </div>
-            <div>
-                <h5>When do You want to go?</h5>
-                <input class="createevent" type="date" required="required" name="date" ng-model="event.date"/>
-            </div>
-            <div>
-                <h5>With how many mates?</h5>
-                <input class="createevent" type="number" name="number" required="required" ng-model="event.participants"/>
-            </div>
-            <div>
-                <h5>Tell something about your event!</h5>
-                <input class="createevent" type="text" name="description" required="required"
-                       ng-model="event.description"/>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                <a href="/u/dashboard" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
+                <a href="/u/dashboard" type="button" id="submit" class="btn btn-info btn-lg"
+                ng-click="saveEvent()">Submit</a>
+                </div>
             </div>
 
-            <div>
-                <a href="/usermain" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                <a href="/usermain" type="button" id="submit" class="btn btn-info btn-lg"
-                   ng-click="saveEvent()">Submit</a>
-                <!--ng-disabled="eventform.$invalid || eventform.$pending"-->
-            </div>
 
-        </div>
 
     </form>
 
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#eventform').formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                number: {
-                    validators: {
-                        integer: {
-                            message: 'The value is not an integer'
-                        }
-                    }
-                }
-            }
-        })
-    });
-</script>
 
 </body>
 
