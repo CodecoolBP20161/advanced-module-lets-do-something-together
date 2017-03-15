@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping(value = "/u")
 @Controller
-public class AuthenticatedUserController extends AbstractController {
+public class ProfileController extends AbstractController {
 
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
