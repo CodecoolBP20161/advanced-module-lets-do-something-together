@@ -26,13 +26,16 @@
             <form method="post">
                 <div class="radio">
                     <label class="radio-inline">
-                        <input class="radio-date" type="radio" th:name="filter" th:value="date" onclick="active()"/>Search by Date
+                        <input class="radio-date" type="radio" th:name="filter" th:value="date" onclick="active()"/>Search
+                        by Date
                     </label>
                     <label class="radio-inline">
-                        <input class="radio-activities" type="radio" th:name="filter" th:value="activities" onclick="active()"/>Search by Activities
+                        <input class="radio-activities" type="radio" th:name="filter" th:value="activities"
+                               onclick="active()"/>Search by Activities
                     </label>
                     <label class="radio-inline">
-                        <input class="radio-status" type="radio" th:name="filter" th:value="status" onclick="active()"/>Search by Status
+                        <input class="radio-status" type="radio" th:name="filter" th:value="status" onclick="active()"/>Search
+                        by Status
                     </label>
                 </div>
                 <div class="search-input">
@@ -44,7 +47,7 @@
                 </div>
             </form>
 
-            <table class="table table-sm table-bordered table-hover">
+            <table class="table table-sm table-bordered table-hover" id="eventsTable">
                 <thead class="thead-inverse">
                 <tr>
                     <th id="name">Name</th>

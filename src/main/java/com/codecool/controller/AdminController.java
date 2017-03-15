@@ -83,9 +83,9 @@ public class AdminController extends AbstractController {
         return "admin/admin_events";
     }
 
-    @RequestMapping(value = "/email", method = RequestMethod.GET)
+    @RequestMapping(value = "/emails", method = RequestMethod.GET)
     public String listUserWithUnsentEmails(Model model) {
         model.addAttribute("users", userEmailRepository.findAllByEmailSent(false));
-        return "admin/admin_email";
+        return "admin/admin_emails";
     }
 }
