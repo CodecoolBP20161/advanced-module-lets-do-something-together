@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RequestMapping(value = "/admin")
@@ -65,7 +67,8 @@ public class AdminController extends AbstractController {
                     }
                     break;
                 case "date":
-                    events = eventRepository.findByDate(key);
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                    events = eventRepository.findByDate(format.parse(key));
                     model.addAttribute("events", events);
                     break;
                 case "activities":

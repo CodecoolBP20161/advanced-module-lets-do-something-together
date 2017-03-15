@@ -5,6 +5,7 @@ import com.codecool.model.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class Event {
 
     private String name;
     private Coordinates location;
-    private String date;
+    private Date date;
     private int participants;
     private String description;
 

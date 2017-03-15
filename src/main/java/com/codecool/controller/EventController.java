@@ -41,11 +41,18 @@ public class EventController extends AbstractController {
         Event event = new Event();
         for (Field field : getBasicEventFields()) {
             field.setAccessible(true);
-            Object fieldValue;
+            Object fieldValue = null;
             if (field.getType().equals(Coordinates.class)) {
                 fieldValue = new Coordinates(jsonData.get("lng"), jsonData.get("lat"));
             } else if (field.getType().equals(int.class)) {
                 fieldValue = Integer.parseInt(jsonData.get(field.getName()).toString());
+            } else if (field.getType().equals(Date.class)) {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                try {
+                    fieldValue = format.parse(jsonData.get(field.getName()).toString());
+                } catch (ParseException e) {
+                    e.getMessage();
+                }
             } else {
                 fieldValue = jsonData.get(field.getName());
             }
@@ -78,18 +85,12 @@ public class EventController extends AbstractController {
     }
 
     //    compares string date to today's last minute
-    private int compareDates(String date) {
+    private int compareDates(Date date) {
         Calendar calendarDay = new GregorianCalendar();
         calendarDay.set(Calendar.HOUR_OF_DAY, 23);
         calendarDay.set(Calendar.MINUTE, 59);
         calendarDay.set(Calendar.SECOND, 59);
         Date today = calendarDay.getTime();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        try {
-            return today.compareTo(format.parse(date));
-        } catch (ParseException e) {
-            e.getMessage();
-            return 0;
-        }
+        return today.compareTo(date);
     }
 }
