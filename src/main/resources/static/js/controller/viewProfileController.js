@@ -15,6 +15,6 @@ actimate.controller('loadUserCtrl', function($scope, $http){
 
     $http.get("/u/profile_data")
         .then(function (response) {
-        $scope.user = response.data;
+        $scope.user = response.data.profile;
     })
 });

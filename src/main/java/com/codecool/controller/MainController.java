@@ -24,11 +24,6 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/usermain", method = RequestMethod.GET)
-    public String userMain() {
-        return "user_main";
-    }
-
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model, String error) {
         if (error != null) {

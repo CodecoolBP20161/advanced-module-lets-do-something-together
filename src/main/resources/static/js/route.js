@@ -7,10 +7,10 @@ angular.module('actimate')
             .when('/', {
                 templateUrl: 'index.html'
             })
-            .when('/profile', {
+            .when('/u/profile', {
                 templateUrl: 'profile.html'
             })
-            .when('/usermain', {
+            .when('/u/dashboard', {
                 templateUrl: 'user_main.html'
             })
             .when('/registration', {

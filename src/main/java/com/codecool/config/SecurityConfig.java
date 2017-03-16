@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/u/**").authenticated()
                 .antMatchers("/", "/registration").permitAll()
                 .and()
-                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/usermain")
+                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/u/dashboard")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
