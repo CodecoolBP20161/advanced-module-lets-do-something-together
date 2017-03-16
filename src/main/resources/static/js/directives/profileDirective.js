@@ -43,7 +43,9 @@ actimate.directive('loadUserCtrl', function() {
 
             $http.get("/u/profile_data")
                 .then(function (response) {
-                    $scope.user = response.data;
+                    console.log(response)
+                    console.log(response.data)
+                    $scope.user = response.data.profile;
                 })
 
         }

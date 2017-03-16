@@ -23,19 +23,23 @@ import java.util.stream.Collectors;
 @Controller
 public class ProfileController extends AbstractController {
 
-
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String userMain() {
         return "user_main";
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String renderProfile() {
+        return "profile";
+    }
+
     @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
-    public String profile() {
+    public String renderProfileForm() {
         return "profile_form";
     }
 
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
-    public String profile(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
+    public String saveProfileForm(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
         UserDetail currentUserDetail = getCurrentUserDetail(principal);
         List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentUserDetail);
 
@@ -56,19 +60,22 @@ public class ProfileController extends AbstractController {
         return "profile_form";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String dashboard() {
-        return "profile";
-    }
-
     @RequestMapping(value = "/profile_data", method = RequestMethod.GET)
     @ResponseBody
     public String profileData(Principal principal) throws IllegalAccessException {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("profile", getUserProfile(principal));
+        } catch (JSONException e) {
+            e.getMessage();
+        }
+        return jsonObject.toString();
+    }
+
+    private JSONObject getUserProfile(Principal principal) throws IllegalAccessException {
+        JSONObject json = new JSONObject();
         UserDetail currentUserDetail = getCurrentUserDetail(principal);
         List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentUserDetail);
-
-        JSONObject json = new JSONObject();
-
         for (Field field : fields.subList(0, fields.size() - 1)) {
             field.setAccessible(true);
             try {
@@ -82,7 +89,7 @@ public class ProfileController extends AbstractController {
                     currentUserDetail.getInterestList().stream().map(Interest::getActivity).collect(Collectors.toList()));
         } catch (JSONException ignored) {
         }
-        return json.toString();
+        return json;
     }
 
     private List<Interest> getInterestsFromJson(JSONObject jsonObject) {

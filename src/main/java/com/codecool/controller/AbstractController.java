@@ -22,8 +22,10 @@ abstract class AbstractController {
     UserService userService;
 
     UserDetail getCurrentUserDetail(Principal principal) {
-        User currentUser = userService.getUserByEmail(principal.getName()).get();
-        return userDetailRepository.findByUser(currentUser);
+        return userDetailRepository.findByUser(getCurrentUser(principal));
     }
 
+    User getCurrentUser(Principal principal) {
+        return userService.getUserByEmail(principal.getName()).get();
+    }
 }
