@@ -28,12 +28,7 @@ import java.util.stream.Collectors;
 public class ProfileController extends AbstractController {
 
     @Autowired
-    EventRepository eventRepository;
-
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String userMain() {
-        return "user_main";
-    }
+    private EventRepository eventRepository;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String renderProfile() {
