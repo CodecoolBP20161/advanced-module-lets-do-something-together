@@ -40,7 +40,7 @@ public class MainControllerTest extends AbstractTest {
     }
 
     @Test
-    public void loginPage() throws Exception {
+    public void loginPageTest() throws Exception {
 
         mockMvc.perform(get("/login"))
                 .andExpect(status().is2xxSuccessful());
