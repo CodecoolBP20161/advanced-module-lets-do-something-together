@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping(value = "/u")
 @Controller
-public class AuthenticatedUserController {
+public class ProfileController {
 
     @Autowired
     UserDetailRepository userDetailRepository;
