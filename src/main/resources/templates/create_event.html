@@ -11,7 +11,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
 
     <title>Actimate</title>
-
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Quicksand"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <!--Style-->
     <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
     <script src="/js/jcs-auto-validate.min.js"></script>
     <!-- load ngmessages -->
@@ -38,24 +40,26 @@
 
         <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
         <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
-        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
+        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
+            <span class="glyphicon glyphicon-log-out"></span></a></li>
 
     </ul>
 </nav>
 
-<div class="container">
-
+<div class="title">
     <h2> Create Event</h2>
+</div>
+<div class="container">
 
     <form class="form-horizontal" id="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
             <!--Event name-->
             <div class="form-group"
                  ng-class="
-                 {'has-error':!eventform.name.$valid &amp;(!eventform.$pristine || eventform.$submitted) ,
-                 'has-success': eventform.name.$valid &amp; !eventform.$pristine || eventform.$submitted }">
-                <label for="name" class="col-sm-2 control-label">Choose a good name!</label>
-                    <div class="col-sm-10">
+                 {'has-error':!eventform.name.$valid &amp;(!eventform.$pristine || eventform.$submitted) }">
+                <label for="name" class="col-sm-2 control-label">Event name</label>
+                    <div class="col-sm-6">
                         <input type="text"
+                               placeholder="Write a catchy name..."
                                id="name"
                                class="form-control"
                                name="name"
@@ -63,14 +67,13 @@
                                 ng-model="event.name"
                                 ng-pattern="/^[A-Za-z]/"
                                 ng-pattern-err-type="wrongInputType"
-                                ng-minlength="3"/>
-                        <p class="help-block" ng-show="eventform.name.$error.required &amp; (!eventform.$pristine || eventform.$submitted)"></p>
+                                ng-minlength="5"/>
                     </div>
                 </div>
             <!--Event type-->
             <div class="form-group">
-                <label for="interest" class="col-sm-2 control-label">What type of activity do you want to do?</label>
-                <div class="col-sm-10">
+                <label for="interest" class="col-sm-2 control-label">Event type</label>
+                <div class="col-sm-6">
                     <div class="input-group">
                         <select id="interest"
                                 class="form-control"
@@ -90,10 +93,11 @@
 
             <!--Event place-->
             <div class="form-group">
-                <label for="place" class="col-sm-2 control-label">Where do You want to go?</label>
-                <div class="col-sm-10">
+                <label for="place" class="col-sm-2 control-label">Place</label>
+                <div class="col-sm-6">
                         <input class="form-control"
                                id="place" type="text"
+                               placeholder="Choose a cool place..."
                                gm-places-autocomplete=""
                                name="place"
                                ng-model="autocomplete"
@@ -102,10 +106,12 @@
             </div>
             <!--Event date-->
             <div class="form-group">
-                <label for="date" class="col-sm-2 control-label">When do You want to go?</label>
-                <div class="col-sm-10">
+                <label for="date" class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-6">
                         <input class="form-control"
                                id="date" type="date"
+                               data-placeholder="Choose a date..."
+                               aria-required="true"
                                required="required"
                                name="date"
                                ng-model="event.date"/>
@@ -113,12 +119,14 @@
             </div>
             <!--Event participants-->
             <div class="form-group">
-                <label for="participants" class="col-sm-2 control-label">With how many mates?</label>
-                <div class="col-sm-10">
+                <label for="participants" class="col-sm-2 control-label">Invite people</label>
+                <div class="col-sm-6">
                         <input class="form-control"
                                id="participants"
+                               placeholder="Invite people to hang out with.."
                                type="number"
                                min="1"
+                               max="20"
                                name="participants"
                                required="required"
                                ng-model="event.participants"
@@ -128,13 +136,14 @@
             </div>
             <!--Event description-->
             <div class="form-group">
-                <label for="description" class="col-sm-2 control-label">Tell something about your event!</label>
-                <div class="col-sm-10">
+                <label for="description" class="col-sm-2 control-label">Event description</label>
+                <div class="col-sm-6">
                         <textarea class="form-control"
                                   id="description" rows="4"
+                                  placeholder="Tell us something about your event..."
                                   name="description"
                                   required="required"
-                                  ng-minlength="7"
+                                  ng-minlength="100"
                                   ng-model="event.description"></textarea>
                 </div>
             </div>
