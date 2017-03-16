@@ -1,10 +1,14 @@
 package com.codecool.controller;
 
 import com.codecool.model.Interest;
+import com.codecool.model.User;
 import com.codecool.model.UserDetail;
+import com.codecool.model.event.Event;
+import com.codecool.repository.EventRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,9 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/u")
 @Controller
 public class ProfileController extends AbstractController {
+
+    @Autowired
+    EventRepository eventRepository;
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String userMain() {
@@ -66,6 +73,7 @@ public class ProfileController extends AbstractController {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("profile", getUserProfile(principal));
+            jsonObject.put("events", getUserEvents(principal));
         } catch (JSONException e) {
             e.getMessage();
         }
@@ -107,5 +115,37 @@ public class ProfileController extends AbstractController {
     private List<Field> getEditableFieldsOfCurrentUserDetail(UserDetail userDetail) {
         Field[] fieldsArray = userDetail.getClass().getDeclaredFields();
         return Arrays.asList(fieldsArray).subList(2, fieldsArray.length);
+    }
+
+    private JSONObject getUserEvents(Principal principal) {
+        JSONObject json = new JSONObject();
+        User user = getCurrentUser(principal);
+        List<Event> events = eventRepository.findByUser(user);
+        if (events.size() > 0) {
+            for (int i = 0; i < events.size(); i++) {
+                try {
+                    json.put(String.valueOf(i), createEventJson(events.get(i)));
+                } catch (JSONException e) {
+                    e.getMessage();
+                }
+            }
+        }
+        return json;
+    }
+
+    private JSONObject createEventJson(Event event) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("name", event.getName());
+            json.put("lat", event.getLocation().getLat());
+            json.put("lng", event.getLocation().getLng());
+            json.put("date", event.getDate());
+            json.put("participants", event.getParticipants());
+            json.put("description", event.getDescription());
+            json.put("interest", event.getInterest().getActivity());
+        } catch (JSONException e) {
+            e.getMessage();
+        }
+        return json;
     }
 }
