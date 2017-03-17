@@ -4,8 +4,8 @@
     margin: 0;
 }
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: #c6eaa8;
+    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #82D4BB;
     height: 100vh;
     background-size: cover;
     margin-bottom: 20px;
@@ -16,13 +16,43 @@ body {
     align-items: center;
 }
 
+nav {
+    top: 0;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: #292f36;
+    z-index: 99;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    padding-right: 5%;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+    font-size: larger;
+}
+
+.nav-link{  display: block;  }
+
+a:hover {  text-decoration: none; color: #82D4BB;}
+
+
 #loginBg {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: #292f36;
     color: #f9f9f9;
+    border-radius: 5px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #formError {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: #292f36;
     font-weight: bold;
     box-shadow: 5px 5px 10px #333333;
     padding: 10px;
@@ -32,20 +62,38 @@ body {
     color: #f9f9f9;
 }
 
-#loginBtn, #signupBtn {
-    background-color: black;
+#loginBtn {
+    background-color: #64a390;
     color: #f9f9f9;
-    margin: 0px 15px
+    position: relative;
+    border: none;
+}
+
+#signupBtn {
+    background-color: #64a390;
+    color: #f9f9f9;
+    position: relative;
+    border: none;
 }
 
 #signupBtn > a, #signupBtn > div {
     text-align: center;
 }
 
-#loginBtnDiv {
-    text-align: right;
+#loginBtn > a, #loginBtn > div {
+    text-align: center;
 }
 
-#signupBtnDiv {
-    text-align: left;
+#loginBtn:hover, #signupBtn:hover {
+    background-color: #95dbc6;
+    color: #292f36;
 }
+
+#signupBtnDiv > p {
+    margin: 10px;
+}
+
+#buttonDiv {
+    display: inline-flex;
+}
+
