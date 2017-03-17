@@ -33,7 +33,8 @@ public class UserDetail {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_detail_interest",
             joinColumns = @JoinColumn(name = "user_detail_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "interest_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "interest_id", referencedColumnName = "id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_detail_id", "interest_id"}))
     private List<Interest> interestList;
 
     public UserDetail() {

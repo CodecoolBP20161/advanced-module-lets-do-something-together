@@ -5,7 +5,6 @@ import com.codecool.model.User;
 import com.codecool.model.UserDetail;
 import com.codecool.model.event.Event;
 import com.codecool.repository.EventRepository;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.reflect.Field;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,7 +55,7 @@ public class ProfileController extends AbstractController {
             }
             field.set(currentUserDetail, fieldValue);
         }
-        currentUserDetail.setInterestList(getInterestsFromJson(jsonData));
+        currentUserDetail.setInterestList(getUpdatedInterestList(currentUserDetail, jsonData));
         userDetailRepository.save(currentUserDetail);
         return "profile_form";
     }
@@ -95,16 +93,23 @@ public class ProfileController extends AbstractController {
         return json;
     }
 
-    private List<Interest> getInterestsFromJson(JSONObject jsonObject) {
-        List<Interest> interestList = new ArrayList<>();
+    private List<Interest> getUpdatedInterestList(UserDetail userDetail, JSONObject jsonData) {
+        List<Interest> interests = userDetail.getInterestList();
         try {
-            JSONArray jsonArray = ((JSONObject) jsonObject.get("interest")).names();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                interestList.add(interestRepository.findByActivity(jsonArray.getString(i)));
+            JSONObject json = (JSONObject) jsonData.get("interest");
+            for (Interest interest : interestRepository.findAll()) {
+                String activity = interest.getActivity();
+                if (json.has(activity)) {
+                    if (json.get(activity).equals(false)) {
+                        interests.remove(interest);
+                    } else if (!interests.contains(interest)) {
+                        interests.add(interest);
+                    }
+                }
             }
         } catch (JSONException ignored) {
         }
-        return interestList;
+        return interests;
     }
 
     private List<Field> getEditableFieldsOfCurrentUserDetail(UserDetail userDetail) {
