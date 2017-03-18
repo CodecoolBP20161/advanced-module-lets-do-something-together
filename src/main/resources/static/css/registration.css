@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 * {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
 }
 
@@ -10,8 +9,8 @@
 }
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: #c6eaa8;
+    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #82D4BB;
     height: 100vh;
     background-size: cover;
 
@@ -97,7 +96,10 @@ h1 {
 .bt-pad {
     align: center;
     align-content: center;
+
 }
+
+.registration-button {  width: 120px;  }
 
 .ng-valid {
     border-color: lightgreen;
@@ -124,6 +126,8 @@ p.errormessage {
 
 #signupBtnDiv {
     text-align: center;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .success-message {
@@ -134,8 +138,9 @@ p.errormessage {
 }
 
 .registration-button {
-    background-color: #000;
-    color: #b9b9b9;
+    background-color: #64a390;
+    color: #f9f9f9;
+    width: 100px;
 }
 
 .control-label {
@@ -163,6 +168,8 @@ nav a {
     margin-left: 30px;
     line-height: 50px;
 }
+
+a:hover {  text-decoration: none; color: #82D4BB;}
 
 #signup {
     width: 400px;

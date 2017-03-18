@@ -9,7 +9,6 @@ body {
     height: 100vh;
     background-size: cover;
     margin-bottom: 20px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,16 +16,13 @@ body {
 }
 
 nav {
-    top: 0;
+    top: 0px;
     position: fixed;
     height: 50px;
     width: 100%;
-    background-color: #292f36;
+    background-color: rgba(0,0,0,0.5);
     z-index: 99;
     text-align: center;
-    margin: 0;
-    padding: 0;
-    padding-right: 5%;
 }
 
 nav a {
@@ -39,14 +35,15 @@ nav a {
 
 .nav-link{  display: block;  }
 
+
 a:hover {  text-decoration: none; color: #82D4BB;}
 
 
 #loginBg {
-    background-color: #292f36;
+    background-color: rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
     color: #f9f9f9;
     border-radius: 5px;
-    width: 40%;
     margin-left: auto;
     margin-right: auto;
 }

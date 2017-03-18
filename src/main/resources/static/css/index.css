@@ -1,5 +1,6 @@
-html
-{
+* { font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+html {
     height: 100%;
     top: 0;
     left: 0;
@@ -26,7 +27,7 @@ nav {
     position: fixed;
     height: 50px;
     width: 100%;
-    background-color: #40798C;
+    background-color: rgba(0,0,0,0.5);
     z-index: 99;
     text-align: center;
     margin: 0;
@@ -43,6 +44,8 @@ nav a {
 .nav-link{
     display: block;
 }
+a:hover {  text-decoration: none; color: #d5ff8eff;}
+
 
 li
 {
@@ -194,10 +197,10 @@ h3 {
     background-color: #ffffff;
 }
 .head {
-    -webkit-border-radius:6px 6px 0px 0px;
-    -moz-border-radius:6px 6px 0px 0px;
-    border-radius:6px 6px 0px 0px;
-    background-color: #c6eaa8;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    background-color: #82D4BB;
     color:#0b2027;
 }
 h2 {
@@ -217,11 +220,11 @@ input:first-of-type
     margin-top:35px;
 }
 input, textarea {
+    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1em;
     padding: 15px 10px 10px;
-    font-family: 'Source Sans Pro',arial,sans-serif;
     border: 1px solid #cecece;
-    background: #d7d7d7;
+    background: white;
     color: #0b2027;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -238,6 +241,7 @@ input, textarea {
 
 button {
     margin-top:15px;
+    font-size: larger;
     margin-bottom:25px;
     background-color: #c6eaa8;
     padding: 12px 45px;
@@ -256,7 +260,6 @@ button:hover, .button:hover {
     background: #c6eaa8;
 }
 label.error {
-    font-family:'Source Sans Pro',arial,sans-serif;
     font-size:1em;
     display:block;
     padding-top:10px;
@@ -290,4 +293,14 @@ label.error {
     .bgimg-1, .bgimg-2, .bgimg-3 {
         background-attachment: scroll;
     }
+}
+
+#howitworks {
+    background-color: #e5e059;
+    padding-top: 40px;
+}
+
+#contact {
+  background-color: rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .3);;
 }
