@@ -60,12 +60,10 @@ public class EventController extends AbstractController {
     @Scheduled(cron = "0 0 0 * * ?", zone = "CET")
     private void managePastEvents() {
         List<Event> events = eventRepository.findAll();
-        for (Event event : events) {
-            if (compareDates(event.getDate()) >= 0) {
-                event.setStatus(Status.PAST);
-                eventRepository.save(event);
-            }
-        }
+        events.stream().filter(event -> compareDates(event.getDate()) >= 0).forEach(event -> {
+            event.setStatus(Status.PAST);
+            eventRepository.save(event);
+        });
     }
 
     //    compares string date to today's last minute

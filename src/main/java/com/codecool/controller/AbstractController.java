@@ -21,7 +21,7 @@ abstract class AbstractController {
     @Autowired
     UserService userService;
 
-    Profile getCurrentUserDetail(Principal principal) {
+    Profile getCurrentProfile(Principal principal) {
         return profileRepository.findByUser(getCurrentUser(principal));
     }
 
