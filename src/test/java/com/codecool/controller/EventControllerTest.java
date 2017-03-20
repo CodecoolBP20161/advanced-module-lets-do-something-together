@@ -6,6 +6,7 @@ import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
 import org.json.JSONException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,35 +21,34 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.NestedServletException;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.Matchers.isA;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.*;
 
 
-
+@Transactional
 public class EventControllerTest extends AbstractTest {
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
     @Resource
     private WebApplicationContext webApplicationContext;
-
     private MockMvc mockMvc;
-
     @Resource
     private FilterChainProxy springSecurityFilterChain;
-
     @Autowired
     private EventRepository eventRepository;
-
     @Autowired
     private UserService userService;
-
     private String route;
+    private User mockUser;
 
     @Before
     public void setup() {
@@ -59,7 +59,13 @@ public class EventControllerTest extends AbstractTest {
                 .build();
 
         route = "/u/create_event";
-        userService.create(new User("user@user.com", "password"), Role.USER);
+        mockUser = new User("user@user.com", "password");
+    }
+
+    @After
+    public void tearDown() {
+        eventRepository.deleteAll();
+        userService.deleteAllUsers();
     }
 
     @Test
@@ -80,7 +86,8 @@ public class EventControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser(username = "user@user.com")
-    public void createEventTest() throws Exception {
+    public void createEventTest_validDetails() throws Exception {
+        userService.create(mockUser, Role.USER);
         int eventsBefore = eventRepository.findAll().size();
 
         mockMvc.perform(post(route)
@@ -91,8 +98,8 @@ public class EventControllerTest extends AbstractTest {
                         "\"date\":\"2017-03-15T23:00:00.000Z\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().is2xxSuccessful());
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
 
         int eventsAfter = eventRepository.findAll().size();
 
@@ -100,17 +107,31 @@ public class EventControllerTest extends AbstractTest {
         assertEquals(42, eventRepository.findAll().get(0).getParticipants());
     }
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @Test
+    @WithMockUser(username = "user@user.com")
+    public void createEventTest_invalidDetails_noExceptionThrown() throws Exception {
+        userService.create(mockUser, Role.USER);
+        mockMvc.perform(post(route)
+                .content("{\"name\":\"eventName\"," +
+                        "\"interest\":\"somethingNotExisting\", " +
+                        "\"lng\":\"47.505013\", " +
+                        "\"lat\":\"19.057821\", " +
+                        "\"invalidKey\":\"2017-03-15T23:00:00.000Z\", " +
+                        "\"participants\":\"42\", \"description\":\"none\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 
     @Test
     @WithMockUser(username = "user@user.com")
-    public void createEventMissingDetails_throwsNestedJsonException() throws Exception {
-            mockMvc.perform(post(route)
-                    .content("{\"name\":\"eventName\"," +
-                            "\"participants\":\"42\"}")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON));
+    public void createEventTest_missingDetails_throwsNestedJsonException() throws Exception {
+        userService.create(mockUser, Role.USER);
+        mockMvc.perform(post(route)
+                .content("{\"name\":\"eventName\"," +
+                        "\"participants\":\"42\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
 
         expectedException.expectCause(isA(JSONException.class));
         throw new NestedServletException("NestedServletException", new JSONException("JSONException"));
