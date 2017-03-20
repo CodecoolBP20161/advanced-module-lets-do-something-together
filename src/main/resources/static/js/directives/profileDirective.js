@@ -1,8 +1,13 @@
 'use strict';
 
-actimate.directive('profileController', function() {
+var actimate = angular.module("actimate", ['ngResource']);
+actimate.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+}]);
+
+actimate.directive('profileController', function () {
     return {
-        controller: function($scope, $http) {
+        controller: function ($scope, $http) {
             $scope.user = {};
             $scope.saveProfile = function () {
                 $http({
@@ -19,18 +24,16 @@ actimate.directive('profileController', function() {
                             })
 
                     }, function (error) {
-                        console.log('Error: ' , error)
+                        console.log('Error: ', error)
                     });
-
-
             };
         }
     };
 });
 
-actimate.directive('loadUserCtrl', function() {
+actimate.directive('loadUserCtrl', function () {
     return {
-        controller: function($scope, $http) {
+        controller: function ($scope, $http) {
             $scope.user = null;
 
             $scope.listofInterests = null;
@@ -39,7 +42,6 @@ actimate.directive('loadUserCtrl', function() {
                 .then(function (response) {
                     $scope.user = response.data;
                 })
-
         }
     };
 });

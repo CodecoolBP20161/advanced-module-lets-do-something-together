@@ -1,18 +1,14 @@
 package com.codecool.controller;
 
-import com.codecool.model.User;
 import com.codecool.repository.UserDetailRepository;
 import com.codecool.repository.UserEmailRepository;
-import com.codecool.repository.UserRepository;
+import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,24 +27,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest extends AbstractTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private UserDetailRepository userDetailRepository;
 
     @Autowired
     private UserEmailRepository userEmailRepository;
-
-    private JdbcTemplate jdbcTemplate;
-
-    private User user1;
-    JSONObject jsonObject = new JSONObject();
-
-
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
     @Resource
     private WebApplicationContext webApplicationContext;
@@ -73,32 +58,38 @@ public class UserControllerTest extends AbstractTest {
     }
 
     @Test
-    public void FindRegisteredUserTest() throws Exception {
+    public void findRegisteredUserTest() throws Exception {
 
         mockMvc.perform(post("/registration")
                 .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-        assertEquals("apple@apple.com",userRepository.findByEmail("apple@apple.com").getEmail());
+
+        assertEquals("apple@apple.com",
+                userService.getUserByEmail("apple@apple.com").get().getEmail());
     }
 
     @Test
-    public void FindUnsentEmailTest() throws Exception {
+    public void findUnsentEmailTest() throws Exception {
 
         mockMvc.perform(post("/registration")
                 .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-        assertEquals("apple@apple.com", userEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
+
+        assertEquals("apple@apple.com",
+                userEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
     }
 
     @Test
-    public void FindRegisteredUserDetailTest() throws Exception {
+    public void findRegisteredUserDetailTest() throws Exception {
 
         mockMvc.perform(post("/registration")
                 .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-        assertEquals("apple@apple.com" ,userDetailRepository.findByUser(userRepository.findByEmail("apple@apple.com")).getFirstName());
+
+        assertEquals("apple@apple.com",
+                userDetailRepository.findByUser(userService.getUserByEmail("apple@apple.com").get()).getFirstName());
     }
 }
