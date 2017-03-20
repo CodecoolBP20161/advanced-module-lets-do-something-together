@@ -59,8 +59,7 @@ public class UserController {
                     userService.create(user, Role.USER);
                     Profile profile = new Profile(user);
                     profileRepository.save(profile);
-                    UserEmail userEmail = new UserEmail();
-                    userEmail.setUser(user);
+                    UserEmail userEmail = new UserEmail(user);
                     userEmailRepository.save(userEmail);
                     return "success";
                 }
