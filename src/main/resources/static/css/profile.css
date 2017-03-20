@@ -27,7 +27,7 @@ nav {
     position: fixed;
     height: 50px;
     width: 100%;
-    background-color: #292f36;
+    background-color: rgba(0,0,0,0.5);
     z-index: 99;
     text-align: right;
     margin: 0;
@@ -48,7 +48,11 @@ nav a {
 
 a:hover {  text-decoration: none;  }
 
-li {  display: inline; }
+nav > .fix-top > li {  display: inline; }
+
+nav > .fix-top > li > a:hover {
+    color: white;
+font-size: larger;}
 
 .page{  top: 100px;}
 

@@ -17,7 +17,7 @@
 </head>
 <body ng-controller="loadUserCtrl">
 <nav>
-    <ul class="fix top">
+    <ul class="fix-top">
 
         <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
         <li><a sec:authorize="isAuthenticated()" href="/" id="home">HOME</a></li>

@@ -37,20 +37,35 @@
     <script type="text/javascript" src="/js/controller/userController.js"></script>
 </head>
 <body>
-<nav>
-    <ul class="fix top">
-        <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+<div class="navbar navbar-inverse navbar-right navbar-static-top">
+    <div class="navcontainer">
 
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#mission">Mission</a></li>
-        <li><a href="#howitworks">How it works?</a></li>
-        <li><a href="#contactus">Contact Us</a></li>
-        <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
-        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
-        <li><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
-        <li><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
-    </ul>
-</nav>
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" id="menubutton">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#home" class="navbar-brand">Actimate</a>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#howitworks">How it works?</a></li>
+                <li><a href="#contactus">Contact Us</a></li>
+                <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+                <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
+                <li><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
+                <li><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
 
 <div id="home" class="bgimg-1 home">
     <div class="caption3">
