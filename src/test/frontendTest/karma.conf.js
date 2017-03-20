@@ -17,7 +17,12 @@ module.exports = function(config) {
     files: [
 
         'node_modules/angular/angular.js',
+
+        'node_modules/angular-route/angular-route.js',
         'node_modules/angular-mocks/angular-mocks.js',
+
+        'node_modules/angular-resource/angular-resource.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.js',
         '../../main/resources/static/js/jquery-3.1.1.min.js',
 
 
@@ -31,9 +36,11 @@ module.exports = function(config) {
         '../../main/resources/static/js/app.js',
         '../../main/resources/static/js/route.js',
         '../../main/resources/static/js/controller/*.js',
+        '../../main/resources/static/js/**/*.js',
 
 
-        'js/**/*.spec.js'
+        //'js/**/*.spec.js',
+        'js/app.spec.js'
     ],
 
 
