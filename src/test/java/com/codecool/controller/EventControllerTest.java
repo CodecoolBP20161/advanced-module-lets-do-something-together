@@ -5,8 +5,11 @@ import com.codecool.repository.EventRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
+import org.json.JSONException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -14,6 +17,7 @@ import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.util.NestedServletException;
 
 import javax.annotation.Resource;
 
@@ -24,6 +28,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.*;
+
 
 
 public class EventControllerTest extends AbstractTest {
@@ -92,6 +98,22 @@ public class EventControllerTest extends AbstractTest {
 
         assertEquals(eventsBefore + 1, eventsAfter);
         assertEquals(42, eventRepository.findAll().get(0).getParticipants());
+    }
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    @Test
+    @WithMockUser(username = "user@user.com")
+    public void createEventMissingDetails_throwsNestedJsonException() throws Exception {
+            mockMvc.perform(post(route)
+                    .content("{\"name\":\"eventName\"," +
+                            "\"participants\":\"42\"}")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON));
+
+        expectedException.expectCause(isA(JSONException.class));
+        throw new NestedServletException("NestedServletException", new JSONException("JSONException"));
     }
 
 }

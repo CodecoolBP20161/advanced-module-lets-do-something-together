@@ -36,24 +36,29 @@ public class EventController extends AbstractController {
     }
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)
-    public String createEvent(@RequestBody String data, Principal principal) throws JSONException {
-        JSONObject jsonData = new JSONObject(data);
+    public String createEvent(@RequestBody String data, Principal principal){
         Event event = new Event();
-        event.setParticipants(Integer.parseInt(jsonData.get("participants").toString()));
-        event.setDescription(jsonData.get("description").toString());
-        event.setName(jsonData.get("name").toString());
-        event.setLocation(new Coordinates(jsonData.get("lng"), jsonData.get("lat")));
         try {
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            event.setDate(format.parse(jsonData.get("date").toString()));
-        } catch (ParseException e) {
+            JSONObject jsonData = new JSONObject(data);
+            event.setParticipants(Integer.parseInt(jsonData.get("participants").toString()));
+            event.setDescription(jsonData.get("description").toString());
+            event.setName(jsonData.get("name").toString());
+            event.setLocation(new Coordinates(jsonData.get("lng"), jsonData.get("lat")));
+            try {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                event.setDate(format.parse(jsonData.get("date").toString()));
+            } catch (ParseException e) {
+                e.getMessage();
+            }
+            event.setInterest(interestRepository.findByActivity(jsonData.get("interest").toString()));
+            event.setUser(userService.getUserByEmail(principal.getName()).get());
+            eventRepository.save(event);
+        } catch (JSONException e) {
             e.getMessage();
         }
-        event.setInterest(interestRepository.findByActivity(jsonData.get("interest").toString()));
-        event.setUser(userService.getUserByEmail(principal.getName()).get());
-        eventRepository.save(event);
         return "create_event";
     }
+
 
     //    method called daily at midnight
 //    toggles status of every event before that
