@@ -1,5 +1,5 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
@@ -7,7 +7,7 @@
     <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/js/onepage.js"></script>
 
-    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
 
     <meta http-equiv="cleartype" content="on"/>
     <meta name="MobileOptimized" content="320"/>
@@ -29,7 +29,6 @@
 
 
     <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/js/jquery/contactUs.js"></script>
     <script type="text/javascript" src="/js/onepage.js"></script>
 
     <script type="text/javascript" src="/js/controller/userController.js"></script>
@@ -41,6 +40,7 @@
 
         <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
         <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+        <li><a href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
         <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
 
 

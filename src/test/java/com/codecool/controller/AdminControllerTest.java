@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@Transactional
 public class AdminControllerTest extends AbstractTest {
 
     @Resource
@@ -36,7 +37,7 @@ public class AdminControllerTest extends AbstractTest {
 
     private String adminRoute;
     private String usersRoute;
-    private String activitiesRoute;
+    private String eventsRoute;
     private String emailRoute;
 
     @Autowired
@@ -60,7 +61,7 @@ public class AdminControllerTest extends AbstractTest {
 
         adminRoute = "/admin";
         usersRoute = adminRoute + "/users";
-        activitiesRoute = adminRoute + "/activities";
+        eventsRoute = adminRoute + "/events";
         emailRoute = adminRoute + "/emails";
 
         mockUser = new User("test@test.com", "password");
@@ -100,7 +101,7 @@ public class AdminControllerTest extends AbstractTest {
 
         mockMvc.perform(get(adminRoute))
                 .andExpect(content().string(containsString("USERS")))
-                .andExpect(content().string(containsString("ACTIVITIES")))
+                .andExpect(content().string(containsString("EVENTS")))
                 .andExpect(content().string(containsString("EMAILS")));
     }
 
@@ -127,12 +128,12 @@ public class AdminControllerTest extends AbstractTest {
     @Test
     @WithMockUser(authorities = {"ADMIN"})
     public void listActivitiesView() throws Exception {
-        mockMvc.perform(get(activitiesRoute))
+        mockMvc.perform(get(eventsRoute))
                 .andExpect(status().is2xxSuccessful());
 
-        mockMvc.perform(get(activitiesRoute))
+        mockMvc.perform(get(eventsRoute))
                 .andExpect(content().string(containsString("ActiMate Admin")))
-                .andExpect(content().string(containsString("List of ActiMate activities")));
+                .andExpect(content().string(containsString("List of ActiMate events")));
     }
 
     @Test
@@ -151,8 +152,7 @@ public class AdminControllerTest extends AbstractTest {
     @WithMockUser(authorities = {"ADMIN"})
     public void listUsersWithUnsentEmailData() throws Exception {
         userService.create(mockUser, Role.USER);
-        UserEmail userEmail = new UserEmail();
-        userEmail.setUser(mockUser);
+        UserEmail userEmail = new UserEmail(mockUser);
         userEmailRepository.save(userEmail);
 
         mockMvc.perform(get(emailRoute))

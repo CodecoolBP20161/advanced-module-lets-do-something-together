@@ -1,6 +1,6 @@
 package com.codecool.controller;
 
-import com.codecool.repository.UserDetailRepository;
+import com.codecool.repository.ProfileRepository;
 import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.service.user.UserService;
 import com.codecool.test.AbstractTest;
@@ -30,7 +30,7 @@ public class UserControllerTest extends AbstractTest {
     private UserService userService;
 
     @Autowired
-    private UserDetailRepository userDetailRepository;
+    private ProfileRepository profileRepository;
 
     @Autowired
     private UserEmailRepository userEmailRepository;
@@ -82,7 +82,7 @@ public class UserControllerTest extends AbstractTest {
     }
 
     @Test
-    public void findRegisteredUserDetailTest() throws Exception {
+    public void findRegisteredProfileTest() throws Exception {
 
         mockMvc.perform(post("/registration")
                 .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
@@ -90,6 +90,6 @@ public class UserControllerTest extends AbstractTest {
                 .accept(MediaType.APPLICATION_JSON));
 
         assertEquals("apple@apple.com",
-                userDetailRepository.findByUser(userService.getUserByEmail("apple@apple.com").get()).getFirstName());
+                profileRepository.findByUser(userService.getUserByEmail("apple@apple.com").get()).getFirstName());
     }
 }

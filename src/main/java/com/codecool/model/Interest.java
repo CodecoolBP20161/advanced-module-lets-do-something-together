@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude = "userDetails")
+@ToString(exclude = "profiles")
 public class Interest {
 
     @Id
@@ -22,7 +22,7 @@ public class Interest {
     private String activity;
 
     @ManyToMany(mappedBy = "interestList")
-    private List<UserDetail> userDetails;
+    private List<Profile> profiles;
 
     public Interest() {
     }

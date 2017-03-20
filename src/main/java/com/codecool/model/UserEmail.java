@@ -21,4 +21,11 @@ public class UserEmail {
     @JoinColumn(name = "`user`")
     @NotNull
     private User user;
+
+    public UserEmail(User user) {
+        this.user = user;
+    }
+
+    public UserEmail() {
+    }
 }

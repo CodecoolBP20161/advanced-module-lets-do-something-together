@@ -1,5 +1,4 @@
-html
-{
+html {
     height: 100%;
     top: 0;
     left: 0;
@@ -7,8 +6,7 @@ html
     padding: 0;
 }
 
-body
-{
+body {
     top: 300px;
     height: 100%;
     left: 0;
@@ -40,18 +38,16 @@ nav a {
     line-height: 50px;
 }
 
-.nav-link{
+.nav-link {
     display: block;
 }
 
-li
-{
+li {
     display: inline;
     padding: 0 20px;
 }
 
-.onepage
-{
+.onepage {
     perspective: 1px;
     height: 100vh;
     top: 100px;
@@ -60,7 +56,7 @@ li
     left: 0;
 }
 
-.home{
+.home {
     height: 100%;
     background-attachment: fixed;
     background-position: center;
@@ -68,16 +64,16 @@ li
     background-size: cover;
 }
 
-.posrel{
-    position:relative;
+.posrel {
+    position: relative;
 }
 
-.parthing{
-    height:300px;
-    font-size:20px;
+.parthing {
+    height: 300px;
+    font-size: 20px;
     text-align: center;
-    background-color:white;
-    padding:50px 80px;
+    background-color: white;
+    padding: 50px 80px;
 }
 
 .bgimg-1 {
@@ -108,16 +104,13 @@ li
     align-content: center;
 }
 
-.sthtoget
-{
-    background-color:transparent;
-    font-size:25px;
+.sthtoget {
+    background-color: transparent;
+    font-size: 25px;
     color: #ffffff;
 }
 
-
-
-.bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5{
+.bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5 {
     position: relative;
     opacity: 0.65;
     background-attachment: fixed;
@@ -146,7 +139,7 @@ li
 .caption2 {
     position: absolute;
     left: 0;
-    top:70px;
+    top: 70px;
     width: 100%;
     text-align: center;
 }
@@ -171,55 +164,60 @@ h3 {
 }
 
 .message {
-    font-size:1.1em;
-    display:none;
-    padding-top:10px;
-    padding-bottom:10px;
-    background-color:#2ABCA7;
+    font-size: 1.1em;
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #2ABCA7;
     width: 80%;
-    margin:auto;
+    margin: auto;
     color: #0b2027;
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    border-radius:6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .container {
-    max-width:600px;
-    margin:0 auto;
-    text-align:center;
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    border-radius:6px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
     background-color: #ffffff;
 }
+
 .head {
-    -webkit-border-radius:6px 6px 0px 0px;
-    -moz-border-radius:6px 6px 0px 0px;
-    border-radius:6px 6px 0px 0px;
+    -webkit-border-radius: 6px 6px 0px 0px;
+    -moz-border-radius: 6px 6px 0px 0px;
+    border-radius: 6px 6px 0px 0px;
     background-color: #c6eaa8;
-    color:#0b2027;
+    color: #0b2027;
 }
+
 h2 {
-    text-align:center;
-    padding:18px 0 18px 0;
+    text-align: center;
+    padding: 18px 0 18px 0;
     font-size: 1.4em;
 }
+
 input {
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
+
 textarea {
-    height:100px;
-    margin-bottom:10px;
+    height: 100px;
+    margin-bottom: 10px;
 }
-input:first-of-type
-{
-    margin-top:35px;
+
+input:first-of-type {
+    margin-top: 35px;
 }
+
 input, textarea {
     font-size: 1em;
     padding: 15px 10px 10px;
-    font-family: 'Source Sans Pro',arial,sans-serif;
+    font-family: 'Source Sans Pro', arial, sans-serif;
     border: 1px solid #cecece;
     background: #d7d7d7;
     color: #0b2027;
@@ -237,8 +235,8 @@ input, textarea {
 }
 
 button {
-    margin-top:15px;
-    margin-bottom:25px;
+    margin-top: 15px;
+    margin-bottom: 25px;
     background-color: #c6eaa8;
     padding: 12px 45px;
     -ms-border-radius: 5px;
@@ -249,39 +247,45 @@ button {
     transition: .5s;
     display: inline-block;
     cursor: pointer;
-    width:30%;
+    width: 30%;
     color: #0b2027;
 }
+
 button:hover, .button:hover {
     background: #c6eaa8;
 }
+
 label.error {
-    font-family:'Source Sans Pro',arial,sans-serif;
-    font-size:1em;
-    display:block;
-    padding-top:10px;
-    padding-bottom:10px;
-    background-color:#d89c9c;
+    font-family: 'Source Sans Pro', arial, sans-serif;
+    font-size: 1em;
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #d89c9c;
     width: 80%;
-    margin:auto;
+    margin: auto;
     color: #0b2027;
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    border-radius:6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
+
 /* media queries */
 @media (max-width: 700px) {
     label.error {
         width: 90%;
     }
+
     input, textarea {
         width: 90%;
     }
+
     button {
-        width:90%;
+        width: 90%;
     }
+
     body {
-        padding-top:10px;
+        padding-top: 10px;
     }
 }
 

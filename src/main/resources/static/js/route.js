@@ -1,24 +1,18 @@
 'use strict';
 
-actimate.config(['$routeProvider',function($routeProvider) {
-
-
+actimate.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'index.html'
         })
-        .when('/profile', {
+        .when('/u/profile', {
             templateUrl: 'profile.html'
         })
-        .when('/login', {
-            templateUrl: 'login_form.html'
-        })
-        .when('/usermain', {
+        .when('/u/dashboard', {
             templateUrl: 'user_main.html'
         })
         .when('/registration', {
-            templateUrl: 'registration.html',
-            controller: 'UserCtrl'
+            templateUrl: 'registration.html'
         })
         .otherwise({
             redirectTo: '/'

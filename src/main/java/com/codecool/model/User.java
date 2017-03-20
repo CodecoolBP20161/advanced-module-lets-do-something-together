@@ -16,6 +16,8 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+
+    @Enumerated(value = EnumType.STRING)
     private Role role;
     private String regDate;
 

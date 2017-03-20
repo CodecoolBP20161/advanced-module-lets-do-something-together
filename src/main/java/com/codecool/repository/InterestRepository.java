@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InterestRepository extends JpaRepository<Interest, Integer> {
+
     Interest save(Interest interest);
 
     Interest findByActivity(String activity);

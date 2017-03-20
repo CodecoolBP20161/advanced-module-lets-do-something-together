@@ -29,7 +29,7 @@
                     <th id="reg-date">REGISTRATION DATE</th>
                 </tr>
                 </thead>
-                <tr th:each="user, iterStat : ${users}" >
+                <tr th:each="user, iterStat : ${users}">
 
                     <td th:text="${user.user.getEmail()}">User</td>
                     <td th:text="${user.user.getRegDate()}" id="td-row">Registration date</td>

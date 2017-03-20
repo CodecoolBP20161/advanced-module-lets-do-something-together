@@ -11,7 +11,7 @@ actimate.controller("UserCtrl", function ($scope, $http) {
             $http({
                 method: 'POST',
                 url: '/registration',
-                withCredentials:true,
+                withCredentials: true,
                 headers: {'Content-Type': 'application/json; charset=UTF-8'},
                 data: angular.toJson($scope.user)
             })

@@ -1,8 +1,9 @@
 'use strict';
 
-var actimate = angular.module("actimate", ['ngResource']);
+var actimate = angular.module('actimate', ['ngResource']);
 actimate.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
 actimate.directive('profileController', function () {
@@ -22,7 +23,6 @@ actimate.directive('profileController', function () {
                             .then(function (response) {
                                 $scope.user = response.data;
                             })
-
                     }, function (error) {
                         console.log('Error: ', error)
                     });
@@ -40,7 +40,8 @@ actimate.directive('loadUserCtrl', function () {
 
             $http.get("/u/profile_data")
                 .then(function (response) {
-                    $scope.user = response.data;
+                    $scope.user = response.data.profile;
+                    updateInterests(response.data.profile.interestList);
                 })
         }
     };
