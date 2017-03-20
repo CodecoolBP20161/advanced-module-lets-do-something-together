@@ -27,7 +27,7 @@ tr td:nth-child(2) {
 }
 
 .admin-btn {
-    background-image: linear-gradient(to bottom, #5c9a84 0,#84D9BE 100%);
+    background-image: linear-gradient(to bottom, #5c9a84 0, #84D9BE 100%);
     border-color: #5c9a84;
 }
 
@@ -65,4 +65,8 @@ tr td:nth-child(2) {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
+}
+
+.eventDescr {
+    word-wrap: break-word;
 }
