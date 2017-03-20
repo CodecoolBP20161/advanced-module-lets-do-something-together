@@ -36,7 +36,7 @@ public class EventController extends AbstractController {
     }
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)
-    public String createEvent(@RequestBody String data, Principal principal){
+    public String createEvent(@RequestBody String data, Principal principal) {
         try {
             Event event = new Event();
             JSONObject jsonData = new JSONObject(data);

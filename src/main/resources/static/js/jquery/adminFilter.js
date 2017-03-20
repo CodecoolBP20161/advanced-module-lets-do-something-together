@@ -3,11 +3,10 @@ $(document).ready(function () {
 });
 
 
-
-var active = function() {
+var active = function () {
     $('.btn-search').removeAttr("disabled");
     if ($('.radio-date').is(':checked')) {
-        $('#search-input').attr('type','date')
+        $('#search-input').attr('type', 'date')
     } else {
         $('#search-input').removeAttr('type');
     }

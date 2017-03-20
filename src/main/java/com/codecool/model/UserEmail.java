@@ -25,4 +25,7 @@ public class UserEmail {
     public UserEmail(User user) {
         this.user = user;
     }
+
+    public UserEmail() {
+    }
 }

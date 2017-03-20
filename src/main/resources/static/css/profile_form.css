@@ -1,5 +1,5 @@
 body {
-    font-family:"Quicksand", "Helvetica Neue", sans-serif;
+    font-family: "Quicksand", "Helvetica Neue", sans-serif;
     background: #c6eaa8;
     color: #0b2027;
     padding: 50px 0;
@@ -68,7 +68,7 @@ h2 {
     max-width: 220px;
 }
 
-.flex-outer >li> #gender{
+.flex-outer > li > #gender {
     flex: 1 0 120px;
     max-width: 80px;
 }

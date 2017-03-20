@@ -1,5 +1,4 @@
-html
-{
+html {
     height: 100%;
     top: 0;
     left: 0;
@@ -7,9 +6,8 @@ html
     padding: 0;
 }
 
-body
-{
-    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+body {
+    font-family: "Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     top: 300px;
     height: 100%;
     left: 0;
@@ -18,7 +16,9 @@ body
     background-color: #82D4BB;
 }
 
-label {  font-size: large; }
+label {
+    font-size: large;
+}
 
 .container {
     margin-right: 20%;
@@ -33,8 +33,9 @@ label {  font-size: large; }
     font-weight: bolder;
 }
 
-
-div {  display: block;  }
+div {
+    display: block;
+}
 
 nav {
     top: 0;
@@ -58,16 +59,22 @@ nav a {
     font-size: larger;
 }
 
-.nav-link{  display: block;  }
+.nav-link {
+    display: block;
+}
 
-a:hover {  text-decoration: none;  }
+a:hover {
+    text-decoration: none;
+}
 
 li {
     display: inline;
     padding: 0 20px;
 }
 
-.page{  top: 100px;  }
+.page {
+    top: 100px;
+}
 
 .form-group {
     display: block;
@@ -80,7 +87,9 @@ li {
     outline: auto;
 }
 
-input {  padding: 20px;  }
+input {
+    padding: 20px;
+}
 
 input::-webkit-input-placeholder {
     color: lightgrey !important;
@@ -92,7 +101,7 @@ input:-moz-placeholder { /* Firefox 18- */
     font-style: italic;
 }
 
-input::-moz-placeholder {  /* Firefox 19+ */
+input::-moz-placeholder { /* Firefox 19+ */
     color: lightgrey !important;
     font-style: italic;
 }
@@ -101,6 +110,7 @@ input:-ms-input-placeholder {
     color: lightgrey !important;
     font-style: italic;
 }
+
 textarea::-webkit-input-placeholder {
     color: lightgrey !important;
     font-style: italic;
@@ -111,7 +121,7 @@ textarea:-moz-placeholder { /* Firefox 18- */
     font-style: italic;
 }
 
-textarea::-moz-placeholder {  /* Firefox 19+ */
+textarea::-moz-placeholder { /* Firefox 19+ */
     color: lightgrey !important;
     font-style: italic;
 }
@@ -130,23 +140,33 @@ input[type="date"]::before {
 }
 
 input[type="date"]:focus::before,
-input[type="date"]:valid::before { display: none }
+input[type="date"]:valid::before {
+    display: none
+}
 
-#cancel { background-color: #e5625e; border: none; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.5);}
+#cancel {
+    background-color: #e5625e;
+    border: none;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
 #cancel:hover {
-    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    background-color: #b74e4b}
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    background-color: #b74e4b
+}
 
-#submit { border: none; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.5)}
+#submit {
+    border: none;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5)
+}
 
-
-.has-error .help-block{
+.has-error .help-block {
     background-color: #e5625e;
     color: white;
     font-size: larger;
@@ -157,6 +177,6 @@ input[type="date"]:valid::before { display: none }
 }
 
 .has-success .help-block,
-.has-success .control-label{
+.has-success .control-label {
     color: #0b2027;
 }

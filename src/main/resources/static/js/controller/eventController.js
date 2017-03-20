@@ -5,17 +5,17 @@ actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
-actimate.run(function(defaultErrorMessageResolver){
-    defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
-        errorMessages['wrongNumber'] = 'Please invite at least 1 person!';
-        errorMessages['wrongInputType'] = 'Please enter letters only!';
-    });
-}
+actimate.run(function (defaultErrorMessageResolver) {
+        defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
+            errorMessages['wrongNumber'] = 'Please invite at least 1 person!';
+            errorMessages['wrongInputType'] = 'Please enter letters only!';
+        });
+    }
 );
 
 actimate.controller('saveEventCtrl', function ($scope, $http) {
-   $scope.event = {};
-    
+    $scope.event = {};
+
     $scope.saveEvent = function () {
 
         $http({
@@ -29,11 +29,11 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
             })
     };
 
-    $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+    $scope.$on('gmPlacesAutocomplete::placeChanged', function () {
         var location = $scope.autocomplete.getPlace().geometry.location;
         $scope.event.lat = location.lat();
         $scope.event.lng = location.lng();
         $scope.$apply();
     });
-    
+
 });

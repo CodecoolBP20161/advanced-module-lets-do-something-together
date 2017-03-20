@@ -8,9 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-
 @RequestMapping(value = "/admin")
 @Controller
 public class AdminController extends AbstractController {
@@ -38,14 +35,8 @@ public class AdminController extends AbstractController {
         return "admin/admin_events";
     }
 
-    @RequestMapping(value = "/events", method = RequestMethod.POST)
-    public String listEvents(HttpServletRequest request, Model model) throws IOException {
-        model.addAttribute("events", eventRepository.findAll());
-        return "admin/admin_events";
-    }
-
     @RequestMapping(value = "/emails", method = RequestMethod.GET)
-    public String listUserWithUnsentEmails(Model model) {
+    public String listUsersWithUnsentEmail(Model model) {
         model.addAttribute("users", userEmailRepository.findAllByEmailSent(false));
         return "admin/admin_emails";
     }

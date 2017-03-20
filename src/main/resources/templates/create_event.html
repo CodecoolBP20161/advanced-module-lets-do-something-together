@@ -52,92 +52,92 @@
 <div class="container">
 
     <form class="form-horizontal" id="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
-            <!--Event name-->
-            <div class="form-group"
-                 ng-class="
+        <!--Event name-->
+        <div class="form-group"
+             ng-class="
                  {'has-error':!eventform.name.$valid &amp;(!eventform.$pristine || eventform.$submitted) }">
-                <label for="name" class="col-sm-2 control-label">Event name</label>
-                    <div class="col-sm-6">
-                        <input type="text"
-                               placeholder="Write a catchy name..."
-                               id="name"
-                               class="form-control"
-                               name="name"
-                               required="required"
-                                ng-model="event.name"
-                                ng-pattern="/^[A-Za-z]/"
-                                ng-pattern-err-type="wrongInputType"
-                                ng-minlength="5"/>
-                    </div>
-                </div>
-            <!--Event type-->
-            <div class="form-group">
-                <label for="interest" class="col-sm-2 control-label">Event type</label>
-                <div class="col-sm-6">
-                    <div class="input-group">
-                        <select id="interest"
-                                class="form-control"
-                                name="interest" ng-model="event.interest" required="required">
-                            <option value="tennis">Tennis</option>
-                            <option value="gokart">Gokart</option>
-                            <option value="running">Running</option>
-                            <option value="hiking">Hiking</option>
-                            <option value="cinema">Cinema</option>
-                            <option value="theater">Theater</option>
-                            <option value="cardGames">Card Games</option>
-                            <option value="cityWalks">City Walks</option>
-                        </select>
-                    </div>
+            <label for="name" class="col-sm-2 control-label">Event name</label>
+            <div class="col-sm-6">
+                <input type="text"
+                       placeholder="Write a catchy name..."
+                       id="name"
+                       class="form-control"
+                       name="name"
+                       required="required"
+                       ng-model="event.name"
+                       ng-pattern="/^[A-Za-z]/"
+                       ng-pattern-err-type="wrongInputType"
+                       ng-minlength="5"/>
+            </div>
+        </div>
+        <!--Event type-->
+        <div class="form-group">
+            <label for="interest" class="col-sm-2 control-label">Event type</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <select id="interest"
+                            class="form-control"
+                            name="interest" ng-model="event.interest" required="required">
+                        <option value="tennis">Tennis</option>
+                        <option value="gokart">Gokart</option>
+                        <option value="running">Running</option>
+                        <option value="hiking">Hiking</option>
+                        <option value="cinema">Cinema</option>
+                        <option value="theater">Theater</option>
+                        <option value="cardGames">Card Games</option>
+                        <option value="cityWalks">City Walks</option>
+                    </select>
                 </div>
             </div>
+        </div>
 
-            <!--Event place-->
-            <div class="form-group">
-                <label for="place" class="col-sm-2 control-label">Place</label>
-                <div class="col-sm-6">
-                        <input class="form-control"
-                               id="place" type="text"
-                               placeholder="Choose a cool place..."
-                               gm-places-autocomplete=""
-                               name="place"
-                               ng-model="autocomplete"
-                               required="required"/>
-                </div>
+        <!--Event place-->
+        <div class="form-group">
+            <label for="place" class="col-sm-2 control-label">Place</label>
+            <div class="col-sm-6">
+                <input class="form-control"
+                       id="place" type="text"
+                       placeholder="Choose a cool place..."
+                       gm-places-autocomplete=""
+                       name="place"
+                       ng-model="autocomplete"
+                       required="required"/>
             </div>
-            <!--Event date-->
-            <div class="form-group">
-                <label for="date" class="col-sm-2 control-label">Date</label>
-                <div class="col-sm-6">
-                        <input class="form-control"
-                               id="date" type="date"
-                               data-placeholder="Choose a date..."
-                               aria-required="true"
-                               required="required"
-                               name="date"
-                               ng-model="event.date"/>
-                </div>
+        </div>
+        <!--Event date-->
+        <div class="form-group">
+            <label for="date" class="col-sm-2 control-label">Date</label>
+            <div class="col-sm-6">
+                <input class="form-control"
+                       id="date" type="date"
+                       data-placeholder="Choose a date..."
+                       aria-required="true"
+                       required="required"
+                       name="date"
+                       ng-model="event.date"/>
             </div>
-            <!--Event participants-->
-            <div class="form-group">
-                <label for="participants" class="col-sm-2 control-label">Invite people</label>
-                <div class="col-sm-6">
-                        <input class="form-control"
-                               id="participants"
-                               placeholder="Invite people to hang out with.."
-                               type="number"
-                               min="1"
-                               max="20"
-                               name="participants"
-                               required="required"
-                               ng-model="event.participants"
-                               ng-min-err-type="wrongNumber"
-                               ng-pattern="/[0-9]/"/>
-                </div>
+        </div>
+        <!--Event participants-->
+        <div class="form-group">
+            <label for="participants" class="col-sm-2 control-label">Invite people</label>
+            <div class="col-sm-6">
+                <input class="form-control"
+                       id="participants"
+                       placeholder="Invite people to hang out with.."
+                       type="number"
+                       min="1"
+                       max="20"
+                       name="participants"
+                       required="required"
+                       ng-model="event.participants"
+                       ng-min-err-type="wrongNumber"
+                       ng-pattern="/[0-9]/"/>
             </div>
-            <!--Event description-->
-            <div class="form-group">
-                <label for="description" class="col-sm-2 control-label">Event description</label>
-                <div class="col-sm-6">
+        </div>
+        <!--Event description-->
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Event description</label>
+            <div class="col-sm-6">
                         <textarea class="form-control"
                                   id="description" rows="4"
                                   placeholder="Tell us something about your event..."
@@ -145,18 +145,17 @@
                                   required="required"
                                   ng-minlength="100"
                                   ng-model="event.description"></textarea>
-                </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
                 <a href="/u/dashboard" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
                 <a href="/u/dashboard" type="button" id="submit" class="btn btn-info btn-lg"
-                ng-click="saveEvent()">Submit</a>
-                </div>
-
+                   ng-click="saveEvent()">Submit</a>
             </div>
 
+        </div>
 
 
     </form>

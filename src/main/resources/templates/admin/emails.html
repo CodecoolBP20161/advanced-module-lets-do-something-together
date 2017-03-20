@@ -22,17 +22,17 @@
 
             <h2>List of unsent emails</h2>
             <br/>
-            <table class="table table-sm table-bordered table-hover" id="emailsTable">
+            <table class="table table-sm table-bordered table-hover">
                 <thead class="thead-inverse">
                 <tr>
-                    <th id="email">EMAIL</th>
+                    <th id="email">EMAIL ADDRESS</th>
                     <th id="reg-date">REGISTRATION DATE</th>
                 </tr>
                 </thead>
                 <tr th:each="user, iterStat : ${users}">
 
-                    <td th:text="${user.user.getEmail()}">USER</td>
-                    <td th:text="${user.user.getRegDate()}" id="td-row">REGISTRATION DATE</td>
+                    <td th:text="${user.user.getEmail()}">User</td>
+                    <td th:text="${user.user.getRegDate()}" id="td-row">Registration date</td>
                 </tr>
             </table>
         </div>

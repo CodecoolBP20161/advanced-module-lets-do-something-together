@@ -21,7 +21,7 @@ ul {
     position: fixed;
     height: 50px;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 99;
     text-align: center;
 }
@@ -36,4 +36,5 @@ li > a {
 .navBardemoBasicUsage md-content .ext-content {
     padding: 50px;
     margin: 20px;
-    background-color: #FFF2E0; }
+    background-color: #FFF2E0;
+}

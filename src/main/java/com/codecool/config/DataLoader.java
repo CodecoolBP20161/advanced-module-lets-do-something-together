@@ -1,6 +1,5 @@
 package com.codecool.config;
 
-
 import com.codecool.model.Interest;
 import com.codecool.model.Profile;
 import com.codecool.model.User;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class DataLoader {
