@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" ng-app="actimate">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
+    <meta http-equiv="cleartype" content="on"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <title>Actimate</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Quicksand"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
+    <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <!--Style-->
+    <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
+    <script src="/js/jcs-auto-validate.min.js"></script>
+    <!-- load ngmessages -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <!--AngularJS Controllers-->
+    <script src="/js/controller/eventController.js"></script>
+
+</head>
+
+<body ng-controller="saveEventCtrl">
+
+<nav>
+    <ul class="fix top">
+
+        <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+        <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
+            <span class="glyphicon glyphicon-log-out"></span></a></li>
+
+    </ul>
+</nav>
+
+<div class="title">
+    <h2> Create Event</h2>
+</div>
+<div class="container">
+
+    <form class="form-horizontal" id="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
+            <!--Event name-->
+            <div class="form-group"
+                 ng-class="
+                 {'has-error':!eventform.name.$valid &amp;(!eventform.$pristine || eventform.$submitted) }">
+                <label for="name" class="col-sm-2 control-label">Event name</label>
+                    <div class="col-sm-6">
+                        <input type="text"
+                               placeholder="Write a catchy name..."
+                               id="name"
+                               class="form-control"
+                               name="name"
+                               required="required"
+                                ng-model="event.name"
+                                ng-pattern="/^[A-Za-z]/"
+                                ng-pattern-err-type="wrongInputType"
+                                ng-minlength="5"/>
+                    </div>
+                </div>
+            <!--Event type-->
+            <div class="form-group">
+                <label for="interest" class="col-sm-2 control-label">Event type</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <select id="interest"
+                                class="form-control"
+                                name="interest" ng-model="event.interest" required="required">
+                            <option value="tennis">Tennis</option>
+                            <option value="gokart">Gokart</option>
+                            <option value="running">Running</option>
+                            <option value="hiking">Hiking</option>
+                            <option value="cinema">Cinema</option>
+                            <option value="theater">Theater</option>
+                            <option value="cardGames">Card Games</option>
+                            <option value="cityWalks">City Walks</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!--Event place-->
+            <div class="form-group">
+                <label for="place" class="col-sm-2 control-label">Place</label>
+                <div class="col-sm-6">
+                        <input class="form-control"
+                               id="place" type="text"
+                               placeholder="Choose a cool place..."
+                               gm-places-autocomplete=""
+                               name="place"
+                               ng-model="autocomplete"
+                               required="required"/>
+                </div>
+            </div>
+            <!--Event date-->
+            <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-6">
+                        <input class="form-control"
+                               id="date" type="date"
+                               data-placeholder="Choose a date..."
+                               aria-required="true"
+                               required="required"
+                               name="date"
+                               ng-model="event.date"/>
+                </div>
+            </div>
+            <!--Event participants-->
+            <div class="form-group">
+                <label for="participants" class="col-sm-2 control-label">Invite people</label>
+                <div class="col-sm-6">
+                        <input class="form-control"
+                               id="participants"
+                               placeholder="Invite people to hang out with.."
+                               type="number"
+                               min="1"
+                               max="20"
+                               name="participants"
+                               required="required"
+                               ng-model="event.participants"
+                               ng-min-err-type="wrongNumber"
+                               ng-pattern="/[0-9]/"/>
+                </div>
+            </div>
+            <!--Event description-->
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">Event description</label>
+                <div class="col-sm-6">
+                        <textarea class="form-control"
+                                  id="description" rows="4"
+                                  placeholder="Tell us something about your event..."
+                                  name="description"
+                                  required="required"
+                                  ng-minlength="100"
+                                  ng-model="event.description"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                <a href="/u/dashboard" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
+                <a href="/u/dashboard" type="button" id="submit" class="btn btn-info btn-lg"
+                ng-click="saveEvent()">Submit</a>
+                </div>
+
+            </div>
+
+
+
+    </form>
+
+</div>
+
+
+</body>
+
+</html>

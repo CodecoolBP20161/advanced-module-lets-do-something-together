@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
         user.setRegDate(regDate);
         userRepository.save(user);
     }
+
+    @Override
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
+    }
 }

@@ -1,0 +1,162 @@
+html
+{
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    top: 300px;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #82D4BB;
+}
+
+label {  font-size: large; }
+
+.container {
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+.title {
+    margin-bottom: 50px;
+    margin-top: 100px;
+    text-align: center;
+    color: #292f36;
+    font-weight: bolder;
+}
+
+
+div {  display: block;  }
+
+nav {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: #292f36;
+    z-index: 99;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    padding-right: 5%;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+    font-size: larger;
+}
+
+.nav-link{  display: block;  }
+
+a:hover {  text-decoration: none;  }
+
+li {
+    display: inline;
+    padding: 0 20px;
+}
+
+.page{  top: 100px;  }
+
+.form-group {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-control:focus {
+    box-shadow: #0b2027;
+    outline: auto;
+}
+
+input {  padding: 20px;  }
+
+input::-webkit-input-placeholder {
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+input:-ms-input-placeholder {
+    color: lightgrey !important;
+    font-style: italic;
+}
+textarea::-webkit-input-placeholder {
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+textarea:-ms-input-placeholder {
+    color: lightgrey !important;
+    font-style: italic;
+}
+
+input[type="date"]::before {
+    content: attr(data-placeholder);
+    width: 100%;
+    color: lightgrey !important;
+    font-style: italic;
+
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before { display: none }
+
+#cancel { background-color: #e5625e; border: none; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5);}
+#cancel:hover {
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    background-color: #b74e4b}
+
+#submit { border: none; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5)}
+
+
+.has-error .help-block{
+    background-color: #e5625e;
+    color: white;
+    font-size: larger;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+
+}
+
+.has-success .help-block,
+.has-success .control-label{
+    color: #0b2027;
+}
