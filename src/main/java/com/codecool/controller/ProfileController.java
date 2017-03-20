@@ -2,7 +2,7 @@ package com.codecool.controller;
 
 import com.codecool.model.Interest;
 import com.codecool.model.User;
-import com.codecool.model.UserDetail;
+import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
 import com.codecool.repository.EventRepository;
 import org.json.JSONException;
@@ -40,8 +40,8 @@ public class ProfileController extends AbstractController {
 
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
     public String saveProfileForm(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
-        UserDetail currentUserDetail = getCurrentUserDetail(principal);
-        List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentUserDetail);
+        Profile currentProfile = getCurrentUserDetail(principal);
+        List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentProfile);
 
 //            profile related JSONExceptions swallowed on purpose: not mandatory profile details
         JSONObject jsonData = new JSONObject(data);
@@ -53,10 +53,10 @@ public class ProfileController extends AbstractController {
                 fieldValue = jsonData.get(field.getName()).toString();
             } catch (JSONException ignored) {
             }
-            field.set(currentUserDetail, fieldValue);
+            field.set(currentProfile, fieldValue);
         }
-        currentUserDetail.setInterestList(getUpdatedInterestList(currentUserDetail, jsonData));
-        userDetailRepository.save(currentUserDetail);
+        currentProfile.setInterestList(getUpdatedInterestList(currentProfile, jsonData));
+        profileRepository.save(currentProfile);
         return "profile_form";
     }
 
@@ -75,26 +75,26 @@ public class ProfileController extends AbstractController {
 
     private JSONObject getUserProfile(Principal principal) throws IllegalAccessException {
         JSONObject json = new JSONObject();
-        UserDetail currentUserDetail = getCurrentUserDetail(principal);
-        List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentUserDetail);
+        Profile currentProfile = getCurrentUserDetail(principal);
+        List<Field> fields = getEditableFieldsOfCurrentUserDetail(currentProfile);
         for (Field field : fields.subList(0, fields.size() - 1)) {
             field.setAccessible(true);
             try {
-                Object fieldValue = field.get(currentUserDetail);
+                Object fieldValue = field.get(currentProfile);
                 json.put(field.getName(), fieldValue);
             } catch (JSONException ignored) {
             }
         }
         try {
             json.put(fields.get(fields.size() - 1).getName(),
-                    currentUserDetail.getInterestList().stream().map(Interest::getActivity).collect(Collectors.toList()));
+                    currentProfile.getInterestList().stream().map(Interest::getActivity).collect(Collectors.toList()));
         } catch (JSONException ignored) {
         }
         return json;
     }
 
-    private List<Interest> getUpdatedInterestList(UserDetail userDetail, JSONObject jsonData) {
-        List<Interest> interests = userDetail.getInterestList();
+    private List<Interest> getUpdatedInterestList(Profile profile, JSONObject jsonData) {
+        List<Interest> interests = profile.getInterestList();
         try {
             JSONObject json = (JSONObject) jsonData.get("interest");
             for (Interest interest : interestRepository.findAll()) {
@@ -112,8 +112,8 @@ public class ProfileController extends AbstractController {
         return interests;
     }
 
-    private List<Field> getEditableFieldsOfCurrentUserDetail(UserDetail userDetail) {
-        Field[] fieldsArray = userDetail.getClass().getDeclaredFields();
+    private List<Field> getEditableFieldsOfCurrentUserDetail(Profile profile) {
+        Field[] fieldsArray = profile.getClass().getDeclaredFields();
         return Arrays.asList(fieldsArray).subList(2, fieldsArray.length);
     }
 

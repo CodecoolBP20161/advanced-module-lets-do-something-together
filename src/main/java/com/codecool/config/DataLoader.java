@@ -2,10 +2,10 @@ package com.codecool.config;
 
 
 import com.codecool.model.Interest;
+import com.codecool.model.Profile;
 import com.codecool.model.User;
-import com.codecool.model.UserDetail;
 import com.codecool.repository.InterestRepository;
-import com.codecool.repository.UserDetailRepository;
+import com.codecool.repository.ProfileRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class DataLoader {
     private UserService userService;
 
     @Autowired
-    private UserDetailRepository userDetailRepository;
+    private ProfileRepository profileRepository;
 
     @PostConstruct
     public void loadBasicActivities() {
@@ -46,8 +46,8 @@ public class DataLoader {
         if (userService.getUserByEmail("admin@admin.com").equals(Optional.empty())) {
             User admin = new User("admin@admin.com", "1234");
             userService.create(admin, Role.ADMIN);
-            UserDetail userDetail = new UserDetail(admin);
-            userDetailRepository.save(userDetail);
+            Profile profile = new Profile(admin);
+            profileRepository.save(profile);
         }
     }
 }

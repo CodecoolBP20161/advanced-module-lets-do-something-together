@@ -9,10 +9,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "user_detail")
 @Data
 @ToString(exclude = "interestList")
-public class UserDetail {
+public class Profile {
 
     @OneToOne
     @JoinColumn(name = "`user`", unique = true)
@@ -31,16 +30,16 @@ public class UserDetail {
     private String introduction;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_detail_interest",
-            joinColumns = @JoinColumn(name = "user_detail_id", referencedColumnName = "id"),
+    @JoinTable(name = "profile_interest",
+            joinColumns = @JoinColumn(name = "profile_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "interest_id", referencedColumnName = "id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"user_detail_id", "interest_id"}))
+            uniqueConstraints = @UniqueConstraint(columnNames = {"profile_id", "interest_id"}))
     private List<Interest> interestList;
 
-    public UserDetail() {
+    public Profile() {
     }
 
-    public UserDetail(User user) {
+    public Profile(User user) {
         this.user = user;
         this.firstName = user.getEmail();
     }

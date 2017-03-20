@@ -2,6 +2,7 @@ package com.codecool.model.event;
 
 import com.codecool.model.Interest;
 import com.codecool.model.User;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,6 +20,8 @@ public class Event {
     private Coordinates location;
     private Date date;
     private int participants;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(value = EnumType.STRING)
