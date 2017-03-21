@@ -14,7 +14,7 @@ $(document).ready(function () {
         if ($.attr(this, 'href').indexOf("#") != -1 && $.attr(this, 'href') != "#") {
             console.log($.attr(this, 'href'));
             root.animate({
-                scrollTop: $($.attr(this, 'href')).offset().top - ($('nav').height() * 2)
+                scrollTop: $( $.attr(this, 'href')).offset().top - ($('.navbar').height() * 2)
             }, 500);
             return false;
         }

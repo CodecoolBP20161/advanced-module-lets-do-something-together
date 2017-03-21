@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="actimate">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" ng-app="actimate">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
     <title>ActiMate - Your Dashboard</title>
@@ -15,10 +16,15 @@
     <script src="/js/controller/viewProfileController.js"></script>
 </head>
 <body ng-controller="loadUserCtrl">
-<div id="topbar">
-    <a href="/u/dashboard">Back to Home</a>
-</div>
+<nav>
+    <ul class="fix-top">
 
+        <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard" id="home">HOME</a></li>
+        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
+            <span class="glyphicon glyphicon-log-out"></span></a></li>
+    </ul>
+</nav>
 <div id="w">
     <div id="content" class="clearfix">
         <div id="userphoto"><img src="/images/avatar.png" alt="default avatar"/>
@@ -28,14 +34,14 @@
         </div>
         <h1>Your Profile</h1>
 
-        <nav id="profiletabs">
+        <div id="profiletabs">
             <ul class="clearfix">
                 <li><a href="#bio" class="sel" ng-click="changeTag('bio')">Bio</a></li>
                 <li><a href="#interest">Interests</a></li>
                 <li><a href="#activity">Your Activities</a></li>
                 <li><a href="#events">Saved Events</a></li>
             </ul>
-        </nav>
+        </div>
 
         <section id="bio">
             <p>{{user.introduction}}</p>
