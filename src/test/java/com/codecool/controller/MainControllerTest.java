@@ -34,7 +34,7 @@ public class MainControllerTest extends AbstractTest {
                 .andExpect(status().is2xxSuccessful());
 
         mockMvc.perform(get("/"))
-                .andExpect(content().string(containsString("HOME")));
+                .andExpect(content().string(containsString("Actimate")));
 
         mockMvc.perform(get("/notvalidroute"))
                 .andExpect(status().is4xxClientError());
