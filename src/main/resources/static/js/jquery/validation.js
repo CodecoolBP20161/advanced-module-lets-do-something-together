@@ -56,7 +56,6 @@ function onSuccess() {
     if ($(".success-message").css("display") === "block") {
         $(".success-message").append('<br/><span>We are redirecting you to the main page.</span>')
         setTimeout(function () {
-            //TODO change the address if we deploy to heroku
             window.location.href = "/";
         }, 4000);
     }

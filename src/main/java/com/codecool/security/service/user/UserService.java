@@ -16,4 +16,6 @@ public interface UserService {
 
     void create(User user, Role role);
 
+    void deleteAllUsers();
+
 }

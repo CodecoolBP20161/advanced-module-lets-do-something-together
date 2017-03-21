@@ -20,10 +20,9 @@
     <ul class="fix-top">
 
         <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
-        <li><a sec:authorize="isAuthenticated()" href="/" id="home">HOME</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard" id="home">HOME</a></li>
         <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
             <span class="glyphicon glyphicon-log-out"></span></a></li>
-
     </ul>
 </nav>
 <div id="w">
@@ -31,7 +30,7 @@
         <div id="userphoto"><img src="/images/avatar.png" alt="default avatar"/>
             <h1 id="username">{{user.firstName}} {{user.lastName}}</h1>
             <a type="submit" id="btn-edit" href="/u/edit-profile" class="btn btn-info btn-lg">
-                <span class="glyphicon glyphicon-pencil"></span>    Edit Profile</a>
+                <span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
         </div>
         <h1>Your Profile</h1>
 

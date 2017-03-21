@@ -1,26 +1,27 @@
 package com.codecool.controller;
 
-import com.codecool.security.service.user.UserService;
+import com.codecool.model.Interest;
+import com.codecool.repository.InterestRepository;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
 
     @Autowired
-    private UserService userService;
+    private InterestRepository interestRepository;
 
     @RequestMapping(value = {"/", "logout"}, method = RequestMethod.GET)
     public String index() {
         return "index";
-    }
-
-    @RequestMapping(value = "/usermain", method = RequestMethod.GET)
-    public String userMain() {
-        return "user_main";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
@@ -34,5 +35,14 @@ public class MainController {
     @RequestMapping(value = "/mission", method = RequestMethod.GET)
     public String mission() {
         return "mission";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/interests", method = RequestMethod.GET)
+    public String interests() throws JSONException {
+        return new JSONObject()
+                .put("interests", interestRepository.findAll()
+                        .stream().map(Interest::getActivity)
+                        .collect(Collectors.toList())).toString();
     }
 }

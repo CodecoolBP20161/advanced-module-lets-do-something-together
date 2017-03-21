@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ActimateApplicationTests {
 
-	@Test
-	public void contextLoads() {
-		Assert.assertEquals(true, true);
-	}
+    @Test
+    public void contextLoads() {
+        Assert.assertEquals(true, true);
+    }
 
 }
