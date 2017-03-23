@@ -118,36 +118,8 @@ public class ProfileController extends AbstractController {
         return Arrays.asList(fieldsArray).subList(2, fieldsArray.length);
     }
 
-    private JSONObject getUserEvents(Principal principal) {
-        JSONObject json = new JSONObject();
-        User user = getCurrentUser(principal);
-        List<Event> events = eventRepository.findByUser(user);
-        if (events.size() > 0) {
-            for (int i = 0; i < events.size(); i++) {
-                try {
-                    json.put(String.valueOf(i), createEventJson(events.get(i)));
-                } catch (JSONException e) {
-                    e.getMessage();
-                }
-            }
-        }
-        return json;
-    }
-
-    private JSONObject createEventJson(Event event) {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("name", event.getName());
-            json.put("lat", event.getCoordinates().getLat());
-            json.put("lng", event.getCoordinates().getLng());
-            json.put("location", event.getLocation());
-            json.put("date", event.getDate());
-            json.put("participants", event.getParticipants());
-            json.put("description", event.getDescription());
-            json.put("interest", event.getInterest().getActivity());
-        } catch (JSONException e) {
-            e.getMessage();
-        }
-        return json;
+    private  JSONObject getUserEvents(Principal principal) {
+        List<Event> events = eventRepository.findByUser(getCurrentUser(principal));
+        return createEventsJson(events);
     }
 }
