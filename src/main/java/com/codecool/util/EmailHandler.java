@@ -1,4 +1,4 @@
-package com.codecool.email;
+package com.codecool.util;
 
 import com.codecool.model.User;
 import com.codecool.model.UserEmail;
@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,5 +40,15 @@ public class EmailHandler {
             userEmail.setEmailSent(true);
             userEmailRepository.save(userEmail);
         }
+    }
+
+    public String getWelcomeEmailTemplate() {
+        StringWriter writer = new StringWriter();
+        try {
+            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email_templates/admin_email.html")), writer);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        return writer.toString();
     }
 }

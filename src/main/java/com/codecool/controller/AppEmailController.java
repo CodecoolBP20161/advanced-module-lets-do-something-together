@@ -1,7 +1,7 @@
 package com.codecool.controller;
 
-import com.codecool.email.EmailHandler;
 import com.codecool.model.User;
+import com.codecool.util.EmailHandler;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpPost;
@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -87,7 +84,7 @@ public class AppEmailController {
                 .map(User::getEmail)
                 .collect(Collectors.toList());
         if (emails.size() > 0) {
-            postJson(createJson(emails, getWelcomeEmailTemplate(), emailSubject));
+            postJson(createJson(emails, emailHandler.getWelcomeEmailTemplate(), emailSubject));
         }
     }
 
@@ -101,13 +98,4 @@ public class AppEmailController {
         emailHandler.updateEmailStatus(sentEmails);
     }
 
-    private String getWelcomeEmailTemplate() {
-        StringWriter writer = new StringWriter();
-        try {
-            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email_templates/admin_email.html")), writer);
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        return writer.toString();
-    }
 }
