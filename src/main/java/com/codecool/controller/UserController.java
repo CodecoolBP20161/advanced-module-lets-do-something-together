@@ -6,6 +6,7 @@ import com.codecool.model.UserEmail;
 import com.codecool.repository.InterestRepository;
 import com.codecool.repository.ProfileRepository;
 import com.codecool.repository.UserEmailRepository;
+import com.codecool.repository.UserRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -32,6 +34,8 @@ public class UserController {
     InterestRepository interestRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -56,6 +60,7 @@ public class UserController {
             if (json.get("email").toString().contains("@") && json.get("password").toString().length() >= 6) {
                 User user = mapper.readValue(data, User.class);
                 if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
+                    user.setToken(UUID.randomUUID());
                     userService.create(user, Role.USER);
                     Profile profile = new Profile(user);
                     profileRepository.save(profile);
@@ -74,19 +79,26 @@ public class UserController {
     @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
     public
     @ResponseBody
-    String androidLogin(@RequestBody String data) {
+    String androidLogin(@RequestBody String data ) throws JSONException {
         ObjectMapper mapper = new ObjectMapper();
+        JSONObject loginResponseJson = new JSONObject();
 //        ignore password confirmation field
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             User user = mapper.readValue(data, User.class);
             if (!userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 if (bCryptPasswordEncoder.matches(user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
-                    return "success";
+                    loginResponseJson.put("status", "success");
+                    loginResponseJson.put("token", userService.getUserByEmail(user.getEmail()).get().getToken());
+                    System.out.println(loginResponseJson.toString());
+                    return loginResponseJson.toString();
                 }
-                return "wrong password";
+                loginResponseJson.put("status", "wrong password");
+                return loginResponseJson.toString();
             }
-            return "register";
+            System.out.println(loginResponseJson.put("status", "wrong email"));
+            System.out.println(loginResponseJson.toString());
+            return loginResponseJson.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,9 +2,11 @@ package com.codecool.model;
 
 
 import com.codecool.security.Role;
+import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "`user`")
@@ -16,6 +18,8 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+    @Nullable
+    private UUID token;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
