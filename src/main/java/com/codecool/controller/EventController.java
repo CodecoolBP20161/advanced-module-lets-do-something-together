@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.reflect.Field;
 import java.security.Principal;
@@ -35,6 +36,7 @@ public class EventController extends AbstractController {
     }
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)
+    @ResponseBody
     public String createEvent(@RequestBody String data, Principal principal) throws JSONException {
         JSONObject result = new JSONObject().put("status", "failed");
 
