@@ -3,10 +3,8 @@ package com.codecool.controller;
 import com.codecool.model.event.Coordinates;
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
-import com.codecool.repository.EventRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,9 +24,6 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/u")
 @Controller
 public class EventController extends AbstractController {
-
-    @Autowired
-    EventRepository eventRepository;
 
     @RequestMapping(value = "/create_event", method = RequestMethod.GET)
     public String renderCreateEventForm() {

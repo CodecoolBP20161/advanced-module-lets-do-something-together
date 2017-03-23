@@ -1,6 +1,5 @@
 package com.codecool.controller;
 
-import com.codecool.repository.EventRepository;
 import com.codecool.repository.UserEmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +13,6 @@ public class AdminController extends AbstractController {
 
     @Autowired
     private UserEmailRepository userEmailRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public String mainUI() {

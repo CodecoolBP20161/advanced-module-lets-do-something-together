@@ -3,21 +3,22 @@ package com.codecool.controller;
 
 import com.codecool.model.Profile;
 import com.codecool.model.User;
-import com.codecool.model.event.Event;
 import com.codecool.repository.EventRepository;
 import com.codecool.repository.InterestRepository;
 import com.codecool.repository.ProfileRepository;
 import com.codecool.security.service.user.UserService;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.codecool.util.EventUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.Field;
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
 
 abstract class AbstractController {
+
+    @Autowired
+    EventUtil eventUtil;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Autowired
     ProfileRepository profileRepository;
@@ -28,45 +29,12 @@ abstract class AbstractController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    EventRepository eventRepository;
-
     Profile getCurrentProfile(Principal principal) {
         return profileRepository.findByUser(getCurrentUser(principal));
     }
 
     User getCurrentUser(Principal principal) {
         return userService.getUserByEmail(principal.getName()).get();
-    }
-
-    JSONObject createEventsJson(List<Event> events) {
-        JSONObject json = new JSONObject();
-        if (events.size() > 0) {
-            for (Event event : events) {
-                try {
-                    json.put(String.valueOf(event.getId()), createJsonFromEvent(event));
-                } catch (JSONException e) {
-                    e.getMessage();
-                }
-            }
-        }
-        return json;
-    }
-
-    private JSONObject createJsonFromEvent(Event event) {
-        JSONObject json = new JSONObject();
-        List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 7);
-        try {
-            for (Field field : fields) {
-                field.setAccessible(true);
-                json.put(field.getName(), field.get(event));
-            }
-            json.put("lat", event.getCoordinates().getLat());
-            json.put("lng", event.getCoordinates().getLng());
-        } catch (JSONException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return json;
     }
 
 }
