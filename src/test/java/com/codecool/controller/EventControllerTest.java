@@ -95,6 +95,7 @@ public class EventControllerTest extends AbstractTest {
                         "\"interest\":\"gokart\", " +
                         "\"lng\":\"47.505013\", " +
                         "\"lat\":\"19.057821\", " +
+                        "\"location\":\"Budapest, Nagymező utca 44, Hungary\", " +
                         "\"date\":\"2017-03-15T23:00:00.000Z\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
                 .contentType(MediaType.APPLICATION_JSON)
