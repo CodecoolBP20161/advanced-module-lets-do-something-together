@@ -33,6 +33,7 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
         var location = $scope.autocomplete.getPlace().geometry.location;
         $scope.event.lat = location.lat();
         $scope.event.lng = location.lng();
+        $scope.event.address = $scope.autocomplete.getPlace().formatted_address;
         $scope.$apply();
     });
 
