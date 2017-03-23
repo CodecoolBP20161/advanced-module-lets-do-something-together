@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.lang.reflect.Field;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @RequestMapping(value = "/u")
@@ -36,30 +35,36 @@ public class EventController extends AbstractController {
     }
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)
-    public String createEvent(@RequestBody String data, Principal principal) {
-        try {
-            Event event = new Event();
-            JSONObject jsonData = new JSONObject(data);
-            event.setParticipants(Integer.parseInt(jsonData.get("participants").toString()));
-            event.setDescription(jsonData.get("description").toString());
-            event.setName(jsonData.get("name").toString());
-            event.setCoordinates(new Coordinates(jsonData.get("lng"), jsonData.get("lat")));
-            event.setLocation(jsonData.get("location").toString());
+    public String createEvent(@RequestBody String data, Principal principal) throws JSONException {
+        JSONObject result = new JSONObject().put("status", "failed");
+
+        Event event = new Event();
+        JSONObject json = new JSONObject(data);
+        if (validateEventJson(json)) {
+            event.setParticipants(Integer.parseInt(json.get("participants").toString()));
+            event.setDescription(json.get("description").toString());
+            event.setName(json.get("name").toString());
+            event.setCoordinates(new Coordinates(json.get("lng"), json.get("lat")));
+            event.setLocation(json.get("location").toString());
             try {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                event.setDate(format.parse(jsonData.get("date").toString()));
+                event.setDate(format.parse(json.get("date").toString()));
             } catch (ParseException e) {
                 e.getMessage();
             }
-            event.setInterest(interestRepository.findByActivity(jsonData.get("interest").toString()));
+            event.setInterest(interestRepository.findByActivity(json.get("interest").toString()));
             event.setUser(userService.getUserByEmail(principal.getName()).get());
             eventRepository.save(event);
-        } catch (JSONException e) {
-            e.getMessage();
+
+            result.put("status", "success");
         }
-        return "create_event";
+        return result.toString();
     }
 
+    private boolean validateEventJson(JSONObject json) {
+        List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 7);
+        return !fields.stream().map(field -> json.has(field.getName())).collect(Collectors.toList()).contains(false);
+    }
 
     //    method called daily at midnight
 //    toggles status of every event before that
