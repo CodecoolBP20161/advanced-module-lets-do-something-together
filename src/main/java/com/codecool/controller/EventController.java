@@ -44,6 +44,7 @@ public class EventController extends AbstractController {
             event.setDescription(jsonData.get("description").toString());
             event.setName(jsonData.get("name").toString());
             event.setCoordinates(new Coordinates(jsonData.get("lng"), jsonData.get("lat")));
+            event.setLocation(jsonData.get("location").toString());
             try {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 event.setDate(format.parse(jsonData.get("date").toString()));
