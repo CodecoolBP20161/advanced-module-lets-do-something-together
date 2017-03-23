@@ -18,11 +18,8 @@ import java.util.List;
 @Controller
 public class DashBoardController extends AbstractController {
 
-    @Autowired
-    EventRepository eventRepository;
-
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String userMain() {
+    public String dashboard() {
         return "user_main";
     }
 
