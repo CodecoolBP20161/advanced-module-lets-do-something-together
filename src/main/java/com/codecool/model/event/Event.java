@@ -16,7 +16,7 @@ public class Event {
     private int id;
 
     private String name;
-    private Coordinates location;
+    private Coordinates coordinates;
     private Date date;
     private int participants;
 
