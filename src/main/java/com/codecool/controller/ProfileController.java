@@ -3,6 +3,7 @@ package com.codecool.controller;
 import com.codecool.model.Interest;
 import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
+import com.codecool.model.event.Status;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -113,7 +114,7 @@ public class ProfileController extends AbstractController {
     }
 
     private JSONObject getUserEvents(Principal principal) {
-        List<Event> events = eventRepository.findByUser(getCurrentUser(principal));
+        List<Event> events = eventRepository.findByUserAndStatus(getCurrentUser(principal), Status.ACTIVE);
         return eventUtil.createEventsJson(events);
     }
 }
