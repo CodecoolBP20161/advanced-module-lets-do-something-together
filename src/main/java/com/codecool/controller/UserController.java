@@ -6,13 +6,14 @@ import com.codecool.model.UserEmail;
 import com.codecool.repository.InterestRepository;
 import com.codecool.repository.ProfileRepository;
 import com.codecool.repository.UserEmailRepository;
-import com.codecool.repository.UserRepository;
 import com.codecool.security.Role;
 import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,15 @@ import java.util.UUID;
 @Controller
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+
     @Autowired
     ProfileRepository profileRepository;
     @Autowired
     InterestRepository interestRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -52,8 +54,10 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public
     @ResponseBody
-    String registration(@RequestBody String data) {
+    String registration(@RequestBody String data) throws JSONException {
+        logger.info("/registration route called");
         ObjectMapper mapper = new ObjectMapper();
+        JSONObject result = new JSONObject();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             JSONObject json = new JSONObject(data);
@@ -64,22 +68,25 @@ public class UserController {
                     userService.create(user, Role.USER);
                     Profile profile = new Profile(user);
                     profileRepository.save(profile);
+                    logger.info("Save profile into the {} table", profile.getClass().getSimpleName());
                     UserEmail userEmail = new UserEmail(user);
                     userEmailRepository.save(userEmail);
-                    return "success";
+                    logger.info("Unsent email save into the {} table", userEmail.getClass().getSimpleName());
+                    return result.put("status","success").toString();
                 }
             }
         } catch (IOException | JSONException e) {
+            logger.error("{} occurred while creating the user: {}", e.getCause(), e.getMessage());
             e.getMessage();
         }
-        return "fail";
+        return result.put("status","fail").toString();
     }
 
-
-    @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/api-login", method = RequestMethod.POST)
     public
     @ResponseBody
     String androidLogin(@RequestBody String data ) throws JSONException {
+        logger.info("api-login route called");
         ObjectMapper mapper = new ObjectMapper();
         JSONObject loginResponseJson = new JSONObject();
 //        ignore password confirmation field
@@ -90,16 +97,16 @@ public class UserController {
                 if (bCryptPasswordEncoder.matches(user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
                     loginResponseJson.put("status", "success");
                     loginResponseJson.put("token", userService.getUserByEmail(user.getEmail()).get().getToken());
-                    System.out.println(loginResponseJson.toString());
+                    logger.info("Successful login by {}", userService.getUserByEmail(user.getEmail()));
                     return loginResponseJson.toString();
                 }
                 loginResponseJson.put("status", "wrong password");
+                logger.info("Wrong email during login");
                 return loginResponseJson.toString();
             }
-            System.out.println(loginResponseJson.put("status", "wrong email"));
-            System.out.println(loginResponseJson.toString());
             return loginResponseJson.toString();
         } catch (IOException e) {
+            logger.error("{} error occurred while login {}", e.getCause(), e.getMessage());
             e.printStackTrace();
         }
         return null;
