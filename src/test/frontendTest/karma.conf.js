@@ -26,12 +26,6 @@ module.exports = function (config) {
             '../../main/resources/static/js/jquery-3.1.1.min.js',
 
 
-            // 'js/node_modules/angular/angular.js',
-            // 'js/node_modules/angular-mocks/angular-mocks.js',
-            //
-            // // 'bower_components/angular-route/angular-route.js',
-            // // 'bower_components/angular-mocks/angular-mocks.js',
-            //
             // // our app
             '../../main/resources/static/js/app.js',
             '../../main/resources/static/js/route.js',
@@ -39,7 +33,7 @@ module.exports = function (config) {
             '../../main/resources/static/js/**/*.js',
 
 
-            //'js/**/*.spec.js',
+            'js/**/*.spec.js',
             'js/app.spec.js'
         ],
 

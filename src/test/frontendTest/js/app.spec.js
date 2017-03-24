@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Unit: App, MainCtrl', function () {
+describe('App.js Test', function () {
 
     var $httpBackend, $controller, $rootScope, authRequestHandler, urlEncodedParams;
 
@@ -13,7 +13,18 @@ describe('Unit: App, MainCtrl', function () {
             .respond({user: 'userX'}, {'A-Token': 'xxx'});
 
         $rootScope = $injector.get('$rootScope');
-        var $controller = $injector.get('$controller');
+        $controller = $injector.get('$controller');
+
+    }));
+
+    beforeEach(inject(function ($injector) {
+        // Set up the mock http service responses
+        $httpBackend = $injector.get('$httpBackend');
+        authRequestHandler = $httpBackend.when('GET', '/')
+            .respond({user: 'userX'}, {'A-Token': 'xxx'});
+
+        $rootScope = $injector.get('$rootScope');
+        $controller = $injector.get('$controller');
 
     }));
 
@@ -26,19 +37,18 @@ describe('Unit: App, MainCtrl', function () {
         $httpBackend = true;
     });
 
-    it('Config part is good', inject(function ($http) {
-
+    it('should have true useXDomain and withCredentiels', inject(function () {
         $httpBackend.withCredentials = true;
-
-        var fakeResponse = {
-            access_token: 'X-Requested-With'
-        };
-
-        $httpBackend.when('GET', 'oauth/token', urlEncodedParams, function (headers) {
-            return headers['Content-Type'] === 'application/json; charset=UTF-8';
-        }).respond(200, fakeResponse);
-
         $httpBackend.useXDomain = true;
+    }));
+
+    it('should have correct Content-Type header on GET request', function() {
+        $httpBackend.when('GET', 'oauth/token', urlEncodedParams, function(headers) {
+            return headers['Content-Type'] === 'application/json; charset=UTF-8';
+        }).respond(200, {});
+    });
+
+    it('loged in test', function () {
 
         var loggedUser = {email: 'lorszil@gmail.com', password: 'Lor1234'};
 
@@ -47,11 +57,6 @@ describe('Unit: App, MainCtrl', function () {
             // MUST return boolean
             return headers['Content-Type'] === 'application/json';
         }).respond();
-    }));
 
-    it('should match route with and without trailing slash', function () {
-        $httpBackend.when('/', {templateUrl: 'index.html'}).respond(200);
-        $httpBackend.when('/registration', {templateUrl: 'registration.html'}).respond(200);
-    });
-
+    })
 });

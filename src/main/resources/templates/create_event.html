@@ -105,6 +105,24 @@
                        required="required"/>
             </div>
         </div>
+
+        <!--Event location-->
+        <div class="form-group">
+            <label for="location" class="col-sm-2 control-label">Event location</label>
+            <div class="col-sm-6">
+                <input type="text"
+                       placeholder="Choose a cool location..."
+                       id="location"
+                       class="form-control"
+                       name="name"
+                       required="required"
+                       ng-model="event.location"
+                       ng-pattern="/^[A-Za-z]/"
+                       ng-pattern-err-type="wrongInputType"
+                       ng-minlength="5"/>
+            </div>
+        </div>
+
         <!--Event date-->
         <div class="form-group">
             <label for="date" class="col-sm-2 control-label">Date</label>

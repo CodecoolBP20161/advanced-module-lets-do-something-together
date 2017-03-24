@@ -9,7 +9,8 @@ actimate.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'profile.html'
         })
         .when('/u/dashboard', {
-            templateUrl: 'user_main.html'
+            templateUrl: 'user_main.html',
+            controller: "loadEventCtrl"
         })
         .when('/registration', {
             templateUrl: 'registration.html'
