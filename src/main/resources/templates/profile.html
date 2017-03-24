@@ -19,8 +19,9 @@
 <nav>
     <ul class="fix-top">
 
-        <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
-        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard" id="home">HOME</a></li>
+        <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard">HOME</a></li>
+        <li><a href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
         <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
             <span class="glyphicon glyphicon-log-out"></span></a></li>
     </ul>

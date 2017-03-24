@@ -36,8 +36,10 @@
 <nav>
     <ul class="fix top">
 
-        <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
+        <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard">HOME</a></li>
         <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+        <li><a href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
         <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
             <span class="glyphicon glyphicon-log-out"></span></a></li>
 
@@ -122,42 +124,42 @@
         </div>
         <!--Interests-->
         <div class="form-group">
-        <div class="form-check form-check-inline">
-            <ul>
-            <li>
-                <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
-                <label for="tennis">Tennis</label>
-            </li>
-            <li>
-                <input type="checkbox" id="running" ng-model="user.interest.running"/>
-                <label for="running">Running</label>
-            </li>
-            <li>
-                <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
-                <label for="gokart">Gokart</label>
-            </li>
-            <li>
-                <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
-                <label for="hiking">Hiking</label>
-            </li>
-            <li>
-                <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
-                <label for="cinema">Cinema</label>
-            </li>
-            <li>
-                <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
-                <label for="theater">Theater</label>
-            </li>
-            <li>
-                <input type="checkbox" id="cardGames" ng-model="user.interest.cardGames"/>
-                <label for="cardGames">Card Games</label>
-            </li>
-            <li>
-                <input type="checkbox" id="cityWalks" ng-model="user.interest.cityWalks"/>
-                <label for="cityWalks">City Walks</label>
-            </li>
-            </ul>
-        </div>
+            <div class="form-check form-check-inline">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
+                        <label for="tennis">Tennis</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="running" ng-model="user.interest.running"/>
+                        <label for="running">Running</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
+                        <label for="gokart">Gokart</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
+                        <label for="hiking">Hiking</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
+                        <label for="cinema">Cinema</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
+                        <label for="theater">Theater</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cardGames" ng-model="user.interest.cardGames"/>
+                        <label for="cardGames">Card Games</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cityWalks" ng-model="user.interest.cityWalks"/>
+                        <label for="cityWalks">City Walks</label>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="form-group">
