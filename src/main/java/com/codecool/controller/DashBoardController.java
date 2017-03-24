@@ -22,14 +22,15 @@ public class DashBoardController extends AbstractController {
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard() {
-        logger.info("/u/dashboard route called.");
+        logger.info("/u/dashboard route called - method: {}.", RequestMethod.GET);
+
         return "user_main";
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     @ResponseBody
     public String collectEvents() {
-        logger.info("/u/events route called.");
+        logger.info("/u/events route called - method: {}.", RequestMethod.GET);
         JSONObject events = new JSONObject();
         try {
             events.put("events", getAllEvents());
