@@ -1,6 +1,7 @@
 package com.codecool.controller;
 
 import com.codecool.model.event.Event;
+import com.codecool.model.event.Status;
 import com.codecool.repository.EventRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +26,7 @@ public class DashBoardController extends AbstractController {
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     @ResponseBody
-    public String collectEvents(Principal principal) {
+    public String collectEvents() {
         JSONObject events = new JSONObject();
         try {
             events.put("events", getAllEvents());
@@ -36,7 +37,7 @@ public class DashBoardController extends AbstractController {
     }
 
     private JSONObject getAllEvents() {
-        List<Event> events = eventRepository.findAll();
+        List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
         return eventUtil.createEventsJson(events);
     }
 
