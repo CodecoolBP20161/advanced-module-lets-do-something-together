@@ -2,7 +2,6 @@ package com.codecool.model.event;
 
 import com.codecool.model.Interest;
 import com.codecool.model.User;
-import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -35,7 +34,6 @@ public class Event {
     @JoinColumn(name = "`user`")
     private User user;
 
-    @Nullable
     private Coordinates coordinates;
 
     public Event() {
