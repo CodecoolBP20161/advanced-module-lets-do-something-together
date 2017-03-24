@@ -5,6 +5,8 @@ import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,19 +27,24 @@ import java.util.stream.Collectors;
 @Controller
 public class EventController extends AbstractController {
 
+    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+
     @RequestMapping(value = "/create_event", method = RequestMethod.GET)
     public String renderCreateEventForm() {
+        logger.info("/u/create_event route called - method: {}.", RequestMethod.GET);
         return "create_event";
     }
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)
     @ResponseBody
     public String createEvent(@RequestBody String data, Principal principal) throws JSONException {
+        logger.info("/u/create_event route called - method: {}.", RequestMethod.POST);
+        logger.debug("Create event data: {}", data);
         JSONObject result = new JSONObject().put("status", "failed");
-
         Event event = new Event();
         JSONObject json = new JSONObject(data);
         if (validateEventJson(json)) {
+            logger.info("Valid json, all necessary event fields present.");
             event.setParticipants(Integer.parseInt(json.get("participants").toString()));
             event.setDescription(json.get("description").toString());
             event.setName(json.get("name").toString());
@@ -47,18 +54,21 @@ public class EventController extends AbstractController {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 event.setDate(format.parse(json.get("date").toString()));
             } catch (ParseException e) {
-                e.getMessage();
+                logger.error("{} occurred while parsing the date of the event: {}.\nUnparsable date: {}", e.getCause(), e.getMessage(), json.get("date"));
+
             }
             event.setInterest(interestRepository.findByActivity(json.get("interest").toString()));
             event.setUser(userService.getUserByEmail(principal.getName()).get());
             eventRepository.save(event);
-
+            logger.info("New event created successfully.");
             result.put("status", "success");
         }
+        logger.error("Invalid json, not all necessary event fields present.");
         return result.toString();
     }
 
     private boolean validateEventJson(JSONObject json) {
+        logger.info("Validating event json: {}", json);
         List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 7);
         return !fields.stream().map(field -> json.has(field.getName())).collect(Collectors.toList()).contains(false);
     }
@@ -67,7 +77,8 @@ public class EventController extends AbstractController {
 //    toggles status of every event before that
     @Scheduled(cron = "0 0 0 * * ?", zone = "CET")
     private void managePastEvents() {
-        List<Event> events = eventRepository.findAll();
+        logger.info("Midnight db management: updating events' statuses.");
+        List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
         events.stream().filter(event -> compareDates(event.getDate()) >= 0).forEach(event -> {
             event.setStatus(Status.PAST);
             eventRepository.save(event);
@@ -81,6 +92,7 @@ public class EventController extends AbstractController {
         calendarDay.set(Calendar.MINUTE, 59);
         calendarDay.set(Calendar.SECOND, 59);
         Date today = calendarDay.getTime();
+        logger.info("Compare dates: {} to {}", date, today);
         return today.compareTo(date);
     }
 }
