@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @Controller
@@ -62,6 +64,7 @@ public class MainController {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             Contact contact = mapper.readValue(data, Contact.class);
+            contact.setDate(new Date());
             contactRepository.save(contact);
         } catch (IOException e) {
             e.getMessage();
