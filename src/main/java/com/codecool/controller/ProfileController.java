@@ -138,8 +138,9 @@ public class ProfileController extends AbstractController {
         JSONObject json = new JSONObject();
         try {
             json.put("name", event.getName());
-            json.put("lat", event.getLocation().getLat());
-            json.put("lng", event.getLocation().getLng());
+            json.put("lat", event.getCoordinates().getLat());
+            json.put("lng", event.getCoordinates().getLng());
+            json.put("location", event.getLocation());
             json.put("date", event.getDate());
             json.put("participants", event.getParticipants());
             json.put("description", event.getDescription());
