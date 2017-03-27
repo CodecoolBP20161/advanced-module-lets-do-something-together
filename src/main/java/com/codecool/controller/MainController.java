@@ -59,16 +59,18 @@ public class MainController {
 
     @ResponseBody
     @RequestMapping(value = "/contact", method = RequestMethod.POST)
-    public String contact(@RequestBody String data) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        try {
-            Contact contact = mapper.readValue(data, Contact.class);
-            contact.setDate(new Date());
-            contactRepository.save(contact);
-        } catch (IOException e) {
-            e.getMessage();
+    public String contact(@RequestBody String data) throws JSONException {
+            JSONObject result = new JSONObject().put("status", "fail");
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            try {
+                Contact contact = mapper.readValue(data, Contact.class);
+                contact.setDate(new Date());
+                contactRepository.save(contact);
+                result.put("status", "success");
+            } catch (IOException e) {
+                e.getMessage();
+            }
+            return result.toString();
         }
-        return "success";
-    }
 }
