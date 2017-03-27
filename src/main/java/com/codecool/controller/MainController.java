@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,5 +45,11 @@ public class MainController {
                 .put("interests", interestRepository.findAll()
                         .stream().map(Interest::getActivity)
                         .collect(Collectors.toList())).toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/contact", method = RequestMethod.POST)
+    public String contact(@RequestBody String data) {
+        return "";
     }
 }
