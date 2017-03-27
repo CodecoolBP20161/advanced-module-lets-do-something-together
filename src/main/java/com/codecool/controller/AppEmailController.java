@@ -3,6 +3,7 @@ package com.codecool.controller;
 import com.codecool.email.EmailHandler;
 import com.codecool.model.Contact;
 import com.codecool.model.User;
+import com.codecool.repository.ContactRepository;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpPost;
@@ -23,6 +24,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,11 +36,16 @@ public class AppEmailController {
     @Autowired
     private static EmailHandler emailHandler;
     private final String emailSubject = "Welcome to ActiMate";
+    private String appEmail = "actimate.app@gmail.com";
+    private String contactSubject = "New contact from website";
 
     @Autowired
     public AppEmailController(EmailHandler handler) {
         emailHandler = handler;
     }
+
+    @Autowired
+    public ContactRepository contactRepository;
 
     public static String builderGet() {
         URIBuilder builder;
@@ -110,6 +117,17 @@ public class AppEmailController {
             e.getMessage();
         }
         return writer.toString();
+    }
+
+
+    @Scheduled(fixedDelayString = "300000")
+    private void manageNewContacts() {
+        List<Contact> unforwardedContacts = contactRepository.findAllByForwarded(false);
+        if (unforwardedContacts.size() > 0) {
+            for (Contact contact : unforwardedContacts) {
+                postJson(createJson(Collections.singletonList(appEmail), formatContactEmail(contact), contactSubject));
+            }
+        }
     }
 
     private String formatContactEmail(Contact contact) {
