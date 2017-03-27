@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,6 +19,9 @@ public class Contact {
 
     private String name;
     private String email;
+    @Column(columnDefinition = "TEXT")
     private String message;
     private Date date;
+    private boolean forwarded = false;
+
 }
