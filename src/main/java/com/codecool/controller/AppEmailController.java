@@ -1,6 +1,7 @@
 package com.codecool.controller;
 
 import com.codecool.email.EmailHandler;
+import com.codecool.model.Contact;
 import com.codecool.model.User;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.fluent.Request;
@@ -110,4 +111,16 @@ public class AppEmailController {
         }
         return writer.toString();
     }
+
+    private String formatContactEmail(Contact contact) {
+        return String.format("<b>New contact</b><br><br>" +
+                        "A visitor from the Actimate app called <b>%s</b> has contacted us at %s.<br>" +
+                        "The message is the following:<br>" +
+                        "<blockquote><i>%s</i></blockquote>" +
+                        "Send your answer to the visitor's email address: %s<br>" +
+                        "Have a nice day!<br><br><br>" +
+                        "<i>This is a generated message, do not reply to it.</i>",
+                contact.getName(), contact.getDate(), contact.getMessage(), contact.getEmail());
+    }
+
 }
