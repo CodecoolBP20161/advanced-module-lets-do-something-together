@@ -1,7 +1,11 @@
 package com.codecool.controller;
 
+import com.codecool.model.Contact;
 import com.codecool.model.Interest;
+import com.codecool.repository.ContactRepository;
 import com.codecool.repository.InterestRepository;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
@@ -19,6 +24,9 @@ public class MainController {
 
     @Autowired
     private InterestRepository interestRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     @RequestMapping(value = {"/", "logout"}, method = RequestMethod.GET)
     public String index() {
@@ -50,6 +58,14 @@ public class MainController {
     @ResponseBody
     @RequestMapping(value = "/contact", method = RequestMethod.POST)
     public String contact(@RequestBody String data) {
-        return "";
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            Contact contact = mapper.readValue(data, Contact.class);
+            contactRepository.save(contact);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        return "success";
     }
 }
