@@ -36,7 +36,6 @@ public class AppEmailController {
     @Autowired
     private static EmailHandler emailHandler;
     private final String emailSubject = "Welcome to ActiMate";
-    private String appEmail = "actimate.app@gmail.com";
     private String contactSubject = "New contact from website";
 
     @Autowired
@@ -124,9 +123,12 @@ public class AppEmailController {
     private void manageNewContacts() {
         List<Contact> unforwardedContacts = contactRepository.findAllByForwarded(false);
         if (unforwardedContacts.size() > 0) {
-            for (Contact contact : unforwardedContacts) {
-                postJson(createJson(Collections.singletonList(appEmail), formatContactEmail(contact), contactSubject));
-            }
+            unforwardedContacts.forEach(contact ->
+                    postJson(
+                            createJson(
+                                    Collections.singletonList(emailHandler.concatEmailAddress(contact)),
+                                    formatContactEmail(contact),
+                                    contactSubject)));
         }
     }
 

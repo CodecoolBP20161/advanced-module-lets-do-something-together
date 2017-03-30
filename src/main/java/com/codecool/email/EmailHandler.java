@@ -1,5 +1,6 @@
 package com.codecool.email;
 
+import com.codecool.model.Contact;
 import com.codecool.model.User;
 import com.codecool.model.UserEmail;
 import com.codecool.repository.UserEmailRepository;
@@ -36,5 +37,13 @@ public class EmailHandler {
             userEmail.setEmailSent(true);
             userEmailRepository.save(userEmail);
         }
+    }
+
+    public String concatEmailAddress(Contact contact) {
+        return String.format("actimate.app+%s@gmail.com", replaceNonAlphaNumericCharacters(contact.getEmail()));
+    }
+
+    private String replaceNonAlphaNumericCharacters(String email) {
+        return email.replaceAll("\\W", "");
     }
 }
