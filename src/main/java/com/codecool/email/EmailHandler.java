@@ -3,6 +3,7 @@ package com.codecool.email;
 import com.codecool.model.Contact;
 import com.codecool.model.User;
 import com.codecool.model.UserEmail;
+import com.codecool.repository.ContactRepository;
 import com.codecool.repository.UserEmailRepository;
 import com.codecool.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class EmailHandler {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    public ContactRepository contactRepository;
 
     public List<User> checkEmailStatus() {
         return userEmailRepository
@@ -33,11 +36,26 @@ public class EmailHandler {
 
     public void updateEmailStatus(List<String> emails) {
         for (String email : emails) {
-            UserEmail userEmail = userEmailRepository.findByUser(userRepository.findByEmail(email));
-            userEmail.setEmailSent(true);
-            userEmailRepository.save(userEmail);
+            try {
+                UserEmail userEmail = userEmailRepository.findByUser(userRepository.findByEmail(email));
+                userEmail.setEmailSent(true);
+                userEmailRepository.save(userEmail);
+            } catch (NullPointerException e) {
+                e.getMessage();
+                manageContactEmails(email);
+            }
         }
     }
+
+    private void manageContactEmails(String email) {
+        String contactEmail = email.substring(email.indexOf("+") + 1, email.indexOf("@"));
+        contactRepository.findAllByForwarded(false)
+                .stream()
+                .filter(contact ->
+                        replaceNonAlphaNumericCharacters(contact.getEmail()).equals(contactEmail))
+                .forEach(contact -> contact.setForwarded(true));
+    }
+
 
     public String concatEmailAddress(Contact contact) {
         return String.format("actimate.app+%s@gmail.com", replaceNonAlphaNumericCharacters(contact.getEmail()));
