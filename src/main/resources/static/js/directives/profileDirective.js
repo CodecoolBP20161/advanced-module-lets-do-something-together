@@ -1,23 +1,25 @@
 'use strict';
 
-var actimate = angular.module('actimate',['ngResource', 'jcs-autoValidate']);
+var actimate = angular.module('actimate',['ngResource']);
 actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
-actimate.run(function(defaultErrorMessageResolver){
-        defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
-            errorMessages['wrongInputType'] = 'Please enter letters only!';
-        });
-    }
-);
-
 actimate.directive('profileController', function() {
     return {
         controller: function ($scope, $http) {
             $scope.user = {};
+
+            var checkboxes = $("input[type='checkbox']"),
+                submitButton = $("input[type='submit']");
+
+            checkboxes.click(function() {
+                submitButton.attr("disabled", !checkboxes.is(":checked"));
+            });
+            
             $scope.saveProfile = function () {
+
                 $http({
                     method: 'POST',
                     url: '/u/edit-profile',

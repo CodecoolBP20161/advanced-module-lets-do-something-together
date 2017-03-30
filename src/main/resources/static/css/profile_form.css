@@ -134,7 +134,7 @@ textarea:-ms-input-placeholder {
     box-shadow: 0 1px 4px rgba(0,0,0,0.5)}
 
 
-.has-error .help-block{
+.has-error .help-block, .help-block{
     background-color: #e5625e;
     color: white;
     font-size: larger;
@@ -147,3 +147,8 @@ textarea:-ms-input-placeholder {
 .has-success .control-label{
     color: #0b2027;
 }
+
+.has-success .help-block  p{
+    display: none;
+}
+

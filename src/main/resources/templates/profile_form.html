@@ -21,7 +21,7 @@
     <!--Style-->
     <link rel="stylesheet" type="text/css" href="/css/profile_form.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
-    <script src="/js/jcs-auto-validate.min.js"></script>
+    <!--<script src="/js/jcs-auto-validate.min.js"></script>-->
     <!-- load ngmessages -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
@@ -49,23 +49,24 @@
 </div>
 <div class="container">
 
-    <form class="form-horizontal" id="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate">
+    <form action="/u/profile" class="form-horizontal" name="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate">
         <!--User first name-->
         <div class="form-group"
              ng-class="
                  {'has-error':!profileForm.firstName.$valid &amp;&amp; (!profileForm.$pristine || profileForm.$submitted) }">
-            <label for="first-name" class="col-sm-2 control-label">First name</label>
+            <label for="firstName" class="col-sm-2 control-label">First name</label>
             <div class="col-sm-6">
                 <input type="text"
                        placeholder="Your first name"
-                       id="first-name"
+                       id="firstName"
                        class="form-control"
-                       name="name"
+                       name="firstName"
                        required="required"
                        ng-model="user.firstName"
                        ng-pattern="/^[A-Za-z]/"
                        ng-pattern-err-type="wrongInputType"
                        ng-minlength="2"/>
+                <p class="help-block" ng-show="!profileForm.firstName.$valid &amp;&amp; !profileForm.firstName.$pristine">Field required</p>
             </div>
         </div>
 
@@ -122,58 +123,61 @@
         </div>
         <!--Interests-->
         <div class="form-group">
-        <div class="form-check form-check-inline">
-            <ul>
-            <li>
-                <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
-                <label for="tennis">Tennis</label>
-            </li>
-            <li>
-                <input type="checkbox" id="running" ng-model="user.interest.running"/>
-                <label for="running">Running</label>
-            </li>
-            <li>
-                <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
-                <label for="gokart">Gokart</label>
-            </li>
-            <li>
-                <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
-                <label for="hiking">Hiking</label>
-            </li>
-            <li>
-                <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
-                <label for="cinema">Cinema</label>
-            </li>
-            <li>
-                <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
-                <label for="theater">Theater</label>
-            </li>
-            <li>
-                <input type="checkbox" id="cardGames" ng-model="user.interest.cardGames"/>
-                <label for="cardGames">Card Games</label>
-            </li>
-            <li>
-                <input type="checkbox" id="cityWalks" ng-model="user.interest.cityWalks"/>
-                <label for="cityWalks">City Walks</label>
-            </li>
-            </ul>
-        </div>
+            <label class="col-sm-2 control-label">Interests</label>
+            <div class="form-check form-check-inline col-sm-6">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
+                        <label for="tennis">Tennis</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="running" ng-model="user.interest.running"/>
+                        <label for="running">Running</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
+                        <label for="gokart">Gokart</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
+                        <label for="hiking">Hiking</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
+                        <label for="cinema">Cinema</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
+                        <label for="theater">Theater</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cardGames" ng-model="user.interest.cardGames"/>
+                        <label for="cardGames">Card Games</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cityWalks" ng-model="user.interest.cityWalks"/>
+                        <label for="cityWalks">City Walks</label>
+                    </li>
+                </ul>
+
+            </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <a href="/u/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                <a href="/u/profile" type="button" id="submit" class="btn btn-info btn-lg"
-                   ng-click="saveProfile()">Submit</a>
+                <input type="submit" value="Submit" class="btn btn-info btn-lg"
+                   ng-click="saveProfile()" disabled="disabled"/>
             </div>
         </div>
-
 
     </form>
 
 </div>
 
+<script>
 
+</script>
 </body>
 
 </html>
