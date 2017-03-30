@@ -15,7 +15,8 @@
           href="https://fonts.googleapis.com/css?family=Quicksand"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+    <!--Bootstrap Validator-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
     <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
@@ -24,12 +25,12 @@
     <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
-    <script src="/js/jcs-auto-validate.min.js"></script>
+
     <!-- load ngmessages -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <!--AngularJS Controllers-->
     <script src="/js/controller/eventController.js"></script>
+    <!--<script src="/js/jquery/address_validation.js"></script>-->
 
 </head>
 
@@ -51,11 +52,9 @@
 </div>
 <div class="container">
 
-    <form class="form-horizontal" id="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
+    <form class="form-horizontal" id="eventform" name="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
         <!--Event name-->
-        <div class="form-group"
-             ng-class="
-                 {'has-error':!eventform.name.$valid &amp;(!eventform.$pristine || eventform.$submitted) }">
+        <div class="form-group" ng-class="{'has-error': !eventform.name.$valid &amp;&amp; (!eventform.$pristine || eventform.$submitted)}">
             <label for="name" class="col-sm-2 control-label">Event name</label>
             <div class="col-sm-6">
                 <input type="text"
@@ -64,20 +63,22 @@
                        class="form-control"
                        name="name"
                        required="required"
-                       ng-model="event.name"
-                       ng-pattern="/^[A-Za-z]/"
-                       ng-pattern-err-type="wrongInputType"
-                       ng-minlength="5"/>
+                       ng-model="event.name"/>
+                <p class="help-block" ng-show="eventform.name.$invalid &amp;&amp; !eventform.name.$pristine">Field required</p>
             </div>
         </div>
+
+
         <!--Event type-->
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'has-error' : !eventform.interest.$valid &amp;&amp; (!eventform.$pristine || eventform.$submitted)}">
             <label for="interest" class="col-sm-2 control-label">Event type</label>
             <div class="col-sm-6">
                 <div class="input-group">
                     <select id="interest"
                             class="form-control"
-                            name="interest" ng-model="event.interest" required="required">
+                            name="interest"
+                            ng-model="event.interest"
+                            required="required">
                         <option value="tennis">Tennis</option>
                         <option value="gokart">Gokart</option>
                         <option value="running">Running</option>
@@ -87,12 +88,13 @@
                         <option value="cardGames">Card Games</option>
                         <option value="cityWalks">City Walks</option>
                     </select>
+                    <p class="help-block" ng-show="eventform.interest.$invalid &amp;&amp; !eventform.interest.$pristine">Field required></p>
                 </div>
             </div>
         </div>
 
         <!--Event place-->
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': !eventform.place.$pristine &amp;&amp;(!eventform.$pristine || eventform.$submitted) }">
             <label for="place" class="col-sm-2 control-label">Place</label>
             <div class="col-sm-6">
                 <input class="form-control"
@@ -101,24 +103,30 @@
                        gm-places-autocomplete=""
                        name="place"
                        ng-model="autocomplete"
-                       required="required"/>
+                       ng-required="required"
+                       />
+                <p class="help-block" ng-show="eventform.place.$invalid.required"></p>
             </div>
         </div>
         <!--Event date-->
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{'has-error':!eventform.date.$valid &amp;&amp; (!eventform.$pristine || eventform.$submitted) }">
             <label for="date" class="col-sm-2 control-label">Date</label>
             <div class="col-sm-6">
                 <input class="form-control"
                        id="date" type="datetime-local"
-                       placeholder="Choose a date..."
                        aria-required="true"
-                       required="required"
                        name="date"
+                       required="required"
+                       data-error="Please choose a valid date!"
+                       placeholder="yyyy-MM-ddTHH:mm:ss" min="2014-01-01T00:00:00" max="2017-12-31T00:00:00"
                        ng-model="event.date"/>
+                <p class="help-block" ng-show="eventform.date.$invalid &amp;&amp; !eventform.date.$pristine">Field required></p>
             </div>
         </div>
         <!--Event participants-->
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{'has-error':!eventform.participants.$valid &amp;&amp; (!eventform.$pristine || eventform.$submitted) }">
             <label for="participants" class="col-sm-2 control-label">Invite people</label>
             <div class="col-sm-6">
                 <input class="form-control"
@@ -128,23 +136,25 @@
                        min="1"
                        max="20"
                        name="participants"
-                       required="required"
                        ng-model="event.participants"
-                       ng-min-err-type="wrongNumber"
-                       ng-pattern="/[0-9]/"/>
+                       required="required"/>
+                <p class="help-block" ng-show="eventform.participants.$invalid &amp;&amp; !eventform.participants.$pristine">Field required</p>
             </div>
         </div>
         <!--Event description-->
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{'has-error':!eventform.description.$valid &amp;&amp; (!eventform.$pristine || eventform.$submitted) }">
             <label for="description" class="col-sm-2 control-label">Event description</label>
             <div class="col-sm-6">
                         <textarea class="form-control"
                                   id="description" rows="4"
                                   placeholder="Tell us something about your event..."
                                   name="description"
-                                  required="required"
-                                  ng-minlength="100"
-                                  ng-model="event.description"></textarea>
+                                  ng-minlength="50"
+                                  ng-model="event.description"
+                                  required="required">
+                        </textarea>
+                <p class="help-block" ng-show="eventform.description.$invalid &amp;&amp; !eventform.description.$pristine">Enter at least 50 characters</p>
             </div>
         </div>
 
@@ -152,7 +162,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <a href="/u/dashboard" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
                 <a href="/u/dashboard" type="button" id="submit" class="btn btn-info btn-lg"
-                   ng-click="saveEvent()">Submit</a>
+                   ng-click="saveEvent()" ng-disabled="eventform.$invalid">Submit</a>
             </div>
 
         </div>
