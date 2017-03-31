@@ -107,13 +107,13 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
-            <version>1.4.9</version>
+            <version>1.6.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.3.6</version>
+            <version>3.3.7</version>
             <scope>runtime</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
@@ -126,8 +126,15 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>3.1.1-1</version>
+            <version>3.2.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars.npm/angular-route -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>angular-route</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
