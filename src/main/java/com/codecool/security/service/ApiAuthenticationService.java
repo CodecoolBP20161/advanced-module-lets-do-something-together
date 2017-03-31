@@ -25,19 +25,16 @@ public class ApiAuthenticationService {
 
     public Authentication getAuth(HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getHeader(AUTH_HEADER_NAME);
-        System.out.println("!!!!!!" +  token);
         User user = userRepository.findByToken(token);
-        System.out.println(token);
         if (user == null) {
             logger.info("No user found");
             throw new AuthenticationCredentialsNotFoundException("No user found");
         }
-        System.out.println("!!!!!!" +  token);
         if (user.getToken() == null) {
             logger.info("No token found");
             throw new AuthenticationCredentialsNotFoundException("No token found");
         }
-        logger.info("Token found");
+        logger.info("Token found with {}", user.getEmail());
         return new ApiAuthentication(user);
     }
 }
