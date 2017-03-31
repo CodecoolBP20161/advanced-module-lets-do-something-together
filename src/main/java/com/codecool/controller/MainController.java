@@ -19,23 +19,19 @@ public class MainController {
     @Autowired
     private InterestRepository interestRepository;
 
-    @RequestMapping(value = {"/", "logout"}, method = RequestMethod.GET)
+    /*@RequestMapping(value = {"/", "logout"}, method = RequestMethod.GET)
     public String index() {
         return "index";
-    }
+    }*/
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model, String error) {
         if (error != null) {
             model.addAttribute("error", "Failed to log in. Email or password is invalid!");
         }
-        return "login_form";
+        return "index";
     }
 
-    @RequestMapping(value = "/mission", method = RequestMethod.GET)
-    public String mission() {
-        return "mission";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/interests", method = RequestMethod.GET)

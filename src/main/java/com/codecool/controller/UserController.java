@@ -40,10 +40,10 @@ public class UserController {
     private UserEmailRepository userEmailRepository;
 
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
-        return "registration";
-    }
+        return "index";
+    }*/
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public

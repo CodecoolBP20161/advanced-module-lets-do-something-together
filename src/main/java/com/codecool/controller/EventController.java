@@ -29,11 +29,11 @@ public class EventController extends AbstractController {
 
     private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 
-    @RequestMapping(value = "/create_event", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/create_event", method = RequestMethod.GET)
     public String renderCreateEventForm() {
         logger.info("/u/create_event route called - method: {}.", RequestMethod.GET);
-        return "create_event";
-    }
+        return "index";
+    }*/
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)
     @ResponseBody

@@ -20,12 +20,12 @@ public class DashBoardController extends AbstractController {
 
     private static final Logger logger = LoggerFactory.getLogger(DashBoardController.class);
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard() {
         logger.info("/u/dashboard route called - method: {}.", RequestMethod.GET);
 
-        return "user_main";
-    }
+        return "index";
+    }*/
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     @ResponseBody
