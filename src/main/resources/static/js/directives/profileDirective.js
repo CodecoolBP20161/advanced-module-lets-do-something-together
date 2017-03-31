@@ -1,11 +1,5 @@
 'use strict';
 
-var actimate = angular.module('actimate',['ngResource', 'jcs-autoValidate']);
-actimate.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}]);
-
 actimate.run(function(defaultErrorMessageResolver){
         defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
             errorMessages['wrongInputType'] = 'Please enter letters only!';

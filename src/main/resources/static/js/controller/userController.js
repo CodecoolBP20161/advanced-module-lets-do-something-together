@@ -1,8 +1,6 @@
 'use strict';
 
-var actimate = angular.module("actimate", ['ngResource']);
-
-actimate.controller("UserCtrl", function ($scope, $http) {
+actimate.controller("userCtrl", function ($scope, $http) {
     $scope.user = {};
     $scope.errorConfirm = false;
 
