@@ -1,31 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
-      xmlns="http://www.w3.org/1999/xhtml" ng-app="actimate">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-    <title>ActiMate - Your Dashboard</title>
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Quicksand"/>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/profile.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script rel="text/javascript" src="/js/jquery/profile.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
-    <script src="/js/controller/viewProfileController.js"></script>
-</head>
-<body ng-controller="loadUserCtrl">
-<nav>
-    <ul class="fix-top">
 
-        <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
-        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard">HOME</a></li>
-        <li><a href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
-        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
-            <span class="glyphicon glyphicon-log-out"></span></a></li>
-    </ul>
-</nav>
 <div id="w">
     <div id="content" class="clearfix">
         <div id="userphoto"><img src="/images/avatar.png" alt="default avatar"/>
@@ -73,6 +46,3 @@
 
     </div>
 </div>
-
-</body>
-</html>
