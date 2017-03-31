@@ -1,6 +1,11 @@
 'use strict';
 
-var actimate = angular.module('actimate', ['ngRoute', 'ui.router']);
+window.actimate = angular.module('actimate', [
+    'ngRoute',
+    'ngResource',
+    'gm',
+    'jcs-autoValidate'
+]);
 
 
 actimate.config(['$httpProvider',
@@ -12,7 +17,8 @@ actimate.config(['$httpProvider',
 
     }]);
 
-actimate.controller("MainCtrl", function ($scope, $http, $state, $stateParams) {
+
+/*actimate.controller("MainCtrl", function ($scope, $http, $state, $stateParams) {
     // Expose $state and $stateParams to the <body> tag
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
@@ -20,6 +26,6 @@ actimate.controller("MainCtrl", function ($scope, $http, $state, $stateParams) {
 
 actimate.service('MainService', function () {
 
-});
+});*/
 
 
