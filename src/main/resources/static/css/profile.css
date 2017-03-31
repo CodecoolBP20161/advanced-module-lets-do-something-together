@@ -1,7 +1,8 @@
-html, body, applet, object, iframe, p, blockquote, pre, abbr, acronym, address, big, cite, code, del, dfn, em, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, summary, time, mark, audio, video {
+html, body, applet, object, iframe, p, blockquote, pre, abbr, acronym, address, big, cite, code, del, dfn, em, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, ruby, summary, time {
     margin: 0;
     padding: 0;
     border: 0;
+    top: 0;
     font-size: 100%;
     font-family: "Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     vertical-align: baseline;
@@ -15,48 +16,9 @@ html, body, applet, object, iframe, p, blockquote, pre, abbr, acronym, address, 
     background: #82D4BB;
 }
 
-html {
+.html-profile {
     overflow-y: scroll;
 }
-
-body {
-    color: #313131;
-    font-size: 62.5%;
-    line-height: 1;
-}
-
-nav {
-    top: 0;
-    left: 0;
-    position: fixed;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 99;
-    text-align: right;
-    margin: 0;
-    padding: 0;
-    padding-right: 5%;
-}
-
-nav a {
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 30px;
-    line-height: 50px;
-    font-size: large;
-    font-style: oblique;
-}
-
-.nav-link{  display: block;  }
-
-a:hover {  text-decoration: none;  }
-
-nav > .fix-top > li {  display: inline; }
-
-nav > .fix-top > li > a:hover {
-    color: white;
-font-size: larger;}
 
 .page{  top: 100px;}
 

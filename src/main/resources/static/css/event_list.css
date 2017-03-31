@@ -1,0 +1,32 @@
+.eventondashbord {
+    width: 320px;
+    height: 200px;
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 0;
+    float: none;
+    background-color: #fff;
+    display: table;
+    margin-bottom: 10px;
+    text-align: center;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+.eventondashbord-head-text{
+    font-size: 16pt;
+}
+
+.eventondashbord-text{
+    font-size: 12pt;
+}
+
+.eventondashbord:hover{
+    color: #b6ffda;
+}
+
+.container-even_list{
+    grid-template-columns: 40px 50px auto 50px 40px;
+    grid-template-rows: 25% 100px auto;
+    /*grid-template-columns: repeat(3, 20px [col-start]) 5%;*/
+}

@@ -2,10 +2,6 @@
     margin: 0;
 }
 
-html, body {
-    height: 100%;
-}
-
 .input[type=text] {
     width: 130px;
     -webkit-transition: width 0.4s ease-in-out;
@@ -17,7 +13,7 @@ input[type=text]:focus {
     width: 20%;
 }
 
-ul {
+.ul-user_main {
     position: fixed;
     height: 50px;
     width: 100%;
@@ -26,7 +22,7 @@ ul {
     text-align: center;
 }
 
-li > a {
+.li-user_main > a {
     text-decoration: none;
     color: #ffffff;
     margin-left: 30px;

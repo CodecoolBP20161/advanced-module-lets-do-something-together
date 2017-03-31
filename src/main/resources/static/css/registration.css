@@ -1,30 +1,18 @@
 
-* {
-    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 0;
-}
-
 .text-center {
     text-align: center;
 }
 
-body {
-    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #82D4BB;
+.body-registration {
     height: 100vh;
     background-size: cover;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-html, body {
-    height: 100%;
-}
-
-h1 {
+.h1-registration {
     color: white;
     text-transform: uppercase;
     font-weight: 900;
@@ -32,7 +20,7 @@ h1 {
     text-align: center;
 }
 
-.container {
+.container-registration {
     max-width: 400px;
     max-height: 200px;
     margin-top: 0px;
@@ -65,7 +53,7 @@ h1 {
     padding-left: 110px;
 }
 
-.input-group {
+.input-group-registration {
     width: 100%;
 }
 
@@ -106,7 +94,7 @@ h1 {
     outline-color: lightgreen;
 }
 
-.input-field {
+.input-field-registration {
     position: relative;
     margin-top: 1rem;
 }
@@ -151,25 +139,6 @@ p.errormessage {
 #sign-up-title {
     color: #f9f9f9;
 }
-
-nav {
-    top: 0px;
-    position: fixed;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 99;
-    text-align: center;
-}
-
-nav a {
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 30px;
-    line-height: 50px;
-}
-
-a:hover {  text-decoration: none; color: #82D4BB;}
 
 #signup {
     width: 400px;

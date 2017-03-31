@@ -1,26 +1,7 @@
-html
-{
-    height: 100%;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-}
-
-body
-{
-    font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    top: 300px;
-    height: 100%;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    background-color: #82D4BB;
-}
 
 label {  font-size: large; }
 
-.container {
+.container-profile_form {
     margin-right: 20%;
     margin-left: 20%;
 }
@@ -33,35 +14,7 @@ label {  font-size: large; }
     font-weight: bolder;
 }
 
-div {  display: block;  }
-
-nav {
-    top: 0;
-    left: 0;
-    position: fixed;
-    height: 50px;
-    width: 100%;
-    background-color: #292f36;
-    z-index: 99;
-    text-align: right;
-    margin: 0;
-    padding: 0;
-    padding-right: 5%;
-}
-
-nav a {
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 30px;
-    line-height: 50px;
-    font-size: larger;
-}
-
-.nav-link{  display: block;  }
-
-a:hover {  text-decoration: none;  }
-
-li {
+.li-profile_form {
     display: inline;
     padding: 0 20px;
 }
