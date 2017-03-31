@@ -1,152 +1,101 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
-      xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head  ng-app="actimate">
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
-
-    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/js/onepage.js"></script>
-
     <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
-
-    <meta http-equiv="cleartype" content="on"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 
     <title>Actimate</title>
 
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
-
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Quicksand"/>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
-    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 
+    <!--Style-->
+    <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login_form.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/profile.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/profile_form.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/event_list.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/user_main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 
-    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-
-    <script type="text/javascript" src="/js/app.js"></script>
-
-    <script type="text/javascript" src="/js/onepage.js"></script>
 
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-right navbar-static-top">
-    <div class="navcontainer">
 
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" id="menubutton">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#home" class="navbar-brand">Actimate</a>
-        </div>
 
-        <!-- Menu Items -->
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
-                <li><a href="#mission">Mission</a></li>
-                <li><a href="#howitworks">How it works?</a></li>
-                <li><a href="#contactus">Contact Us</a></li>
-                <li><a sec:authorize="isAuthenticated()" href="/u/dashboard">DASHBOARD</a></li>
-                <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
-                <li><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
-                <li><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
-            </ul>
-        </div>
-    </div>
+    <div class="navbar navbar-inverse navbar-right navbar-static-top">
+        <div class="navcontainer">
 
-</div>
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" id="menubutton">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#home" class="navbar-brand">Actimate</a>
+            </div>
 
-<div id="home" class="bgimg-1 home">
-    <div class="caption3">
-    </div>
-</div>
-
-<div class="parthing">
-    <div data-full="true" id="mission" class="onepage">
-        <div class="container">
-            <div class="mission-container">
-                <div class="vertical-align mission-text">
-                    <i>Mission</i> answers the question “Why do we exist?”
-                    <br/>
-                    <br/>
-                    <i>Vision</i> answers the question “What will the future look like as we fulfill our mission? What
-                    will be different?”
-                    <br/>
-                    <br/>
-                    While mission is about today, vision is about the future, what we will become.
-                    <br/>
-                    <br/>
-                    <br/>
-                </div>
+            <!-- Menu Items -->
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="li-navbar"><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
+                    <li class="li-navbar"><a href="#mission">Mission</a></li>
+                    <li class="li-navbar"><a href="#howitworks">How it works?</a></li>
+                    <li class="li-navbar"><a href="#contactus">Contact Us</a></li>
+                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="/u/dashboard">DASHBOARD</a></li>
+                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
+                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+                    <li class="li-navbar"><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
+                    <li class="li-navbar"><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
+                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
+                </ul>
             </div>
         </div>
+
     </div>
-</div>
 
-<div class="bgimg-2">
-    <div class="caption">
-        <span class="border sthtoget">DO SOMETHING TOGETHER!</span>
+    <div>
+        <ng-view></ng-view>
     </div>
-</div>
 
-<div class="parthing posrel">
-    <div data-full="true" class="onepage">
-        <div class="container">
-            <div class="vertical-align" id="howitworks">
-                You can register and find good program.
-                <br/>
-                <br/>
-                Very easy to use and it could be so much fun.
-                <br/>
-                <br/>
-                We hope you will enjoy it.
-                <br/>
-                <br/>
-                <br/>
-            </div>
-        </div>
-    </div>
-</div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-messages.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
 
-<div class="bgimg-3">
-    <div class="caption">
-        <span class="border sthtoget">FIND NEW FRIENDS!</span>
-    </div>
-</div>
+    <script type="text/javascript" src="/js/jcs-auto-validate.min.js"></script>
 
-<div class="bgimg-5">
-    <div class="caption2">
-        <div class="container vertical-align" id="contact">
-            <form id="contactus">
-                <div class="contactus">
-                    <div class="head">
-                        <h2>Contact Us!</h2>
-                    </div>
-                    <input type="text" name="name" placeholder="Name"/><br/>
-                    <input type="email" name="email" placeholder="Email"/><br/>
-                    <textarea type="text" name="message" placeholder="Message"></textarea><br/>
-                    <div class="message">Message Sent</div>
-                    <button id="submit" type="submit">
-                        Send!
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
+    <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
 
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/route.js"></script>
+    <script type="text/javascript" src="/js/onepage.js"></script>
+    <script type="text/javascript" src="/js/jquery/profile.js"></script>
+    <script type="text/javascript" src="/js/jquery/validation.js"></script>
 
-<div></div>
+    <!--AngularJS Controllers-->
+    <script type="text/javascript" src="/js/controller/eventController.js"></script>
+    <script type="text/javascript" src="/js/controller/viewProfileController.js"></script>
+    <script type="text/javascript" src="/js/directives/profileDirective.js"></script>
+    <script type="text/javascript" src="/js/jquery/editProfile.js"></script>
+    <script type="text/javascript" src="/js/controller/userController.js"></script>
+    <script type="text/javascript" src="/js/controller/eventOnDashboardController.js"></script>
+    <script type="text/javascript" src="/js/directives/eventOnDashboardDirective.js"></script>
+    <script type="text/javascript" src="/js/directives/mainDirective.js"></script>
+    <script type="text/javascript" src="/js/directives/profileDirective.js"></script>
+    <script type="text/javascript" src="/js/directives/register.js"></script>
+
 </body>
 </html>
