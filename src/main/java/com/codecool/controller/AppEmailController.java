@@ -37,7 +37,7 @@ public class AppEmailController {
 
     private static final String URL = "http://localhost:60227";
     @Autowired
-    private static EmailHandler emailHandler;
+    private EmailHandler emailHandler;
     private final String emailSubject = "Welcome to ActiMate";
     private String contactSubject = "New contact from website";
 
