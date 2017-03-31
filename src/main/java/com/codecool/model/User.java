@@ -6,7 +6,6 @@ import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "`user`")
@@ -19,7 +18,7 @@ public class User {
     private String email;
     private String password;
     @Nullable
-    private UUID token;
+    private String token;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

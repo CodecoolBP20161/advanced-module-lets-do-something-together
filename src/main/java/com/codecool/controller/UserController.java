@@ -64,7 +64,7 @@ public class UserController {
             if (json.get("email").toString().contains("@") && json.get("password").toString().length() >= 6) {
                 User user = mapper.readValue(data, User.class);
                 if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
-                    user.setToken(UUID.randomUUID());
+                    user.setToken(UUID.randomUUID().toString());
                     userService.create(user, Role.USER);
                     Profile profile = new Profile(user);
                     profileRepository.save(profile);
