@@ -120,7 +120,7 @@ public class AppEmailController {
         logger.info("Getting welcome email template.");
         StringWriter writer = new StringWriter();
         try {
-            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email_templates/admin_email.html")), writer);
+            spark.utils.IOUtils.copy(new FileInputStream(new File("./src/main/resources/templates/email_templates/welcome_email.html")), writer);
             logger.info("Template successfully read.");
         } catch (IOException e) {
             logger.error("{} occurred while reading the welcome email template: {}.", e.getCause(), e.getMessage());
