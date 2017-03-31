@@ -19,7 +19,8 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
             data: JSON.stringify($scope.event)
         })
             .then(function (response) {
-                console.log($scope.event);
+                console.log(response);
+                console.log("Location is: " + $scope.event.location + " , Interest is: " + $scope.event.interest );
             })
     };
 
@@ -30,12 +31,6 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
         $scope.event.location = $scope.autocomplete.getPlace().formatted_address;
         $scope.$apply();
     });
-
-    var selectedDate = $scope.event.date;
-    var now = new Date();
-    if (selectedDate < now) {
-        console.log('error in date');
-    }
 
 
 });
