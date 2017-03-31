@@ -1,5 +1,5 @@
 
-<div class="body-registration" id="signup">
+<div id="signup" class="registration">
     <div class="signup-screen">
         <div class="space-bot text-center">
             <h1 class="h1-registration" id="sign-up-title">Register</h1>
@@ -9,7 +9,7 @@
 
             <div class="form-group text-center" id="emailDiv">
                 <label class="col-md-12 control-label" for="email">EMAIL</label>
-                <div class="input-field col s6 input-group">
+                <div class="input-field-registration col s6 input-group-registration">
                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                     <input onfocus="hideError()" onblur="validateEmailFormat()"
                            placeholder="example@example.com" type="email" name="email"
@@ -21,7 +21,7 @@
 
             <div class="form-group text-center" id="pwdDiv">
                 <label class="col-md-12 control-label" for="password">PASSWORD</label>
-                <div class="input-field col s6 input-group">
+                <div class="input-field-registration col s6 input-group-registration">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input type="password" ng-minlength='6' id="password"
                            onkeyup="validatePasswordFormat()" onchange="passwordMatch()"
@@ -32,7 +32,7 @@
 
             <div class="form-group text-center" id="pwd2Div">
                 <label class="col-md-12 control-label" for="confirmPassword">CONFIRM PASSWORD</label>
-                <div class="input-field col s6 input-group">
+                <div class="input-field-registration col s6 input-group-registration">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input onkeyup="passwordMatch()" type="password"
                            class="form-control password-again" id="confirmPassword"
