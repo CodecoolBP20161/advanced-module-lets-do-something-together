@@ -2,7 +2,6 @@ package com.codecool.model;
 
 
 import com.codecool.security.Role;
-import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +16,6 @@ public class User {
     private Integer id;
     private String email;
     private String password;
-    @Nullable
     private String token;
 
     @Enumerated(value = EnumType.STRING)
