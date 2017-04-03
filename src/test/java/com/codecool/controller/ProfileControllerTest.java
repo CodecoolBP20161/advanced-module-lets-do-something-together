@@ -22,6 +22,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 
+import java.util.UUID;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -61,7 +63,7 @@ public class ProfileControllerTest extends AbstractTest {
                 .addFilters(springSecurityFilterChain)
                 .build();
 
-        mockUser = new User("apple@apple.com", "password");
+        mockUser = new User("user@user.com", "password");
         profileRoute = "/u/profile";
         editProfileRoute = "/u/edit-profile";
         host = "http://localhost";
@@ -96,7 +98,8 @@ public class ProfileControllerTest extends AbstractTest {
         profile = new Profile(mockUser);
         profileRepository.save(profile);
 
-        mockMvc.perform(get(editProfileRoute))
+        mockMvc.perform(get(editProfileRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Your Profile")))
                 .andExpect(content().string(containsString("Submit")));
@@ -104,7 +107,7 @@ public class ProfileControllerTest extends AbstractTest {
 
 
     @Test
-    @WithMockUser(value = "apple@apple.com")
+    @WithMockUser(value = "user@user.com")
     public void defaultProfileTest() throws Exception {
         userService.create(mockUser, Role.USER);
         profile = new Profile(mockUser);
@@ -113,7 +116,7 @@ public class ProfileControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(value = "apple@apple.com")
+    @WithMockUser(value = "user@user.com")
     public void saveProfileLastNameTest() throws Exception {
         userService.create(mockUser, Role.USER);
         profile = new Profile(mockUser);
@@ -124,13 +127,14 @@ public class ProfileControllerTest extends AbstractTest {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().is2xxSuccessful());
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
         assertEquals("apple", profileRepository.findByUser(mockUser).getLastName());
     }
 
     @Test
-    @WithMockUser(value = "apple@apple.com")
+    @WithMockUser(value = "user@user.com")
     public void saveProfileLanguageTest() throws Exception {
         userService.create(mockUser, Role.USER);
         profile = new Profile(mockUser);
@@ -141,6 +145,7 @@ public class ProfileControllerTest extends AbstractTest {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful());
         System.out.println(profile);
@@ -149,7 +154,7 @@ public class ProfileControllerTest extends AbstractTest {
     }
 
     @Test
-    @WithMockUser(value = "apple@apple.com")
+    @WithMockUser(value = "user@user.com")
     public void saveProfileGenderTest() throws Exception {
         userService.create(mockUser, Role.USER);
         profile = new Profile(mockUser);
@@ -160,13 +165,14 @@ public class ProfileControllerTest extends AbstractTest {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().is2xxSuccessful());
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
         assertEquals("humen", profileRepository.findByUser(mockUser).getGender());
     }
 
     @Test
-    @WithMockUser(value = "apple@apple.com")
+    @WithMockUser(value = "user@user.com")
     public void saveProfileIntroductionTest() throws Exception {
         userService.create(mockUser, Role.USER);
         profile = new Profile(mockUser);
@@ -177,8 +183,9 @@ public class ProfileControllerTest extends AbstractTest {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().is2xxSuccessful());
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
         assertEquals("I'm M", profileRepository.findByUser(mockUser).getIntroduction());
     }
 }

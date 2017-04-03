@@ -62,23 +62,23 @@ public class UserControllerTest extends AbstractTest {
     public void findRegisteredUserTest() throws Exception {
 
         mockMvc.perform(post("/registration")
-                .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
+                .content("{\"email\":\"user@user.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
-        assertEquals("apple@apple.com",
-                userService.getUserByEmail("apple@apple.com").get().getEmail());
+        assertEquals("user@user.com",
+                userService.getUserByEmail("user@user.com").get().getEmail());
     }
 
     @Test
     public void findUnsentEmailTest() throws Exception {
 
         mockMvc.perform(post("/registration")
-                .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
+                .content("{\"email\":\"user@user.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
-        assertEquals("apple@apple.com",
+        assertEquals("user@user.com",
                 userEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
     }
 
@@ -86,21 +86,20 @@ public class UserControllerTest extends AbstractTest {
     public void findRegisteredProfileTest() throws Exception {
 
         mockMvc.perform(post("/registration")
-                .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
+                .content("{\"email\":\"user@user.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
-        assertEquals("apple@apple.com",
-                profileRepository.findByUser(userService.getUserByEmail("apple@apple.com").get()).getFirstName());
+        assertEquals("user@user.com",
+                profileRepository.findByUser(userService.getUserByEmail("user@user.com").get()).getFirstName());
     }
 
     @Test
     public void findTokenRegisteredUserTest() throws Exception {
         mockMvc.perform(post("/registration")
-                .content("{\"email\":\"apple@apple.com\",\"password\":\"123456\"}")
+                .content("{\"email\":\"user@user.com\",\"password\":\"123456\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-        System.out.println(userService.getUserByEmail("apple@apple.com").get().getToken());
-        assertNotEquals(null, userService.getUserByEmail("apple@apple.com").get().getToken());
+        assertNotEquals(null, userService.getUserByEmail("user@user.com").get().getToken());
     }
 }
