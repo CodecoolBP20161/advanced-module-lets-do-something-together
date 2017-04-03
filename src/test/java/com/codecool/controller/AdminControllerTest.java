@@ -19,6 +19,8 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import java.util.UUID;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
@@ -64,7 +66,7 @@ public class AdminControllerTest extends AbstractTest {
         eventsRoute = adminRoute + "/events";
         emailRoute = adminRoute + "/emails";
 
-        mockUser = new User("test@test.com", "password");
+        mockUser = new User("user@user.com", "password");
     }
 
     @After
@@ -121,7 +123,8 @@ public class AdminControllerTest extends AbstractTest {
     @WithMockUser(authorities = {"ADMIN"})
     public void listUsersData() throws Exception {
         userService.create(mockUser, Role.USER);
-        mockMvc.perform(get(usersRoute))
+        mockMvc.perform(get(usersRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(content().string(containsString(mockUser.getEmail())));
     }
 
@@ -131,7 +134,8 @@ public class AdminControllerTest extends AbstractTest {
         mockMvc.perform(get(eventsRoute))
                 .andExpect(status().is2xxSuccessful());
 
-        mockMvc.perform(get(eventsRoute))
+        mockMvc.perform(get(eventsRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(content().string(containsString("ActiMate Admin")))
                 .andExpect(content().string(containsString("List of ActiMate events")));
     }
@@ -155,7 +159,8 @@ public class AdminControllerTest extends AbstractTest {
         UserEmail userEmail = new UserEmail(mockUser);
         userEmailRepository.save(userEmail);
 
-        mockMvc.perform(get(emailRoute))
+        mockMvc.perform(get(emailRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(content().string(containsString(mockUser.getEmail())));
     }
 }

@@ -23,6 +23,8 @@ import org.springframework.web.util.NestedServletException;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import java.util.UUID;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.isA;
 import static org.junit.Assert.assertEquals;
@@ -89,7 +91,6 @@ public class EventControllerTest extends AbstractTest {
     public void createEventTest_validDetails() throws Exception {
         userService.create(mockUser, Role.USER);
         int eventsBefore = eventRepository.findAll().size();
-
         mockMvc.perform(post(route)
                 .content("{\"name\":\"eventName\"," +
                         "\"interest\":\"gokart\", " +
@@ -97,6 +98,7 @@ public class EventControllerTest extends AbstractTest {
                         "\"lat\":\"19.057821\", " +
                         "\"date\":\"2017-03-15T23:00:00.000Z\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful());
@@ -119,6 +121,7 @@ public class EventControllerTest extends AbstractTest {
                         "\"invalidKey\":\"2017-03-15T23:00:00.000Z\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -131,6 +134,7 @@ public class EventControllerTest extends AbstractTest {
                 .content("{\"name\":\"eventName\"," +
                         "\"participants\":\"42\"}")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .accept(MediaType.APPLICATION_JSON));
 
         expectedException.expectCause(isA(JSONException.class));
