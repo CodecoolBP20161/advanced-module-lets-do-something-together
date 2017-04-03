@@ -5,6 +5,7 @@ import com.codecool.model.Profile;
 import com.codecool.model.User;
 import com.codecool.model.event.Event;
 import com.codecool.repository.EventRepository;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.reflect.Field;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +57,7 @@ public class ProfileController extends AbstractController {
             }
             field.set(currentProfile, fieldValue);
         }
-        currentProfile.setInterestList(getUpdatedInterestList(currentProfile, jsonData));
+        currentProfile.setInterestList(getUpdatedInterestList(jsonData));
         profileRepository.save(currentProfile);
         return "profile_form";
     }
@@ -94,21 +96,15 @@ public class ProfileController extends AbstractController {
         return json;
     }
 
-    private List<Interest> getUpdatedInterestList(Profile profile, JSONObject jsonData) {
-        List<Interest> interests = profile.getInterestList();
+    private List<Interest> getUpdatedInterestList(JSONObject jsonData) {
+        List<Interest> interests = new ArrayList<>();
         try {
-            JSONObject json = (JSONObject) jsonData.get("interest");
-            for (Interest interest : interestRepository.findAll()) {
-                String activity = interest.getActivity();
-                if (json.has(activity)) {
-                    if (json.get(activity).equals(false)) {
-                        interests.remove(interest);
-                    } else if (!interests.contains(interest)) {
-                        interests.add(interest);
-                    }
-                }
+            JSONArray json = (JSONArray) jsonData.get("interest");
+            for (int i = 0; i < json.length(); i++) {
+                interests.add(interestRepository.findByActivity(json.get(i).toString()));
             }
-        } catch (JSONException ignored) {
+        } catch (JSONException e) {
+            e.getMessage();
         }
         return interests;
     }
