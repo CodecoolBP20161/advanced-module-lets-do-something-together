@@ -21,6 +21,8 @@ actimate.directive('profileController', function() {
 
             $scope.saveProfile = function () {
 
+                $scope.user.interest = checkInterests();
+
                 $http({
                     method: 'POST',
                     url: '/u/edit-profile',
