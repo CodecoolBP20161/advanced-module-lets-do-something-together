@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -70,7 +71,8 @@ public class ProfileControllerTest extends AbstractTestController {
         profile = new Profile(mockUser);
         profileRepository.save(profile);
 
-        mockMvc.perform(get(editProfileRoute))
+        mockMvc.perform(get(editProfileRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Your Profile")))
                 .andExpect(content().string(containsString("Submit")));
@@ -100,6 +102,7 @@ public class ProfileControllerTest extends AbstractTestController {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .accept(MediaType.APPLICATION_JSON)).
                 andExpect(status().is2xxSuccessful());
 
@@ -120,6 +123,7 @@ public class ProfileControllerTest extends AbstractTestController {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful());
 
@@ -135,15 +139,15 @@ public class ProfileControllerTest extends AbstractTestController {
 
         String profileString =
                 "{\"firstName\":\"littleDog\"," +
-                        "\"gender\":\"humen\"}";
+                        "\"gender\":\"human\"}";
 
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().is2xxSuccessful());
-
-        assertEquals("humen", profileRepository.findByUser(mockUser).getGender());
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
+        assertEquals("human", profileRepository.findByUser(mockUser).getGender());
     }
 
     @Test
@@ -160,9 +164,9 @@ public class ProfileControllerTest extends AbstractTestController {
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().is2xxSuccessful());
-
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
         assertEquals("I'm M", profileRepository.findByUser(mockUser).getIntroduction());
     }
 }

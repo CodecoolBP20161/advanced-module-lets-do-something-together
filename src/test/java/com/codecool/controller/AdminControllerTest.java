@@ -1,18 +1,30 @@
 package com.codecool.controller;
 
+import com.codecool.model.User;
 import com.codecool.model.UserEmail;
 import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
+import com.codecool.security.service.user.UserService;
+import com.codecool.test.AbstractTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import java.util.UUID;
+
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -85,7 +97,8 @@ public class AdminControllerTest extends AbstractTestController {
     @WithMockUser(authorities = {"ADMIN"})
     public void listUsersData() throws Exception {
         userService.create(mockUser, Role.USER);
-        mockMvc.perform(get(usersRoute))
+        mockMvc.perform(get(usersRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(content().string(containsString(mockUser.getEmail())));
     }
 
@@ -95,7 +108,8 @@ public class AdminControllerTest extends AbstractTestController {
         mockMvc.perform(get(eventsRoute))
                 .andExpect(status().is2xxSuccessful());
 
-        mockMvc.perform(get(eventsRoute))
+        mockMvc.perform(get(eventsRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(content().string(containsString("ActiMate Admin")))
                 .andExpect(content().string(containsString("List of ActiMate events")));
     }
@@ -119,7 +133,8 @@ public class AdminControllerTest extends AbstractTestController {
         UserEmail userEmail = new UserEmail(mockUser);
         userEmailRepository.save(userEmail);
 
-        mockMvc.perform(get(emailRoute))
+        mockMvc.perform(get(emailRoute)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))
                 .andExpect(content().string(containsString(mockUser.getEmail())));
     }
 }

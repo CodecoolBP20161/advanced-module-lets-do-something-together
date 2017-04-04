@@ -6,6 +6,8 @@ import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 @Controller
 public class ProfileController extends AbstractController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
+
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String renderProfile() {
         return "profile";
@@ -33,9 +37,12 @@ public class ProfileController extends AbstractController {
         return "profile_form";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
     public String saveProfileForm(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
+        logger.info("/u/edit-profile route called - method: {}.", RequestMethod.POST);
         Profile currentProfile = getCurrentProfile(principal);
+        JSONObject result = new JSONObject();
         List<Field> fields = getEditableFieldsOfCurrentProfile(currentProfile);
 
 //            profile related JSONExceptions swallowed on purpose: not mandatory profile details
@@ -47,12 +54,16 @@ public class ProfileController extends AbstractController {
             try {
                 fieldValue = jsonData.get(field.getName()).toString();
             } catch (JSONException ignored) {
+                logger.error("{}: occurred while trying to parse data {}", ignored.getClass().getSimpleName(), ignored.getMessage());
+                result.put("status","error");
             }
             field.set(currentProfile, fieldValue);
         }
         currentProfile.setInterestList(getUpdatedInterestList(currentProfile, jsonData));
         profileRepository.save(currentProfile);
-        return "profile_form";
+        logger.info("Profile(email: {}) saved into the database", currentProfile.getUser().getEmail());
+        result.put("status","success");
+        return result.toString();
     }
 
     @RequestMapping(value = "/profile_data", method = RequestMethod.GET)
