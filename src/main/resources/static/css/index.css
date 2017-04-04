@@ -351,3 +351,21 @@ label.error {
 #contactEmail {
     margin-top: 0px;
 }
+
+.has-error .help-block {
+    background-color: #e5625e;
+    color: white;
+    font-size: larger;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 600px;
+    display: -webkit-inline-box;
+
+}
+
+.has-success .help-block,
+.has-success .control-label {
+    color: #0b2027;
+}

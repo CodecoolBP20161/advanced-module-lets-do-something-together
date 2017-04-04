@@ -129,7 +129,7 @@
     <div class="caption2">
         <div class="container vertical-align"
              id="contact">
-            <form id="contactForm" ng-submit="sendContact(contactForm)" novalidate="novalidate">
+            <form id="contactForm" name="contactForm" ng-submit="sendContact(contactForm)" novalidate="novalidate">
                 <div class="contactus">
 
                     <div class="head">
@@ -156,10 +156,11 @@
                                name="email"
                                placeholder="Email"
                                required="required"
+                               ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
                                id="contactEmail"
                                ng-model="contact.email"/>
                         <p class="help-block"
-                           ng-show="contactForm.email.$invalid &amp;&amp; !contactForm.email.$pristine">
+                           ng-show="contactForm.email.$error.pattern">
                             Field required
                         </p>
                     </div>
@@ -174,21 +175,20 @@
                               ng-model="contact.message">
                     </textarea>
                         <p class="help-block"
-                           ng-show="contactForm.contactMsg.$invalid &amp;&amp; !contactForm.contactMsg.$pristine">
+                           ng-show="contactForm.message.$invalid &amp;&amp; !contactForm.message.$pristine">
                             Field required
                         </p>
                     </div>
 
                     <div class="form-group">
-                        <button href="/"
-                                disabled="disabled"
-                                type="submit"
+                        <a href="/"
+                                type="button"
                                 id="contactSubmit"
                                 class="btn btn-default btn-lg"
                                 ng-click="sendContact()"
-                                ng-disabled="eventform.$invalid">
+                                ng-disabled="contactForm.$invalid">
                             SEND
-                        </button>
+                        </a>
                     </div>
 
                 </div>
