@@ -42,7 +42,7 @@ public class DashBoardController extends AbstractController {
         return events.toString();
     }
 
-    private JSONArray getAllEvents() {
+    private JSONObject getAllEvents() {
         List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
         logger.debug("{} active events collected.", events.size());
         return eventUtil.createEventsJson(events);

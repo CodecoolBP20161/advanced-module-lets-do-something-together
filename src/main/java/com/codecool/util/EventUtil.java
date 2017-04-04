@@ -17,13 +17,13 @@ public class EventUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(EventUtil.class);
 
-    public JSONArray createEventsJson(List<Event> events){
-        JSONArray json = new JSONArray();
+    public JSONObject createEventsJson(List<Event> events){
+        JSONObject json = new JSONObject();
         logger.info("createEventsJson method called.");
         if (events.size() > 0) {
             for (Event event : events) {
                 try {
-                    json.put(new JSONObject().put(String.valueOf(event.getId()), createJsonFromEvent(event)));
+                    json.put(String.valueOf(event.getId()), createJsonFromEvent(event));
                 } catch (JSONException e) {
                     logger.error("{} occurred while creating json from events: {}", e.getCause(), e.getMessage());
                 }

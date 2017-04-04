@@ -125,7 +125,7 @@ public class ProfileController extends AbstractController {
         return Arrays.asList(fieldsArray).subList(2, fieldsArray.length);
     }
 
-    private JSONArray getUserEvents(Principal principal) {
+    private JSONObject getUserEvents(Principal principal) {
         List<Event> events = eventRepository.findByUserAndStatus(getCurrentUser(principal), Status.ACTIVE);
         return eventUtil.createEventsJson(events);
     }
