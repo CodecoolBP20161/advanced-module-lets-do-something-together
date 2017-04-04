@@ -35,12 +35,13 @@ public class EventUtil {
     private JSONObject createJsonFromEvent(Event event) {
         logger.info("createJsonFromEvent method called.");
         JSONObject json = new JSONObject();
-        List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 7);
+        List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 6);
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
                 json.put(field.getName(), field.get(event));
             }
+            json.put("interest", event.getInterest().getActivity());
             json.put("lat", event.getCoordinates().getLat());
             json.put("lng", event.getCoordinates().getLng());
         } catch (JSONException | IllegalAccessException e) {
