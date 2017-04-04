@@ -10,7 +10,11 @@ actimate.config(['$httpProvider',
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    }]);
+    }], ['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]
+
+);
 
 actimate.controller("MainCtrl", function ($scope, $http, $state, $stateParams) {
     // Expose $state and $stateParams to the <body> tag
