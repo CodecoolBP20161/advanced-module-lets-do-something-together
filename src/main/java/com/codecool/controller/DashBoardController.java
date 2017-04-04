@@ -2,6 +2,7 @@ package com.codecool.controller;
 
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class DashBoardController extends AbstractController {
         return events.toString();
     }
 
-    private JSONObject getAllEvents() {
+    private JSONArray getAllEvents() {
         List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
         logger.debug("{} active events collected.", events.size());
         return eventUtil.createEventsJson(events);

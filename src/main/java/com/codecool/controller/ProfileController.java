@@ -4,6 +4,7 @@ import com.codecool.model.Interest;
 import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -124,7 +125,7 @@ public class ProfileController extends AbstractController {
         return Arrays.asList(fieldsArray).subList(2, fieldsArray.length);
     }
 
-    private JSONObject getUserEvents(Principal principal) {
+    private JSONArray getUserEvents(Principal principal) {
         List<Event> events = eventRepository.findByUserAndStatus(getCurrentUser(principal), Status.ACTIVE);
         return eventUtil.createEventsJson(events);
     }
