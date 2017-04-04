@@ -34,7 +34,6 @@ actimate.directive('profileController', function() {
                         $http.get("/u/profile_data")
                             .success(function (data, status, headers, config) {
                                 $scope.user = data;
-                                updateInterests(data.profile.interestList);
                             })
                     }, function (error) {
                         console.log('Error: ', error)

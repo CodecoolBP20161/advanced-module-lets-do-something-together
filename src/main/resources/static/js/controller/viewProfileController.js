@@ -7,7 +7,7 @@ actimate.config(['$httpProvider', function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
-actimate.controller('loadUserCtrl', ['$scope', '$http', function ($scope, $http) {
+actimate.controller('loadUserCtrl', function ($scope, $http) {
 
     $scope.user = null;
     $scope.listofInterests = null;
@@ -16,4 +16,4 @@ actimate.controller('loadUserCtrl', ['$scope', '$http', function ($scope, $http)
         .then(function (response) {
             $scope.user = response.data.profile;
         })
-}]);
+});
