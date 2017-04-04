@@ -347,3 +347,7 @@ label.error {
   background-color: rgba(0, 0, 0, 0.65);
     box-shadow: 0 1px 6px rgba(0, 0, 0, .3);;
 }
+
+#contactEmail {
+    margin-top: 0px;
+}
