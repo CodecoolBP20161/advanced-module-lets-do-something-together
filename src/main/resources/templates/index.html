@@ -22,12 +22,11 @@
           href="https://fonts.googleapis.com/css?family=Quicksand"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
 
 
     <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
@@ -37,7 +36,6 @@
     <script type="text/javascript" src="/js/onepage.js"></script>
 
     <script src="/js/controller/contactController.js"></script>
-
 </head>
 <body ng-controller="contactCtrl">
 <div class="navbar navbar-inverse navbar-right navbar-static-top">
@@ -55,12 +53,11 @@
         <!-- Menu Items -->
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right">
-                <a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a>
-
+                <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
                 <li><a href="#mission">Mission</a></li>
                 <li><a href="#howitworks">How it works?</a></li>
                 <li><a href="#contactForm">Contact Us</a></li>
-                <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+                <li><a sec:authorize="isAuthenticated()" href="/u/dashboard" id="dashboard">DASHBOARD</a></li>
                 <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
                 <li><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
                 <li><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
@@ -132,41 +129,68 @@
     <div class="caption2">
         <div class="container vertical-align"
              id="contact">
-            <form id="contactForm"
-                  ng-submit="sendContact(contactForm)">
+            <form id="contactForm" ng-submit="sendContact(contactForm)" novalidate="novalidate">
                 <div class="contactus">
+
                     <div class="head">
                         <h2>Contact Us!</h2>
                     </div>
-                    <input type="text"
-                           name="name"
-                           placeholder="Name"
-                           required="required"
-                           id="contactName"
-                           ng-model="contact.name"/>
-                    <br/>
-                    <input type="email"
-                           name="email"
-                           placeholder="Email"
-                           required="required"
-                           id="contactEmail"
-                           ng-model="contact.email"/>
-                    <br/>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': !contactForm.name.$valid &amp;&amp; (!contactForm.$pristine || contactForm.$submitted)}">
+                        <input type="text"
+                               name="name"
+                               placeholder="Name"
+                               required="required"
+                               id="contactName"
+                               ng-model="contact.name"/>
+                        <p class="help-block"
+                           ng-show="contactForm.name.$invalid &amp;&amp; !contactForm.name.$pristine">
+                            Field required
+                        </p>
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': !contactForm.email.$valid &amp;&amp; (!contactForm.$pristine || contactForm.$submitted)}">
+                        <input type="email"
+                               name="email"
+                               placeholder="Email"
+                               required="required"
+                               id="contactEmail"
+                               ng-model="contact.email"/>
+                        <p class="help-block"
+                           ng-show="contactForm.email.$invalid &amp;&amp; !contactForm.email.$pristine">
+                            Field required
+                        </p>
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': !contactForm.contactMsg.$valid &amp;&amp; (!contactForm.$pristine || contactForm.$submitted)}">
                     <textarea type="text"
                               name="message"
                               placeholder="Message"
                               required="required"
                               id="contactMsg"
                               ng-model="contact.message">
-
                     </textarea>
-                    <br/>
-                    <div class="message">Message Sent</div>
-                    <button id="contactSubmit"
-                            type="submit"
-                            ng-click="sendContact()">
-                        Send!
-                    </button>
+                        <p class="help-block"
+                           ng-show="contactForm.contactMsg.$invalid &amp;&amp; !contactForm.contactMsg.$pristine">
+                            Field required
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <button href="/"
+                                disabled="disabled"
+                                type="submit"
+                                id="contactSubmit"
+                                class="btn btn-default btn-lg"
+                                ng-click="sendContact()"
+                                ng-disabled="eventform.$invalid">
+                            SEND
+                        </button>
+                    </div>
+
                 </div>
             </form>
         </div>
