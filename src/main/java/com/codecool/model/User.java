@@ -16,6 +16,7 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+    private String token;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -23,7 +24,6 @@ public class User {
 
     public User() {
     }
-
     public User(String email, String password) {
         this.email = email;
         this.password = password;
