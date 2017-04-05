@@ -16,9 +16,7 @@ body {
     background-color: #82D4BB;
 }
 
-label {
-    font-size: large;
-}
+label {  font-size: large;  }
 
 .container {
     margin-right: 20%;
@@ -32,6 +30,13 @@ label {
     color: #292f36;
     font-weight: bolder;
 }
+
+p { margin-left: inherit;
+   margin-bottom: 40px;
+    font-size: larger;
+    font-style: italic;
+   }
+
 
 div {
     display: block;
@@ -149,7 +154,7 @@ textarea:-ms-input-placeholder {
 
 .bootstrap-datetimepicker-widget td span{
     display: block; !important
-    float:none; !important;
+float:none; !important;
     width:100%; !important;
     margin: auto;
 }
@@ -196,3 +201,5 @@ textarea:-ms-input-placeholder {
 .has-success .control-label {
     color: #0b2027;
 }
+
+#interest-help {  margin-top: 39px;  }
