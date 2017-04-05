@@ -13,7 +13,6 @@ actimate.config(['$httpProvider',
     }], ['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]
-
 );
 
 actimate.controller("MainCtrl", function ($scope, $http, $state, $stateParams) {
