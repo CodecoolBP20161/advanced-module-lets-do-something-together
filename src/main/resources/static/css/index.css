@@ -347,3 +347,25 @@ label.error {
   background-color: rgba(0, 0, 0, 0.65);
     box-shadow: 0 1px 6px rgba(0, 0, 0, .3);;
 }
+
+#contactEmail {
+    margin-top: 0px;
+}
+
+.has-error .help-block {
+    background-color: #e5625e;
+    color: white;
+    font-size: larger;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 600px;
+    display: -webkit-inline-box;
+
+}
+
+.has-success .help-block,
+.has-success .control-label {
+    color: #0b2027;
+}

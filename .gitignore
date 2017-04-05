@@ -29,3 +29,4 @@ nbdist/
 /src/main/resources/application.properties
 /src/test/frontendTest/node_modules
 /src/main/resources/application-dev.properties
+*.log
