@@ -27,11 +27,11 @@ public class ApiAuthenticationService {
         String token = httpServletRequest.getHeader(AUTH_HEADER_NAME);
         User user = userRepository.findByToken(token);
         if (user == null) {
-            logger.info("No user found");
+            logger.info("No user found with this token: {}", token);
             throw new AuthenticationCredentialsNotFoundException("No user found");
         }
         if (user.getToken() == null) {
-            logger.info("No token found");
+            logger.info("No token found while calling route: {}", httpServletRequest.getRequestURI());
             throw new AuthenticationCredentialsNotFoundException("No token found");
         }
         logger.info("Token found with {}", user.getEmail());
