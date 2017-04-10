@@ -84,47 +84,9 @@
             </ul>
         </div>
     </div>
->>>>>>> Stashed changes
-
-    <div class="navbar navbar-inverse navbar-right navbar-static-top">
-        <div class="navcontainer">
-
-<<<<<<< Updated upstream
-            <div class="navbar-header">
-                <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" id="menubutton">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#home" class="navbar-brand">Actimate</a>
-            </div>
-
-            <!-- Menu Items -->
-            <div class="collapse navbar-collapse navHeaderCollapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="li-navbar"><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
-                    <li class="li-navbar"><a href="#mission">Mission</a></li>
-                    <li class="li-navbar"><a href="#howitworks">How it works?</a></li>
-                    <li class="li-navbar"><a href="#contactus">Contact Us</a></li>
-                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="/u/dashboard">DASHBOARD</a></li>
-                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
-                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
-                    <li class="li-navbar"><a sec:authorize="!isAuthenticated()" id="register" href="/registration">REGISTER</a></li>
-                    <li class="li-navbar"><a sec:authorize="!isAuthenticated()" id="login" href="/login">LOGIN</a></li>
-                    <li class="li-navbar"><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
     <div>
-        <ng-view></ng-view>
-    </div>
-=======
-<div>
     <ng-view></ng-view>
-</div>
+    </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
