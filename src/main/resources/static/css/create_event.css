@@ -16,9 +16,7 @@ body {
     background-color: #82D4BB;
 }
 
-label {
-    font-size: large;
-}
+label {  font-size: large;  }
 
 .container {
     margin-right: 20%;
@@ -32,6 +30,13 @@ label {
     color: #292f36;
     font-weight: bolder;
 }
+
+p { margin-left: inherit;
+   margin-bottom: 40px;
+    font-size: larger;
+    font-style: italic;
+   }
+
 
 div {
     display: block;
@@ -87,6 +92,7 @@ li {
     outline: auto;
 }
 
+
 input {
     padding: 20px;
 }
@@ -131,17 +137,26 @@ textarea:-ms-input-placeholder {
     font-style: italic;
 }
 
-input[type="date"]::before {
-    content: attr(data-placeholder);
-    width: 100%;
-    color: lightgrey !important;
-    font-style: italic;
-
+@media (min-width: 768px){
+    #datetimepicker1{
+        width: 50%;
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
-input[type="date"]:focus::before,
-input[type="date"]:valid::before {
-    display: none
+.input-group-addon {
+    cursor: pointer;
+}
+
+.bootstrap-datetimepicker-widget td span{
+    display: block; !important
+float:none; !important;
+    width:100%; !important;
+    margin: auto;
 }
 
 #cancel {
@@ -176,7 +191,15 @@ input[type="date"]:valid::before {
 
 }
 
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline{
+    color: #292f36;}
+
+.has-error .help-block, .has-error p, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline{
+    color: white;}
+
 .has-success .help-block,
 .has-success .control-label {
     color: #0b2027;
 }
+
+#interest-help {  margin-top: 39px;  }
