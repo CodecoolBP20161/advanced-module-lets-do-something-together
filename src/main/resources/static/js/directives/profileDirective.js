@@ -29,6 +29,7 @@ actimate.directive('profileController', function() {
                     headers: {'Content-Type': 'application/json; charset=UTF-8'},
                     data: JSON.stringify($scope.user)
                 });
+                $scope.user = null;
             };
         }
     };
