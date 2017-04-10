@@ -24,7 +24,9 @@
     <script type="text/javascript" src="/js/app.js"></script>
     <!--AngularJS Controllers-->
     <script src="/js/directives/profileDirective.js"></script>
+    <!--jqueries-->
     <script rel="text/javascript" src="/js/jquery/editProfile.js"></script>
+    <script rel="text/javascript" src="/js/jquery/locateUser.js"></script>
 
 </head>
 
@@ -106,6 +108,19 @@
                         <option value="female">English</option>
                         <option value="male">Hungarian</option>
                     </select>
+                </div>
+            </div>
+        </div>
+        <!--Location-->
+        <div class="form-group">
+            <label for="location" class="col-sm-2 control-label">Location</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input class="form-control"
+                           id="location"
+                           placeholder="Your location"
+                           type="text"
+                           ng-model="user.location"/>
                 </div>
             </div>
         </div>
