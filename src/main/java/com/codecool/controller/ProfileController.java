@@ -23,10 +23,21 @@ import java.util.stream.Collectors;
 @Controller
 public class ProfileController extends AbstractController {
 
+<<<<<<< Updated upstream
   /*  @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
+=======
+    /*@RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String renderProfile() {
+        return "profile";
+    }
+
+    @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
+>>>>>>> Stashed changes
     public String renderProfileForm() {
         return "index";
     }*/
+
+    */
 
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
     public String saveProfileForm(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {

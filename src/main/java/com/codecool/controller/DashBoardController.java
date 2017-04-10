@@ -24,7 +24,11 @@ public class DashBoardController extends AbstractController {
     public String dashboard() {
         logger.info("/u/dashboard route called - method: {}.", RequestMethod.GET);
 
+<<<<<<< Updated upstream
         return "index";
+=======
+        return "user_main";
+>>>>>>> Stashed changes
     }*/
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)

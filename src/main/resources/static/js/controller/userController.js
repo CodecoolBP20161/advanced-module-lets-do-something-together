@@ -1,6 +1,7 @@
 'use strict';
 
-actimate.controller("userCtrl", function ($scope, $http) {
+actimate.controller("userCtrl", ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
     $scope.user = {};
     $scope.errorConfirm = false;
 
@@ -10,23 +11,23 @@ actimate.controller("userCtrl", function ($scope, $http) {
                 method: 'POST',
                 url: '/registration',
                 withCredentials: true,
-                headers: {'Content-Type': 'application/json; charset=UTF-8'},
+                headers: {'Content-Type': 'application/json; charset=UTF-8', 'Accept': 'text/plain'},
                 data: angular.toJson($scope.user)
             })
-                .success(function (response) {
-                    if (response == "fail") {
+                .then(function successCallback (response) {
+                    if (response.data == "fail") {
                         $(".email-error-message").text("Email address is already in use").addClass("alert alert-danger alert-dismissable").fadeIn();
                         addError($("#emailDiv"));
                     } else {
-                        onSuccess();
+                        $location.path('/');
+                        console.log('saved')
                     }
                     console.log(response);
-                })
-                .error(function (response) {
+                }, function errorCallback (response) {
                     alert("failure message: " + angular.toJson($scope.user));
                 });
         }
         // Making the fields empty
         $scope.user = null;
-    };
-});
+        };
+    }]);

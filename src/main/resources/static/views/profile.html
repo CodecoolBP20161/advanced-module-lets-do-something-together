@@ -1,0 +1,47 @@
+<div id="w">
+    <div id="content" class="clearfix">
+        <div id="userphoto"><img src="/images/avatar.png" alt="default avatar"/>
+            <h1 id="username">{{user.firstName}} {{user.lastName}}</h1>
+            <a type="submit" id="btn-edit" href="/u/edit-profile" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
+        </div>
+        <h1>Your Profile</h1>
+
+        <div id="profiletabs">
+            <ul class="clearfix">
+                <li><a href="#bio" class="sel" ng-click="changeTag('bio')">Bio</a></li>
+                <li><a href="#interest">Interests</a></li>
+                <li><a href="#activity">Your Activities</a></li>
+                <li><a href="#events">Saved Events</a></li>
+            </ul>
+        </div>
+
+        <section id="bio">
+            <p>{{user.introduction}}</p>
+        </section>
+
+        <section id="interest" class="hidden">
+            <ul>
+                <li ng-repeat="interest in user.interestList">{{interest}}</li>
+            </ul>
+        </section>
+
+        <section id="activity" class="hidden">
+            <p>Your upcoming activities:</p>
+
+            <ul id="activityList" class="clearfix">
+
+            </ul>
+        </section>
+
+        <section id="events" class="hidden">
+            <p>Your upcoming events:</p>
+
+            <ul id="eventList" class="clearfix">
+
+            </ul>
+        </section>
+
+
+    </div>
+</div>
