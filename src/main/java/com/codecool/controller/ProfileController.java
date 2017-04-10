@@ -23,18 +23,6 @@ import java.util.stream.Collectors;
 @Controller
 public class ProfileController extends AbstractController {
 
-    /*@RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String renderProfile() {
-        return "profile";
-    }
-
-    @RequestMapping(value = "/edit-profile", method = RequestMethod.GET)
-    public String renderProfileForm() {
-        return "profile_form";
-    }
-
-    */
-
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
     public String saveProfileForm(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
         Profile currentProfile = getCurrentProfile(principal);
