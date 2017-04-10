@@ -1,9 +1,6 @@
 
-
 #menubutton { border: transparent !important; cursor: pointer}
 #menubutton:hover, #menubutton:focus { background-color: #82D4BB; border: transparent !important;}
-
-{ background-color: transparent}
 
 /* Collapse breakpoint changed */
 @media (max-width: 943px) {
@@ -55,6 +52,7 @@
 }
 
 .onepage {
+    display: block;
     perspective: 1px;
     height: 100vh;
     top: 100px;

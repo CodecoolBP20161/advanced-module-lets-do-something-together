@@ -29,14 +29,8 @@ public class MainController {
         if (error != null) {
             model.addAttribute("error", "Failed to log in. Email or password is invalid!");
         }
-<<<<<<< Updated upstream
-        return "index";
-    }
-
-=======
         return "login_form";
     }*/
->>>>>>> Stashed changes
 
     @ResponseBody
     @RequestMapping(value = "/interests", method = RequestMethod.GET)

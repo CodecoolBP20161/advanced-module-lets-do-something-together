@@ -32,11 +32,7 @@ public class EventController extends AbstractController {
     /*@RequestMapping(value = "/create_event", method = RequestMethod.GET)
     public String renderCreateEventForm() {
         logger.info("/u/create_event route called - method: {}.", RequestMethod.GET);
-<<<<<<< Updated upstream
-        return "index";
-=======
         return "create_event";
->>>>>>> Stashed changes
     }*/
 
     @RequestMapping(value = "/create_event", method = RequestMethod.POST)

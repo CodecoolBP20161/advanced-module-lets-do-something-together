@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 actimate.controller('loadUserCtrl', function ($scope, $http) {
 
         $scope.user = null;

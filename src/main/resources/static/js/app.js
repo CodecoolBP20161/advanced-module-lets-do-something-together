@@ -1,13 +1,11 @@
 'use strict';
 
-
 var actimate = angular.module('actimate', [
     'ngRoute',
     'ngResource',
     'gm',
     'jcs-autoValidate'
 ])
-
 
     .config(['$httpProvider', '$routeProvider', '$locationProvider',
         function ($httpProvider, $routeProvider, $locationProvider) {
@@ -62,12 +60,8 @@ var actimate = angular.module('actimate', [
         console.log($location.path())
     }]);
 
-
-/*actimate.controller("MainCtrl", function ($scope, $http, $state, $stateParams) {
-=======
 /*
 actimate.controller("mainCtrl", function ($scope, $http, $state, $stateParams) {
->>>>>>> Stashed changes
     // Expose $state and $stateParams to the <body> tag
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
@@ -75,7 +69,7 @@ actimate.controller("mainCtrl", function ($scope, $http, $state, $stateParams) {
 
 actimate.service('mainService', function () {
 
-<<<<<<< Updated upstream
-});*/
+});
+*/
 
 

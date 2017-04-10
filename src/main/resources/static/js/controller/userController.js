@@ -1,6 +1,8 @@
 'use strict';
 
+
 actimate.controller("userCtrl", ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
 
     $scope.user = {};
     $scope.errorConfirm = false;

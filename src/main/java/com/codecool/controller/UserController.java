@@ -42,11 +42,7 @@ public class UserController {
 
     /*@RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
-<<<<<<< Updated upstream
-        return "index";
-=======
         return "registration";
->>>>>>> Stashed changes
     }*/
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)

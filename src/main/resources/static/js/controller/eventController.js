@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 actimate.run(function (defaultErrorMessageResolver) {
             defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
                 errorMessages['wrongNumber'] = 'Please invite at least 1 person!';

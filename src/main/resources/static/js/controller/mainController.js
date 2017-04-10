@@ -1,11 +1,7 @@
 'use strict';
 
-actimate.controller('mainCtrl', function ($http) {
-    $http({
-        method: 'GET',
-        url: '/',
-        withCredentials: true,
-        headers: {'Content-Type': 'charset=UTF-8'},
-        data: 'templates/main.html'
-    })
-});
+actimate.controller('mainCtrl', ['$rootScope', '$location', '$scope', function($rootScope, $location, $scope) {
+        $scope.currentPath = $location.path();
+        console.log($location.path())
+
+    }]);
