@@ -11,12 +11,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
+
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -169,4 +170,27 @@ public class ProfileControllerTest extends AbstractTestController {
                 .andExpect(status().is2xxSuccessful());
         assertEquals("I'm M", profileRepository.findByUser(mockUser).getIntroduction());
     }
+
+    @Test
+    @WithMockUser(value = "user@user.com")
+    public void saveProfileInterestsTest() throws Exception {
+        userService.create(mockUser, Role.USER);
+        profile = new Profile(mockUser);
+        profileRepository.save(profile);
+
+        String profileString =
+                "{\"firstName\":\"littleDog\"," +
+                        "\"interest\":[\"running\",\"gokart\"]}";
+
+        mockMvc.perform(post(editProfileRoute)
+                .content(profileString)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful());
+        assertTrue(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("gokart")));
+        assertTrue(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("running")));
+        assertFalse(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("someInterest")));
+    }
+
 }
