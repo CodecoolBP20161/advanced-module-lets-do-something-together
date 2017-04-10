@@ -27,24 +27,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-public class UserController {
+public class UserController extends AbstractController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-
-    @Autowired
-    ProfileRepository profileRepository;
-    @Autowired
-    InterestRepository interestRepository;
-    @Autowired
-    private UserService userService;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
     private UserEmailRepository userEmailRepository;
-
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
