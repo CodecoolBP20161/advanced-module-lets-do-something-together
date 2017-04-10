@@ -25,7 +25,7 @@ public class Profile {
     @NotNull
     private String firstName;
 
-    private String lastName, language, gender;
+    private String lastName, language, gender,location;
     @Column(columnDefinition = "TEXT")
     private String introduction;
 
