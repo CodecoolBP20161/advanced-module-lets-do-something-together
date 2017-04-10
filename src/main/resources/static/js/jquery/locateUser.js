@@ -39,7 +39,7 @@ function getCity(position) {
 }
 
 function setLocationData(city, country) {
-    $("#location").val(city + ", " + country);
+    $("#location").val(city + ", " + country).trigger('input');
 }
 
 $(document).ready(function () {
