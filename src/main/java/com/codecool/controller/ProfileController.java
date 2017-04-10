@@ -5,8 +5,6 @@ import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
 import org.json.JSONArray;
-import com.codecool.repository.EventRepository;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -60,32 +58,34 @@ public class ProfileController extends AbstractController {
             try {
                 fieldValue = jsonData.get(field.getName()).toString();
             } catch (JSONException ignored) {
-                logger.error("{}: occurred while trying to parse data {}", ignored.getClass().getSimpleName(), ignored.getMessage());
-                result.put("status","error");
+                logger.error("Ignored {} occurred while trying to parse data {}", ignored.getClass().getSimpleName(), ignored.getMessage());
+                result.put("status", "error");
             }
             field.set(currentProfile, fieldValue);
         }
         currentProfile.setInterestList(getUpdatedInterestList(jsonData));
         profileRepository.save(currentProfile);
-        logger.info("Profile(email: {}) saved into the database", currentProfile.getUser().getEmail());
-        result.put("status","success");
+        logger.info("Profile(email: '{}') saved into the database", currentProfile.getUser().getEmail());
+        result.put("status", "success");
         return result.toString();
     }
 
     @RequestMapping(value = "/profile_data", method = RequestMethod.GET)
     @ResponseBody
     public String profileData(Principal principal) throws IllegalAccessException {
+        logger.info("Profile requests data for user '{}'", principal.getName());
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("profile", getUserProfile(principal));
             jsonObject.put("events", getUserEvents(principal));
         } catch (JSONException e) {
-            e.getMessage();
+            logger.error("{}: occurred while trying to collect profile data {}", e.getClass().getSimpleName(), e.getMessage());
         }
         return jsonObject.toString();
     }
 
     private JSONObject getUserProfile(Principal principal) throws IllegalAccessException {
+        logger.info("Profile data collected for user '{}'", principal.getName());
         JSONObject json = new JSONObject();
         Profile currentProfile = getCurrentProfile(principal);
         List<Field> fields = getEditableFieldsOfCurrentProfile(currentProfile);
@@ -102,6 +102,7 @@ public class ProfileController extends AbstractController {
                             .map(Interest::getActivity)
                             .collect(Collectors.toList()));
         } catch (JSONException ignored) {
+            logger.error("Ignored {}: occurred while trying to collect profile data {}", ignored.getClass().getSimpleName(), ignored.getMessage());
         }
         return json;
     }
@@ -113,8 +114,9 @@ public class ProfileController extends AbstractController {
             for (int i = 0; i < json.length(); i++) {
                 interests.add(interestRepository.findByActivity(json.get(i).toString()));
             }
+            logger.info("Create updated interest list. {} interest(s) added", interests.size());
         } catch (JSONException e) {
-            e.getMessage();
+            logger.error("Ignored {}: occurred while trying to collect profile data {}", e.getClass().getSimpleName(), e.getMessage());
         }
         return interests;
     }
@@ -125,7 +127,9 @@ public class ProfileController extends AbstractController {
     }
 
     private JSONObject getUserEvents(Principal principal) {
+        logger.info("Event data collected for user {}", principal.getName());
         List<Event> events = eventRepository.findByUserAndStatus(getCurrentUser(principal), Status.ACTIVE);
+        logger.info("{} events collected", events.size());
         return eventUtil.createEventsJson(events);
     }
 }
