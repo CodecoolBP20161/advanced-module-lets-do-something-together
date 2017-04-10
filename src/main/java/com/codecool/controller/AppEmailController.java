@@ -113,7 +113,7 @@ public class AppEmailController {
         }
     }
 
-    @Scheduled(fixedDelayString = "3000")
+    @Scheduled(fixedDelayString = "300000")
     private void manageNewContacts() {
         logger.info("Checking new contacts in the db.");
         List<Contact> unforwardedContacts = contactRepository.findAllByForwarded(false);
