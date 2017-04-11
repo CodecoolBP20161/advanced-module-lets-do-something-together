@@ -19,8 +19,13 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     List<Event> findByStatusAndInterestInOrderByDate(Status status, List<Interest> interest);
 
-    List<Event> findByStatusAndInterestInAndLocationIgnoreCaseContainingOrderByDate(Status status, List<Interest> interest, String location);
+    List<Event> findByStatusAndInterestInAndLocationIgnoreCaseContainingOrderByDate(
+            Status status, List<Interest> interest, String location);
 
-    List<Event> findByStatusAndInterestInAndDateBetweenOrderByDate(Status status, List<Interest> interest, Date startDate, Date endDate);
+    List<Event> findByStatusAndInterestInAndDateBetweenOrderByDate(
+            Status status, List<Interest> interest, Date startDate, Date endDate);
+
+    List<Event> findByStatusAndInterestInAndDateBetweenAndLocationIgnoreCaseContainingOrderByDate(
+            Status status, List<Interest> interest, Date startDate, Date endDate, String location);
 
 }
