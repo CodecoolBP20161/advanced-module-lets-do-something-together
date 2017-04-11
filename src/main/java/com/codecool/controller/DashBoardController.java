@@ -1,5 +1,6 @@
 package com.codecool.controller;
 
+import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
 import org.json.JSONException;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -39,6 +41,16 @@ public class DashBoardController extends AbstractController {
             logger.error("{} occurred while collecting events to json: {}", e.getCause(), e.getMessage());
         }
         return events.toString();
+    }
+
+//    TODO initial version for test purposes
+    @RequestMapping(value = "/custom_events", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCustomEventsBasedOnInterest(Principal principal) {
+        Profile profile = getCurrentProfile(principal);
+        List<Event> events = eventRepository.findByStatusAndInterestInOrderByDate(Status.ACTIVE, profile.getInterestList());
+        logger.info("{} active events collected based on user's interests.", events.size());
+        return eventUtil.createEventsJson(events).toString();
     }
 
     private JSONObject getAllEvents() {
