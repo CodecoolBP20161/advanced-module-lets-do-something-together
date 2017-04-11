@@ -8,12 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class EventUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(EventUtil.class);
+
+    private Calendar calendar = Calendar.getInstance();
 
     public JSONObject createEventsJson(List<Event> events) {
         JSONObject json = new JSONObject();
@@ -48,13 +53,19 @@ public class EventUtil {
         return json;
     }
 
+    public Date getDateOneMonthFromNow(Date now) {
+        logger.info("Getting date one month from now.");
+        calendar.setTime(now);
+        calendar.add(Calendar.MONTH, 1);
+        return calendar.getTime();
+    }
+
     //    compares string date to today's last minute
     public int compareDates(Date date) {
-        Calendar calendarDay = new GregorianCalendar();
-        calendarDay.set(Calendar.HOUR_OF_DAY, 23);
-        calendarDay.set(Calendar.MINUTE, 59);
-        calendarDay.set(Calendar.SECOND, 59);
-        Date today = calendarDay.getTime();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        Date today = calendar.getTime();
         logger.info("Compare dates: {} to {}", date, today);
         return today.compareTo(date);
     }
