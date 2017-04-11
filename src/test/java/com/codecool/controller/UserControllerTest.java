@@ -1,7 +1,7 @@
 package com.codecool.controller;
 
 import com.codecool.repository.ProfileRepository;
-import com.codecool.repository.UserEmailRepository;
+import com.codecool.email.repository.WelcomeEmailRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserControllerTest extends AbstractTestController {
     private ProfileRepository profileRepository;
 
     @Autowired
-    private UserEmailRepository userEmailRepository;
+    private WelcomeEmailRepository welcomeEmailRepository;
 
     @Before
     public void setup() {
@@ -63,7 +63,7 @@ public class UserControllerTest extends AbstractTestController {
                 .accept(MediaType.APPLICATION_JSON));
 
         assertEquals("user@user.com",
-                userEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
+                welcomeEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
     }
 
     @Test

@@ -1,5 +1,6 @@
-package com.codecool.model;
+package com.codecool.email.model;
 
+import com.codecool.model.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-public class UserEmail {
+public class WelcomeEmail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +23,10 @@ public class UserEmail {
     @NotNull
     private User user;
 
-    public UserEmail(User user) {
+    public WelcomeEmail(User user) {
         this.user = user;
     }
 
-    public UserEmail() {
+    public WelcomeEmail() {
     }
 }

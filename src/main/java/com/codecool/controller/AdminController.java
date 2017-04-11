@@ -1,6 +1,6 @@
 package com.codecool.controller;
 
-import com.codecool.repository.UserEmailRepository;
+import com.codecool.email.repository.WelcomeEmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AdminController extends AbstractController {
 
     @Autowired
-    private UserEmailRepository userEmailRepository;
+    private WelcomeEmailRepository welcomeEmailRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public String mainUI() {
@@ -33,7 +33,7 @@ public class AdminController extends AbstractController {
 
     @RequestMapping(value = "/emails", method = RequestMethod.GET)
     public String listUsersWithUnsentEmail(Model model) {
-        model.addAttribute("users", userEmailRepository.findAllByEmailSent(false));
+        model.addAttribute("users", welcomeEmailRepository.findAllByEmailSent(false));
         return "admin/admin_emails";
     }
 }
