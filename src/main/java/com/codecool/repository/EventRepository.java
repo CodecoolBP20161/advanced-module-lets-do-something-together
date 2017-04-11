@@ -1,5 +1,6 @@
 package com.codecool.repository;
 
+import com.codecool.model.Interest;
 import com.codecool.model.User;
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
@@ -14,5 +15,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findByStatus(Status status);
 
     List<Event> findByUserAndStatus(User user, Status status);
+
+    List<Event> findByStatusAndInterestInOrderByDate(Status status, List<Interest> interest);
 
 }
