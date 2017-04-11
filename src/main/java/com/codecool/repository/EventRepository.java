@@ -7,6 +7,7 @@ import com.codecool.model.event.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -19,5 +20,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findByStatusAndInterestInOrderByDate(Status status, List<Interest> interest);
 
     List<Event> findByStatusAndInterestInAndLocationIgnoreCaseContainingOrderByDate(Status status, List<Interest> interest, String location);
+
+    List<Event> findByStatusAndInterestInAndDateBetweenOrderByDate(Status status, List<Interest> interest, Date startDate, Date endDate);
 
 }
