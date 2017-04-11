@@ -50,13 +50,7 @@ public class EventController extends AbstractController {
             event.setName(json.get("name").toString());
             event.setCoordinates(new Coordinates(json.get("lng"), json.get("lat")));
             event.setLocation(json.get("location").toString());
-            try {
-                DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                event.setDate(format.parse(json.get("date").toString()));
-            } catch (ParseException e) {
-                logger.error("{} occurred while parsing the date of the event: {}.\nUnparsable date: {}", e.getCause(), e.getMessage(), json.get("date"));
-
-            }
+            event.setDate(parseDate(json.get("date").toString()));
             event.setInterest(interestRepository.findByActivity(json.get("interest").toString()));
             event.setUser(userService.getUserByEmail(principal.getName()).get());
             eventRepository.save(event);
@@ -71,6 +65,19 @@ public class EventController extends AbstractController {
         logger.info("Validating event json: {}", json);
         List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 7);
         return !fields.stream().map(field -> json.has(field.getName())).collect(Collectors.toList()).contains(false);
+    }
+
+    private Date parseDate(String date) {
+        Date parsedDate = null;
+        try {
+            DateFormat format = new SimpleDateFormat("MM/dd/yyy hh:mm a");
+            parsedDate = format.parse(date);
+            logger.info("'{}' successfully parsed from event json", parsedDate);
+        } catch (ParseException e) {
+            logger.error("{} occurred while parsing the date of the event: {}.\n" +
+                    "Unparsable date: {}", e.getCause(), e.getMessage(), date);
+        }
+        return parsedDate;
     }
 
     //    method called daily at midnight
