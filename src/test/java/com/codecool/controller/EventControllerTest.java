@@ -14,7 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.web.util.NestedServletException;
 
 import javax.transaction.Transactional;
-
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.containsString;

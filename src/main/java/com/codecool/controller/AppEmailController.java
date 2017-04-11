@@ -23,11 +23,9 @@ import java.util.Date;
 public class AppEmailController {
 
     private static final Logger logger = LoggerFactory.getLogger(AppEmailController.class);
-
+    private final String URL = "http://localhost:60227";
     @Autowired
     private EmailHandler emailHandler;
-
-    private final String URL = "http://localhost:60227";
 
     @Scheduled(fixedDelayString = "31000")
     private void manageSentEmails() {

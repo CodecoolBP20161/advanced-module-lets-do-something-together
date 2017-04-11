@@ -1,7 +1,6 @@
 package com.codecool.util;
 
 import com.codecool.model.event.Event;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ public class EventUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(EventUtil.class);
 
-    public JSONObject createEventsJson(List<Event> events){
+    public JSONObject createEventsJson(List<Event> events) {
         JSONObject json = new JSONObject();
         logger.info("createEventsJson method called.");
         if (events.size() > 0) {

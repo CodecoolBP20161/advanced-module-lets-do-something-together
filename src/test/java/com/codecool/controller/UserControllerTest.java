@@ -1,7 +1,7 @@
 package com.codecool.controller;
 
-import com.codecool.repository.ProfileRepository;
 import com.codecool.email.repository.WelcomeEmailRepository;
+import com.codecool.repository.ProfileRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

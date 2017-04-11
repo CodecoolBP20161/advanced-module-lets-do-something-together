@@ -20,14 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class AuthenticationFilter extends GenericFilterBean{
-
+public class AuthenticationFilter extends GenericFilterBean {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
 
     @Autowired
     ApiAuthenticationService service;
-
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

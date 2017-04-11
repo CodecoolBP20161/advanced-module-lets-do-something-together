@@ -2,7 +2,6 @@ package com.codecool.controller;
 
 import com.codecool.model.event.Event;
 import com.codecool.model.event.Status;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
