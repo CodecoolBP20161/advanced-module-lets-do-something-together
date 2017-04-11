@@ -45,15 +45,7 @@ public class EventController extends AbstractController {
         JSONObject json = new JSONObject(data);
         if (validateEventJson(json)) {
             logger.info("Valid json, all necessary event fields present.");
-            event.setParticipants(Integer.parseInt(json.get("participants").toString()));
-            event.setDescription(json.get("description").toString());
-            event.setName(json.get("name").toString());
-            event.setCoordinates(new Coordinates(json.get("lng"), json.get("lat")));
-            event.setLocation(json.get("location").toString());
-            event.setDate(parseDate(json.get("date").toString()));
-            event.setInterest(interestRepository.findByActivity(json.get("interest").toString()));
-            event.setUser(userService.getUserByEmail(principal.getName()).get());
-            eventRepository.save(event);
+            eventRepository.save(eventFromJson(event, json, principal));
             logger.info("New event created successfully.");
             result.put("status", "success");
         }
@@ -67,12 +59,25 @@ public class EventController extends AbstractController {
         return !fields.stream().map(field -> json.has(field.getName())).collect(Collectors.toList()).contains(false);
     }
 
+    private Event eventFromJson(Event event, JSONObject json, Principal principal) throws JSONException {
+        logger.info("Setting fields of a new event.");
+        event.setParticipants(Integer.parseInt(json.get("participants").toString()));
+        event.setDescription(json.get("description").toString());
+        event.setName(json.get("name").toString());
+        event.setCoordinates(new Coordinates(json.get("lng"), json.get("lat")));
+        event.setLocation(json.get("location").toString());
+        event.setDate(parseDate(json.get("date").toString()));
+        event.setInterest(interestRepository.findByActivity(json.get("interest").toString()));
+        event.setUser(userService.getUserByEmail(principal.getName()).get());
+        return event;
+    }
+
     private Date parseDate(String date) {
         Date parsedDate = null;
         try {
             DateFormat format = new SimpleDateFormat("MM/dd/yyy hh:mm a");
             parsedDate = format.parse(date);
-            logger.info("'{}' successfully parsed from event json", parsedDate);
+            logger.debug("'{}' successfully parsed from event json", parsedDate);
         } catch (ParseException e) {
             logger.error("{} occurred while parsing the date of the event: {}.\n" +
                     "Unparsable date: {}", e.getCause(), e.getMessage(), date);
