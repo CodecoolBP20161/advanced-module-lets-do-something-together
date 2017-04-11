@@ -78,7 +78,7 @@ public class EventControllerTest extends AbstractTestController {
                         "\"lng\":\"47.505013\", " +
                         "\"lat\":\"19.057821\", " +
                         "\"location\":\"Budapest, Nagymező utca 44, Hungary\", " +
-                        "\"date\":\"2017-03-15T23:00:00.000Z\", " +
+                        "\"date\":\"04/12/2017 2:15 PM\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
                 .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)
