@@ -8,8 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EventUtil {
@@ -47,6 +46,17 @@ public class EventUtil {
             logger.error("{} occurred while creating json from event: {}", e.getCause(), e.getMessage());
         }
         return json;
+    }
+
+    //    compares string date to today's last minute
+    public int compareDates(Date date) {
+        Calendar calendarDay = new GregorianCalendar();
+        calendarDay.set(Calendar.HOUR_OF_DAY, 23);
+        calendarDay.set(Calendar.MINUTE, 59);
+        calendarDay.set(Calendar.SECOND, 59);
+        Date today = calendarDay.getTime();
+        logger.info("Compare dates: {} to {}", date, today);
+        return today.compareTo(date);
     }
 
 }

@@ -19,7 +19,9 @@ import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -91,20 +93,10 @@ public class EventController extends AbstractController {
     private void managePastEvents() {
         logger.info("Midnight db management: updating events' statuses.");
         List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
-        events.stream().filter(event -> compareDates(event.getDate()) >= 0).forEach(event -> {
+        events.stream().filter(event -> eventUtil.compareDates(event.getDate()) >= 0).forEach(event -> {
             event.setStatus(Status.PAST);
             eventRepository.save(event);
         });
     }
 
-    //    compares string date to today's last minute
-    private int compareDates(Date date) {
-        Calendar calendarDay = new GregorianCalendar();
-        calendarDay.set(Calendar.HOUR_OF_DAY, 23);
-        calendarDay.set(Calendar.MINUTE, 59);
-        calendarDay.set(Calendar.SECOND, 59);
-        Date today = calendarDay.getTime();
-        logger.info("Compare dates: {} to {}", date, today);
-        return today.compareTo(date);
-    }
 }
