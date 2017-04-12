@@ -2,7 +2,7 @@
 
 .registration-body {
     font-family: "Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 0;
+    margin: auto;
     text-align: center;
     background-color: #82D4BB;
     height: 100vh;
@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
 
 }
 
@@ -31,10 +32,10 @@
     max-width: 400px;
     max-height: 800px;
     margin-top: 0px;
+    align-content: center;
 }
 
 .signup-screen {
-    align: center;
     align-content: center;
     padding: 20px;
     padding-bottom: 40px;

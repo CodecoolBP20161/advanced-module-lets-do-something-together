@@ -30,51 +30,51 @@ label {
     outline: auto;
 }
 
-input {
+.input-createevent {
     padding: 20px;
 }
 
-input::-webkit-input-placeholder {
+.input-createevent::-webkit-input-placeholder {
     color: lightgrey !important;
     font-style: italic;
 }
 
-input:-moz-placeholder { /* Firefox 18- */
+.input-createevent:-moz-placeholder { /* Firefox 18- */
     color: lightgrey !important;
     font-style: italic;
 }
 
-input::-moz-placeholder { /* Firefox 19+ */
+.input-createevent::-moz-placeholder { /* Firefox 19+ */
     color: lightgrey !important;
     font-style: italic;
 }
 
-input:-ms-input-placeholder {
+.input-createevent:-ms-input-placeholder {
     color: lightgrey !important;
     font-style: italic;
 }
 
-textarea::-webkit-input-placeholder {
+.textarea-createevent::-webkit-input-placeholder {
     color: lightgrey !important;
     font-style: italic;
 }
 
-textarea:-moz-placeholder { /* Firefox 18- */
+.textarea-createevent:-moz-placeholder { /* Firefox 18- */
     color: lightgrey !important;
     font-style: italic;
 }
 
-textarea::-moz-placeholder { /* Firefox 19+ */
+.textarea-createevent::-moz-placeholder { /* Firefox 19+ */
     color: lightgrey !important;
     font-style: italic;
 }
 
-textarea:-ms-input-placeholder {
+.textarea-createevent:-ms-input-placeholder {
     color: lightgrey !important;
     font-style: italic;
 }
 
-input[type="date"]::before {
+.input-createevent[type="date"]::before {
     content: attr(data-placeholder);
     width: 100%;
     color: lightgrey !important;
@@ -82,8 +82,8 @@ input[type="date"]::before {
 
 }
 
-input[type="date"]:focus::before,
-input[type="date"]:valid::before {
+.input-createevent[type="date"]:focus::before,
+.input-createeventinput[type="date"]:valid::before {
     display: none
 }
 

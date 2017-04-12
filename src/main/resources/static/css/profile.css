@@ -113,12 +113,12 @@ img {
     margin: 0 0 0 -50%;
 }
 
-h1:after {
+.h1-profile:after {
     left: .5em;
     margin: 0 -50% 0 0;
 }
 
-h1 > span {
+.h1-profile > span {
     display: inline-block;
     vertical-align: middle;
     white-space: normal;
@@ -138,7 +138,7 @@ h2 {
     text-align: center;
 }
 
-p {
+.p-profile {
     display: block;
     font-size: 1.9em;
     line-height: 1.55em;
@@ -147,11 +147,11 @@ p {
     background-color: #ffffff;
 }
 
-a { color: #5a9352; text-decoration: none; }
-a:hover { text-decoration: none; }
+.a-profile { color: #5a9352; text-decoration: none; }
+.a-profile:hover { text-decoration: none; }
 .clearfix > li > a:visited { text-decoration: none; }
 
-a:hover {
+.a-profile:hover {
     text-decoration: underline;
 }
 
