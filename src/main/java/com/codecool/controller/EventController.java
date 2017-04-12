@@ -77,7 +77,7 @@ public class EventController extends AbstractController {
     private Date parseDate(String date) {
         Date parsedDate = null;
         try {
-            DateFormat format = new SimpleDateFormat("MM/dd/yyy hh:mm a");
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
             parsedDate = format.parse(date);
             logger.debug("'{}' successfully parsed from event json", parsedDate);
         } catch (ParseException e) {
