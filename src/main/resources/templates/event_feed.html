@@ -16,8 +16,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-
-    <!--Style-->
+    <script src="/js/controller/cardController.js"></script>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css"/>
@@ -28,7 +27,7 @@
     <!--AngularJS Controller-->
 
 </head>
-<body>
+<body ng-controller="cardCtrl">
 
 <nav>
     <ul class="fix top">
@@ -43,29 +42,27 @@
 </nav>
 
 
-<div class="panel panel-default">
+<div class="panel panel-default" ng-repeat="event in events">
 
     <div class="panel-heading clearfix">
-        <h3 class="panel-title pull-left">TITLE</h3>
-        <button class="btn btn-danger pull-right">Interest</button>
+        <h3 class="panel-title pull-left event-name">{{event.name}}</h3>
+        <h3 class="panel-title pull-right interest">{{event.interest}}</h3>
     </div>
     <div class="col-md-6">
         <div class="card-block">
         <ul>
             <li>
-                <h4 class="card-title">DATE</h4>
-                <p class="list-group-item-heading">relative date</p>
+                <h4 class="card-title date">{{event.date}}</h4>
+                <p class="list-group-item-heading rel-date">relative date</p>
             </li>
             <li>
-                <h4 class="list-group-item-text">LOCATION</h4>
-                <p class="list-group-item-heading">SLOTS/Reserved</p>
+                <h4 class="list-group-item-text location">{{event.location}}</h4>
+            </li>
+            <li>
+                <h4 class="list-group-item-text slots">{{event.participants}}</h4>
             </li>
         </ul>
         </div>
-
-
-
-        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris tellus, vehicula ut tellus id, suscipit dapibus tortor. Integer viverra turpis ac fringilla hendrerit. Sed faucibus posuere felis et pellentesque. Cras varius tortor vitae molestie tempor. Proin ut viverra elit, ac gravida tortor.</p>
 
     </div>
     <div class="col-md-6">
@@ -74,9 +71,9 @@
     </div>
 
     <div class="panel-footer clearfix">
-        <h3 class="panel-title pull-left">USER</h3>
+        <h3 class="panel-title pull-left user">{{event.user}}</h3>
 
-        <a class="btn btn-primary pull-right" href="#">Details</a>
+        <a class="btn btn-primary pull-right btn-details" href="#">Details</a>
     </div>
 </div>
 

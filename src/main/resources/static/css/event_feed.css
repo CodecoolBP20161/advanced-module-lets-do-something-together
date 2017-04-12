@@ -66,3 +66,31 @@ li {
     background: url(../images/tennis.jpg) center no-repeat;
     background-size: auto;
 }
+
+.panel { padding: 10px;}
+.panel-default > .panel-heading {
+    background-color: #1E26B8;
+}
+
+.panel-title {
+    color: white;
+    font-style: oblique;
+}
+
+.date { margin-bottom: 5px;}
+
+.card-block > ul > li > .location { margin-bottom: 30px;}
+
+.user {
+    color: black;
+}
+
+.event-name, .user {
+    padding-left: 5%;
+}
+
+.interest {
+    padding-right: 5%;
+}
+
+.btn-details { background-color:  #292f36; border-color: #292f36}
