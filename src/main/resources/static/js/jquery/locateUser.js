@@ -24,7 +24,6 @@ function getCity(position) {
                     var data = JSON.parse(request.responseText);
                     var address = data.results[0];
                     resolve(address);
-                    console.log(address)
                     var city = address.address_components[3].short_name;
                     var country = address.address_components[4].long_name;
                     setLocationData(city, country);
@@ -39,7 +38,9 @@ function getCity(position) {
 }
 
 function setLocationData(city, country) {
-    $("#location").val(city + ", " + country).trigger('input');
+    if  ($('#location').val() == "") {
+        $("#location").val(city + ", " + country).trigger('input');
+    }
 }
 
 $(document).ready(function () {
