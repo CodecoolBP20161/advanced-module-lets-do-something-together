@@ -41,11 +41,11 @@
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" id="menubutton"></button>
                 <a href="/" class="navbar-brand">Actimate</a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
+            <ul ng-controller="menuCtrl" class="nav navbar-nav navbar-right">
                 <li class="li-navbar"><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
-                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar index-page"><a href="#mission">Mission</a></li>
-                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar index-page"><a href="#howitworks">How it works?</a></li>
-                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar index-page"><a href="#contactus">Contact Us</a></li>
+                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a href="#mission">Mission</a></li>
+                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a href="#howitworks">How it works?</a></li>
+                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a href="#contactus">Contact Us</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/dashboard">DASHBOARD</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/create_event" id="createEvent">CREATE EVENT</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/profile" id="profile">PROFILE</a></li>
@@ -53,6 +53,7 @@
                 <li class="li-navbar"><a sec:authorize="!isAuthenticated()" id="login" href="login">LOGIN</a></li>
                 <!--<li class="li-navbar"><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT</a></li>-->
                 <li class="li-navbar" ng-show="authenticated"><a href="" ng-click="logout()" id="logout">LOGOUT</a></li>
+
             </ul>
         </div>
     </div>
@@ -97,6 +98,8 @@
 <script type="text/javascript" src="/js/controller/viewProfileController.js"></script>
 <script type="text/javascript" src="/js/controller/userController.js"></script>
 <script type="text/javascript" src="/js/controller/loginController.js"></script>
+<script type="text/javascript" src="/js/controller/menuController.js"></script>
+
 
 <!--<script type="text/javascript" src="/js/controller/eventOnDashboardController.js"></script>-->
 
