@@ -1,14 +1,14 @@
 
-<div id="signup">
-    <div class="signup-screen">
+<div id="signup registration-body">
+    <div class="signup-screen container-registration">
         <div class="space-bot text-center">
-            <h1 id="sign-up-title">Registration</h1>
+            <h1 class="h1-registration" id="sign-up-title">Register</h1>
         </div>
         <form class="form-register ng-valid-email ng-invalid ng-invalid-required ng-dirty ng-valid-parse ng-invalid-minlength"
               name="validForm" ng-submit="addUser(validForm.$valid)" novalidate="novalidate">
 
             <div class="form-group text-center" id="emailDiv">
-                <label class="col-md-12 control-label" for="email">EMAIL</label>
+                <h4 class="col-md-12 control-label" for="email">EMAIL</h4>
                 <div class="input-field col s6 input-group">
                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                     <input onfocus="hideError()" onblur="validateEmailFormat()"

@@ -43,9 +43,9 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="li-navbar"><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
-                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar"><a href="#mission">Mission</a></li>
-                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar"><a href="#howitworks">How it works?</a></li>
-                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar"><a href="#contactus">Contact Us</a></li>
+                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar index-page"><a href="#mission">Mission</a></li>
+                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar index-page"><a href="#howitworks">How it works?</a></li>
+                <li ng-show="currentPath === '/'" ng-cloak="ng-cloak" class="li-navbar index-page"><a href="#contactus">Contact Us</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/dashboard">DASHBOARD</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/create_event" id="createEvent">CREATE EVENT</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/profile" id="profile">PROFILE</a></li>
