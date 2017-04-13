@@ -10,6 +10,11 @@ actimate.config(['$httpProvider', function ($httpProvider) {
 actimate.controller('saveEventCtrl', function ($scope, $http) {
     $scope.event = {};
 
+    $('#datetimepicker1').on('dp.change', function (data) {
+        $scope.event.date = moment(data.date).format("DD/MM/YYYY HH:mm a");
+        $scope.$apply();
+    });
+
     $scope.saveEvent = function () {
 
         $http({
@@ -20,7 +25,6 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
         })
             .then(function (response) {
                 console.log(response);
-                console.log("Location is: " + $scope.event.location + " , Interest is: " + $scope.event.interest );
             })
     };
 
