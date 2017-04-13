@@ -11,17 +11,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class DataLoader {
 
-    private List<String> basicActivities = new ArrayList<>(
-            Arrays.asList("tennis", "gokart", "running", "cardGames",
-                    "cinema", "theater", "cityWalks", "hiking"));
+    private Map<String, String> basicActivities = new HashMap<String, String>() {{
+        put("waterSports", "#1E26B8");
+        put("winterSports", "#45CCFF");
+        put("outdoorSports", "#FF9C2D");
+        put("cultural", "#530E53");
+        put("outdoorActivity", "#64F22A");
+        put("ballGames", "#F22799");
+        put("boardGames", "#F03F20");
+        put("eSports", "#B243FF");
+        put("indoorSports", "#FFFC44");
+        put("other", "#32333D");
+    }};
 
     @Autowired
     private InterestRepository interestRepository;
@@ -35,7 +43,11 @@ public class DataLoader {
     @PostConstruct
     public void loadBasicActivities() {
         if (interestRepository.findAll().isEmpty()) {
-            basicActivities.forEach(activity -> interestRepository.save(new Interest(activity)));
+            basicActivities.entrySet().forEach(activity -> {
+                Interest interest = new Interest(activity.getKey());
+                interest.setColorCode(activity.getValue());
+                interestRepository.save(interest);
+            });
         }
     }
 

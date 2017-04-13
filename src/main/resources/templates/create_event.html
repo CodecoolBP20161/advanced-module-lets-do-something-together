@@ -85,14 +85,16 @@
                             name="interest"
                             ng-model="event.interest"
                             required="required">
-                        <option value="tennis">Tennis</option>
-                        <option value="gokart">Gokart</option>
-                        <option value="running">Running</option>
-                        <option value="hiking">Hiking</option>
-                        <option value="cinema">Cinema</option>
-                        <option value="theater">Theater</option>
-                        <option value="cardGames">Card Games</option>
-                        <option value="cityWalks">City Walks</option>
+                        <option value="waterSports">Water Sports</option>
+                        <option value="winterSports">Winter Sports</option>
+                        <option value="outdoorSports">Outdoor Sports</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="outdoorActivity">Outdoor Activity</option>
+                        <option value="ballGames">Ball Games</option>
+                        <option value="boardGames">Board Games</option>
+                        <option value="eSports">e-Sports</option>
+                        <option value="indoorSports">Indoor Sports</option>
+                        <option value="other">Other</option>
                     </select>
                     <p class="help-block" id="interest-help" ng-show="eventform.interest.$invalid &amp;&amp; eventform.interest.$touched">Required</p>
                 </div>
@@ -128,7 +130,7 @@
                 <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-                <p class="help-block" ng-show="eventform.date.$invalid &amp;&amp; eventform.date.$touched">Required></p>
+                <p class="help-block" ng-show="eventform.date.$invalid &amp;&amp; eventform.date.$touched">Required</p>
             </div>
         </div>
 
