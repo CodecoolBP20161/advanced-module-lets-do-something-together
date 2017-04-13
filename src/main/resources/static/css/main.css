@@ -78,7 +78,7 @@
     font-size: 20px;
     text-align: center;
     background-color: white;
-    padding: 50px 80px;
+    padding: 50px 50px;
 }
 
 .bgimg-1 {
@@ -96,11 +96,13 @@
 .bgimg-2 {
     background-image: url("../images/img_parallax3.jpg");
     min-height: 400px;
+    opacity: 0.75;
 }
 
 .bgimg-3 {
     background-image: url("../images/img_parallax2.jpeg");
     min-height: 400px;
+    opacity: 0.75;
 }
 
 .bgimg-5 {
@@ -117,7 +119,6 @@
 
 .bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5 {
     position: relative;
-    opacity: 0.85;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
