@@ -24,7 +24,6 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
             data: JSON.stringify($scope.event)
         })
             .then(function (response) {
-                console.log(response);
             })
     };
 
