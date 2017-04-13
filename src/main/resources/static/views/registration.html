@@ -1,6 +1,6 @@
 
 <div id="signup registration-body">
-    <div class="signup-screen container-registration">
+    <div class="signup-screen container">
         <div class="space-bot text-center">
             <h1 class="h1-registration" id="sign-up-title">Register</h1>
         </div>
@@ -8,7 +8,7 @@
               name="validForm" ng-submit="addUser(validForm.$valid)" novalidate="novalidate">
 
             <div class="form-group text-center" id="emailDiv">
-                <h4 class="col-md-12 control-label" for="email">EMAIL</h4>
+                <h4 class="col-md-12 control-label h4-registration" for="email">EMAIL</h4>
                 <div class="input-field col s6 input-group">
                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                     <input onfocus="hideError()" onblur="validateEmailFormat()"
@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group text-center" id="pwdDiv">
-                <label class="col-md-12 control-label" for="password">PASSWORD</label>
+                <h4 class="col-md-12 control-label h4-registration" for="password">PASSWORD</h4>
                 <div class="input-field col s6 input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input type="password" ng-minlength='6' id="password"
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group text-center" id="pwd2Div">
-                <label class="col-md-12 control-label" for="confirmPassword">CONFIRM PASSWORD</label>
+                <h4 class="col-md-12 control-label h4-registration" for="confirmPassword">CONFIRM PASSWORD</h4>
                 <div class="input-field col s6 input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input onkeyup="passwordMatch()" type="password"
