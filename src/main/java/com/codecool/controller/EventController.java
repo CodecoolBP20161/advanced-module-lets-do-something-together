@@ -42,7 +42,6 @@ public class EventController extends AbstractController {
     public String createEvent(@RequestBody String data, Principal principal) throws JSONException {
         logger.info("/u/create_event route called - method: {}.", RequestMethod.POST);
         logger.debug("Create event data: {}", data);
-        System.out.println("!!!!!!!!data = " + data);
         JSONObject result = new JSONObject().put("status", "failed");
         Event event = new Event();
         JSONObject json = new JSONObject(data);
@@ -51,8 +50,9 @@ public class EventController extends AbstractController {
             eventRepository.save(eventFromJson(event, json, principal));
             logger.info("New event created successfully.");
             result.put("status", "success");
+        } else {
+            logger.error("Invalid json, not all necessary event fields present.");
         }
-        logger.error("Invalid json, not all necessary event fields present.");
         return result.toString();
     }
 
@@ -78,7 +78,7 @@ public class EventController extends AbstractController {
     private Date parseDate(String date) {
         Date parsedDate = null;
         try {
-            DateFormat format = new SimpleDateFormat("DD/MM/YYYY HH:mm a");
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm a");
             parsedDate = format.parse(date);
             logger.debug("'{}' successfully parsed from event json", parsedDate);
         } catch (ParseException e) {
