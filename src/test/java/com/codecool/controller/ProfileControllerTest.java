@@ -179,7 +179,7 @@ public class ProfileControllerTest extends AbstractTestController {
 
         String profileString =
                 "{\"firstName\":\"littleDog\"," +
-                        "\"interest\":[\"running\",\"gokart\"]}";
+                        "\"interest\":[\"cultural\",\"other\"]}";
 
         mockMvc.perform(post(editProfileRoute)
                 .content(profileString)
@@ -187,8 +187,8 @@ public class ProfileControllerTest extends AbstractTestController {
                 .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful());
-        assertTrue(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("gokart")));
-        assertTrue(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("running")));
+        assertTrue(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("other")));
+        assertTrue(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("cultural")));
         assertFalse(profileRepository.findByUser(mockUser).getInterestList().contains(interestRepository.findByActivity("someInterest")));
     }
 

@@ -73,7 +73,7 @@ public class EventControllerTest extends AbstractTestController {
         int eventsBefore = eventRepository.findAll().size();
         mockMvc.perform(post(route)
                 .content("{\"name\":\"eventName\"," +
-                        "\"interest\":\"gokart\", " +
+                        "\"interest\":\"other\", " +
                         "\"lng\":\"47.505013\", " +
                         "\"lat\":\"19.057821\", " +
                         "\"location\":\"Budapest, Nagymező utca 44, Hungary\", " +
