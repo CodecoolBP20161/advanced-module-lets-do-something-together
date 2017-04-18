@@ -43,6 +43,7 @@ public class ProfileController extends AbstractController {
     @RequestMapping(value = "/edit-profile", method = RequestMethod.POST)
     public String saveProfileForm(@RequestBody String data, Principal principal) throws JSONException, IllegalAccessException {
         logger.info("/u/edit-profile route called - method: {}.", RequestMethod.POST);
+        logger.info("Profile data: '{}'", data);
         Profile currentProfile = getCurrentProfile(principal);
         JSONObject result = new JSONObject();
         List<Field> fields = getEditableFieldsOfCurrentProfile(currentProfile);

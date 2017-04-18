@@ -40,7 +40,7 @@ var getCity = function (position) {
 var setLocationData = function (city, country) {
     var locationSelector = "#location";
     var locationString = city + ", " + country;
-    if (!$(locationSelector).val()) {
+    if (!($(locationSelector).val().length)) {
         $(locationSelector).val(locationString).trigger('input');
     }
 };
