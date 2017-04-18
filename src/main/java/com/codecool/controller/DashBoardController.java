@@ -32,11 +32,11 @@ public class DashBoardController extends AbstractController {
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     @ResponseBody
-    public String collectEvents() {
+    public String collectEvents(Principal principal) {
         logger.info("/u/events route called - method: {}.", RequestMethod.GET);
         JSONObject events = new JSONObject();
         try {
-            events.put("events", getAllEvents());
+            events.put("events", getAllEvents(principal));
             logger.info("All events collected to dashboard.");
         } catch (JSONException e) {
             logger.error("{} occurred while collecting events to json: {}", e.getCause(), e.getMessage());
@@ -54,10 +54,21 @@ public class DashBoardController extends AbstractController {
         return eventUtil.createEventsJson(events).toString();
     }
 
-    private JSONArray getAllEvents() {
-        List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
-        logger.debug("{} active events collected.", events.size());
+    private JSONArray getAllEvents(Principal principal) {
+        Profile profile = getCurrentProfile(principal);
+        List<Event> ownEvents = eventRepository.findByStatusAndInterestInOrderByDate(Status.ACTIVE, profile.getInterestList());
+        logger.info("{} active events based on user's interest(s) collected.", ownEvents.size());
+        List<Event> otherEvents = eventRepository.findByStatus(Status.ACTIVE);
+        logger.info("{} other active events collected.", otherEvents.size());
+        List<Event> events = mergeLists(ownEvents, otherEvents);
         return eventUtil.createEventsJson(events);
+    }
+
+    private List<Event> mergeLists(List<Event> ownEvents, List<Event> otherEvents) {
+        otherEvents.removeAll(ownEvents);
+        ownEvents.addAll(otherEvents);
+        logger.info("Interest based and every other event merged. {} event(s) collected.", ownEvents.size());
+        return ownEvents;
     }
 
 }
