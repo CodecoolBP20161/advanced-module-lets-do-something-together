@@ -18,6 +18,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+
+    <!--Location - Google autocomplete-->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
+    <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
+
     <!--Style-->
     <link rel="stylesheet" type="text/css" href="/css/profile_form.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
@@ -121,7 +126,8 @@
                            placeholder="Your location"
                            type="text"
                            name="location"
-                           ng-model="user.location"/>
+                           gm-places-autocomplete=""
+                           ng-model="autocomplete"/>
                 </div>
             </div>
         </div>
@@ -176,7 +182,7 @@
                     <li>
                         <input type="checkbox" id="indoorSports" ng-model="user.interest.indoorSports"/>
                         <label for="indoorSports">Indoor Sports</label>
-                    </li>                   
+                    </li>
                     <li>
                         <input type="checkbox" id="other" ng-model="user.interest.other"/>
                         <label for="other">Other</label>
@@ -190,7 +196,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <a href="/u/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
                 <input type="submit" value="Submit" class="btn btn-info btn-lg"
-                   ng-click="saveProfile()" disabled="disabled"/>
+                       ng-click="saveProfile()" disabled="disabled"/>
             </div>
         </div>
 

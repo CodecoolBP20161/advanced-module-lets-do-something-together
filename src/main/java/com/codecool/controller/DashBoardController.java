@@ -44,7 +44,7 @@ public class DashBoardController extends AbstractController {
         return events.toString();
     }
 
-//    TODO initial version for test purposes
+    //    TODO initial version for test purposes
     @RequestMapping(value = "/custom_events", method = RequestMethod.GET)
     @ResponseBody
     public String getCustomEventsBasedOnInterest(Principal principal) {

@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 public class EventUtil {
 
@@ -36,9 +35,8 @@ public class EventUtil {
             List<JSONObject> js = events
                     .stream()
                     .map(this::createJsonFromEvent)
-                   .collect(Collectors.toList());
+                    .collect(Collectors.toList());
             json = new JSONArray(js);
-
         }
         return json;
     }
@@ -62,12 +60,11 @@ public class EventUtil {
         }
         return json;
     }
-
-    private String getEventOwnerName(Event event){
+    private String getEventOwnerName(Event event) {
         Profile profile = profileRepository.findByUser(event.getUser());
         return (profile.getLastName() != null) ?
-        String.format("%s %s", profile.getFirstName(), profile.getLastName()) :
-        profile.getFirstName().split("@")[0];
+                String.format("%s %s", profile.getFirstName(), profile.getLastName()) :
+                profile.getFirstName().split("@")[0];
     }
 
     public Date getDateOneMonthFromNow(Date now) {

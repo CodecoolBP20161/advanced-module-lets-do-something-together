@@ -17,7 +17,6 @@ function checkInterests() {
             interests.push(id)
         }
     });
-console.log(interests)
     return interests;
 }
 
