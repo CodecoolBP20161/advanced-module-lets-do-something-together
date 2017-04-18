@@ -1,14 +1,20 @@
 'use strict';
 
-var actimate = angular.module('actimate', ['ngResource', 'gm']);
-actimate.config(['$httpProvider', function ($httpProvider) {
+var actimate = angular.module('actimate', ['ngResource', 'gm', 'ngRoute']);
+actimate.config(['$httpProvider', '$qProvider', function ($httpProvider, $qProvider) {
     $httpProvider.defaults.useXDomain = true;
+    $qProvider.errorOnUnhandledRejections(false);
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
 
 actimate.controller('saveEventCtrl', function ($scope, $http) {
     $scope.event = {};
+
+    $('#datetimepicker1').on('dp.change', function (data) {
+        $scope.event.date = moment(data.date).format("DD/MM/YYYY HH:mm a");
+        $scope.$apply();
+        });
 
     $scope.saveEvent = function () {
 
@@ -19,8 +25,6 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
             data: JSON.stringify($scope.event)
         })
             .then(function (response) {
-                console.log(response);
-                console.log("Location is: " + $scope.event.location + " , Interest is: " + $scope.event.interest );
             })
     };
 
