@@ -60,7 +60,6 @@ public class EventUtil {
         }
         return json;
     }
-
     private String getEventOwnerName(Event event) {
         Profile profile = profileRepository.findByUser(event.getUser());
         return (profile.getLastName() != null) ?
