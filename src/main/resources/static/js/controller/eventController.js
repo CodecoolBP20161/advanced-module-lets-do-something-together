@@ -16,6 +16,7 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
         $scope.$apply();
         });
 
+
     $scope.saveEvent = function () {
 
         $http({

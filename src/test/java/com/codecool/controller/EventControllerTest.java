@@ -14,7 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.web.util.NestedServletException;
 
 import javax.transaction.Transactional;
-
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -74,11 +73,11 @@ public class EventControllerTest extends AbstractTestController {
         int eventsBefore = eventRepository.findAll().size();
         mockMvc.perform(post(route)
                 .content("{\"name\":\"eventName\"," +
-                        "\"interest\":\"gokart\", " +
+                        "\"interest\":\"other\", " +
                         "\"lng\":\"47.505013\", " +
                         "\"lat\":\"19.057821\", " +
                         "\"location\":\"Budapest, Nagymező utca 44, Hungary\", " +
-                        "\"date\":\"2017-03-15T23:00:00.000Z\", " +
+                        "\"date\":\"04/12/2017 2:15 PM\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
                 .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)

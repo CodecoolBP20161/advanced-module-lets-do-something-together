@@ -1,30 +1,19 @@
 package com.codecool.controller;
 
-import com.codecool.model.User;
-import com.codecool.model.UserEmail;
-import com.codecool.repository.UserEmailRepository;
+import com.codecool.email.model.WelcomeEmail;
+import com.codecool.email.repository.WelcomeEmailRepository;
 import com.codecool.security.Role;
-import com.codecool.security.service.user.UserService;
-import com.codecool.test.AbstractTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.web.FilterChainProxy;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertEquals;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -37,7 +26,7 @@ public class AdminControllerTest extends AbstractTestController {
     private String emailRoute;
 
     @Autowired
-    private UserEmailRepository userEmailRepository;
+    private WelcomeEmailRepository welcomeEmailRepository;
 
     @Before
     public void setup() {
@@ -50,7 +39,7 @@ public class AdminControllerTest extends AbstractTestController {
 
     @After
     public void tearDown() {
-        userEmailRepository.deleteAll();
+        welcomeEmailRepository.deleteAll();
         userService.deleteAllUsers();
     }
 
@@ -130,8 +119,8 @@ public class AdminControllerTest extends AbstractTestController {
     @WithMockUser(authorities = {"ADMIN"})
     public void listUsersWithUnsentEmailData() throws Exception {
         userService.create(mockUser, Role.USER);
-        UserEmail userEmail = new UserEmail(mockUser);
-        userEmailRepository.save(userEmail);
+        WelcomeEmail welcomeEmail = new WelcomeEmail(mockUser);
+        welcomeEmailRepository.save(welcomeEmail);
 
         mockMvc.perform(get(emailRoute)
                 .header("X-AUTH-TOKEN", UUID.randomUUID().toString()))

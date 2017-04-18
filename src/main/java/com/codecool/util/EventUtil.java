@@ -1,7 +1,6 @@
 package com.codecool.util;
 
 import com.codecool.model.event.Event;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,7 +18,9 @@ public class EventUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(EventUtil.class);
 
-    public JSONObject createEventsJson(List<Event> events){
+    private Calendar calendar = Calendar.getInstance();
+
+    public JSONObject createEventsJson(List<Event> events) {
         JSONObject json = new JSONObject();
         logger.info("createEventsJson method called.");
         if (events.size() > 0) {
@@ -48,6 +51,23 @@ public class EventUtil {
             logger.error("{} occurred while creating json from event: {}", e.getCause(), e.getMessage());
         }
         return json;
+    }
+
+    public Date getDateOneMonthFromNow(Date now) {
+        logger.info("Getting date one month from now.");
+        calendar.setTime(now);
+        calendar.add(Calendar.MONTH, 1);
+        return calendar.getTime();
+    }
+
+    //    compares string date to today's last minute
+    public int compareDates(Date date) {
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        Date today = calendar.getTime();
+        logger.info("Compare dates: {} to {}", date, today);
+        return today.compareTo(date);
     }
 
 }

@@ -1,16 +1,16 @@
-function getCoords() {
+var getCoords = function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getCity, noLocation);
     } else {
         noLocation();
     }
-}
+};
 
-function noLocation() {
+var noLocation = function () {
     setLocationData("City", "Country")
-}
+};
 
-function getCity(position) {
+var getCity = function (position) {
     return new Promise(function (resolve, reject) {
         var request = new XMLHttpRequest();
         var method = 'GET';
@@ -24,7 +24,6 @@ function getCity(position) {
                     var data = JSON.parse(request.responseText);
                     var address = data.results[0];
                     resolve(address);
-                    console.log(address)
                     var city = address.address_components[3].short_name;
                     var country = address.address_components[4].long_name;
                     setLocationData(city, country);
@@ -36,11 +35,15 @@ function getCity(position) {
         };
         request.send();
     });
-}
+};
 
-function setLocationData(city, country) {
-    $("#location").val(city + ", " + country).trigger('input');
-}
+var setLocationData = function (city, country) {
+    var locationSelector = "#location";
+    var locationString = city + ", " + country;
+    if (!$(locationSelector).val()) {
+        $(locationSelector).val(locationString).trigger('input');
+    }
+};
 
 $(document).ready(function () {
     getCoords();
