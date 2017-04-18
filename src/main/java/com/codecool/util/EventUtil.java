@@ -1,10 +1,14 @@
 package com.codecool.util;
 
+import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
+import com.codecool.repository.ProfileRepository;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -12,6 +16,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class EventUtil {
@@ -20,23 +26,25 @@ public class EventUtil {
 
     private Calendar calendar = Calendar.getInstance();
 
-    public JSONObject createEventsJson(List<Event> events) {
-        JSONObject json = new JSONObject();
+    @Autowired
+    ProfileRepository profileRepository;
+
+    public JSONArray createEventsJson(List<Event> events) {
+        JSONArray json = null;
         logger.info("createEventsJson method called.");
         if (events.size() > 0) {
-            for (Event event : events) {
-                try {
-                    json.put(String.valueOf(event.getId()), createJsonFromEvent(event));
-                } catch (JSONException e) {
-                    logger.error("{} occurred while creating json from events: {}", e.getCause(), e.getMessage());
-                }
-            }
+            List<JSONObject> js = events
+                    .stream()
+                    .map(this::createJsonFromEvent)
+                   .collect(Collectors.toList());
+            json = new JSONArray(js);
+
         }
         return json;
     }
 
     private JSONObject createJsonFromEvent(Event event) {
-        logger.info("createJsonFromEvent method called.");
+        logger.info("createJsonFromEvent method called for event 'id_{}'.", event.getId());
         JSONObject json = new JSONObject();
         List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 6);
         try {
@@ -45,12 +53,21 @@ public class EventUtil {
                 json.put(field.getName(), field.get(event));
             }
             json.put("interest", event.getInterest().getActivity());
+            json.put("color", event.getInterest().getColorCode());
             json.put("lat", event.getCoordinates().getLat());
             json.put("lng", event.getCoordinates().getLng());
+            json.put("user", getEventOwnerName(event));
         } catch (JSONException | IllegalAccessException e) {
             logger.error("{} occurred while creating json from event: {}", e.getCause(), e.getMessage());
         }
         return json;
+    }
+
+    private String getEventOwnerName(Event event){
+        Profile profile = profileRepository.findByUser(event.getUser());
+        return (profile.getLastName() != null) ?
+        String.format("%s %s", profile.getFirstName(), profile.getLastName()) :
+        profile.getFirstName().split("@")[0];
     }
 
     public Date getDateOneMonthFromNow(Date now) {

@@ -1,0 +1,97 @@
+html {
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    top: 300px;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #82D4BB;
+}
+
+nav {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: #292f36;
+    z-index: 99;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    padding-right: 5%;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 30px;
+    line-height: 50px;
+    font-size: larger;
+}
+
+.nav-link {
+    display: block;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+li {
+    display: inline;
+    padding: 0 20px;
+}
+
+.page {
+    top: 100px;
+}
+
+
+.panel {    margin-top: 100px;
+    margin-left: 20%;
+    margin-right: 20%}
+
+.card-img-bottom {
+    color: #fff;
+    height: 30rem;
+    background: url(../images/ball_sport.jpg) center no-repeat;
+    background-size: 60%;
+}
+
+.panel { padding: 10px;}
+.panel-default > .panel-heading {
+    background-color: #1E26B8;
+}
+
+.panel-title {
+    color: white;
+    font-style: oblique;
+}
+
+.date { margin-bottom: 5px;}
+
+.card-block > ul > li > .location { margin-bottom: 30px;}
+
+.user {
+    color: black;
+    display: inline-flex;
+}
+
+.event-name, .user {
+    padding-left: 5%;
+}
+
+.interest {
+    padding-right: 5%;
+}
+
+.btn-details { background-color:  #292f36; border-color: #292f36}
