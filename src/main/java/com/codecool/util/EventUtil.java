@@ -1,11 +1,14 @@
 package com.codecool.util;
 
+import com.codecool.model.Profile;
 import com.codecool.model.event.Event;
+import com.codecool.repository.ProfileRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -21,6 +24,9 @@ public class EventUtil {
     private static final Logger logger = LoggerFactory.getLogger(EventUtil.class);
 
     private Calendar calendar = Calendar.getInstance();
+
+    @Autowired
+    ProfileRepository profileRepository;
 
     public JSONArray createEventsJson(List<Event> events) {
         JSONArray json = null;
@@ -45,12 +51,21 @@ public class EventUtil {
                 json.put(field.getName(), field.get(event));
             }
             json.put("interest", event.getInterest().getActivity());
+            json.put("color", event.getInterest().getColorCode());
             json.put("lat", event.getCoordinates().getLat());
             json.put("lng", event.getCoordinates().getLng());
+            json.put("user", getEventOwnerName(event));
         } catch (JSONException | IllegalAccessException e) {
             logger.error("{} occurred while creating json from event: {}", e.getCause(), e.getMessage());
         }
         return json;
+    }
+
+    private String getEventOwnerName(Event event) {
+        Profile profile = profileRepository.findByUser(event.getUser());
+        return (profile.getLastName() != null) ?
+                String.format("%s %s", profile.getFirstName(), profile.getLastName()) :
+                profile.getFirstName().split("@")[0];
     }
 
     public Date getDateOneMonthFromNow(Date now) {
