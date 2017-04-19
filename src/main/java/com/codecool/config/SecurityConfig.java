@@ -5,10 +5,10 @@ import com.codecool.security.Role;
 import com.codecool.security.service.ApiAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.repository.query.spi.EvaluationContextExtension;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,8 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling()
-        ;
+                .exceptionHandling();
     }
 
     @Override
@@ -60,5 +59,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     ApiAuthenticationService apiAuthenticationService() {
         return new ApiAuthenticationService();
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(filter);
+        registration.addUrlPatterns("/u/**");
+        registration.setName("apiFilter");
+        registration.setOrder(1);
+        return registration;
     }
 }

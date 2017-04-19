@@ -1,20 +1,12 @@
 package com.codecool.controller;
 
+import com.codecool.email.repository.WelcomeEmailRepository;
 import com.codecool.repository.ProfileRepository;
-import com.codecool.repository.UserEmailRepository;
-import com.codecool.security.service.user.UserService;
-import com.codecool.test.AbstractTest;
-import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
-
-import javax.annotation.Resource;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
@@ -25,25 +17,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
-public class UserControllerTest extends AbstractTest {
-
-    @Autowired
-    private UserService userService;
+public class UserControllerTest extends AbstractTestController {
 
     @Autowired
     private ProfileRepository profileRepository;
 
     @Autowired
-    private UserEmailRepository userEmailRepository;
-
-    @Resource
-    private WebApplicationContext webApplicationContext;
-
-    private MockMvc mockMvc;
+    private WelcomeEmailRepository welcomeEmailRepository;
 
     @Before
-    public void setup() throws JSONException {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    public void setup() {
+        initMockMvc();
     }
 
     @Test
@@ -79,7 +63,7 @@ public class UserControllerTest extends AbstractTest {
                 .accept(MediaType.APPLICATION_JSON));
 
         assertEquals("user@user.com",
-                userEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
+                welcomeEmailRepository.findAllByEmailSent(false).get(0).getUser().getEmail());
     }
 
     @Test

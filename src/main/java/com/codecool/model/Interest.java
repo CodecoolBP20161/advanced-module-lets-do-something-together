@@ -18,8 +18,10 @@ public class Interest {
     @NotNull
     private int id;
 
-    @Column
+    @NotNull
     private String activity;
+
+    private String colorCode;
 
     @ManyToMany(mappedBy = "interestList")
     private List<Profile> profiles;

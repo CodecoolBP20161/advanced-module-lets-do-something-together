@@ -1,13 +1,7 @@
 package com.codecool.controller;
 
-import com.codecool.test.AbstractTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import javax.annotation.Resource;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -15,25 +9,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-public class MainControllerTest extends AbstractTest {
+public class MainControllerTest extends AbstractTestController {
 
-    @Resource
-    private WebApplicationContext webApplicationContext;
-
-    private MockMvc mockMvc;
+    private String route;
 
     @Before
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        initMockMvc();
+        route = "/";
     }
 
     @Test
     public void mainPageTest() throws Exception {
 
-        mockMvc.perform(get("/"))
+        mockMvc.perform(get(route))
                 .andExpect(status().is2xxSuccessful());
 
-        mockMvc.perform(get("/"))
+        mockMvc.perform(get(route))
                 .andExpect(content().string(containsString("Actimate")));
 
         mockMvc.perform(get("/notvalidroute"))
@@ -42,11 +34,11 @@ public class MainControllerTest extends AbstractTest {
 
     @Test
     public void loginPageTest() throws Exception {
-
-        mockMvc.perform(get("/login"))
+        String login = "/login";
+        mockMvc.perform(get(login))
                 .andExpect(status().is2xxSuccessful());
 
-        mockMvc.perform(get("/login"))
+        mockMvc.perform(get(login))
                 .andExpect(content().string(containsString("LOGIN")))
                 .andExpect(content().string(containsString("PASSWORD")))
                 .andExpect(content().string(containsString("EMAIL")));

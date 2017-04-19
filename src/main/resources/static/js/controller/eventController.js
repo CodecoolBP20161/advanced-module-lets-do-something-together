@@ -1,20 +1,19 @@
 'use strict';
 
-var actimate = angular.module('actimate', ['ngResource', 'gm', 'jcs-autoValidate']);
+var actimate = angular.module('actimate', ['ngResource', 'gm']);
 actimate.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
-actimate.run(function (defaultErrorMessageResolver) {
-        defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
-            errorMessages['wrongNumber'] = 'Please invite at least 1 person!';
-            errorMessages['wrongInputType'] = 'Please enter letters only!';
-        });
-    }
-);
+
 
 actimate.controller('saveEventCtrl', function ($scope, $http) {
     $scope.event = {};
+
+    $('#datetimepicker1').on('dp.change', function (data) {
+        $scope.event.date = moment(data.date).format("DD/MM/YYYY HH:mm a");
+        $scope.$apply();
+    });
 
     $scope.saveEvent = function () {
 
@@ -25,7 +24,6 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
             data: JSON.stringify($scope.event)
         })
             .then(function (response) {
-                console.log($scope.event);
             })
     };
 
@@ -33,7 +31,9 @@ actimate.controller('saveEventCtrl', function ($scope, $http) {
         var location = $scope.autocomplete.getPlace().geometry.location;
         $scope.event.lat = location.lat();
         $scope.event.lng = location.lng();
+        $scope.event.location = $scope.autocomplete.getPlace().formatted_address;
         $scope.$apply();
     });
+
 
 });

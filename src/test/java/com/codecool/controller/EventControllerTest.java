@@ -1,10 +1,7 @@
 package com.codecool.controller;
 
-import com.codecool.model.User;
 import com.codecool.repository.EventRepository;
 import com.codecool.security.Role;
-import com.codecool.security.service.user.UserService;
-import com.codecool.test.AbstractTest;
 import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
@@ -14,54 +11,34 @@ import org.junit.rules.ExpectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.web.FilterChainProxy;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.NestedServletException;
 
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.isA;
 import static org.junit.Assert.assertEquals;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @Transactional
-public class EventControllerTest extends AbstractTest {
+public class EventControllerTest extends AbstractTestController {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
-    @Resource
-    private WebApplicationContext webApplicationContext;
-    private MockMvc mockMvc;
-    @Resource
-    private FilterChainProxy springSecurityFilterChain;
+
     @Autowired
     private EventRepository eventRepository;
-    @Autowired
-    private UserService userService;
     private String route;
-    private User mockUser;
 
     @Before
     public void setup() {
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(webApplicationContext)
-                .apply(springSecurity())
-                .addFilters(springSecurityFilterChain)
-                .build();
-
+        initMockMvc();
         route = "/u/create_event";
-        mockUser = new User("user@user.com", "password");
     }
 
     @After
@@ -72,7 +49,10 @@ public class EventControllerTest extends AbstractTest {
 
     @Test
     public void createEventFormUnavailableWithoutLogin() throws Exception {
-        mockMvc.perform(get(route)).andExpect(status().is3xxRedirection());
+        mockMvc.perform(get(route))
+                .andExpect(unauthenticated())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl(loginRoute));
     }
 
     @Test
@@ -93,10 +73,11 @@ public class EventControllerTest extends AbstractTest {
         int eventsBefore = eventRepository.findAll().size();
         mockMvc.perform(post(route)
                 .content("{\"name\":\"eventName\"," +
-                        "\"interest\":\"gokart\", " +
+                        "\"interest\":\"other\", " +
                         "\"lng\":\"47.505013\", " +
                         "\"lat\":\"19.057821\", " +
-                        "\"date\":\"2017-03-15T23:00:00.000Z\", " +
+                        "\"location\":\"Budapest, Nagymező utca 44, Hungary\", " +
+                        "\"date\":\"04/12/2017 2:15 PM\", " +
                         "\"participants\":\"42\", \"description\":\"none\"}")
                 .header("X-AUTH-TOKEN", UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)
