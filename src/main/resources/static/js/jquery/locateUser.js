@@ -14,7 +14,7 @@ var getCity = function (position) {
     return new Promise(function (resolve, reject) {
         var request = new XMLHttpRequest();
         var method = 'GET';
-        var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' +
+        var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
             position.coords.latitude + ',' + position.coords.longitude + '&sensor=true';
         var async = true;
         request.open(method, url, async);
