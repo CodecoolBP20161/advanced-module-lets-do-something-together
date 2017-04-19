@@ -1,0 +1,16 @@
+language: java
+install: mvn clean test -Dmaven.javadoc.skip=true -Dspring.profiles.active=test -B
+  -V
+sudo: false
+addons:
+  apt:
+    packages:
+    - oracle-java8-installer
+jdk:
+- oraclejdk8
+notifications:
+  email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: wO3KyxNA7cYqqmqReVRO6FSvmaykLaB3IiWWfF1q/CKKHAzaiweBGEgllTkunDC7Ejy07gyO3WucDGK2O4yPCAA2M7JZMExsuB+M4Sr1FDq0lvJwf/6nxjXoTjD3PzHonk2WacekFTwxW8cw/1h60MsUtch8APBWDykeKfaVi0JUiM0hubVT5Wc6ywXdlvGtxXnmfNbf9ym2MKTaYFTx7KXyS7d8+nYPfaolk0x/eqdciB04xXPul0JlwsV29Pe7adkypoj787KWedMgi4Qp03N/gHHOqPnKOzZdZeCVKqZvqi8BWVnrlp4fIPYw2naH9pPfw7rYiTZ0zxUppbWyIryLnmDRbX3xJdWPJmvaUFpYpih+YIZ3Ff3AbiSNrggZRYKFxOkiZC1jedRzCUtDEdD6Afk/5suOEo/0oT9eroQYn99ryKTAbX4RzE3USREA7sH0xM9X4fKME7KfuIDHjeJO0hwCLbCmiQfXelnwfr2lTbZ94q+5cB6QYV9i411qU6bqEBzC8VRGudIjgAWGNoRwJCfa9oxGhnj7jKk0+g6iE66hpqcv/UPBGrwRlk4OIFdqSwF9kS0Mr4aM18Lb/5vrJ/V91fLQ0Jb5vmn0lzVXe9K9shL+QKOvcr9LPnn7vijMyZ2nzbqqd69aTl3NC/HXVege/wKl455FXvlUDxQ=

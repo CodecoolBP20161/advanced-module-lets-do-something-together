@@ -1,99 +1,212 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="actimate">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" ng-app="actimate">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-    <title>ActiMate</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
+    <meta http-equiv="cleartype" content="on"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <title>Actimate</title>
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Quicksand"/>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/profile_form.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script>
-    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
-    <script type="text/javascript" src="/js/directives/profileDirective.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+
+    <!--Location - Google autocomplete-->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACLX7LNDx6aPRJbliFct--cSQgZKoxXUQ&amp;libraries=places"></script>
+    <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
+
+    <!--Style-->
+    <link rel="stylesheet" type="text/css" href="/css/profile_form.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <!--AngularJS Controllers-->
+    <script src="/js/directives/profileDirective.js"></script>
+    <!--jqueries-->
+    <script rel="text/javascript" src="/js/jquery/editProfile.js"></script>
+    <script rel="text/javascript" src="/js/jquery/locateUser.js"></script>
+
 </head>
+
 <body profile-controller="profileController" load-user-ctrl="loadUserCtrl">
+
+<nav>
+    <ul class="fix top">
+
+        <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin">ADMIN</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/u/dashboard">HOME</a></li>
+        <li><a sec:authorize="isAuthenticated()" href="/u/profile" id="profile">PROFILE</a></li>
+        <li><a href="/u/create_event" id="createEvent">CREATE EVENT</a></li>
+        <li><a sec:authorize="isAuthenticated()" id="logout" th:href="@{/logout}">LOGOUT
+            <span class="glyphicon glyphicon-log-out"></span></a></li>
+
+    </ul>
+</nav>
+
+<div class="title">
+    <h2> Your Profile</h2>
+</div>
 <div class="container">
-    <h2>Your Profile</h2>
-    <form name="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate" required="required"
-          class="profileForm">
-        <ul class="flex-outer">
-            <li>
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="firstName" required="required" class="form-control"
-                       ng-model="user.firstName" placeholder="Enter your first name here"/>
-                <div ng-messages="profileForm.firstName.$error" ng-if="profileForm.firstName.$pristine">
-                    <div ng-message="required" id="required-message"> * This field is required</div>
+
+    <form action="/u/profile" class="form-horizontal" name="profileForm" id="profileForm" novalidate="novalidate">
+        <!--User first name-->
+        <div class="form-group"
+             ng-class="
+                 {'has-error':!profileForm.firstName.$valid &amp;&amp; (!profileForm.$pristine || profileForm.$submitted) }">
+            <label for="firstName" class="col-sm-2 control-label">First name</label>
+            <div class="col-sm-6">
+                <input type="text"
+                       placeholder="Your first name"
+                       id="firstName"
+                       class="form-control"
+                       name="firstName"
+                       required="required"
+                       ng-model="user.firstName"
+                       ng-pattern="/^[a-zA-Z\s]*$/"
+                       ng-minlength="2"/>
+                <p class="help-block" ng-show="profileForm.firstName.$error.required">Field required</p>
+                <p class="help-block" ng-show="profileForm.firstName.$error.pattern">Only letters allowed</p>
+            </div>
+        </div>
+
+        <!--User last name-->
+        <div class="form-group">
+            <label for="last-name" class="col-sm-2 control-label">Last name</label>
+            <div class="col-sm-6">
+                <input class="form-control"
+                       id="last-name"
+                       placeholder="Your last name"
+                       type="text"
+                       ng-model="user.lastName"/>
+            </div>
+        </div>
+        <!--Gender-->
+        <div class="form-group">
+            <label for="gender" class="col-sm-2 control-label">Gender</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <select id="gender"
+                            class="form-control"
+                            name="gender" ng-model="user.gender">
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
-            </li>
-            <li>
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" class="form-control" ng-model="user.lastName"
-                       placeholder="Enter your last name here"/>
-            </li>
-            <li>
-                <label for="gender">Gender</label>
-                <select id="gender" ng-model="user.gender">
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                    <option value="other">Other&hellip;</option>
-                </select>
-            </li>
-            <li>
-                <label for="language">Language</label>
-                <input type="text" id="language" ng-model="user.language" placeholder="What language do you prefer"/>
-            </li>
-            <li>
-                <label for="message">Introduction</label>
-                <textarea rows="8" id="message" ng-model="user.introduction"
-                          placeholder="Write a couple of words about yourself here..."></textarea>
-            </li>
-            <li>
-                <p>Interests</p>
-                <ul class="flex-inner">
+            </div>
+        </div>
+        <!--Language-->
+        <div class="form-group">
+            <label for="language" class="col-sm-2 control-label">Language</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <select id="language"
+                            class="form-control"
+                            name="gender" ng-model="user.language">
+                        <option value="female">English</option>
+                        <option value="male">Hungarian</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--Location-->
+        <div class="form-group">
+            <label for="location" class="col-sm-2 control-label">Location</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input class="form-control"
+                           id="location"
+                           placeholder="Your location"
+                           type="text"
+                           name="location"
+                           gm-places-autocomplete=""
+                           ng-model="autocomplete"/>
+                </div>
+            </div>
+        </div>
+        <!--Bio-->
+        <div class="form-group">
+            <label for="message" class="col-sm-2 control-label">About yourself</label>
+            <div class="col-sm-6">
+                        <textarea class="form-control"
+                                  id="message" rows="8"
+                                  placeholder="Tell us something about yourself..."
+                                  name="introduction"
+                                  ng-model="user.introduction"></textarea>
+            </div>
+        </div>
+        <!--Interests-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Interests</label>
+            <div class="form-check form-check-inline col-sm-6">
+                <ul>
                     <li>
-                        <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
-                        <label for="tennis">Tennis</label>
+                        <input type="checkbox" id="waterSports" ng-model="user.interest.waterSports"/>
+                        <label for="waterSports">Water Sports</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="running" ng-model="user.interest.running"/>
-                        <label for="running">Running</label>
+                        <input type="checkbox" id="winterSports" ng-model="user.interest.winterSports"/>
+                        <label for="winterSports">Winter Sports</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
-                        <label for="gokart">Gokart</label>
+                        <input type="checkbox" id="outdoorSports" ng-model="user.interest.outdoorSports"/>
+                        <label for="outdoorSports">Outdoor Sports</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
-                        <label for="hiking">Hiking</label>
+                        <input type="checkbox" id="cultural" ng-model="user.interest.cultural"/>
+                        <label for="cultural">Cultural</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
-                        <label for="cinema">Cinema</label>
+                        <input type="checkbox" id="outdoorActivity" ng-model="user.interest.outdoorActivity"/>
+                        <label for="outdoorActivity">Outdoor Activity</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
-                        <label for="theater">Theater</label>
+                        <input type="checkbox" id="ballGames" ng-model="user.interest.ballGames"/>
+                        <label for="ballGames">Ball Games</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="card-games" ng-model="user.interest.cardGames"/>
-                        <label for="card-games">Card Games</label>
+                        <input type="checkbox" id="boardGames" ng-model="user.interest.boardGames"/>
+                        <label for="boardGames">Board Games</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="city-walks" ng-model="user.interest.cityWalks"/>
-                        <label for="city-walks">City Walks</label>
+                        <input type="checkbox" id="eSports" ng-model="user.interest.eSports"/>
+                        <label for="eSports">e-Sports</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="indoorSports" ng-model="user.interest.indoorSports"/>
+                        <label for="indoorSports">Indoor Sports</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="other" ng-model="user.interest.other"/>
+                        <label for="other">Other</label>
                     </li>
                 </ul>
-            </li>
-            <li>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
                 <a href="/u/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                <a href="/u/profile" type="button" id="submit" class="btn btn-info btn-lg"
-                   ng-disabled="profileForm.$invalid" ng-click="saveProfile()">Submit</a>
-            </li>
-        </ul>
+                <input type="submit" value="Submit" class="btn btn-info btn-lg"
+                       ng-click="saveProfile()" disabled="disabled"/>
+            </div>
+        </div>
+
     </form>
+
 </div>
+
+<script>
+
+</script>
 </body>
+
 </html>

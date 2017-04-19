@@ -3,19 +3,20 @@ package com.codecool.security.service.user;
 import com.codecool.model.User;
 import com.codecool.repository.UserRepository;
 import com.codecool.security.Role;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -44,10 +45,17 @@ public class UserServiceImpl implements UserService {
     public void create(User user, Role role) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole(role);
+        user.setToken(UUID.randomUUID().toString());
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String regDate = formatter.format(today);
         user.setRegDate(regDate);
         userRepository.save(user);
+        logger.info("Save user into the database " + user.getEmail());
+    }
+
+    @Override
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 }

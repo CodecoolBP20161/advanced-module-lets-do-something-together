@@ -1,15 +1,16 @@
 package com.codecool.controller;
 
+import com.codecool.email.model.WelcomeEmail;
+import com.codecool.email.repository.WelcomeEmailRepository;
+import com.codecool.model.Profile;
 import com.codecool.model.User;
-import com.codecool.model.UserDetail;
-import com.codecool.repository.InterestRepository;
-import com.codecool.repository.UserDetailRepository;
-import com.codecool.model.UserEmail;
-import com.codecool.repository.UserEmailRepository;
 import com.codecool.security.Role;
-import com.codecool.security.service.user.UserService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,21 +23,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
-public class UserController {
+public class UserController extends AbstractController {
 
-    @Autowired
-    UserDetailRepository userDetailRepository;
-    @Autowired
-    InterestRepository interestRepository;
-    @Autowired
-    private UserService userService;
-
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
-    private UserEmailRepository userEmailRepository;
-
+    private WelcomeEmailRepository welcomeEmailRepository;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
@@ -46,45 +39,58 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public
     @ResponseBody
-    String registration(@RequestBody String data) {
+    String registration(@RequestBody String data) throws JSONException {
+        logger.info("/registration route called");
         ObjectMapper mapper = new ObjectMapper();
+        JSONObject result = new JSONObject();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            User user = mapper.readValue(data, User.class);
-            if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
-                userService.create(user, Role.USER);
-                UserDetail userDetail = new UserDetail(user);
-                userDetailRepository.save(userDetail);
-                UserEmail userEmail = new UserEmail();
-                userEmail.setUser(user);
-                userEmailRepository.save(userEmail);
-            } else {
-                return "fail";
+            JSONObject json = new JSONObject(data);
+            if (json.get("email").toString().contains("@") && json.get("password").toString().length() >= 6) {
+                User user = mapper.readValue(data, User.class);
+                if (userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
+                    userService.create(user, Role.USER);
+                    Profile profile = new Profile(user);
+                    profileRepository.save(profile);
+                    logger.info("Save profile into the {} table", profile.getClass().getSimpleName());
+                    WelcomeEmail welcomeEmail = new WelcomeEmail(user);
+                    welcomeEmailRepository.save(welcomeEmail);
+                    logger.info("Unsent welcome email saved into the {} table", welcomeEmail.getClass().getSimpleName());
+                    return result.put("status", "success").toString();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | JSONException e) {
+            logger.error("{} occurred while creating the user: {}", e.getCause(), e.getMessage());
+            e.getMessage();
         }
-        return "success";
+        return result.put("status", "fail").toString();
     }
 
-
-    @RequestMapping(value = "/androidlogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/api-login", method = RequestMethod.POST)
     public
     @ResponseBody
-    String androidLogin(@RequestBody String data) {
+    String androidLogin(@RequestBody String data) throws JSONException {
+        logger.info("api-login route called");
         ObjectMapper mapper = new ObjectMapper();
+        JSONObject loginResponseJson = new JSONObject();
 //        ignore password confirmation field
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             User user = mapper.readValue(data, User.class);
             if (!userService.getUserByEmail(user.getEmail()).equals(Optional.empty())) {
                 if (bCryptPasswordEncoder.matches(user.getPassword(), userService.getUserByEmail(user.getEmail()).get().getPassword())) {
-                    return "success";
+                    loginResponseJson.put("status", "success");
+                    loginResponseJson.put("token", userService.getUserByEmail(user.getEmail()).get().getToken());
+                    logger.info("Successful login by {}", userService.getUserByEmail(user.getEmail()));
+                    return loginResponseJson.toString();
                 }
-                return "wrong password";
+                loginResponseJson.put("status", "wrong password");
+                logger.info("Wrong email during login");
+                return loginResponseJson.toString();
             }
-            return "register";
+            return loginResponseJson.toString();
         } catch (IOException e) {
+            logger.error("{} error occurred while login {}", e.getCause(), e.getMessage());
             e.printStackTrace();
         }
         return null;
