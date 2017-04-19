@@ -37,14 +37,16 @@ public class AppEmailController {
 
     @Scheduled(fixedDelayString = "29000")
     private void manageNewRegistrations() {
-        logger.info("Forwarding new registrations to the microservice at {}", new Date());
-        postEmailJson(emailHandler.manageWelcomeEmails());
+        if (emailHandler.manageWelcomeEmails() != null) {
+            logger.info("Forwarding new registrations to the microservice at {}", new Date());
+            postEmailJson(emailHandler.manageWelcomeEmails());
+        }
     }
 
     @Scheduled(fixedDelayString = "300000")
     private void manageNewContacts() {
-        logger.info("Sending new contact details to the microservice");
         if (emailHandler.manageContactEmails() != null) {
+            logger.info("Sending new contact details to the microservice");
             emailHandler.manageContactEmails().forEach(this::postEmailJson);
         }
     }
