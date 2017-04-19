@@ -44,16 +44,6 @@ public class DashBoardController extends AbstractController {
         return events.toString();
     }
 
-    //    TODO initial version for test purposes
-    @RequestMapping(value = "/custom_events", method = RequestMethod.GET)
-    @ResponseBody
-    public String getCustomEventsBasedOnInterest(Principal principal) {
-        Profile profile = getCurrentProfile(principal);
-        List<Event> events = eventRepository.findByStatusAndInterestInOrderByDate(Status.ACTIVE, profile.getInterestList());
-        logger.info("{} active events collected based on user's interests.", events.size());
-        return eventUtil.createEventsJson(events).toString();
-    }
-
     private JSONArray getAllEvents(Principal principal) {
         Profile profile = getCurrentProfile(principal);
         List<Event> ownEvents = eventRepository.findByStatusAndInterestInOrderByDate(Status.ACTIVE, profile.getInterestList());
