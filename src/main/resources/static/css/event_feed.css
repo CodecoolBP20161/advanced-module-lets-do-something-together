@@ -90,6 +90,12 @@ li {
     padding-left: 5%;
 }
 
+.event-name {
+    font-size: x-large;
+}
+.location {
+    line-height: initial;
+}
 .interest {
     padding-right: 5%;
 }

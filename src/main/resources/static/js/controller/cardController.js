@@ -12,10 +12,11 @@ actimate.config(['$httpProvider', '$qProvider', function ($httpProvider, $qProvi
 //http://www.concretepage.com/angular-js/angularjs-http-get-example
 actimate.controller('cardCtrl', function ($scope, $http) {
 
-    $scope.events = null;
+    $scope.events = [];
 
     $http.get("/u/events")
         .then(function (response) {
+
             $scope.events = response.data.events;
             console.log($scope.events);
         })
