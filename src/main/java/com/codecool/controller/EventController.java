@@ -93,7 +93,7 @@ public class EventController extends AbstractController {
     @Scheduled(cron = "0 0 0 * * ?", zone = "CET")
     private void managePastEvents() {
         logger.info("Midnight db management: updating events' statuses.");
-        List<Event> events = eventRepository.findByStatus(Status.ACTIVE);
+        List<Event> events = eventRepository.findByStatusOrderByDate(Status.ACTIVE);
         events.stream().filter(event -> eventUtil.compareDates(event.getDate()) >= 0).forEach(event -> {
             event.setStatus(Status.PAST);
             eventRepository.save(event);

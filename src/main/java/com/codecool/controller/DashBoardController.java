@@ -48,7 +48,7 @@ public class DashBoardController extends AbstractController {
         Profile profile = getCurrentProfile(principal);
         List<Event> ownEvents = eventRepository.findByStatusAndInterestInOrderByDate(Status.ACTIVE, profile.getInterestList());
         logger.info("{} active events based on user's interest(s) collected.", ownEvents.size());
-        List<Event> otherEvents = eventRepository.findByStatus(Status.ACTIVE);
+        List<Event> otherEvents = eventRepository.findByStatusOrderByDate(Status.ACTIVE);
         logger.info("{} other active events collected.", otherEvents.size());
         List<Event> events = mergeLists(ownEvents, otherEvents);
         return eventUtil.createEventsJson(events);

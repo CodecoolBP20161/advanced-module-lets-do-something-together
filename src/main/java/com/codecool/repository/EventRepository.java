@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
-    List<Event> findByStatus(Status status);
+    List<Event> findByStatusOrderByDate(Status status);
 
     List<Event> findByUserAndStatus(User user, Status status);
 
