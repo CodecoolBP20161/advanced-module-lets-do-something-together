@@ -5,7 +5,4 @@ actimate.controller('menuCtrl', ['$rootScope', '$location', '$scope', function($
     $rootScope.$on("$locationChangeStart", function(event, next, current) {
         $scope.currentPath = $location.path();
     });
-
-    console.log("Path: " + $location.path())
-
 }]);
