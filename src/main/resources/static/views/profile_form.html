@@ -3,23 +3,24 @@
 </div>
 <div class="container">
 
-    <form class="form-horizontal" id="profileForm" ng-submit="saveProfile(profileForm)" novalidate="novalidate">
+    <form action="/u/profile" class="form-horizontal" name="profileForm" id="profileForm" novalidate="novalidate">
         <!--User first name-->
         <div class="form-group"
              ng-class="
                  {'has-error':!profileForm.firstName.$valid &amp;&amp; (!profileForm.$pristine || profileForm.$submitted) }">
-            <label for="first-name" class="col-sm-2 control-label">First name</label>
+            <label for="firstName" class="col-sm-2 control-label">First name</label>
             <div class="col-sm-6">
                 <input type="text"
                        placeholder="Your first name"
-                       id="first-name"
+                       id="firstName"
                        class="form-control"
-                       name="name"
+                       name="firstName"
                        required="required"
                        ng-model="user.firstName"
-                       ng-pattern="/^[A-Za-z]/"
-                       ng-pattern-err-type="wrongInputType"
+                       ng-pattern="/^[a-zA-Z\s]*$/"
                        ng-minlength="2"/>
+                <p class="help-block" ng-show="profileForm.firstName.$error.required">Field required</p>
+                <p class="help-block" ng-show="profileForm.firstName.$error.pattern">Only letters allowed</p>
             </div>
         </div>
 
@@ -63,6 +64,21 @@
                 </div>
             </div>
         </div>
+        <!--Location-->
+        <div class="form-group">
+            <label for="location" class="col-sm-2 control-label">Location</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input class="form-control"
+                           id="location"
+                           placeholder="Your location"
+                           type="text"
+                           name="location"
+                           gm-places-autocomplete=""
+                           ng-model="autocomplete"/>
+                </div>
+            </div>
+        </div>
         <!--Bio-->
         <div class="form-group">
             <label for="message" class="col-sm-2 control-label">About yourself</label>
@@ -76,52 +92,61 @@
         </div>
         <!--Interests-->
         <div class="form-group">
-            <div class="form-check form-check-inline">
+            <label class="col-sm-2 control-label">Interests</label>
+            <div class="form-check form-check-inline col-sm-6">
                 <ul>
                     <li>
-                        <input type="checkbox" id="tennis" ng-model="user.interest.tennis"/>
-                        <label for="tennis">Tennis</label>
+                        <input type="checkbox" id="waterSports" ng-model="user.interest.waterSports"/>
+                        <label for="waterSports">Water Sports</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="running" ng-model="user.interest.running"/>
-                        <label for="running">Running</label>
+                        <input type="checkbox" id="winterSports" ng-model="user.interest.winterSports"/>
+                        <label for="winterSports">Winter Sports</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="gokart" ng-model="user.interest.gokart"/>
-                        <label for="gokart">Gokart</label>
+                        <input type="checkbox" id="outdoorSports" ng-model="user.interest.outdoorSports"/>
+                        <label for="outdoorSports">Outdoor Sports</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="hiking" ng-model="user.interest.hiking"/>
-                        <label for="hiking">Hiking</label>
+                        <input type="checkbox" id="cultural" ng-model="user.interest.cultural"/>
+                        <label for="cultural">Cultural</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="cinema" ng-model="user.interest.cinema"/>
-                        <label for="cinema">Cinema</label>
+                        <input type="checkbox" id="outdoorActivity" ng-model="user.interest.outdoorActivity"/>
+                        <label for="outdoorActivity">Outdoor Activity</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="theater" ng-model="user.interest.theater"/>
-                        <label for="theater">Theater</label>
+                        <input type="checkbox" id="ballGames" ng-model="user.interest.ballGames"/>
+                        <label for="ballGames">Ball Games</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="cardGames" ng-model="user.interest.cardGames"/>
-                        <label for="cardGames">Card Games</label>
+                        <input type="checkbox" id="boardGames" ng-model="user.interest.boardGames"/>
+                        <label for="boardGames">Board Games</label>
                     </li>
                     <li>
-                        <input type="checkbox" id="cityWalks" ng-model="user.interest.cityWalks"/>
-                        <label for="cityWalks">City Walks</label>
+                        <input type="checkbox" id="eSports" ng-model="user.interest.eSports"/>
+                        <label for="eSports">e-Sports</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="indoorSports" ng-model="user.interest.indoorSports"/>
+                        <label for="indoorSports">Indoor Sports</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="other" ng-model="user.interest.other"/>
+                        <label for="other">Other</label>
                     </li>
                 </ul>
+
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <a href="/u/profile" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                <a href="/u/profile" type="button" id="submit" class="btn btn-info btn-lg"
-                   ng-click="saveProfile()">Submit</a>
+                <input type="submit" value="Submit" class="btn btn-info btn-lg"
+                       ng-click="saveProfile()" disabled="disabled"/>
             </div>
         </div>
-
 
     </form>
 
