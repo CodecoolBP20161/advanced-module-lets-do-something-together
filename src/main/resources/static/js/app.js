@@ -34,11 +34,11 @@ var actimate = angular.module('actimate', [
                 })
                 .when('/u/profile', {
                     templateUrl: 'views/profile.html',
-                    controller: 'loadUserCtrl'
+                    controller: 'profileCtrl'
                 })
                 .when('/u/dashboard', {
                  template: 'views/user_main.html',
-                 controller: 'loadEventCtrl'
+                 controller: 'profileCtrl'
                  })
                 .when('/u/edit-profile', {
                     templateUrl: 'views/profile_form.html',
