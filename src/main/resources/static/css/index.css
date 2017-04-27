@@ -59,6 +59,9 @@ a:hover {
     text-decoration: none;
     color: #82D4BB;
 }
+#contact-us {
+    margin-right: 200px;
+}
 
 /*nav > .fix-top > .li-navbar {  display: inline; }*/
 
@@ -130,10 +133,8 @@ div {
 
 .navbar-inverse .navbar-collapse { border-color: transparent}
 
-.li-navbar
-{
+.li-navbar {
     display: inline;
-    padding: 0 20px;
 }
 
 /*from main css !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
@@ -235,7 +236,7 @@ div {
 .bgimg-2 {
     background-image: url("../images/img_parallax3.jpg");
     min-height: 400px;
-    opacity: 0.75;
+    opacity: 0.80;
 }
 
 .bgimg-3 {
@@ -362,7 +363,7 @@ div {
 
 .input-main, .textarea-main {
     font-family:"Quicksand", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1em;
+    font-size: small;
     padding: 15px 10px 10px;
     border: 1px solid #cecece;
     background: white;
@@ -527,11 +528,11 @@ div {
     text-align: center;
     padding: 15px;
     margin-bottom: 20px;
-    border-radius: 2px;
-    border-color: #e85a71;
-    background-color: #e85a71;
+    border-radius: 5px;
+    border-color: #e5625e;
+    background-color: #e5625e;
     color: white;
-    font-size: small;
+    font-size: medium;
 }
 
 .bt-pad {
@@ -1275,7 +1276,7 @@ label {
 .has-error .help-block {
     background-color: #e5625e;
     color: white;
-    font-size: larger;
+    font-size: medium;
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 20px;
