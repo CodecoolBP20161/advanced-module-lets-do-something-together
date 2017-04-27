@@ -13,11 +13,11 @@ var passwordMatch = function () {
         buttonActive(false);
         $('.password-error-message').text("Password does not match").addClass("alert alert-danger alert-dismissable").fadeIn();
         $("#password_again").focus();
-        addError($("#pwd2Div"));
+        // addError($("#pwd2Div"));
     } else {
         buttonActive(true);
         $(".password-error-message").fadeOut();
-        removeError($("#pwd2Div"));
+        // removeError($("#pwd2Div"));
     }
 };
 
@@ -29,25 +29,25 @@ function buttonActive(status) {
         $(".registration-button").removeAttr("disabled");
     }
 }
-
-
-function hideError() {
-    $('.email-error-message').hide();
-}
-
-
-function validateEmailFormat() {
-    var $email = $("#email");
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if ($email.val().length > 0 && !re.test($email.val())) {
-        $(".email-format-message").text("Incorrect email format").addClass("alert alert-danger alert-dismissable").fadeIn();
-        $("#email").focus();
-        addError($("#emailDiv"));
-    } else {
-        $(".email-format-message").fadeOut();
-        removeError($("#emailDiv"));
-    }
-}
+//
+//
+// function hideError() {
+//     $('.email-error-message').hide();
+// }
+//
+//
+// function validateEmailFormat() {
+//     var $email = $("#email");
+//     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     if ($email.val().length > 0 && !re.test($email.val())) {
+//         $(".email-format-message").text("Incorrect email format").addClass("alert alert-danger alert-dismissable").fadeIn();
+//         $("#email").focus();
+//         // addError($("#emailDiv"));
+//     } else {
+//         $(".email-format-message").fadeOut();
+//         // removeError($("#emailDiv"));
+//     }
+// }
 
 
 function onSuccess() {
@@ -59,35 +59,36 @@ function onSuccess() {
             window.location.href = "/";
         }, 4000);
     }
-}
 
 
-function addError($element) {
-    $element.addClass("has-error");
-    $element.addClass("has-feedback");
-}
 
 
-function removeError($element) {
-    $element.removeClass("has-error");
-    $element.removeClass("has-feedback");
-}
+// function addError($element) {
+//     $element.addClass("has-error");
+//     $element.addClass("has-feedback");
+// }
+//
+//
+// function removeError($element) {
+//     $element.removeClass("has-error");
+//     $element.removeClass("has-feedback");
+// }
 
 
-function validatePasswordFormat() {
-    var $password = $(".password");
-    var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}/g;
-    if ($password.val().length > 0 && !re.test($password.val())) {
-        $(".password-validate-message").text("Minimum length is 6 characters.\nPassword must contain at least one " +
-            "uppercase, lowercase and number").addClass("alert alert-danger alert-dismissable").css("white-space", "pre-line").fadeIn();
-        buttonActive(false);
-        $("#password").focus();
-        addError($("#pwdDiv"));
-    } else {
-        $(".password-validate-message").fadeOut();
-        buttonActive(true);
-        removeError($("#pwdDiv"));
-    }
+// function validatePasswordFormat() {
+//     var $password = $(".password");
+//     var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}/g;
+//     if ($password.val().length > 0 && !re.test($password.val())) {
+//         $(".password-validate-message").text("Minimum length is 6 characters.\nPassword must contain at least one " +
+//             "uppercase, lowercase and number").addClass("alert alert-danger alert-dismissable").css("white-space", "pre-line").fadeIn();
+//         buttonActive(false);
+//         $("#password").focus();
+//         // addError($("#pwdDiv"));
+//     } else {
+//         $(".password-validate-message").fadeOut();
+//         buttonActive(true);
+//         // removeError($("#pwdDiv"));
+//     }
 }
 
 
