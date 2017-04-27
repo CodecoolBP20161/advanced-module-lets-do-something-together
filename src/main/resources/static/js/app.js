@@ -28,6 +28,10 @@ var actimate = angular.module('actimate', [
                     templateUrl: 'views/registration.html',
                     controller: 'userCtrl'
                 })
+                .when('/logout', {
+                    templateUrl: 'views/main.html',
+                    controller: 'mainCtrl'
+                })
                 .when('/login', {
                     templateUrl: 'views/login_form.html'
                     //controller: 'loginCtrl'
@@ -37,7 +41,7 @@ var actimate = angular.module('actimate', [
                     controller: 'profileCtrl'
                 })
                 .when('/u/dashboard', {
-                 template: 'views/user_main.html',
+                 template: 'views/dashboard.html',
                  controller: 'profileCtrl'
                  })
                 .when('/u/edit-profile', {

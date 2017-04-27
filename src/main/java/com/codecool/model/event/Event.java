@@ -5,6 +5,7 @@ import com.codecool.model.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -15,21 +16,28 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
     private String name;
+    @NotNull
     private String location;
+    @NotNull
     private Date date;
+    @NotNull
     private int participants;
 
     @Column(columnDefinition = "TEXT")
+    @NotNull
     private String description;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "interest")
     private Interest interest;
 
     @Enumerated(value = EnumType.STRING)
     private Status status = Status.ACTIVE;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "`user`")
     private User user;

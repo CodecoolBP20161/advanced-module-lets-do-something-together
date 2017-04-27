@@ -3,12 +3,14 @@ package com.codecool.model;
 
 import com.codecool.security.Role;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "`user`")
 @Data
+@ToString(exclude = {"password", "token"})
 public class User {
 
     @Id
@@ -16,6 +18,7 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+    private String token;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

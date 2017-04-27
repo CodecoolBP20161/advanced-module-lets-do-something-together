@@ -8,7 +8,7 @@ spring.jpa.database = postgresql
 spring.jpa.hibernate.ddl-auto=create
 
 
-logging.level.org.springframework.web=DEBUG
+logging.level.org.springframework.web=INFO
 logging.level.org.hibernate=ERROR
 
 logging.file=app_actimate.log

@@ -20,7 +20,7 @@ describe('Rout.js test', function() {
         // $httpBackend.when('/', {templateUrl: 'main.html'}).respond(200);
         /*$httpBackend.when('/registration', {templateUrl: 'registration.html'}).respond(200);
         $httpBackend.when('/u/profile', {templateUrl: 'profile.html'}).respond(200);
-        $httpBackend.when('/u/dashboard', {templateUrl: 'user_main.html'}).respond(200);*/
+        $httpBackend.when('/u/dashboard', {templateUrl: 'dashboard.html'}).respond(200);*/
     });
 
 });

@@ -16,10 +16,12 @@ actimate.controller("profileCtrl", function ($scope, $http) {
         submitButton.attr("disabled", !checkboxes.is(":checked"));
     });
 
+    // $scope.user.location = getCoords();
+
 
     $scope.saveProfile = function () {
-        
-        // $scope.user.interest = checkInterests();
+
+        $scope.user.interest = checkInterests();
         console.log( $scope.user.interest);
 
         $http({
@@ -31,6 +33,7 @@ actimate.controller("profileCtrl", function ($scope, $http) {
         console.log($scope.user);
         $scope.user = null;
     };
+
 
     $scope.loadProfile = function () {
 
@@ -44,10 +47,6 @@ actimate.controller("profileCtrl", function ($scope, $http) {
                 updateInterests(response.data.profile.interestList);
                 $scope.autocomplete = response.data.profile.location;
             })
-    };
-
-    $scope.locateUser = function () {
-
     };
 
     $scope.loadProfile();
