@@ -35,13 +35,13 @@
                 <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a href="#mission">Mission</a></li>
                 <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a href="#howitworks">How it works?</a></li>
                 <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a id="contact-us" href="#contactus">Contact Us</a></li>
-                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak" id="register"><a  href="registration">REGISTER</a></li>
-                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a id="login" href="login">LOGIN</a></li>
-                <li ng-show="currentPath == '/registration'" class="li-navbar index-page ng-cloak"><a href="login">LOGIN</a></li>
+                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak" id="register"><a  href="/registration">REGISTER</a></li>
+                <li ng-show="currentPath == '/'" class="li-navbar index-page ng-cloak"><a id="login" href="/login">LOGIN</a></li>
+                <li ng-show="currentPath == '/registration'" class="li-navbar index-page ng-cloak"><a href="/login">LOGIN</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/dashboard">DASHBOARD</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/create_event" id="createEvent">CREATE EVENT</a></li>
                 <li class="li-navbar"><a sec:authorize="isAuthenticated()" href="u/profile" id="profile">PROFILE</a></li>
-                <li class="li-navbar"><a sec:authorize="isAuthenticated()" id="logout" href="../logout">LOGOUT</a></li>
+                <li class="li-navbar"><a sec:authorize="isAuthenticated()" id="logout" href="/" ng-click="logout()">LOGOUT</a></li>
 
             </ul>
             <div class="navbar-header">
@@ -62,7 +62,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-messages.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
 
 <script type="text/javascript" src="/js/jcs-auto-validate.min.js"></script>
@@ -95,6 +94,7 @@
 <script type="text/javascript" src="/js/controller/userController.js"></script>
 <script type="text/javascript" src="/js/controller/loginController.js"></script>
 <script type="text/javascript" src="/js/controller/menuController.js"></script>
+<script type="text/javascript" src="/js/controller/logout.js"></script>
 
 
 <!--<script type="text/javascript" src="/js/controller/eventOnDashboardController.js"></script>-->
