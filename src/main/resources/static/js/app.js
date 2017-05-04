@@ -28,10 +28,6 @@ var actimate = angular.module('actimate', [
                     templateUrl: 'views/registration.html',
                     controller: 'userCtrl'
                 })
-                .when('/logout', {
-                    templateUrl: 'views/main.html',
-                    controller: 'mainCtrl'
-                })
                 .when('/login', {
                     templateUrl: 'views/login_form.html'
                     //controller: 'loginCtrl'
@@ -50,7 +46,7 @@ var actimate = angular.module('actimate', [
                 })
                 .when('/u/create_event', {
                     templateUrl: 'views/create_event.html',
-                    controller: 'saveEventCtrl'
+                    controller: 'eventCtrl'
                 })
                 .otherwise({
                     redirectTo: '/'
