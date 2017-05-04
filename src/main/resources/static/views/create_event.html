@@ -35,6 +35,8 @@
                             name="interest"
                             ng-model="event.interest"
                             required="required">
+                        <option value="">--- Please select ---</option> <!-- not selected / blank option -->
+
                         <option ng-repeat="interest in listOfInterests['interests']" value="{{interest}}">{{interest}}</option>
                     </select>
                     <p class="help-block" id="interest-help" ng-show="eventform.interest.$invalid &amp;&amp; eventform.interest.$touched">Required</p>
@@ -102,11 +104,11 @@
                                   id="description" rows="4"
                                   placeholder="Tell us something about your event..."
                                   name="description"
-                                  ng-minlength="50"
+                                  ng-minlength="20"
                                   ng-model="event.description"
                                   required="required">
                         </textarea>
-                <p class="help-block" ng-show="eventform.description.$touched &amp;&amp; eventform.description.$invalid">Enter at least 50 characters</p>
+                <p class="help-block" ng-show="eventform.description.$touched &amp;&amp; eventform.description.$invalid">Enter at least 20 characters</p>
             </div>
         </div>
 
