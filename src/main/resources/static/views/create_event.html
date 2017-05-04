@@ -5,7 +5,7 @@
 
 <div class="container">
 
-    <p>Please note that all fields are required!</p>
+    <p id="required-text">Please note that all fields are required!</p>
 
 
     <form class="form-horizontal" id="eventform" name="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
@@ -29,22 +29,13 @@
         <div class="form-group" ng-class="{ 'has-error' : !eventform.interest.$valid &amp;&amp; (eventform.interest.$touched || eventform.$submitted)}">
             <label for="interest" class="col-sm-2 control-label">Event type</label>
             <div class="col-sm-6">
-                <div class="input-group">
+                <div class="input-group" ng-if="listOfInterests!=null">
                     <select id="interest"
                             class="form-control"
                             name="interest"
                             ng-model="event.interest"
                             required="required">
-                        <option value="waterSports">Water Sports</option>
-                        <option value="winterSports">Winter Sports</option>
-                        <option value="outdoorSports">Outdoor Sports</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="outdoorActivity">Outdoor Activity</option>
-                        <option value="ballGames">Ball Games</option>
-                        <option value="boardGames">Board Games</option>
-                        <option value="eSports">e-Sports</option>
-                        <option value="indoorSports">Indoor Sports</option>
-                        <option value="other">Other</option>
+                        <option ng-repeat="interest in listOfInterests['interests']" value="{{interest}}">{{interest}}</option>
                     </select>
                     <p class="help-block" id="interest-help" ng-show="eventform.interest.$invalid &amp;&amp; eventform.interest.$touched">Required</p>
                 </div>
@@ -101,6 +92,7 @@
                 <p class="help-block" ng-show="eventform.participants.$invalid &amp;&amp; eventform.participants.$touched">Required</p>
             </div>
         </div>
+
         <!--Event description-->
         <div class="form-group"
              ng-class="{'has-error':!eventform.description.$valid &amp;&amp; (eventform.description.$touched || eventform.$submitted) }">
@@ -126,7 +118,6 @@
             </div>
 
         </div>
-
 
     </form>
 
