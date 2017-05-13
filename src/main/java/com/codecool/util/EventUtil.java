@@ -55,6 +55,7 @@ public class EventUtil {
             json.put("lat", event.getCoordinates().getLat());
             json.put("lng", event.getCoordinates().getLng());
             json.put("user", getEventOwnerName(event));
+            json.put("id", event.getId());
         } catch (JSONException | IllegalAccessException e) {
             logger.error("{} occurred while creating json from event: {}", e.getCause(), e.getMessage());
         }
