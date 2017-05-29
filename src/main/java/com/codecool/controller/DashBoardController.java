@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,4 +55,19 @@ public class DashBoardController extends AbstractController {
         return ownEvents;
     }
 
+    @RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String showCurrentEvent(@PathVariable(value = "id") String id) throws JSONException {
+        logger.info("/u/event/{} route called - method: {}", id, RequestMethod.GET);
+        try {
+            Event event = eventRepository.findById(Integer.parseInt(id));
+            logger.info("Event (id: {}) has found", id);
+            return eventUtil.createJsonFromEvent(event).toString();
+        } catch (NullPointerException e) {
+            logger.error("{} occurred while looking for event with id:{}; {}", e.getClass().getSimpleName(), id, e.getMessage());
+            JSONObject message = new JSONObject();
+            message.put("message", "No event has found with this id");
+            return message.toString();
+        }
+    }
 }

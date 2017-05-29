@@ -1,0 +1,18 @@
+<div class="event-container">
+    <div class="event col-md-8 individual-event">
+        <h3 id="individual-event-name">Name: {{event.name}}</h3>
+        <h3 id="individual-event-description">Description: {{event.description}}</h3>
+        <h3 id="individual-event-location">Location: {{event.location}}</h3>
+        <h3 id="individual-event-interest">Interest: {{event.interest}}</h3>
+        <h3 id="individual-event-date">Date: {{event.date}}</h3>
+        <h3 id="individual-event-user"> User: {{event.user}}</h3>
+        <h3 id="individual-event-participants">Participants: {{event.participants}}</h3>
+    </div>
+    <div class="chat-container col-md-4">
+        <button class="btn btn-warning btn-xs show-chat" ng-click="showChat()">Show</button>
+        <button class="btn btn-warning btn-xs hide-chat" ng-click="hideChat()">Hide</button>
+        <div class="event-chat-window">
+            <iframe class="iframe-chat"></iframe>
+        </div>
+    </div>
+</div>

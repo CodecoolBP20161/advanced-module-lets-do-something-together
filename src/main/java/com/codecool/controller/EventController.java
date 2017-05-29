@@ -93,5 +93,4 @@ public class EventController extends AbstractController {
             eventRepository.save(event);
         });
     }
-
 }

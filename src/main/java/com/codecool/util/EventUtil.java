@@ -41,7 +41,7 @@ public class EventUtil {
         return json;
     }
 
-    private JSONObject createJsonFromEvent(Event event) {
+    public JSONObject createJsonFromEvent(Event event) {
         logger.info("createJsonFromEvent method called for event 'id_{}'.", event.getId());
         JSONObject json = new JSONObject();
         List<Field> fields = Arrays.asList(Event.class.getDeclaredFields()).subList(1, 6);
