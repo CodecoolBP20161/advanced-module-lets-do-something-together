@@ -61,16 +61,3 @@ const actimate = angular.module('actimate', [
         $scope.currentPath = $location.path();
     }]);
 
-/*
-actimate.controller("mainCtrl", function ($scope, $http, $state, $stateParams) {
-    // Expose $state and $stateParams to the <body> tag
-    $scope.$state = $state;
-    $scope.$stateParams = $stateParams;
-});
-
-actimate.service('mainService', function () {
-
-});
-*/
-
-
