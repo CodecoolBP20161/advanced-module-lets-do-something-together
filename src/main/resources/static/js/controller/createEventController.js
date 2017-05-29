@@ -10,12 +10,17 @@ actimate.run(function (defaultErrorMessageResolver) {
     .controller('eventCtrl', function ($scope, $http) {
         $scope.event = {};
 
+        $('#datetimepicker1').datetimepicker({
+            format:'DD/MM/YYYY HH:mm a',
+            minDate: moment().add(1, 'h')
+        });
+
         $('#datetimepicker1').on('dp.change', function (data) {
             $scope.event.date = moment(data.date).format("DD/MM/YYYY HH:mm a");
             $scope.$apply();
         });
 
-        $scope.saveEvent = function () {
+        $scope.saveEvent = function() {
 
             $http({
                 method: 'POST',
@@ -24,7 +29,6 @@ actimate.run(function (defaultErrorMessageResolver) {
                 data: JSON.stringify($scope.event)
             })
                 .then(function (response) {
-                    console.log($scope.event);
                     console.log(response);
                 })
         };
@@ -38,7 +42,7 @@ actimate.run(function (defaultErrorMessageResolver) {
         });
 
 
-        $scope.getInterest = function () {
+        $scope.getInterest = function() {
 
             $scope.listOfInterests = null;
 
