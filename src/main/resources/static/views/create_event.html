@@ -10,7 +10,7 @@
 
     <form class="form-horizontal" id="eventform" name="eventform" ng-submit="saveEvent(eventform)" novalidate="novalidate">
         <!--Event name-->
-        <div class="form-group" ng-class="{'has-error': !eventform.name.$valid &amp;&amp; (eventform.name.$touched || eventform.$submitted)}">
+        <div class="form-group" ng-class="{'has-error': !eventform.name.$valid && (eventform.name.$touched || eventform.$submitted)}">
             <label for="name" class="col-sm-2 control-label">Event name</label>
             <div class="col-sm-6">
                 <input type="text"
@@ -20,13 +20,13 @@
                        name="name"
                        required="required"
                        ng-model="event.name"/>
-                <p class="help-block" ng-show="eventform.name.$invalid &amp;&amp; eventform.name.$touched">Required</p>
+                <p class="help-block" ng-show="eventform.name.$invalid && eventform.name.$touched">Required</p>
             </div>
         </div>
 
 
         <!--Event type-->
-        <div class="form-group" ng-class="{ 'has-error' : !eventform.interest.$valid &amp;&amp; (eventform.interest.$touched || eventform.$submitted)}">
+        <div class="form-group" ng-class="{ 'has-error' : !eventform.interest.$valid && (eventform.interest.$touched || eventform.$submitted)}">
             <label for="interest" class="col-sm-2 control-label">Event type</label>
             <div class="col-sm-6">
                 <div class="input-group" ng-if="listOfInterests!=null">
@@ -39,13 +39,13 @@
 
                         <option ng-repeat="interest in listOfInterests['interests']" value="{{interest}}">{{interest}}</option>
                     </select>
-                    <p class="help-block" id="interest-help" ng-show="eventform.interest.$invalid &amp;&amp; eventform.interest.$touched">Required</p>
+                    <p class="help-block" id="interest-help" ng-show="eventform.interest.$invalid && eventform.interest.$touched">Required</p>
                 </div>
             </div>
         </div>
 
         <!--Event place-->
-        <div class="form-group" ng-class="{'has-error': !eventform.place.$pristine &amp;&amp;(eventform.place.$touched || eventform.$submitted) &amp;&amp; !eventform.place.$valid }">
+        <div class="form-group" ng-class="{'has-error': !eventform.place.$pristine && (eventform.place.$touched || eventform.$submitted) &amp;&amp; !eventform.place.$valid }">
             <label for="place" class="col-sm-2 control-label">Place</label>
             <div class="col-sm-6">
                 <input class="form-control"
@@ -54,32 +54,33 @@
                        gm-places-autocomplete=""
                        name="place"
                        ng-model="autocomplete"
-                       ng-required="required"
-                       />
-                <p class="help-block" ng-show="!eventform.place.$pristine &amp;&amp;(eventform.place.$touched || eventform.$submitted) &amp;&amp; eventform.place.$invalid">Required</p>
+                       required="required"/>
+                <p class="help-block" ng-show="!eventform.place.$pristine && (eventform.place.$touched || eventform.$submitted) &amp;&amp; eventform.place.$invalid">Required</p>
             </div>
         </div>
 
         <!--Event date-->
         <div class="form-group"
-             ng-class="{'has-error':!eventform.date.$valid &amp;&amp; (eventform.date.$touched || eventform.$submitted) }">
+             ng-class="{'has-error':!eventform.date.$valid && (eventform.date.$touched || eventform.$submitted) }">
             <label for="date" class="col-sm-2 control-label">Date</label>
             <div class="col-sm-6 input-group date" id="datetimepicker1">
                 <input class="form-control"
-                       id="date" type="text"
+                       id="date"
+                       type="text"
                        aria-required="true"
                        name="date"
-                       ng-model="event.date"/>
-                <span class="input-group-addon">
+                       ng-model="event.date"
+                       required="required"/>
+                    <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-                <p class="help-block" ng-show="eventform.date.$invalid &amp;&amp; eventform.date.$touched">Required</p>
+                <p class="help-block" ng-show="eventform.date.$invalid && eventform.date.$touched">Required</p>
             </div>
         </div>
 
         <!--Event participants-->
         <div class="form-group"
-             ng-class="{'has-error':!eventform.participants.$valid &amp;&amp; (eventform.participants.$touched || eventform.$submitted) }">
+             ng-class="{'has-error':!eventform.participants.$valid && (eventform.participants.$touched || eventform.$submitted) }">
             <label for="participants" class="col-sm-2 control-label">Invite people</label>
             <div class="col-sm-6">
                 <input class="form-control"
@@ -91,13 +92,13 @@
                        name="participants"
                        ng-model="event.participants"
                        required="required"/>
-                <p class="help-block" ng-show="eventform.participants.$invalid &amp;&amp; eventform.participants.$touched">Required</p>
+                <p class="help-block" ng-show="eventform.participants.$invalid && eventform.participants.$touched">Required</p>
             </div>
         </div>
 
         <!--Event description-->
         <div class="form-group"
-             ng-class="{'has-error':!eventform.description.$valid &amp;&amp; (eventform.description.$touched || eventform.$submitted) }">
+             ng-class="{'has-error':!eventform.description.$valid && (eventform.description.$touched || eventform.$submitted) }">
             <label for="description" class="col-sm-2 control-label">Event description</label>
             <div class="col-sm-6">
                         <textarea class="form-control"
@@ -108,15 +109,15 @@
                                   ng-model="event.description"
                                   required="required">
                         </textarea>
-                <p class="help-block" ng-show="eventform.description.$touched &amp;&amp; eventform.description.$invalid">Enter at least 20 characters</p>
+                <p class="help-block" ng-show="eventform.description.$touched && eventform.description.$invalid">Enter at least 20 characters</p>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a href="/u/dashboard" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</a>
-                <a href="/u/dashboard" type="button" id="submit" class="btn btn-info btn-lg"
-                   ng-click="saveEvent()" ng-disabled="eventform.$invalid">Submit</a>
+                <button href="/u/dashboard" type="button" id="cancel" class="btn btn-info btn-lg">Cancel</button>
+                <button href="/u/dashboard" type="button" id="submit" class="btn btn-info btn-lg"
+                   ng-click="saveEvent()" ng-disabled="eventform.$invalid">Submit</button>
             </div>
 
         </div>

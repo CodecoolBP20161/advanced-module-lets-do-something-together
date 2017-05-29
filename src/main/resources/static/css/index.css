@@ -23,8 +23,6 @@ body {
     line-height: 1;
 }
 
-
-
 nav {
     left: 0;
     text-align: right;
@@ -82,6 +80,10 @@ a:hover {
 
 div {
     /*display: block;*/
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #000;
 }
 
 
@@ -1287,14 +1289,21 @@ label {
     color: #0b2027;
 }
 
+#required-text {
+    font-size: medium;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
 /*from event list css !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 .eventondashbord {
-    width: 320px;
-    height: 200px;
+    /*width: 320px;*/
+    height: 400px;
     padding: 10px;
     border: 2px solid gray;
-    margin: 0;
+    margin-left: 20%;
+    margin-right: 20%;
     float: none;
     background-color: #fff;
     display: table;
@@ -1312,12 +1321,85 @@ label {
     font-size: 12pt;
 }
 
-.eventondashbord:hover{
-    color: #b6ffda;
-}
-
 .container-even_list{
     grid-template-columns: 40px 50px auto 50px 40px;
     grid-template-rows: 25% 100px auto;
     /*grid-template-columns: repeat(3, 20px [col-start]) 5%;*/
+}
+
+
+/* from event feed*/
+
+.card-img-bottom {
+    color: #fff;
+    height: 30rem;
+    background: url(../images/ball_sport.jpg) center no-repeat;
+    background-size: 60%;
+}
+
+.panel { padding: 10px;}
+.panel-default > .panel-heading {
+    background-color: #1E26B8;
+}
+
+.panel-title {
+    color: white;
+    font-style: oblique;
+}
+
+.date { margin-bottom: 5px;}
+
+.card-block > ul > li > .location { margin-bottom: 30px;}
+
+.user {
+    color: black;
+    display: inline-flex;
+}
+
+.event-name, .user {
+    padding-left: 5%;
+}
+
+.interest {
+    padding-right: 5%;
+}
+
+.btn-details { background-color:  #292f36; border-color: #292f36}
+
+
+/*event page*/
+.individual-event {
+    padding-top: 60px;
+}
+
+.event-chat-window {
+    /*width: ;*/
+    height: inherit;
+}
+
+.iframe-chat {
+    width: inherit;
+    height: inherit;
+}
+
+.chat-container {
+    right: -76%;
+    position: fixed;
+    bottom: 0;
+    height: 480px;
+    width: 100%;
+}
+
+.hide-chat {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+}
+.show-chat {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+
 }
