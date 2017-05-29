@@ -1,6 +1,6 @@
 'use strict';
 
-var actimate = angular.module('actimate', [
+const actimate = angular.module('actimate', [
     'ngRoute',
     'ngResource',
     'gm',
@@ -37,8 +37,8 @@ var actimate = angular.module('actimate', [
                     controller: 'profileCtrl'
                 })
                 .when('/u/dashboard', {
-                 template: 'views/dashboard.html',
-                 controller: 'profileCtrl'
+                    templateUrl: 'views/dashboard.html',
+                    controller: 'dashboardCtrl'
                  })
                 .when('/u/edit-profile', {
                     templateUrl: 'views/profile_form.html',
@@ -46,18 +46,19 @@ var actimate = angular.module('actimate', [
                 })
                 .when('/u/create_event', {
                     templateUrl: 'views/create_event.html',
+                    controller: 'createEventCtrl'
+                })
+                .when('/u/event/:id', {
+                    templateUrl: 'views/event.html',
                     controller: 'eventCtrl'
                 })
                 .otherwise({
                     redirectTo: '/'
                 })
-
-
         }])
 
     .controller('navCtrl', ['$scope', '$location', function($scope, $location) {
         $scope.currentPath = $location.path();
-        console.log($location.path())
     }]);
 
 /*
