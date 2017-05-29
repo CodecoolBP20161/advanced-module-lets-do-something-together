@@ -1,11 +1,37 @@
-<div id="event" class="eventondashbord container">
 
+<div id="event" class="eventondashbord panel panel-default" ng-repeat="event in events">
 
-    <div class="events" ng-repeat="event in events">
-            <section id="eventName" class="eventName"><li class="eventondashbord-head-text">{{event.name}}</li></section>
-            <section id="eventLocation" class="eventLocation"><li class="eventondashbord-text">{{event.location}}</li></section>
-            <section id="eventDate" class="eventDate"><li class="eventondashbord-text">{{event.date}}</li></section>
-            <section id="eventInsterest" class="eventInsterest"><li class="eventondashbord-text">{{event.interest}}</li></section>
+    <div class="panel-heading clearfix" ng-style="{'background-color': event.color}">
+        <h3 class="panel-title pull-left event-name">{{event.name}}</h3>
+        <h3 class="panel-title pull-right interest">{{event.interest}}</h3>
+    </div>
+    <div class="col-md-6">
+        <div class="card-block">
+            <ul>
+                <li>
+                    <h4 class="card-title date">{{event.date}}</h4>
+                    <p class="list-group-item-heading rel-date">relative date</p>
+                </li>
+                <li>
+                    <h4>Location:</h4>
+                    <h4 class="list-group-item-text location">{{event.location}}</h4>
+                </li>
+                <li>
+                    <h4 class="list-group-item-text slots">Slots: {{event.participants}}</h4>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="card-img-bottom">
+        </div>
     </div>
 
+    <div class="panel-footer clearfix">
+        <h4 class="panel-title pull-left user">User: {{event.user}}</h4>
+
+        <a class="btn btn-primary pull-right btn-details btn-event-detail" href="/u/event/{{event.id}}"  ng-click="getEvent(event.id)">Details</a>
+    </div>
 </div>
+
