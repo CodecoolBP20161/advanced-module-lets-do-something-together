@@ -38,7 +38,6 @@ actimate.controller("eventCtrl", function ($scope, $http) {
                         $scope.user = res.data;
                         let firstname = $scope.user.profile.firstName;
                         let lastname = $scope.user.profile.lastName;
-                        let user = $scope.event.name.replace(" ", "");
                         let url = "http://0.0.0.0:9090/?room=" + id + "&firstname=" + firstname + "&lastname=" + lastname;
                         iframe.attr("src", url);
                     });
