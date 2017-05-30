@@ -33,14 +33,15 @@ actimate.controller("eventCtrl", function ($scope, $http) {
         $http.get('u/event/' + id)
             .then(function (res) {
                 $scope.event = res.data;
-                $http.get('u/profile_data')
-                    .then(function (res) {
-                        $scope.user = res.data;
-                        let firstname = $scope.user.profile.firstName;
-                        let lastname = $scope.user.profile.lastName;
-                        let url = "http://0.0.0.0:9090/?room=" + id + "&firstname=" + firstname + "&lastname=" + lastname;
-                        iframe.attr("src", url);
-                    });
+            });
+
+        $http.get('u/profile_data')
+            .then(function (res) {
+                $scope.user = res.data;
+                let firstname = $scope.user.profile.firstName;
+                let lastname = $scope.user.profile.lastName;
+                let url = "http://0.0.0.0:9090/?room=" + id + "&firstname=" + firstname + "&lastname=" + lastname;
+                iframe.attr("src", url);
             });
     };
 
